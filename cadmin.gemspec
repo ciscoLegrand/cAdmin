@@ -15,5 +15,13 @@ Gem::Specification.new do |spec|
   
   spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
+  # here we add the gems that we will use and then we will need to require them in lib/cadmin.rb
   spec.add_dependency "rails", "~> 6.1.4", ">= 6.1.4.1"
+  spec.add_dependency 'pg'
+  spec.add_dependency 'pg_search'
+  spec.add_dependency "bulma-rails"
+  spec.add_dependency "turbo-rails"
+  spec.add_dependency "stimulus-rails"
+  spec.add_dependency 'inline_svg'
+  spec.add_dependency "breadcrumbs_on_rails"
 end

@@ -1,9 +1,10 @@
 # Cadmin
 Short description and motivation.
 
-# Crate project 
+# Crate engine 
 ```ruby
-running { rails plugin new cadmin --mountable -d postgresql --skip-action-cable --skip-bootsnap --skip-bundle --skip-javascript --skip-keeps --skip-listen --skip-spring --skip-system-test  --skip-turbolinks --skip-webpack-install --skip-yarn}
+  rails plugin new cadmin --mountable -d postgresql --skip-action-cable --skip-bootsnap --skip-bundle --skip-javascript --skip-keeps 
+  --skip-listen --skip-spring --skip-system-test  --skip-turbolinks --skip-webpack-install --skip-yarn
 ```
 
 ## Usage
