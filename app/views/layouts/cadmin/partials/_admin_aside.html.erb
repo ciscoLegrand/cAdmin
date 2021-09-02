@@ -1,0 +1,64 @@
+<!-- sidebaar-->
+<aside class="sidebar" data-controller="sidebar" data-action="openSidebar@window->sidebar#open">
+<button class="sidebar__close delete" aria-label="close" data-action="sidebar#close"></button>
+  <div class="has-text-centered">
+    <%= link_to inline_svg_tag("cadmin/icons/ico-home.svg", size: "90", class:"has-text-white-ter"), root_path %>              
+  </div>
+  <nav class="vertical" data-controller="menu">
+    <ul>
+      <li>  
+        <span data-action="click->menu#set_active_menu" data-menu="home">
+          <%= link_to root_path , class: 'panel-block is-flex is-justify-content-flex-start is-align-items-start is-clickable is-hoverable has-no-bottom-line', data: {'menu-target': 'link', 'menu-item': 'home', action: 'click->menu#set_active_menu_item'} do %>
+              <%= inline_svg_tag('cadmin/icons/ico-home.svg', class:'icon  mx-4')%> Inicio
+          <% end %>
+        </span>
+      </li>
+      <li>  
+        <span class="panel-block is-flex is-justify-content-flex-start is-align-items-start is-clickable is-hoverable has-no-bottom-line" data-action="click->menu#set_active_menu" data-menu="conf">
+          <%= inline_svg_tag('cadmin/icons/ico-cog.svg', class:'icon mx-4')%>Blog
+        </span>
+        <ul data-menu-target="dropdown">
+          <li>
+            <%= link_to root_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start', data: {'menu-target': 'link', 'menu-item': 'nueva-cuenta', action: 'click->menu#set_active_menu_item'} do %>
+              Lista Ports <%= inline_svg_tag('cadmin/icons/ico-view-grid-add.svg', class:'icon ')%>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to root_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'cuentas', action: 'click->menu#set_active_menu_item'} do %>
+              Nuevo Post <%= inline_svg_tag('cadmin/icons/ico-key.svg', class:'icon ')%>
+            <% end %>
+          </li>
+          <span class="arrow p-0">
+            <span></span>
+            <span></span>
+          </span>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+  <% if 1==0 %>
+    <!--cuenta/cerrar sesion-->
+    <span class="has-text-centered has-text-white-ter"><%= current_user.business_name %></span>
+    <div data-controller="dropdown" class="dropdown is-up is-justify-content-center p-3">
+      <div class="dropdown-trigger">
+        <button class="button has-text-white is-fullwidth sidebar__button_user" aria-haspopup="true" aria-controls="dropdown-menu" data-action="click->dropdown#show_options">
+          <span class="sidebar__letter_user"><%= current_user.email[0] %></span> 
+          <span><%= current_user.email %></span>
+          <span class="icon is-small">
+            <i class="fas fa-angle-up" aria-hidden="true"></i>
+          </span>
+        </button>
+      </div>
+      <div class="dropdown-menu pr-3" data-dropdown-target="button" id="dropdown-menu" role="menu">
+        <div class="dropdown-content is-pulled-right">
+          <div class="dropdown-item">
+            <div class="dropdown-content">
+              <%= button_to "Cerrar Sesión", signout_path, method: :delete, class: "dropdown-item", data: {turbo: false} %>
+              <%= link_to "Mi Cuenta", perfil_path, class: "dropdown-item has-text-centered p-0" %>                      
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</aside>

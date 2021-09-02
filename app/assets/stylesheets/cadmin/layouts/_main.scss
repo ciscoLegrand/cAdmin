@@ -1,0 +1,11 @@
+
+main{
+  height: 100vh;
+}
+.main {
+  margin-left: 260px;
+
+  @include touch {
+    margin-left: 0;
+  }
+}

@@ -1,0 +1,15 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 60px;
+  padding: .5rem 1rem;
+  
+  &__menu {
+    display: none;
+
+    @include touch {
+      display: block;
+    }
+  }
+}

@@ -1,0 +1,123 @@
+.sidebar {
+  background-color: #00112C;
+  border-right: 1px solid $grey-lighter;
+  z-index: 5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 16.66%;
+  display: flex;
+  flex-direction: column;
+
+  &.open {
+    width: 260px;
+    visibility: visible;
+
+    &:before {
+      content: "";
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 259px;
+      right: 0;
+      background-color: rgba($black, .5);
+    }
+  }
+
+  @include touch {
+    visibility: hidden;
+    width: 0;
+  }
+  
+  &__letter_user {
+    text-transform: uppercase;
+    background-color: #fff;
+    color: #000 !important;
+    width: 24px;
+    text-align: center;
+    border-radius: 50px;
+    float: left;
+    margin-right: 10px;
+    margin-left: 10px;    
+  }
+
+  .dropdown-item {
+    color: #fff;
+  }
+
+  .dropdown-content {
+    background-color: #20304C;
+    box-shadow: none;
+  }
+
+  .dropdown-content > .dropdown-item > .dropdown-content {
+    background-color: #20304C;
+  }
+  
+  a.dropdown-item:hover, button.dropdown-item:hover {
+    background-color: #394962;
+    color: #fff;
+    border-radius: 7px;
+  }
+
+  .button_to .dropdown-item {
+    width: 100%;
+    background-color: transparent;
+    border: 0;
+  }
+
+  .button_to .dropdown-item:hover {
+    background-color: #394962;
+    color: #fff;
+    border-radius: 7px;
+  }
+
+  &__button_user {
+    background-color: transparent;
+    border: 0;
+  }
+
+  &__button_user:hover {
+    background-color: #20304C;
+  }
+
+  &__button_user:focus {
+    background-color: #20304C;
+    border-color: transparent;
+  }
+
+  .dropdown-trigger {
+    width: 100%;
+  }
+
+  .dropdown-menu {
+    width: 100%;
+  }
+  &__close {
+    background: $link;
+    border-radius: 0;
+    position: absolute;
+    right: -20px;
+    display: none;
+    right: -35px;
+    min-width: 35px;
+    min-height: 35px;
+
+    @include touch {
+      display: block;
+    }
+  }
+}
+
+.cmenu {
+  padding: .5rem 1.5rem;
+
+  &__list {
+
+  }
+
+  &__item {
+    padding: .25rem;
+  }
+}

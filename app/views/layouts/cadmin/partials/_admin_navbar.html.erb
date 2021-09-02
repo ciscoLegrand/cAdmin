@@ -1,0 +1,39 @@
+<nav class="navbar has-background-white-ter">
+  <div class="navbar-brand">
+    <figure class="icons is-medium">
+      <%= link_to  inline_svg_tag('logo.svg', size: '128px'), root_path, class: 'navbar-item' %>
+    </figure>
+    <div class="navbar-burger" data-target="navbarExampleTransparentExample">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div id="navbarExampleTransparentExample" class="navbar-menu ">
+    <div class="navbar-start">
+      <%= link_to 'Inicio', root_path, class: 'navbar-item' %>
+      <%= link_to 'Cuenta', cuenta_path, class: 'navbar-item'  %>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="field is-grouped">
+          <div class="control ">
+            <% if user_signed_in?  %>
+              <div class="tags has-addons">
+                <span class="tag <%= @user_color %> is-small"><%=link_to current_user.email, root_path, class: ' has-text-white'%></span>
+                <%= link_to destroy_user_session_path, method: :delete, class: 'tag is-success is-small' do %>
+                  <span class="name mr-3">Salir</span>
+                  <span class="panel-icon">
+                    <i class="fas fa-sign-out-alt"></i>
+                  </span>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

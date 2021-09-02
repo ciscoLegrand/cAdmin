@@ -1,0 +1,41 @@
+$primary: hsl(217, 100%, 9%);
+$danger: hsl(6,71%,49%);
+$light: hsl(0,0%,93%);
+$white: hsl(0,0%,100%);
+$grey-darker: hsl(0,0%,24%);
+$grey-dark: hsl(0,0%,40%);
+$grey-lighter: hsl(0,0%,96%);
+$primary-light: hsla(217, 100%, 15%, 0.5%);
+$primary-lightest: rgba(0, 30, 77, 0.35%);
+
+$link: $primary;
+$link-hover: $primary-light;
+
+$input-focus-border-color: $light;
+
+$button-hover-color: inherit;
+
+$pagination-current-background-color: $primary;
+$pagination-current-border-color: $primary;
+$pagination-focus-border-color: $primary;
+
+$tabs-toggle-link-active-background-color: $primary-light;
+$tabs-toggle-link-active-border-color: $primary-light;
+$tabs-toggle-link-hover-border-color: $primary-light;
+$tabs-toggle-link-radius: 2px;
+
+
+$notification-radius: 2px;
+$notification-padding: 1rem 2.5rem 1rem 1.5rem;
+
+$box-radius: 3px;
+
+$table-row-hover-background-color: $primary-lightest;
+$table-head-cell-border-width: 0 0 1px;
+
+// fonts
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap');
+$family-sans-serif: 'Raleway', sans-serif;
+
+$body-size: 16px;
+$body-family: $family-sans-serif;

@@ -1,0 +1,28 @@
+.field {
+  margin-top: 20px;
+}
+
+.total_width {
+  width: 100%;
+}
+
+.btn-icon {
+  background:transparent;
+  border:none;
+}
+
+.has-no-bottom-line{
+  border-bottom: none !important;
+}
+
+.is-170x128 {
+  width: 170px;
+  height: 128px;
+}
+
+.is-scrollable-touch{
+  overflow-x: scroll;
+  @include until($tablet) {
+    overflow-x: scroll;
+  }
+}

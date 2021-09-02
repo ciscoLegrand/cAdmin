@@ -1,0 +1,10 @@
+@import "abstracts/bulma-variables";
+@import 'bulma';
+
+@import 'base/utilities';
+
+@import "layouts/header";
+@import "layouts/main";
+@import "layouts/sidebar";
+
+@import "components/menu";

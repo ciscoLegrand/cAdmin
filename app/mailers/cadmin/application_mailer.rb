@@ -1,6 +1,6 @@
 module Cadmin
   class ApplicationMailer < ActionMailer::Base
-    default from: 'from@example.com'
+    default from: 'creadix@creadix.es'
     layout 'mailer'
   end
 end

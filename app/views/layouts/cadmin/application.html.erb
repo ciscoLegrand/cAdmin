@@ -1,15 +1,33 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Cadmin</title>
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= @title.present? ? @title : 'cAdmin'%></title>
 
-  <%= stylesheet_link_tag    "cadmin/application", media: "all" %>
-</head>
-<body>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-<%= yield %>
-
-</body>
+    <%= stylesheet_link_tag 'cadmin/main',  'data-turbo-track': 'reload' %>    
+    <%= yield :head %>
+    
+    <%= javascript_include_tag 'cadmin/main' %>
+    <%= javascript_include_tag "turbo", type: "module-shim" %>
+    <%#= cadmin_stimulus_include_tags %>
+  </head>
+  <body>
+    <%= render 'layouts/cadmin/partials/admin_aside' %>
+    <main class= "column main is-10 is-offset-2 p-0 is-vcentered" >
+      <header class="header panel-heading">
+        <div class="is-flex is-align-items-center">
+          <button class="button mr-3 header__menu" data-controller="fire-sidebar" data-action="fire-sidebar#fire"><%= inline_svg_tag("cadmin/icons/ico-menu.svg", class:"icon has-text-link") %></button>
+          <span class="panel-heading subtitle is-size-6 | has-text-left"><%= render_breadcrumbs separator: ' > '  %></span>           
+        </div>
+      </header>
+      <section class="section">  
+        <%= yield %>
+      </section>
+    </main>
+  </body>
 </html>
