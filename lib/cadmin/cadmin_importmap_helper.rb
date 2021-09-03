@@ -2,7 +2,7 @@
 module CadminImportmapHelper
 
   def importmap_list_with_cadmin_from(*paths)
-    [ %("stimulus": "#{asset_path("stimulus/libraries/stimulus")}"), importmap_blorgh_list_from(*paths) ].compact_blank.join(",\n")
+    [ %("stimulus": "#{asset_path("stimulus/libraries/stimulus")}"), importmap_cadmin_list_from(*paths) ].compact_blank.join(",\n")
   end
 
   def importmap_cadmin_list_from(*paths)
