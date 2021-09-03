@@ -12,7 +12,7 @@
     <%= stylesheet_link_tag 'cadmin/main',  'data-turbo-track': 'reload' %>    
     <%= yield :head %>
     
-    <%= javascript_include_tag 'cadmin/application' %>
+    <%#= javascript_include_tag 'cadmin/application' %>
     <%= javascript_include_tag "turbo", type: "module-shim" %>
     <%= cadmin_stimulus_include_tags %>
   </head>

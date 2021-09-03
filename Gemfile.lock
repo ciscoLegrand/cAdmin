@@ -8,7 +8,7 @@ PATH
       pg
       pg_search
       rails (~> 6.1.4, >= 6.1.4.1)
-      stimulus-rails
+      stimulus-rails (~> 0.2.4)
       turbo-rails
 
 GEM
@@ -145,7 +145,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    stimulus-rails (0.3.11)
+    stimulus-rails (0.2.4)
       rails (>= 6.0.0)
     thor (1.1.0)
     turbo-rails (0.7.10)
@@ -168,4 +168,4 @@ DEPENDENCIES
   tzinfo-data
 
 BUNDLED WITH
-   2.2.13
+   2.2.15
