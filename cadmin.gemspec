@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'pg_search'
   spec.add_dependency "bulma-rails"
   spec.add_dependency "turbo-rails"
-  spec.add_dependency 'stimulus-rails', '~> 0.2.4'
+  spec.add_dependency "stimulus-rails", '~> 0.2.4'
   spec.add_dependency 'inline_svg'
   spec.add_dependency "breadcrumbs_on_rails"
 end
