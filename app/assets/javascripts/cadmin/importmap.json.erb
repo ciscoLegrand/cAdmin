@@ -1,0 +1,6 @@
+{
+  "imports": {
+    "turbo": "<%= asset_path('turbo')%>",
+    <%= importmap_list_with_cadmin_from Cadmin::Engine.root.join('app/assets/javascripts/cadmin/controllers'), Cadmin::Engine.root.join('app/assets/javascripts/cadmin/libraries') %>
+  }
+}

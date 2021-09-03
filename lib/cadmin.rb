@@ -1,5 +1,6 @@
 require "cadmin/version"
 require "cadmin/engine"
+require "cadmin/cadmin_importmap_helper"
 
 # here we place the gems that we add in the ../cadmin.gemspec
 require 'pg'
