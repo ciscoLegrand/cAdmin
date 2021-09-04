@@ -15,20 +15,20 @@
       </li>
       <li>  
         <span class="panel-block is-flex is-justify-content-flex-start is-align-items-start is-clickable is-hoverable has-no-bottom-line" data-action="click->menu#set_active_menu" data-menu="conf">
-          <%= inline_svg_tag('cadmin/icons/ico-cog.svg', class:'icon mx-4')%>Blog
+          <%= inline_svg_tag('cadmin/icons/ico-cog.svg', class:'icon mx-4')%>example open
         </span>
         <ul data-menu-target="dropdown">
           <li>
             <%= link_to root_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start', data: {'menu-target': 'link', 'menu-item': 'nueva-cuenta', action: 'click->menu#set_active_menu_item'} do %>
-              Lista Ports <%= inline_svg_tag('cadmin/icons/ico-view-grid-add.svg', class:'icon ')%>
+              example display <%= inline_svg_tag('cadmin/icons/ico-view-grid-add.svg', class:'icon ')%>
             <% end %>
           </li>
           <li>
             <%= link_to root_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'cuentas', action: 'click->menu#set_active_menu_item'} do %>
-              Nuevo Post <%= inline_svg_tag('cadmin/icons/ico-key.svg', class:'icon ')%>
+              example display <%= inline_svg_tag('cadmin/icons/ico-key.svg', class:'icon ')%>
             <% end %>
           </li>
-          <span class="arrow p-0">
+          <span class="arrow p-0 is-clickable">
             <span></span>
             <span></span>
           </span>

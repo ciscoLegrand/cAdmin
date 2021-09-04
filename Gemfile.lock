@@ -148,7 +148,7 @@ GEM
     stimulus-rails (0.2.4)
       rails (>= 6.0.0)
     thor (1.1.0)
-    turbo-rails (0.7.10)
+    turbo-rails (0.7.11)
       rails (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
@@ -168,4 +168,4 @@ DEPENDENCIES
   tzinfo-data
 
 BUNDLED WITH
-   2.2.15
+   2.2.13
