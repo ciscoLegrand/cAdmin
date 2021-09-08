@@ -13,48 +13,199 @@
 
   <h1 class="title is-size-4-desktop is-size-5-touch">Pagos</h1>
   <div class="columns is-multiline">
-    <div class="column is-one-third">
-      <%= form.label :paypal %> <br>
-      <%= form.check_box :paypal, class:"switch" %>
+    <div class="column is-2">
+      <div class="card ccard">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <div class="<%= web_module.paypal? ? 'has-background-success' : 'has-background-primary'%> p-2   ccard__rounded">
+                <%= inline_svg_tag("cadmin/icons/ico-paypal.svg", size: '64', class: 'has-text-white  ') %>
+              </div>
+            </div>
+            <div class="media-content is-flex is-flex-direction-column is-align-items-center">
+              <%= form.label :paypal, class: 'label' %> 
+              <%= form.check_box :paypal, class:"switch" %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="column is-one-third">
-    <%= form.label :stripe %> <br>
-    <%= form.check_box :stripe, class:"switch" %>
+    <div class="column is-2">
+      <div class="card ccard">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <div class="<%= web_module.stripe? ? 'has-background-success' : 'has-background-primary'%> p-2   ccard__rounded">
+                <%= inline_svg_tag("cadmin/icons/ico-stripe.svg", size: '64', class: 'has-text-white  ') %>
+              </div>
+            </div>
+            <div class="media-content is-flex is-flex-direction-column is-align-items-center">
+              <%= form.label :stripe, class: 'label' %> 
+              <%= form.check_box :stripe, class:"switch" %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="column is-one-third">
-        <%= form.label :adyen %> <br>
-    <%= form.check_box :adyen, class:"switch" %>
+    <div class="column is-2">
+      <div class="card ccard">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <div class="<%= web_module.adyen? ? 'has-background-success' : 'has-background-primary'%> p-2   ccard__rounded">
+                <%= inline_svg_tag("cadmin/icons/ico-paypal.svg", size: '64', class: 'has-text-white  ') %>
+              </div>
+            </div>
+            <div class="media-content is-flex is-flex-direction-column is-align-items-center">
+              <%= form.label :adyen, class: 'label' %> 
+              <%= form.check_box :adyen, class:"switch" %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="actions">
     <%= form.submit 'Guardar', class: 'button is-success is-small' %>
   </div>
   <hr class="has-background-primary">
-    <h1 class="title is-size-4-desktop is-size-5-touch">Pagos</h1>
+    <h1 class="title is-size-4-desktop is-size-5-touch">Modulos</h1>
   <div class="columns is-multiline">
-    <div class="column is-one-third">
-    <%= form.label :blog %> <br>
-    <%= form.check_box :blog, class:"switch" %>
+    <div class="column is-2">
+      <div class="card ccard">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <div class="<%= web_module.blog? ? 'has-background-success' : 'has-background-primary'%> p-2   ccard__rounded">
+                <%= inline_svg_tag("cadmin/icons/ico-rss.svg", size: '64', class: 'has-text-white  ') %>
+              </div>
+            </div>
+            <div class="media-content is-flex is-flex-direction-column is-align-items-center">
+              <%= form.label :blog, class: 'label' %> 
+              <%= form.check_box :blog, class:"switch" %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="column is-one-third"> 
-    <%= form.label :gallery %> <br>
-    <%= form.check_box :gallery, class:"switch" %>
+    <div class="column is-2">
+      <div class="card ccard">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <div class="<%= web_module.gallery? ? 'has-background-success' : 'has-background-primary'%> p-2   ccard__rounded">
+                <%= inline_svg_tag("cadmin/icons/ico-images.svg", size: '64', class: 'has-text-white  ') %>
+              </div>
+            </div>
+            <div class="media-content is-flex is-flex-direction-column is-align-items-center">
+              <%= form.label :gallery, class: 'label' %> 
+              <%= form.check_box :gallery, class:"switch" %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="column is-one-third">
-    <%= form.label :opinions %> <br>
-    <%= form.check_box :opinions, class:"switch"%>
+    <div class="column is-2">
+      <div class="card ccard">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <div class="<%= web_module.opinions? ? 'has-background-success' : 'has-background-primary'%> p-2   ccard__rounded">
+                <%= inline_svg_tag("cadmin/icons/ico-information-circle.svg", size: '64', class: 'has-text-white  ') %>
+              </div>
+            </div>
+            <div class="media-content is-flex is-flex-direction-column is-align-items-center">
+              <%= form.label :opinions, class: 'label' %> 
+              <%= form.check_box :opinions, class:"switch" %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="column is-one-third">
-    <%= form.label :newsletter %> <br>
-    <%= form.check_box :newsletter, class:"switch" %>
+    <div class="column is-2">
+      <div class="card ccard">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <div class="<%= web_module.newsletter? ? 'has-background-success' : 'has-background-primary'%> p-2   ccard__rounded">
+                <%= inline_svg_tag("cadmin/icons/ico-newspaper.svg", size: '64', class: 'has-text-white  ') %>
+              </div>
+            </div>
+            <div class="media-content is-flex is-flex-direction-column is-align-items-center">
+              <%= form.label :newsletter, class: 'label' %> 
+              <%= form.check_box :newsletter, class:"switch" %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="column is-one-third box  is-flex is-flex-direction-column">
-    <%= form.label :reservation %> <br>
-    <%= form.check_box :reservation , class:"switch"%>
+    <div class="column is-2">
+      <div class="card ccard">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <div class="<%= web_module.reservation? ? 'has-background-success' : 'has-background-primary'%> p-2   ccard__rounded">
+                <%= inline_svg_tag("cadmin/icons/ico-lock-open.svg", size: '64', class: 'has-text-white  ') %>
+              </div>
+            </div>
+            <div class="media-content is-flex is-flex-direction-column is-align-items-center">
+              <%= form.label :reservation, class: 'label' %> 
+              <%= form.check_box :reservation, class:"switch" %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="column is-one-third box  is-flex is-flex-direction-column">
-    <%= form.label :mailbox %> <br>
-    <%= form.check_box :mailbox , class:"switch"%>
+    <div class="column is-2">
+      <div class="card ccard">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <div class="<%= web_module.mailbox? ? 'has-background-success' : 'has-background-primary'%> p-2   ccard__rounded">
+                <%= inline_svg_tag("cadmin/icons/ico-mail.svg", size: '64', class: 'has-text-white  ') %>
+              </div>
+            </div>
+            <div class="media-content is-flex is-flex-direction-column is-align-items-center">
+              <%= form.label :mailbox, class: 'label' %> 
+              <%= form.check_box :mailbox, class:"switch" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="column is-2">
+      <div class="card ccard">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <div class="<%= web_module.invitable? ? 'has-background-success' : 'has-background-primary'%> p-2   ccard__rounded">
+                <%= inline_svg_tag("cadmin/icons/ico-user-add.svg", size: '64', class: 'has-text-white  ') %>
+              </div>
+            </div>
+            <div class="media-content is-flex is-flex-direction-column is-align-items-center">
+              <%= form.label :invitable, class: 'label' %> 
+              <%= form.check_box :invitable, class:"switch" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="column is-2">
+      <div class="card ccard">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <div class="<%= web_module.social_media? ? 'has-background-success' : 'has-background-primary'%> p-2   ccard__rounded">
+                <%= inline_svg_tag("cadmin/icons/ico-instagram.svg", size: '64', class: 'has-text-white  ') %>
+              </div>
+            </div>
+            <div class="media-content is-flex is-flex-direction-column is-align-items-center">
+              <%= form.label :social_media, class: 'label' %> 
+              <%= form.check_box :social_media, class:"switch" %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="actions">
