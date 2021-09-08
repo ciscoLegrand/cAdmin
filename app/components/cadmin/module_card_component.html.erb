@@ -3,14 +3,12 @@
     <div class="media">
       <div class="media-left">
         <div class="has-background-primary p-2 ccard__rounded">
-          <%= inline_svg_tag('cadmin/icons/ico-paypal.svg', size: '64', class: 'has-text-white  ') %>
+          <%= inline_svg_tag("cadmin/icons/#{icon}", size: '64', class: 'has-text-white  ') %>
         </div>
       </div>
       <div class="media-content">
-       <% if 1 == 0 %>
-        <%= form.label :mailbox %> <br>
-        <%= form.check_box :mailbox , class:"switch"%>
-       <% end %>
+        <%=  label %> <br>
+        <%=  field %>
       </div>
     </div>
   </div>
