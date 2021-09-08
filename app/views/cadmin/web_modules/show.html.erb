@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Blog:</strong>
+  <%= @web_module.blog %>
+</p>
+
+<p>
+  <strong>Gallery:</strong>
+  <%= @web_module.gallery %>
+</p>
+
+<p>
+  <strong>Paypal:</strong>
+  <%= @web_module.paypal %>
+</p>
+
+<p>
+  <strong>Stripe:</strong>
+  <%= @web_module.stripe %>
+</p>
+
+<p>
+  <strong>Adyen:</strong>
+  <%= @web_module.adyen %>
+</p>
+
+<p>
+  <strong>Opinions:</strong>
+  <%= @web_module.opinions %>
+</p>
+
+<p>
+  <strong>Newsletter:</strong>
+  <%= @web_module.newsletter %>
+</p>
+
+<p>
+  <strong>Reservation:</strong>
+  <%= @web_module.reservation %>
+</p>
+
+<%= link_to 'Edit', edit_web_module_path(@web_module) %> |
+<%= link_to 'Back', web_modules_path %>

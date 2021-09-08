@@ -1,0 +1,64 @@
+<%= form_with(model: web_module) do |form| %>
+  <% if web_module.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(web_module.errors.count, "error") %> prohibited this web_module from being saved:</h2>
+
+      <ul>
+        <% web_module.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h1 class="title is-size-4-desktop is-size-5-touch">Pagos</h1>
+  <div class="columns is-multiline">
+    <div class="column is-one-third">
+      <%= form.label :paypal %> <br>
+      <%= form.check_box :paypal, class:"switch" %>
+    </div>
+    <div class="column is-one-third">
+    <%= form.label :stripe %> <br>
+    <%= form.check_box :stripe, class:"switch" %>
+    </div>
+    <div class="column is-one-third">
+        <%= form.label :adyen %> <br>
+    <%= form.check_box :adyen, class:"switch" %>
+    </div>
+  </div>
+  <div class="actions">
+    <%= form.submit 'Guardar', class: 'button is-success is-small' %>
+  </div>
+  <hr class="has-background-primary">
+    <h1 class="title is-size-4-desktop is-size-5-touch">Pagos</h1>
+  <div class="columns is-multiline">
+    <div class="column is-one-third">
+    <%= form.label :blog %> <br>
+    <%= form.check_box :blog, class:"switch" %>
+    </div>
+    <div class="column is-one-third"> 
+    <%= form.label :gallery %> <br>
+    <%= form.check_box :gallery, class:"switch" %>
+    </div>
+    <div class="column is-one-third">
+    <%= form.label :opinions %> <br>
+    <%= form.check_box :opinions, class:"switch"%>
+    </div>
+    <div class="column is-one-third">
+    <%= form.label :newsletter %> <br>
+    <%= form.check_box :newsletter, class:"switch" %>
+    </div>
+    <div class="column is-one-third box  is-flex is-flex-direction-column">
+    <%= form.label :reservation %> <br>
+    <%= form.check_box :reservation , class:"switch"%>
+    </div>
+    <div class="column is-one-third box  is-flex is-flex-direction-column">
+    <%= form.label :mailbox %> <br>
+    <%= form.check_box :mailbox , class:"switch"%>
+    </div>
+  </div>
+  <div class="actions">
+    <%= form.submit 'Guardar', class: 'button is-success is-small' %>
+  </div>
+  <hr class="has-background-primary">
+<% end %>

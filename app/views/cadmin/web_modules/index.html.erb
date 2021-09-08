@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Web Modules</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Blog</th>
+      <th>Gallery</th>
+      <th>Paypal</th>
+      <th>Stripe</th>
+      <th>Adyen</th>
+      <th>Opinions</th>
+      <th>Newsletter</th>
+      <th>Reservation</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @web_modules.each do |web_module| %>
+      <tr>
+        <td><%= web_module.blog.inspect %></td>
+        <td><%= web_module.gallery %></td>
+        <td><%= web_module.paypal %></td>
+        <td><%= web_module.stripe %></td>
+        <td><%= web_module.adyen %></td>
+        <td><%= web_module.opinions %></td>
+        <td><%= web_module.newsletter %></td>
+        <td><%= web_module.reservation %></td>
+        <td><%= link_to 'Show', web_module %></td>
+        <td><%= link_to 'Edit', edit_web_module_path(web_module) %></td>
+        <td><%= link_to 'Destroy', web_module, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
+
+<% @web_modules.first.blog.inspect %>
+  <input class="switch" type="checkbox" checked />
+
+<%= link_to 'New Web Module', new_web_module_path %>

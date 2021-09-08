@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  blog: false
+  gallery: false
+  paypal: false
+  stripe: false
+  adyen: false
+  opinions: false
+  newsletter: false
+  reservation: false
+
+two:
+  blog: false
+  gallery: false
+  paypal: false
+  stripe: false
+  adyen: false
+  opinions: false
+  newsletter: false
+  reservation: false
