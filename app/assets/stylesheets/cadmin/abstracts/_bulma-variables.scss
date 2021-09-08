@@ -1,4 +1,5 @@
 $primary: hsl(217, 100%, 9%);
+$secondary: hsl(271, 100%, 71%);
 $danger: hsl(6,71%,49%);
 $light: hsl(0,0%,93%);
 $white: hsl(0,0%,100%);
@@ -32,6 +33,8 @@ $box-radius: 3px;
 
 $table-row-hover-background-color: $primary-lightest;
 $table-head-cell-border-width: 0 0 1px;
+$scheme-invert: hsl(0, 0%, 4%);
+$shadow: 0 0.5em 1em -0.125em rgba($scheme-invert, 0.1), 0 0px 0 1px rgba($scheme-invert, 0.02);
 
 // fonts
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap');
