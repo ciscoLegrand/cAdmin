@@ -1,0 +1,11 @@
+.ccard {
+  &__rounded{
+    border-radius: 50px;
+    width: 90px;
+    height:90px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+}
