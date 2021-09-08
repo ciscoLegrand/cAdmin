@@ -7,6 +7,7 @@ class CreateCadminWebModules < ActiveRecord::Migration[6.1]
       t.boolean :opinions
       t.boolean :newsletter
       t.boolean :reservation
+      t.boolean :social_media
       t.boolean :invitable
       t.boolean :paypal
       t.boolean :stripe

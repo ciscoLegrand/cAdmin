@@ -4,12 +4,15 @@ class CreateCadminWebModules < ActiveRecord::Migration[6.1]
     create_table :cadmin_web_modules do |t|
       t.boolean :blog
       t.boolean :gallery
-      t.boolean :paypal
-      t.boolean :stripe
-      t.boolean :adyen
+      t.boolean :mailbox
       t.boolean :opinions
       t.boolean :newsletter
       t.boolean :reservation
+      t.boolean :social_media
+      t.boolean :invitable
+      t.boolean :paypal
+      t.boolean :stripe
+      t.boolean :adyen
 
       t.timestamps
     end

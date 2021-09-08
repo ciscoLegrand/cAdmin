@@ -10,32 +10,55 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_08_053346) do
+ActiveRecord::Schema.define(version: 2021_09_08_195505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "cadmin_users", force: :cascade do |t|
+    t.string "username", default: "", null: false
+    t.string "name", default: "", null: false
+    t.string "first_name", default: "", null: false
     t.string "email", default: "", null: false
+    t.integer "phone", null: false
+    t.integer "postal_code"
+    t.string "province"
+    t.string "address"
+    t.date "birthdate"
+    t.string "role", default: "user", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["confirmation_token"], name: "index_cadmin_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_cadmin_users_on_email", unique: true
+    t.index ["phone"], name: "index_cadmin_users_on_phone", unique: true
     t.index ["reset_password_token"], name: "index_cadmin_users_on_reset_password_token", unique: true
   end
 
   create_table "cadmin_web_modules", force: :cascade do |t|
     t.boolean "blog"
     t.boolean "gallery"
-    t.boolean "paypal"
-    t.boolean "stripe"
-    t.boolean "adyen"
+    t.boolean "mailbox"
     t.boolean "opinions"
     t.boolean "newsletter"
     t.boolean "reservation"
+    t.boolean "social_media"
+    t.boolean "invitable"
+    t.boolean "paypal"
+    t.boolean "stripe"
+    t.boolean "adyen"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

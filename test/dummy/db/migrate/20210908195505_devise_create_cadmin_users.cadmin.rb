@@ -5,7 +5,16 @@ class DeviseCreateCadminUsers < ActiveRecord::Migration[6.1]
   def change
     create_table :cadmin_users do |t|
       ## Database authenticatable
+      t.string :username,            null: false, default: ""
+      t.string :name ,           null: false, default: ""
+      t.string :first_name,            null: false, default: ""
       t.string :email,              null: false, default: ""
+      t.integer :phone, null: false 
+      t.integer :postal_code
+      t.string :province
+      t.string :address 
+      t.date :birthdate 
+      t.string :role, null: false, default: 'user'
       t.string :encrypted_password, null: false, default: ""
 
       ## Recoverable
@@ -16,17 +25,17 @@ class DeviseCreateCadminUsers < ActiveRecord::Migration[6.1]
       t.datetime :remember_created_at
 
       ## Trackable
-      # t.integer  :sign_in_count, default: 0, null: false
-      # t.datetime :current_sign_in_at
-      # t.datetime :last_sign_in_at
-      # t.string   :current_sign_in_ip
-      # t.string   :last_sign_in_ip
+      t.integer  :sign_in_count, default: 0, null: false
+      t.datetime :current_sign_in_at
+      t.datetime :last_sign_in_at
+      t.string   :current_sign_in_ip
+      t.string   :last_sign_in_ip
 
       ## Confirmable
-      # t.string   :confirmation_token
-      # t.datetime :confirmed_at
-      # t.datetime :confirmation_sent_at
-      # t.string   :unconfirmed_email # Only if using reconfirmable
+      t.string   :confirmation_token
+      t.datetime :confirmed_at
+      t.datetime :confirmation_sent_at
+      t.string   :unconfirmed_email # Only if using reconfirmable
 
       ## Lockable
       # t.integer  :failed_attempts, default: 0, null: false # Only if lock strategy is :failed_attempts
@@ -38,8 +47,9 @@ class DeviseCreateCadminUsers < ActiveRecord::Migration[6.1]
     end
 
     add_index :cadmin_users, :email,                unique: true
+    add_index :cadmin_users, :phone,                unique: true
     add_index :cadmin_users, :reset_password_token, unique: true
-    # add_index :cadmin_users, :confirmation_token,   unique: true
+    add_index :cadmin_users, :confirmation_token,   unique: true
     # add_index :cadmin_users, :unlock_token,         unique: true
   end
 end
