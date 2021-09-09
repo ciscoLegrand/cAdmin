@@ -2,5 +2,22 @@ Cadmin::Engine.routes.draw do
   root to: "dashboard#index"
   resources :web_modules
   
-  devise_for :users, class_name: "Cadmin::User"
+  # devise_for :cadmin_users, class_name: "Cadmin::User", module: :devise
+
+  devise_for :cadmin_users,
+             class_name: "Cadmin::User",
+             controllers: {
+                 sessions: 'cadmin/user_sessions',
+                 registrations: 'cadmin/user_registrations'
+             },
+            #  skip: [:sessions, :registrations],
+             path_names: { sign_out: 'logout' },
+             path_prefix: :user
+
+  devise_scope :cadmin_user do
+    get 'login' => 'user_sessions#new', :as => :login
+    post 'login' => 'user_sessions#create', :as => :create_new_session
+    get 'register' => 'user_registrations#new', :as => :register
+    post 'register' => 'user_registrations#create', :as => :registration
+  end
 end
