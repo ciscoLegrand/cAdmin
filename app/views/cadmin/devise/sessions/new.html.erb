@@ -3,7 +3,7 @@
     <%= inline_svg_tag('cadmin/content/login.svg', class:'login__content') %>
   </div>
   <div class="login__colform column is-4-desktop is-12-touch is-flex is-flex-direction-column is-align-content-center">
-    <h2 class="title is-size-3-desktop is-size-5-touch is-family-primary has-text-centered">Login Usuario</h2>
+    <h2 class="title is-size-3-desktop is-size-5-touch is-family-primary has-text-centered">LOGIN DEVISE</h2>
     <%= form_for(resource, as: resource_name, url: login_path, html:{turbo: false, class:'login__logform'}) do |f| %>
       <div class="field login__logform__eigthywidth">
         <%= f.label :email, class: 'login__label is-size-5-desktop' %>
@@ -27,7 +27,7 @@
       <% end %>
 
       <div class="actions is-relative login__logform__eigthywidth ">
-        <%= f.submit "Inicio sesión", class: 'button login__logform__logbutton is-rounded is-clickable' %>
+        <%= f.submit "Log in", class: 'button login__logform__logbutton is-rounded is-clickable' %>
         <%= link_to '/cadmin/register' , class: 'subtitle is-rounded login__buttons is-clickable' do %>
           Registro <%= inline_svg_tag('cadmin/icons/ico-arrow-right.svg', class: 'login__buttons__arrow')%>
         <% end %>        

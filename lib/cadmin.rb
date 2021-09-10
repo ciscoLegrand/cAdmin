@@ -14,5 +14,9 @@ require "view_component"
 require "devise"
 
 module Cadmin
-  # Your code goes here...
+  # class Engine < ::Rails::Engine
+  #   config.to_prepare do
+  #     Devise::SessionsController.layout "application"
+  #   end
+  # end
 end
