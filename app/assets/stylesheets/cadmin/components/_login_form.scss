@@ -1,30 +1,95 @@
-.hero.is-success {
-  background: #F2F6FA;
-}
-.hero .nav, .hero.is-success .nav {
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-.box {
-  margin-top: 5rem;
-}
-.avatar {
-  margin-top: -70px;
-  padding-bottom: 20px;
-}
-.avatar img {
-  padding: 5px;
-  background: #fff;
-  border-radius: 50%;
-  -webkit-box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
-  box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
-}
-input {
-  font-weight: 300;
-}
-p {
-  font-weight: 700;
-}
-p.subtitle {
-  padding-top: 1rem;
+.login{
+  input {
+    all: unset;
+  }
+  input[type="checkbox"]{
+    vertical-align: baseline;
+    background-color: initial;
+    cursor: default;
+    appearance: auto;
+    box-sizing: border-box;
+    margin: 3px 3px 3px 4px;
+    padding: initial;
+    border: initial;
+  }
+  &__label{
+    color: $grey-light;
+    display: block;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  &__content{
+    width: 100%;
+  }
+  &__colform{
+    border-left: solid $primary-light 1px;
+  }
+  &__logform {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    &__eigthywidth{
+      width: 80% !important;
+    }
+    &__logbutton{
+      background: rgb(2,0,36);
+      background: linear-gradient(180deg, hsl(227, 95%, 22%) 0%, hsl(206, 94%, 19%) 35%, hsl(196, 91%, 34%) 100%) !important;
+      padding: 5px 10px !important;
+      font-size: 1.15rem !important;
+      font-weight: 500 !important;
+      text-align: center !important;
+      color: $white !important;
+      width:30% !important;
+    }
+    &__logbutton:hover {
+      transform: scale(1.25);
+    }
+  }
+
+  &__input{
+    border:none;
+    background-image:none;
+    background-color:transparent;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    background-color: white; 
+    border:none !important;
+    border-color: none !important; 
+    border-bottom: solid $grey-light 2px !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    color: $secondary !important;  
+    box-shadow: inherit !important;
+    border-radius: 4px !important;  
+    font-size: 1.35rem !important;
+    letter-spacing: 0.2rem !important;
+  }
+  &__input:focus,
+  &__input:hover,
+  &__input:active{
+    border-color: none;
+    border-bottom: solid $primary 2px !important;
+    box-shadow: inherit;
+  }
+  &__buttons{
+    position: absolute;
+    right: 10%;
+    top: 30%;
+    color: $primary;
+    &__arrow {
+      width: 24px;
+      margin-left: 10px;
+      position:absolute;
+    }
+  }
+  &__buttons:hover{
+    transform: scale(1.25);
+    color: $tertiary;
+  }
+
+
+  
 }

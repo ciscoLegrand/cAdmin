@@ -1,42 +1,51 @@
-<h2>Sign up user</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: {turbo: false}) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+<div class="columns login">
+  <div class="column is-8-desktop is-hidden-touch">
+    <%= inline_svg_tag('cadmin/content/login.svg', class:'login__content') %>
   </div>
+  <div class="login__colform column is-4-desktop is-12-touch is-flex is-flex-direction-column is-align-content-center">
+    <h2 class="title is-size-3-desktop is-size-5-touch is-family-primary has-text-centered">Registro</h2>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name),html:{turbo: false, class:'login__logform'}) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username, autofocus: true, autocomplete: "surname" %>
-  </div>
-  <div class="field">
-    <%= f.label :phone %><br />
-    <%= f.number_field :phone, autofocus: true, autocomplete: "surname" %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      <div class="field login__logform__eigthywidth my-3">
+        <%= f.label :name, class: 'login__label is-size-5-desktop' %>
+        <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'login__input' %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+      <div class="field is-success  login__logform__eigthywidth my-3">
+        <%= f.label :username, class: 'login__label is-size-5-desktop' %>
+        <%= f.text_field :username, autofocus: true, autocomplete: "username", class: 'login__input' %>
+      </div>
+      <div class="field login__logform__eigthywidth my-3">
+        <%= f.label :phone, class: 'login__label is-size-5-desktop' %>
+        <%= f.number_field :phone, autofocus: true, autocomplete: "phone", class: 'login__input' %>
+      </div>
+      <div class="field login__logform__eigthywidth my-3">
+        <%= f.label :email, class: 'login__label is-size-5-desktop' %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'login__input' %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+      <div class="field login__logform__eigthywidth my-3">
+        <%= f.label :password, class: 'login__label is-size-5-desktop' %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %>
+        <%= f.password_field :password, autocomplete: "new-password", class: 'login__input' %>
+      </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+      <div class="field login__logform__eigthywidth my-2">
+        <%= f.label :password_confirmation, class: 'login__label is-size-5-desktop' %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'login__input' %>
+      </div>
 
-<%#= render "devise/shared/links" %>
+      <div class="actions is-relative login__logform__eigthywidth mt-6">
+        <%= f.submit "Registrarse", class: 'button login__logform__logbutton is-rounded is-clickable' %>
+        <%= link_to '/cadmin/login' , class: 'subtitle is-rounded login__buttons is-clickable' do %>
+          Login <%= inline_svg_tag('cadmin/icons/ico-arrow-right.svg', class: 'login__buttons__arrow')%>
+        <% end %>        
+      </div>
+    <% end %>
+
+    <%#= render "devise/shared/links" %>
+  </div>
+</div>

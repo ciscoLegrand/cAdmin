@@ -17,14 +17,16 @@
     <%= cadmin_stimulus_include_tags %>
   </head>
   <body>
-    <%= render 'layouts/cadmin/partials/admin_aside' %>
-    <main class= "column main is-10 is-offset-2 p-0 is-vcentered" >
-      <header class="header panel-heading">
-        <div class="is-flex is-align-items-center">
-          <button class="button mr-3 header__menu" data-controller="fire-sidebar" data-action="fire-sidebar#fire"><%= inline_svg_tag("cadmin/icons/ico-menu.svg", class:"icon has-text-link") %></button>
-          <span class="panel-heading subtitle is-size-6 | has-text-left"><%= render_breadcrumbs separator: ' > '  %></span>           
-        </div>
-      </header>
+    <%= render 'layouts/cadmin/partials/admin_aside' if user_signed_in? %>
+    <main class="column <%= user_signed_in? ? 'main is-10 is-offset-2 p-0' : 'is-12 has-background-primary' %> is-vcentered is-fullheight" >
+      <% if user_signed_in? %>
+        <header class="header panel-heading">
+          <div class="is-flex is-align-items-center">
+            <button class="button mr-3 header__menu" data-controller="fire-sidebar" data-action="fire-sidebar#fire"><%= inline_svg_tag("cadmin/icons/ico-menu.svg", class:"icon has-text-link") %></button>
+            <span class="panel-heading subtitle is-size-6 | has-text-left"><%= render_breadcrumbs separator: ' > '  %></span>           
+          </div>
+        </header>
+      <% end %>
       <section class="section">  
         <%= yield %>
       </section>

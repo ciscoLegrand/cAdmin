@@ -39,9 +39,9 @@
       </li>
     </ul>
   </nav>
-  <% if 1==0 %>
+
     <!--cuenta/cerrar sesion-->
-    <span class="has-text-centered has-text-white-ter"><%= current_user.business_name %></span>
+    <span class="has-text-centered has-text-white-ter"><%= current_user.username %></span>
     <div data-controller="dropdown" class="dropdown is-up is-justify-content-center p-3">
       <div class="dropdown-trigger">
         <button class="button has-text-white is-fullwidth sidebar__button_user" aria-haspopup="true" aria-controls="dropdown-menu" data-action="click->dropdown#show_options">
@@ -56,12 +56,12 @@
         <div class="dropdown-content is-pulled-right">
           <div class="dropdown-item">
             <div class="dropdown-content">
-              <%= button_to "Cerrar Sesión", signout_path, method: :delete, class: "dropdown-item", data: {turbo: false} %>
-              <%= link_to "Mi Cuenta", perfil_path, class: "dropdown-item has-text-centered p-0" %>                      
+              <%= button_to "Cerrar Sesión", destroy_cadmin_user_session_path, method: :delete, class: "dropdown-item", data: {turbo: false} %>
+              <%= link_to "Mi Cuenta", '/cadmin', class: "dropdown-item has-text-centered p-0" %>                      
             </div>
           </div>
         </div>
       </div>
     </div>
-  <% end %>
+
 </aside>

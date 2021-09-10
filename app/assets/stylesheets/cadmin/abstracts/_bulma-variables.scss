@@ -1,13 +1,16 @@
-$primary: hsl(217, 100%, 9%);
-$secondary: hsl(271, 100%, 71%);
+$primary: hsl(227, 95%, 22%);
+$secondary: hsl(206, 94%, 19%);
+$tertiary: hsl(196, 91%, 34%);
+$fourth:hsl(210, 100%, 26%);
+$fifth: hsl(192, 96%, 44%);
 $danger: hsl(6,71%,49%);
 $light: hsl(0,0%,93%);
 $white: hsl(0,0%,100%);
 $grey-darker: hsl(0,0%,24%);
 $grey-dark: hsl(0,0%,40%);
 $grey-lighter: hsl(0,0%,96%);
-$primary-light: hsla(217, 100%, 15%, 0.5%);
-$primary-lightest: rgba(0, 30, 77, 0.35%);
+$primary-light: hsla(227, 95%, 22%, 0.5%);
+$primary-lightest: rgba(0, 95%, 22%, 0.35%);
 
 $link: $primary;
 $link-hover: $primary-light;

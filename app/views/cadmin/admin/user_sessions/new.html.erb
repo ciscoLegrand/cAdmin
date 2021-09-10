@@ -1,0 +1,27 @@
+<div class="columns is-centered">
+  <div class="column is-half">
+    <div class="box">
+      <%= form_for(resource, as: resource_name, url: admin_login_path, data: {turbo: false}) do |f| %>
+        <div class="field is-relative">
+          <%= f.email_field :email, placeholder: true, autocomplete: "email", class: "input field-group__input mt-5" %>
+          <%= f.label :email, class: "label-hidden" %>
+        </div>
+
+        <div class="field is-relative">
+          <%= f.password_field :password, placeholder: true, autocomplete: "password", class: "input field-group__input mt-5" %>
+          <%= f.label :password, class: "label-hidden" %>
+        </div>
+        <div class="is-flex is-justify-content-space-between is-align-items-center">
+          <div>
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+
+          <div class="control">
+            <%= f.submit "ACCEDER", class: "button is-primary" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
