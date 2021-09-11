@@ -32,8 +32,8 @@
   
   &__letter_user {
     text-transform: uppercase;
-    background-color: #fff;
-    color: #000 !important;
+    background-color: $white;
+    color: $black !important;
     width: 24px;
     text-align: center;
     border-radius: 50px;
@@ -43,21 +43,21 @@
   }
 
   .dropdown-item {
-    color: #fff;
+    color: $white;
   }
 
   .dropdown-content {
-    background-color: #20304C;
+    background-color: $tertiary;
     box-shadow: none;
   }
 
   .dropdown-content > .dropdown-item > .dropdown-content {
-    background-color: #20304C;
+    background-color: $tertiary;
   }
   
   a.dropdown-item:hover, button.dropdown-item:hover {
-    background-color: #394962;
-    color: #fff;
+    background-color: $secondary;
+    color: $white;
     border-radius: 7px;
   }
 
@@ -68,8 +68,8 @@
   }
 
   .button_to .dropdown-item:hover {
-    background-color: #394962;
-    color: #fff;
+    background-color: $secondary;
+    color: $white;
     border-radius: 7px;
   }
 
@@ -79,11 +79,11 @@
   }
 
   &__button_user:hover {
-    background-color: #20304C;
+    background-color: $secondary;
   }
 
   &__button_user:focus {
-    background-color: #20304C;
+    background-color: $tertiary;
     border-color: transparent;
   }
 
