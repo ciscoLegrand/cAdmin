@@ -1,0 +1,12 @@
+<div class="notifications">
+  <div class="notification notifications__item <%= color_class %> " data-controller='notification'  data-notification-delay-value="15000">
+    <span class="notifications__item-icon">
+      <%= icon %>  
+    </span>
+    <span class="notifications__item-content has-text-dark"><%= data[:title] %></span>
+    <% if data[:body].present? %>
+      <span> <%= data[:body]%> </span>
+    <% end %>
+    <button class="delete notifications__item-close" data-action="click->notification#close"></button>
+  </div>         
+</div>
