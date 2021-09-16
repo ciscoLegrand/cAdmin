@@ -1,3 +1,4 @@
+<%# TODO: add style and new fields to complete this form %>
 <%= form_with(model: article) do |form| %>
   <% if article.errors.any? %>
     <div id="error_explanation">
@@ -16,13 +17,23 @@
     <%= form.text_field :title %>
   </div>
 
+  <%# TODO: change textarea to quill editor and develop their stimulus controller %>
   <div class="field">
     <%= form.label :content %>
     <%= form.text_area :content %>
   </div>
 
-    <%= form.hidden_field :user_id, value: current_cadmin_user.id %>
 
+  <%= form.hidden_field :user_id, value: current_cadmin_user.id %>
+  <div class="field">
+    <div class="file has-name">
+      <%= form.label :image , class: 'label required-form__mark' %>
+      <div class="control">
+        <%= image_tag form.object.image_url if form.object.cached_image_data %>
+        <%= form.hidden_field :image, value: form.object.cached_image_data %>
+        <%= form.file_field :image, class: 'input' %>    
+    </div>
+  </div>
 
   <div class="actions">
     <%= form.submit %>

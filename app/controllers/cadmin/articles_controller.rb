@@ -11,6 +11,7 @@ module Cadmin
 
     # GET /articles/1
     def show
+      @articles = Article.order(created_at: 'DESC').all
     end
 
     # GET /articles/new
@@ -48,6 +49,10 @@ module Cadmin
       redirect_to articles_url, notice: 'Article was successfully destroyed.'
     end
 
+    def unpublish
+      # TODO: set a date to unpublish article, this article will be hidden when the date arrives 
+    end
+
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_article
@@ -56,7 +61,7 @@ module Cadmin
 
       # Only allow a list of trusted parameters through.
       def article_params
-        params.require(:article).permit(:title, :content, :user_id)
+        params.require(:article).permit(:title, :content,:status,:published_at,:unpublished_at,:metatitle,:metadata, :user_id, :image)
       end
   end
 end

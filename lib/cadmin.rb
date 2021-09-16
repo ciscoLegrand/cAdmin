@@ -12,6 +12,8 @@ require 'inline_svg'
 require "breadcrumbs_on_rails"
 require "view_component"
 require "devise"
+require 'shrine'
+require "image_processing"
 
 module Cadmin
   # class Engine < ::Rails::Engine

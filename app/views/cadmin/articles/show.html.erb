@@ -1,19 +1,172 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @article.title %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @article.content %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @article.user_id %>
-</p>
 
 <%= link_to 'Edit', edit_article_path(@article) %> |
 <%= link_to 'Back', articles_path %>
+<div class="container">
+  <div class="section">
+    <div class="columns">
+      <div class="column is-three-quarters">
+        <%= turbo_frame_tag :article do %>
+          <div class="section">
+            <figure class="image is-16by9 mb-6">
+              <%= image_tag @article.image_url if @article.image %>
+            </figure>
+            <div class="content">
+              <h1><%= @article.title %></h1>
+              <div class="has-text-left">
+                <%= @article.content %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        
+
+        <!--TODO: COMENTARIOS SECTION-->
+        <div class="section">
+          <article class="media">
+            <figure class="media-left">
+              <p class="image is-64x64">
+                <img src="http://bulma.io/images/placeholders/128x128.png">
+              </p>
+            </figure>
+            <div class="media-content">
+              <div class="content">
+                <p>
+                  <strong>Barbara Middleton</strong>
+                  <br> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta eros lacus, nec ultricies elit blandit non. Suspendisse pellentesque mauris sit amet dolor blandit rutrum. Nunc in tempus turpis.
+                  <br>
+                  <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
+                </p>
+              </div>
+
+              <article class="media">
+                <figure class="media-left">
+                  <p class="image is-48x48">
+                    <img src="http://bulma.io/images/placeholders/96x96.png">
+                  </p>
+                </figure>
+                <div class="media-content">
+                  <div class="content">
+                    <p>
+                      <strong>Sean Brown</strong>
+                      <br> Donec sollicitudin urna eget eros malesuada sagittis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam blandit nisl a nulla sagittis, a lobortis leo feugiat.
+                      <br>
+                      <small><a>Like</a> · <a>Reply</a> · 2 hrs</small>
+                    </p>
+                  </div>
+
+                  <article class="media">
+                    Vivamus quis semper metus, non tincidunt dolor. Vivamus in mi eu lorem cursus ullamcorper sit amet nec massa.
+                  </article>
+
+                  <article class="media">
+                    Morbi vitae diam et purus tincidunt porttitor vel vitae augue. Praesent malesuada metus sed pharetra euismod. Cras tellus odio, tincidunt iaculis diam non, porta aliquet tortor.
+                  </article>
+                </div>
+              </article>
+
+              <article class="media">
+                <figure class="media-left">
+                  <p class="image is-48x48">
+                    <img src="http://bulma.io/images/placeholders/96x96.png">
+                  </p>
+                </figure>
+                <div class="media-content">
+                  <div class="content">
+                    <p>
+                      <strong>Kayli Eunice </strong>
+                      <br> Sed convallis scelerisque mauris, non pulvinar nunc mattis vel. Maecenas varius felis sit amet magna vestibulum euismod malesuada cursus libero. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
+                      Curae; Phasellus lacinia non nisl id feugiat.
+                      <br>
+                      <small><a>Like</a> · <a>Reply</a> · 2 hrs</small>
+                    </p>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </article>
+          <article class="media">
+            <figure class="media-left">
+              <p class="image is-64x64">
+                <img src="http://bulma.io/images/placeholders/128x128.png">
+              </p>
+            </figure>
+            <div class="media-content">
+              <div class="field">
+                <p class="control">
+                  <textarea class="textarea" placeholder="Add a comment..."></textarea>
+                </p>
+              </div>
+              <div class="field">
+                <p class="control">
+                  <button class="button">Post comment</button>
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!--TODO: PAGINATION SECTION-->
+        <div class="section">
+          <nav class="pagination is-centered">
+            <a class="pagination-previous">Previous</a>
+            <a class="pagination-next">Next page</a>
+
+          </nav>
+
+        </div>
+      </div>
+      <!--TODO: buscador y articulos relacionados-->
+      <div class="column">
+        <div class="section">
+          <div class="field is-grouped">
+            <p class="control is-expanded">
+              <input class="input" type="text" placeholder="Find a repository">
+            </p>
+            <p class="control">
+              <a class="button is-primary">
+                Search
+              </a>
+            </p>
+          </div>
+        </div>
+        <div class="section">
+          <aside class="menu">
+            <p class="menu-label">
+              Últimos articulos
+            </p>
+            <ul class="menu-list">
+              <% @articles.each do |article| %>
+                <li><h2 class="subtitle is-size-5 has-background-white-ter has-text-dark my-3"><%=link_to article.title, article %></h2></li>
+              <% end %>
+            </ul>
+
+
+          </aside>
+
+        </div>
+        <div class="section">
+          <aside class="menu">
+            <p class="menu-label">
+              カテゴリ
+            </p>
+            <ul class="menu-list">
+              <li><a>Lorem ipsum dolor sit amet, consectetur.</a></li>
+              <li><a>Lorem ipsum dolor sit amet, consectetur.</a></li>
+              <li><a>Lorem ipsum dolor sit amet, consectetur.</a></li>
+              <li><a>Lorem ipsum dolor sit amet, consectetur.</a></li>
+              <li><a>Lorem ipsum dolor sit amet, consectetur.</a></li>
+              <li><a>Lorem ipsum dolor sit amet, consectetur.</a></li>
+            </ul>
+
+
+          </aside>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
