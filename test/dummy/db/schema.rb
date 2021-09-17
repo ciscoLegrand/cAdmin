@@ -10,18 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_16_190021) do
+ActiveRecord::Schema.define(version: 2021_09_17_183642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "cadmin_articles", force: :cascade do |t|
-    t.string "title"
-    t.text "content"
+    t.string "title", null: false
+    t.text "content", null: false
+    t.integer "status", default: 0, null: false
+    t.date "published_at", default: "2021-09-17", null: false
+    t.date "unpublished_at"
+    t.string "metatitle"
+    t.string "metadata"
+    t.text "image_data"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_cadmin_articles_on_user_id"
+  end
+
+  create_table "cadmin_comments", force: :cascade do |t|
+    t.text "content"
+    t.bigint "user_id", null: false
+    t.bigint "article_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["article_id"], name: "index_cadmin_comments_on_article_id"
+    t.index ["user_id"], name: "index_cadmin_comments_on_user_id"
   end
 
   create_table "cadmin_users", force: :cascade do |t|
@@ -73,4 +89,6 @@ ActiveRecord::Schema.define(version: 2021_09_16_190021) do
   end
 
   add_foreign_key "cadmin_articles", "cadmin_users", column: "user_id"
+  add_foreign_key "cadmin_comments", "cadmin_articles", column: "article_id"
+  add_foreign_key "cadmin_comments", "cadmin_users", column: "user_id"
 end

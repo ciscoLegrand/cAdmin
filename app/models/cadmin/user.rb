@@ -1,6 +1,7 @@
 module Cadmin
   class User < ApplicationRecord
     has_many :articles
+    has_many :comments
 
 
     # Include default devise modules. Others available are:

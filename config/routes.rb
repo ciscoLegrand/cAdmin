@@ -1,9 +1,10 @@
 Cadmin::Engine.routes.draw do
-  resources :articles
   root to: "dashboard#index"
   resources :web_modules
-
-
+  
+  resources :articles do
+    resources :comments
+  end
   match '/articulos', to: 'articles#index', via: :get
   match '/articulos/nuevo', to: 'articles#new', via: :get
   match '/articulos/nuevo', to: 'articles#create', via: :post 
