@@ -6,7 +6,10 @@ module Cadmin
 
     # GET /comments
     def index
-      @comments = Comment.all
+      comments = Comment.all
+
+
+      @pagy, @comments = pagy(comments, items: 5)  
     end
 
     # GET /comments/1
@@ -15,7 +18,7 @@ module Cadmin
 
     # GET /comments/new
     def new
-      @comment = Comment.new
+      @comment = Comment.build
     end
 
     # GET /comments/1/edit
@@ -25,7 +28,7 @@ module Cadmin
     # POST /comments
     def create
       @article = Article.find(params[:article_id])
-      @comment = @article.comments.new(comment_params)
+      @comment = @article.comments.build(comment_params)
       
       if @comment.save
         redirect_to @article, notice: 'Comment was successfully created.'
@@ -37,7 +40,7 @@ module Cadmin
     # PATCH/PUT /comments/1
     def update
       if @comment.update(comment_params)
-        redirect_to @comment, notice: 'Comment was successfully updated.'
+        redirect_to @article, notice: 'Comment was successfully updated.'
       else
         render :edit
       end

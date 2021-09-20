@@ -1,9 +1,9 @@
 
 
-<%= link_to 'Edit', edit_article_path(@article) %> |
-<%= link_to 'Back', articles_path %>
 <div class="container">
   <div class="section">
+<%= link_to 'Edit', edit_article_path(@article) %> |
+<%= link_to 'Back', articles_path %>
     <div class="columns">
       <div class="column is-three-quarters">
         <%= turbo_frame_tag :article do %>
@@ -23,48 +23,47 @@
 
         <!--TODO: COMENTARIOS SECTION-->
         <div class="section">
-          <% if @article.comments.present? %>
-            <%= render @article.comments %>
-            <%#= turbo_frame_tag :comments, loading: :lazy, src: @article.comments %>
-          <% end %>
-          <%# TODO: form comments%>
-          <article class="media">
-            <figure class="media-left">
-              <p class="image is-64x64">
-                <img src="http://bulma.io/images/placeholders/128x128.png" class="is-rounded">
-              </p>
-            </figure>
-            <div class="media-content">
-              <%= form_with(model: [@article, @article.comments.build],data: {"controller": "quill", "action": "quill#save", turbo: false}, html: {id: 'base'}) do |form| %>
-                <div class="field">
-                  <p class="control">
-                    <%= form.hidden_field :user_id, value: current_cadmin_user.id %>
-                    <%= form.hidden_field :content, class: 'content',data: {"quill-target": "content"} %>
-                    <div data-quill-target="editor" class="is-fullwidth">
-                      comment...
-                    </div> 
-                  </p>
-                </div>
-                <div class="field">
-                  <p class="control">
-                    <div class="actions">
-                      <%= form.submit 'Post Comment', class: 'button is-success' %>
-                    </div>                  
-                  </p>
-                </div>  
-              <% end %>              
-            </div>
-          </article>
+          <div class="box">
+            <% if @article.comments.present? %>
+              <%= render @comments %>
+              <%#= turbo_frame_tag :comments, loading: :lazy, src: @article.comments %>
+            <% end %>
+
+            <article class="media mb-3">
+              <figure class="media-left">
+                <p class="image is-64x64">
+                  <img src="http://bulma.io/images/placeholders/128x128.png" class="is-rounded">
+                </p>
+              </figure>
+              <div class="media-content">
+                <%= form_with(model: [@article, @article.comments.build],data: {"controller": "quill", "action": "quill#save", turbo: false}, html: {id: 'base'}) do |form| %>
+                  <div class="field">
+                    <p class="control">
+                      <%= form.hidden_field :user_id, value: current_cadmin_user.id %>
+                      <%= form.hidden_field :content, class: 'content',data: {"quill-target": "content"} %>
+                      <div data-quill-target="editor" class="is-fullwidth">
+                        comment...
+                      </div> 
+            
+                    </p>
+                  </div>
+                  <div class="field">
+                    <p class="control">
+                      <div class="actions">
+                        <%= form.submit 'Post Comment', class: 'button is-success' %>
+                      </div>                  
+                    </p>
+                  </div>  
+                <% end %>              
+              </div>
+            </article>
+            <%#== pagy_bulma_nav(@cpagy)%>
+          </div>
         </div>
 
         <!--TODO: PAGINATION SECTION-->
         <div class="section">
-          <nav class="pagination is-centered">
-            <a class="pagination-previous">Previous</a>
-            <a class="pagination-next">Next page</a>
-
-          </nav>
-
+          <%#== pagy_bulma_nav(@apagy)%>
         </div>
       </div>
       <!--TODO: buscador y articulos relacionados-->
