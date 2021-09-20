@@ -1,5 +1,6 @@
 module Cadmin
   class User < ApplicationRecord
+    include ImageUploader::Attachment(:avatar)
     has_many :articles
     has_many :comments
 
