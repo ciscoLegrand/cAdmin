@@ -7,6 +7,7 @@ PATH
       devise
       image_processing (~> 1.8)
       inline_svg
+      pagy
       pg
       pg_search
       rails (~> 6.1.4, >= 6.1.4.1)
@@ -122,6 +123,7 @@ GEM
     nokogiri (1.12.4-x64-mingw32)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    pagy (4.11.0)
     pg (1.2.3-x64-mingw32)
     pg_search (2.3.5)
       activerecord (>= 5.2)

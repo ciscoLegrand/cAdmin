@@ -28,4 +28,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'devise'
   spec.add_dependency "image_processing", "~> 1.8"
   spec.add_dependency 'shrine'
+  spec.add_dependency 'pagy'
 end

@@ -14,6 +14,7 @@ require "view_component"
 require "devise"
 require 'shrine'
 require "image_processing"
+require "pagy"
 
 module Cadmin
   # class Engine < ::Rails::Engine
