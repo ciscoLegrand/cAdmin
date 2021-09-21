@@ -1,8 +1,10 @@
 <%= turbo_frame_tag :comment_form do%>
-  <article class="media">
+  <article class="media comments__form">
     <figure class="media-left">
-      <p class="image is-64x64">
-        <img src="http://bulma.io/images/placeholders/128x128.png">
+      <p class="image is-64x64 ">
+      <% if current_cadmin_user.avatar.present? %>
+        <%= image_tag current_cadmin_user.avatar_url, class:"is-rounded comments__profile"%>
+      <% end %>
       </p>
     </figure>
     <div class="media-content">
