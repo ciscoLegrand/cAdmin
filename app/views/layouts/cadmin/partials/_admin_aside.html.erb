@@ -20,12 +20,12 @@
         </span>
         <ul data-menu-target="dropdown">
           <li>
-            <%= link_to articles_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'articles', action: 'click->menu#set_active_menu_item'} do %>
+            <%= link_to articles_path  , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'articles', action: 'click->menu#set_active_menu_item'} do %>
               Articulos<%= inline_svg_tag('cadmin/icons/ico-document.svg', class:'icon ')%>
             <% end %>
           </li>
           <li>
-            <%= link_to new_article_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'new_article', action: 'click->menu#set_active_menu_item'} do %>
+            <%= link_to new_article_path  , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'new_article', action: 'click->menu#set_active_menu_item'} do %>
               Nuevo Articulos<%= inline_svg_tag('cadmin/icons/ico-document-add.svg', class:'icon ')%>
             <% end %>
           </li>
@@ -67,7 +67,7 @@
     <div data-controller="dropdown" class="dropdown is-up is-justify-content-center p-3">
       <div class="dropdown-trigger">
         <button class="button has-text-white is-fullwidth sidebar__button_user p-5" aria-haspopup="true" aria-controls="dropdown-menu" data-action="click->dropdown#show_options">
-          <% if current_cadmin_user.avatar.present? %>
+          <% if current_cadmin_user.avatar_data.present? %>
             <figure class=" image mr-3"><%= image_tag current_cadmin_user.avatar_url, class:'is-rounded sidebar__avatar'  %></figure>
           <% else %>
             <span class="sidebar__letter_user"><%= current_cadmin_user.email[0] %></span> 

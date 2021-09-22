@@ -14,7 +14,7 @@ module Cadmin
       add_breadcrumb @article.title
       @articles = Article.order(created_at: 'DESC').all
       # TODO: COMPLETAR COMENTARIOS ASOCIADOS A ARTICULOS
-      @comments = @article.comments.all
+      comments = @article.comments.all
       # @cpagy, @comments = pagy(@comments, items: 5)
       # @apagy, @articles = pagy(@articles, items: 1)
     end

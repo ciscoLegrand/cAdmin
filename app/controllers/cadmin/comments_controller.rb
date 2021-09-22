@@ -6,10 +6,8 @@ module Cadmin
 
     # GET /comments
     def index
-      comments = Comment.all
-
-
-      @pagy, @comments = pagy(comments, items: 5)  
+      @comments = Comment.all      
+      @pagy, @comments = pagy(@comments, items: 5)  
     end
 
     # GET /comments/1

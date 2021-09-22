@@ -2,9 +2,11 @@
   <article class="media mb-6 comments">
     <figure class="media-left">
       <p class="image is-64x64 ">
-      <% if current_cadmin_user.avatar.present? %>
-        <%= image_tag current_cadmin_user.avatar_url, class:"is-rounded comments__profile"%>
-      <% end %>
+        <% if current_cadmin_user.avatar_data.present? %>
+          <figure class=" image mr-3"><%= image_tag current_cadmin_user.avatar_url, class:'is-rounded comments_profile'  %></figure>
+        <% else %>
+          <span class="sidebar__letter_user"><%= current_cadmin_user.username[0] %></span> 
+        <% end %>
       </p>
     </figure>
     <div class="media-content">
