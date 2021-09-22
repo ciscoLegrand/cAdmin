@@ -1,6 +1,5 @@
 
-
-<%= link_to 'New Article', new_article_path %>
+<%= link_to 'New Article', new_article_path, class:'button is-success mb-4' %>
 
 <div class="columns is-multiline is-mobile">
     <% @articles.each do |article| %>
@@ -14,7 +13,11 @@
           <div class="media">
             <div class="media-left">
               <figure class="image is-48x48">
-                <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                <% if current_cadmin_user.avatar_data.present? %>
+                  <figure class=" image mr-3"><%= image_tag current_cadmin_user.avatar_url, class:'is-rounded comments_profile'  %></figure>
+                <% else %>
+                  <span class="sidebar__letter_user"><%= current_cadmin_user.username[0] %></span> 
+                <% end %>
               </figure>
             </div>
             <div class="media-content">

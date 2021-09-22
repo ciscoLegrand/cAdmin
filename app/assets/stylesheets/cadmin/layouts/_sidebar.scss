@@ -29,7 +29,11 @@
     visibility: hidden;
     width: 0;
   }
-  
+  &__avatar {
+    width: 45px !important;
+    height: 45px !important;
+    border: $white solid 2px;
+  }
   &__letter_user {
     text-transform: uppercase;
     background-color: $white;

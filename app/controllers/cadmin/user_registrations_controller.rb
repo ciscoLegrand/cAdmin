@@ -1,6 +1,6 @@
 module Cadmin
   class UserRegistrationsController < Devise::RegistrationsController
-    before_action :sign_up_params, only: [:create]
+    before_action :sign_up_params, only: [:create, :update]
 
     # GET /resource/sign_up
     def new
@@ -23,7 +23,7 @@ module Cadmin
     end
     private
       def sign_up_params
-        params.require(:cadmin_user).permit(:name, :username, :email,:phone, :password, :password_confirmation)
+        params.require(:cadmin_user).permit(:name, :username, :email,:phone, :password, :password_confirmation, :avatar)
       end
   end
 end

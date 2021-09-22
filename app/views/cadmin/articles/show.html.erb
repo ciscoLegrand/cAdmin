@@ -1,7 +1,4 @@
-
-
-<%= link_to 'Edit', edit_article_path(@article) %> |
-<%= link_to 'Back', articles_path %>
+  <%= link_to 'Edit', edit_article_path(@article), class: 'button is-outlined is-success' %> | <%= link_to 'Back', articles_path, class: 'button is-outlined is-info' %>
 <div class="container">
   <div class="section">
     <div class="columns">
@@ -23,48 +20,54 @@
 
         <!--TODO: COMENTARIOS SECTION-->
         <div class="section">
-          <% if @article.comments.present? %>
-            <%= render @article.comments %>
-            <%#= turbo_frame_tag :comments, loading: :lazy, src: @article.comments %>
-          <% end %>
-          <%# TODO: form comments%>
-          <article class="media">
-            <figure class="media-left">
-              <p class="image is-64x64">
-                <img src="http://bulma.io/images/placeholders/128x128.png" class="is-rounded">
-              </p>
-            </figure>
-            <div class="media-content">
-              <%= form_with(model: [@article, @article.comments.build],data: {"controller": "quill", "action": "quill#save", turbo: false}, html: {id: 'base'}) do |form| %>
-                <div class="field">
-                  <p class="control">
-                    <%= form.hidden_field :user_id, value: current_cadmin_user.id %>
-                    <%= form.hidden_field :content, class: 'content',data: {"quill-target": "content"} %>
-                    <div data-quill-target="editor" class="is-fullwidth">
-                      comment...
-                    </div> 
-                  </p>
-                </div>
-                <div class="field">
-                  <p class="control">
-                    <div class="actions">
-                      <%= form.submit 'Post Comment', class: 'button is-success' %>
-                    </div>                  
-                  </p>
-                </div>  
-              <% end %>              
-            </div>
-          </article>
-        </div>
+          <div class="box">
+            <% if @article.comments.present? %>
+              <%= render @article.comments %>
+              <%#= turbo_frame_tag :comments, loading: :lazy, src: @article.comments %>
+            <% end %>
 
+            <article class="media mb-3 comments">
+              <figure class="media-left">
+                <p class="image is-64x64 ">
+                <% if current_cadmin_user.avatar_data.present? %>
+                  <figure class=" image mr-3"><%= image_tag current_cadmin_user.avatar_url, class:'is-rounded comments_profile'  %></figure>
+                <% else %>
+                  <span class="sidebar__letter_user"><%= current_cadmin_user.username[0] %></span> 
+                <% end %>
+                </p>
+              </figure>
+              <div class="media-content">
+                <%= form_with(model: [@article, @article.comments.build],data: {"controller": "quill", "action": "quill#save", turbo: false}, html: {id: 'base'}) do |form| %>
+                  <div class="field">
+                    <p class="control">
+                      <%= form.hidden_field :user_id, value: current_cadmin_user.id %>
+                      <%= form.hidden_field :content, class: 'content',data: {"quill-target": "content"} %>
+                      <div data-quill-target="editor" class="is-fullwidth">
+                        comment...
+                      </div> 
+            
+                    </p>
+                  </div>
+                  <div class="field">
+                    <p class="control">
+                      <div class="actions">
+                        <%= form.submit 'Post Comment', class: 'button is-success' %>
+                      </div>                  
+                    </p>
+                  </div>  
+                <% end %>              
+              </div>
+            </article>
+            <%#== pagy_bulma_nav(@cpagy)%>
+          </div>
+        </div>
         <!--TODO: PAGINATION SECTION-->
         <div class="section">
           <nav class="pagination is-centered">
             <a class="pagination-previous">Previous</a>
             <a class="pagination-next">Next page</a>
-
           </nav>
-
+          <%#== pagy_bulma_nav(@apagy)%>
         </div>
       </div>
       <!--TODO: buscador y articulos relacionados-->

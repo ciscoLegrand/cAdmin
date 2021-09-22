@@ -5,11 +5,6 @@ Cadmin::Engine.routes.draw do
   resources :articles do
     resources :comments
   end
-  match '/articulos', to: 'articles#index', via: :get
-  match '/articulos/nuevo', to: 'articles#new', via: :get
-  match '/articulos/nuevo', to: 'articles#create', via: :post 
-  match '/articulos/editar', to: 'articles#edit', via: :get 
-  match '/articulos/editar', to: 'articles#update', via: :put
   
   # devise_for :cadmin_users, class_name: "Cadmin::User", module: :devise
   devise_for  :cadmin_users, 

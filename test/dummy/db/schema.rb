@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_17_183642) do
+ActiveRecord::Schema.define(version: 2021_09_22_201753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2021_09_17_183642) do
     t.string "title", null: false
     t.text "content", null: false
     t.integer "status", default: 0, null: false
-    t.date "published_at", default: "2021-09-17", null: false
+    t.date "published_at", default: "2021-09-22", null: false
     t.date "unpublished_at"
     t.string "metatitle"
     t.string "metadata"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2021_09_17_183642) do
     t.string "province"
     t.string "address"
     t.date "birthdate"
+    t.text "avatar_data"
     t.string "role", default: "user", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

@@ -13,6 +13,7 @@ class DeviseCreateCadminUsers < ActiveRecord::Migration[6.1]
       t.string :province
       t.string :address 
       t.date :birthdate 
+      t.text :avatar_data
       t.string :role, null: false, default: 'user'
       t.string :encrypted_password, null: false, default: ""
 
