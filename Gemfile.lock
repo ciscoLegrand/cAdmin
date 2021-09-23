@@ -5,6 +5,7 @@ PATH
       breadcrumbs_on_rails
       bulma-rails
       devise
+      devise_invitable
       image_processing (~> 1.8)
       inline_svg
       pagy
@@ -95,6 +96,9 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise_invitable (2.0.5)
+      actionmailer (>= 5.0)
+      devise (>= 4.6)
     down (5.2.3)
       addressable (~> 2.8)
     erubi (1.10.0)

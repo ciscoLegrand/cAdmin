@@ -11,7 +11,8 @@ Cadmin::Engine.routes.draw do
               class_name: "Cadmin::User" , 
               controllers: { 
                 sessions: 'cadmin/user_sessions', 
-                registrations: 'cadmin/user_registrations'
+                registrations: 'cadmin/user_registrations',
+                registrations: 'cadmin/invitations'
                },
                path_names: {sign_out: 'logout'},
                path_prefix: :user,

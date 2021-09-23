@@ -19,8 +19,8 @@ module Cadmin
 
     # Include default devise modules. Others available are:
     # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-    devise :database_authenticatable, :registerable,
-           :recoverable, :rememberable, :validatable
+    devise :invitable, :database_authenticatable, :registerable,
+           :recoverable, :rememberable, :validatable, :trackable
 
     scope :filter_between_dates, -> (start_date, end_date) { where(created_at: start_date..end_date) }
     scope :filter_by_user_id, -> (user_id) { where(id: user_id)}

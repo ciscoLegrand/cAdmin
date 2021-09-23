@@ -31,6 +31,18 @@
           </li>
         </ul>
       </li>
+      <li>  
+        <span class="panel-block is-flex is-justify-content-flex-start is-align-items-start is-clickable is-hoverable has-no-bottom-line sidebar__arrow" data-action="click->menu#set_active_menu" data-menu="users">
+          <%= inline_svg_tag('cadmin/icons/ico-users.svg', class:'icon mx-4')%> Usuarios
+        </span>
+        <ul data-menu-target="dropdown">
+          <li>
+            <%= link_to new_cadmin_user_invitation_path  , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'invite', action: 'click->menu#set_active_menu_item'} do %>
+              Invitar<%= inline_svg_tag('cadmin/icons/ico-user-add.svg', class:'icon ')%>
+            <% end %>
+          </li>
+        </ul>
+      </li>
       <%# if @web_module.mailbox? %>
         <li>  
           <span class="panel-block is-flex is-justify-content-flex-start is-align-items-start is-clickable is-hoverable has-no-bottom-line sidebar__arrow" data-action="click->menu#set_active_menu" data-menu="mailbox">
