@@ -1,16 +1,71 @@
-<h2><%= t "devise.invitations.new.header" %></h2>
-
-<%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <% resource.class.invite_key_fields.each do |field| -%>
-    <div class="field">
-      <%= f.label field %><br />
-      <%= f.text_field field %>
-    </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit t("devise.invitations.new.submit_button"), class:'button is-primary is-small is-clickable is-hoverable'  %>
+<div class="columns is-flex is-justify-content-center">
+  <div class="column is-3 ">
+    <h3 class="title is-size-4-desktop is-size-5-touch has-text-left"> <%="#{t '.title'}"%></h3>
+    <hr class="has-background-dark">
+    <span class="is-size-6"><%= t '.description' %></span>
   </div>
-<% end %>
+  <div class="column is-8-desktop is-12-touch has-text-centered">
+    <div class="box invitable">
+      <h2 class="subtitle has-text-weight-semibold is-size-4-desktop is-size-6-touch"><%= "#{t '.title'}" %></h2>
+      <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post}, data: {turbo: false}) do |f| %>
+        <%= render "users/shared/error_messages", resource: resource %>  
+
+        <% resource.class.invite_key_fields.each do |field| -%>
+            <div class="columns is-justify-content-center">
+              <div class="column  is-8-desktop is-12-touch">
+                <div class="field is-horizontal is-align-items-center">
+                  <div class="field-label invitable__grow">
+                    <%= f.label :email, class: 'label required-form__mark' %>
+                  </div>
+                  <div class="field-body">
+                    <div class="field">
+                      <div class="control">
+                        <%= f.text_field :email, class: 'input' %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% if current_user.superadmin? %>
+                  <div class="field is-horizontal is-align-items-center">
+                    <div class="field-label invitable__grow">
+                      <%= f.label :role, class: 'label' %>
+                    </div>
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <%= f.select :role, [['Usuario', 'user'], ['Administrador', 'admin']], {prompt: 'Selecciona un rol de usuario'},{ class: 'select is-fullwidth is-focused'} %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+
+        <% end -%>
+        <% if 1 == 0 %>
+          <hr class="has-background-white-ter">
+          <%= f.collection_select(:permission_ids, Permission.all, :resource, :action, prompt:'Permisso') %>
+          <hr class="has-background-white-ter">
+          <h3 class="subtitle has-text-weight-semibold is-size-4-desktop is-size-6-touch">Permisos</h3>
+          <div class="columns is-multiline is-mobile">
+            <%= Permission.first.inspect %>
+            <% Permission.all.each do |value|%>
+              <div class="column is-6">
+                <span  class="dropdown-item has-text-left is-clickable" >
+                  <%= check_box_tag value.id , "#{value.resource}:#{value.action}",false,class: 'dropdown-item__checkbox'%>
+                  <%= label_tag value.id,"#{value.resource}:#{value.action}", class:'is-clickable'%>
+                </span>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+        <hr class="has-background-white-ter">
+        <div class="actions">
+          <%= f.submit "#{t '.create'}", class:'button is-primary mx-2'  %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

@@ -7,12 +7,13 @@ Cadmin::Engine.routes.draw do
   end
   
   # devise_for :cadmin_users, class_name: "Cadmin::User", module: :devise
+  # devise_for :users, controllers: { invitations: 'devise/invitations' }
   devise_for  :cadmin_users, 
               class_name: "Cadmin::User" , 
               controllers: { 
                 sessions: 'cadmin/user_sessions', 
                 registrations: 'cadmin/user_registrations',
-                registrations: 'cadmin/invitations'
+                invitations: 'cadmin/user_invitations'
                },
                path_names: {sign_out: 'logout'},
                path_prefix: :user,

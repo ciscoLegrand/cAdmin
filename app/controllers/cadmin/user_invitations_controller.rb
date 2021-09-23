@@ -1,5 +1,5 @@
 module Cadmin
-  class CadminUserInvitationsController < Devise::InvitationsController
+  class UserInvitationsController < Devise::InvitationsController
     # before_action :initial_invited_user, only: [:new, :edit]
 
     # def new
@@ -11,7 +11,7 @@ module Cadmin
     # # end
 
     def create
-      @user = Cadmin::User.invite!(invited_cadmin_user_params)
+      @user = User.invite!(invited_cadmin_user_params)
       if @user.valid?
         redirect_to root_path, notice: "Se acaba de enviar un email de activación a  #{invited_cadmin_user_params[:email]}."
       else        

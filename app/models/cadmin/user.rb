@@ -7,7 +7,7 @@ module Cadmin
     validates :email, presence: true, uniqueness: true
     validates :username, presence: true, uniqueness: { case_sensitive: false }, on: :update
     validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true # para no permitir caracteres especiales
-    validates :role, :invitation_token, presence: true
+    validates :role, presence: true
 
     has_many :articles
     has_many :comments
@@ -15,7 +15,7 @@ module Cadmin
     validates :email, presence: true, uniqueness: true
     validates :username, presence: true, uniqueness: { case_sensitive: false }, on: :update
     validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true # para no permitir caracteres especiales
-    validates :role, :invitation_token, presence: true
+    validates :role , presence: true
 
     # Include default devise modules. Others available are:
     # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
