@@ -22,6 +22,7 @@ module Cadmin
     devise :invitable, :database_authenticatable, :registerable,
            :recoverable, :rememberable, :validatable, :trackable
 
+    # todo: create page's results
     scope :filter_between_dates, -> (start_date, end_date) { where(created_at: start_date..end_date) }
     scope :filter_by_user_id, -> (user_id) { where(id: user_id)}
 
@@ -32,7 +33,7 @@ module Cadmin
       :email
     ]
 
-    # TODO: move to concern
+    # TODO: move validations to concern
     def user?
       %w(user employee admin superadmin).include?(self.role)
     end

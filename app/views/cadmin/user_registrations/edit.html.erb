@@ -1,15 +1,13 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
 
 
 
 <%= link_to "Back", :back %>
 
-<div class="columns login">
-  <div class="column is-8-desktop is-hidden-touch">
-    <%= inline_svg_tag('cadmin/content/login.svg', class:'login__content') %>
-  </div>
-  <div class="login__colform column is-4-desktop is-12-touch is-flex is-flex-direction-column is-align-content-center">
-    <h2 class="title is-size-3-desktop is-size-5-touch is-family-primary has-text-centered">Actualizar Usuario</h2>
+<div class="container login">
+
+  <div class="login__edit is-flex is-flex-direction-column is-align-content-center">
+    <h2>Edit <%= resource_name.to_s.humanize %></h2>
+    <h2 class="title is-size-3-desktop is-size-5-touch is-family-primary has-text-centered"><%= current_cadmin_user.username %></h2>
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name),html:{turbo: false, class:'login__logform', method: :put}) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
@@ -18,8 +16,8 @@
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>
       <div class="field is-success  login__logform__eigthywidth my-3">
-        <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-        <%= f.password_field :current_password, autocomplete: "current-password" %>
+        <%= f.label :current_password, class: 'login__label is-size-5-desktop has-text-danger' %> <i>(we need your current password to confirm your changes)</i><br />
+        <%= f.password_field :current_password,class: 'login__input', autocomplete: "current-password" %>
       </div>
       <div class="field login__logform__eigthywidth my-3">
         <%= f.label :name, class: 'login__label is-size-5-desktop' %>

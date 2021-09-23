@@ -1,0 +1,35 @@
+<div class="columns login">
+  <div class="column is-4-desktop is-hidden-touch">
+    <h2 class="subtitle is-5">Pendientes activación</h2>
+    <%= turbo_frame_tag :pending_users, loading: :lazy, src: pending_users_path %>
+  </div>
+  <div class="login__invite column is-6-desktop is-12-touch is-flex is-flex-direction-column is-align-content-center">
+    <h2 class="title is-size-3-desktop is-size-5-touch is-family-primary has-text-centered"><%= t "devise.invitations.new.header" %></h2>
+    <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post,class:'login__logform',turbo: false }) do |f| %>
+      
+      <%= f.hidden_field :phone, value: rand(9**9).to_i %>
+      <% resource.class.invite_key_fields.each do |field| -%>
+        <div class="field login__logform__eigthywidth my-3">
+          <%= f.label field, class: 'login__label' %><br />
+          <%= f.text_field field, class: 'login__input' %>
+        </div>
+      <% end -%>
+      
+          
+          
+        <div class="field login__logform__eigthywidth my-3">
+          <div class="control">
+            <%= f.label :role, class: 'login__label' %>
+            <%# ! permitted_roles being located in application_helper.rb %>
+            <%= f.select :role, permitted_roles, {prompt: 'Selecciona un rol de usuario'},{ class: 'select is-fullwidth is-focused'} %>
+          </div>
+            
+          
+        </div>
+
+      <div class="actions is-relative login__logform__eigthywidth mt-6 is-flex is-justify-content-center">
+        <%= f.submit t("devise.invitations.new.submit_button"), class: 'button login__logform__logbutton is-rounded is-clickable' %>       
+      </div>
+    <% end %>
+  </div>
+</div>

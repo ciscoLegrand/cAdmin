@@ -5,8 +5,11 @@ Cadmin::Engine.routes.draw do
   resources :articles do
     resources :comments
   end
-  
-  # devise_for :cadmin_users, class_name: "Cadmin::User", module: :devise
+
+  match '/usuarios/pendientes', to: 'users#pending', via: :get, as: :pending_users
+  match '/usuarios/activos', to: 'users#active', via: :get, as: :active_users
+
+  # # devise_for :cadmin_users, class_name: "Cadmin::User", module: :devise
   # devise_for :users, controllers: { invitations: 'devise/invitations' }
   devise_for  :cadmin_users, 
               class_name: "Cadmin::User" , 

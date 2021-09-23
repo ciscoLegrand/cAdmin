@@ -37,8 +37,13 @@
         </span>
         <ul data-menu-target="dropdown">
           <li>
-            <%= link_to new_cadmin_user_invitation_path  , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'invite', action: 'click->menu#set_active_menu_item'} do %>
+            <%= link_to new_cadmin_user_invitation_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'invite', action: 'click->menu#set_active_menu_item'} do %>
               Invitar<%= inline_svg_tag('cadmin/icons/ico-user-add.svg', class:'icon ')%>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to active_users_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'active', action: 'click->menu#set_active_menu_item'} do %>
+              Usuarios<%= inline_svg_tag('cadmin/icons/ico-user-add.svg', class:'icon ')%>
             <% end %>
           </li>
         </ul>
@@ -95,7 +100,7 @@
           <div class="dropdown-item">
             <div class="dropdown-content">
               <%= button_to "Cerrar Sesión", '', method: :delete, class: "dropdown-item", data: {turbo: false} %>
-              <%= link_to "Mi Cuenta", edit_cadmin_user_registration_path(id: current_cadmin_user.id), class: "dropdown-item has-text-centered p-0" %>                      
+              <%= link_to "Mi Cuenta", edit_cadmin_user_registration_path(@user), class: "dropdown-item has-text-centered p-0" %>                      
             </div>
           </div>
         </div>

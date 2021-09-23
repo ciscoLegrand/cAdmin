@@ -8,12 +8,13 @@ class DeviseCreateCadminUsers < ActiveRecord::Migration[6.1]
       t.string :name ,           null: false, default: ""
       t.string :first_name,            null: false, default: ""
       t.string :email,              null: false, default: ""
-      t.integer :phone, null: false 
+      t.integer :phone, null: false
       t.integer :postal_code
       t.string :province
       t.string :address 
       t.date :birthdate 
       t.text :avatar_data
+      t.datetime :deleted_at
       t.string :role, null: false, default: 'user'
       t.string :encrypted_password, null: false, default: ""
 
@@ -47,6 +48,7 @@ class DeviseCreateCadminUsers < ActiveRecord::Migration[6.1]
     end
 
     add_index :cadmin_users, :email,                unique: true
+    add_index :cadmin_users, :username,             unique: true
     add_index :cadmin_users, :phone,                unique: true
     add_index :cadmin_users, :reset_password_token, unique: true
     add_index :cadmin_users, :confirmation_token,   unique: true

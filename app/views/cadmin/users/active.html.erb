@@ -1,0 +1,22 @@
+
+
+<hr class="has-background-white-ter">
+<div class="clearfix"></div>
+<%= turbo_frame_tag :active_users do %>  
+  <% if @active.present? %>
+    <ul>
+      <% @active.each do |active| %>
+        <li><%= active.email %> | <%= active.role %></li>  
+      <% end %>
+    </ul> 
+  <% else %>
+    <div class="box is-fullwidth">
+      <div class="is-flex is-justify-content-center">
+        <figure class='image'>
+          <%= inline_svg_tag('content/add_friends.svg', size: '250', class: 'has-text-centered')%> <br>
+        </figure>
+      </div>
+      <h3 class="subtitle is-size-5 has-text-centered"> No hay usuarios activos </h3>
+    </div>
+  <% end %>
+<% end %>
