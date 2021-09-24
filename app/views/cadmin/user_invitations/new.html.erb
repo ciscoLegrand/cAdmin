@@ -1,7 +1,7 @@
 <div class="columns login">
   <div class="column is-4-desktop is-hidden-touch">
     <h2 class="subtitle is-5">Pendientes activación</h2>
-    <%= turbo_frame_tag :pending_users, loading: :lazy, src: pending_users_path %>
+    <%= turbo_frame_tag :users, loading: :lazy, src: users_path %>
   </div>
   <div class="login__invite column is-6-desktop is-12-touch is-flex is-flex-direction-column is-align-content-center">
     <h2 class="title is-size-3-desktop is-size-5-touch is-family-primary has-text-centered"><%= t "devise.invitations.new.header" %></h2>

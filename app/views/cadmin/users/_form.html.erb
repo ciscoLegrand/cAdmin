@@ -4,7 +4,7 @@
 
     <h2 class="has-text-weight-bold">CUENTA</h2>
 
-    <%= form_for(@user,url:  usuarios_editar_path(id: @user.id) , html: { method: :put ,class:'box required-form'}, data: {turbo: false}) do |f| %>
+    <%= form_for(@user,url:  edit_profile_path(id: current_cadmin_user.id) , html: { method: :put ,class:'box required-form'}, data: {turbo: false}) do |f| %>
       <% if @user.errors.any? %>
         <div id="error_explanation">
           <h2 class="subtitle is-size-5 has-background-warning has-text-centered has-text-dark"><%= pluralize(@user.errors.count, "error") %> evitaron que se guardase:</h2>
@@ -44,7 +44,7 @@
       <div class="actions is-flex is-justify-content-center">
         <%= f.submit "#{ t '.update'}", class: "button is-success mx-2" %>
 
-        <%= link_to "#{ t '.back'}", cadmin_users_active_path, class: "button has-background-white-ter mx-2" %>
+        <%= link_to "#{ t '.back'}", root_path, class: "button has-background-white-ter mx-2" %>
       </div>
     <% end %>
 

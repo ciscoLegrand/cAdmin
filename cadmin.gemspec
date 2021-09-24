@@ -30,4 +30,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "image_processing", "~> 1.8"
   spec.add_dependency 'shrine'
   spec.add_dependency 'pagy'
+  spec.add_development_dependency "rspec-rails"
+  spec.add_development_dependency "letter_opener"
 end

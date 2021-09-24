@@ -12,9 +12,12 @@ module Cadmin
     # end
 
     def create
-      @user = User.invite!(invited_cadmin_user_params)
+      @user = Cadmin::User.invite!(invited_cadmin_user_params) do |user|
+        # todo: review this section 'cause dont sending emails and uses skip_invitations only for not broke this part!
+        user.skip_invitation = true
+      end
       if @user.valid?
-        redirect_to root_path, notice: "Se acaba de enviar un email de activación a  #{invited_cadmin_user_params[:email]}."
+        redirect_to new_cadmin_user_invitation_path, notice: "Se acaba de enviar un email de activación a  #{invited_cadmin_user_params[:email]}."
       else        
         render 'cadmin/user_invitations/new', locals: { resource: @user, resource_name: resource_name }, notice: "No se ha podido enviar el email a  #{invited_cadmin_user_params[:email]}."
       end
