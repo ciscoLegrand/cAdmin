@@ -1,5 +1,5 @@
 <%# TODO: add style and new fields to complete this form %>
-<%= form_with(model: article) do |form| %>
+<%= form_with(model: article, data: {"controller": "quill", "action": "quill#save", turbo: false}, html: {id: 'base'}) do |form| %>
   <% if article.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
@@ -12,18 +12,56 @@
     </div>
   <% end %>
 
+  <div class="field is-horizontal">
+    <div class="field">
+      <%= form.label :published_at %>
+      <div class="control  has-icons-right">
+        <%= form.text_field :published_at,  autocomplete: "off", class: 'input is-medium',placeholder: "#{Time.now.strftime('%d-%m-%Y')}", data: { controller: "flatpickr" } %>
+        <%= inline_svg_tag('cadmin/icons/ico-calendar.svg', class: 'icon is-small is-right')%>
+      </div>
+    </div>
+    <div class="field">
+    <%# TODO: REVIEW WHY DONT RUN FLATPICKR %>
+      <%= form.label :unpublished_at %>
+      <div class="control  has-icons-right">
+        <%= form.text_field :unpublished_at,  autocomplete: "off", class: 'input is-medium',placeholder: "#{Time.now.strftime('%d-%m-%Y')}", data: { controller: "flatpickr" } %>
+        <%= inline_svg_tag('cadmin/icons/ico-calendar.svg', class: 'icon is-small is-right')%>
+      </div>
+    </div>
+  </div>
+
+
   <div class="field">
     <%= form.label :title %>
+    <div class="control">
     <%= form.text_field :title %>
+    </div>
   </div>
 
-  <%# TODO: change textarea to quill editor and develop their stimulus controller %>
   <div class="field">
     <%= form.label :content %>
-    <%= form.text_area :content %>
+    <div class="control">
+    <%= form.hidden_field :content, class: 'content',data: {"quill-target": "content"} %>
+      <div data-quill-target="editor" class="is-fullwidth">
+        <%= raw article.content %>
+      </div> 
+    </div>
   </div>
 
-
+  <div class="field is-horizontal">
+    <div class="field">
+      <%= form.label :metatitle %>
+      <div class="control">
+      <%= form.text_field :metatitle %>
+      </div>
+    </div>
+    <div class="field">
+      <%= form.label :metadata %>
+      <div class="control">
+      <%= form.text_field :metadata %>
+      </div>
+    </div>
+  </div>
   <%= form.hidden_field :user_id, value: current_cadmin_user.id %>
   <div class="field">
     <div class="file has-name">
