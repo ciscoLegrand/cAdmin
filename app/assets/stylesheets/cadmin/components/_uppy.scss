@@ -1,0 +1,21 @@
+.uppy {
+  &__image {
+    position: absolute;
+    top: 0%;
+    // left: 15%;
+    width:100%;
+    height: 100%;
+    background: white;
+    
+    &:hover{
+      display: none;
+    }
+
+    &__img{
+      width: 100%;
+      height:90%;
+      // display: none;
+    }
+  }
+  
+}

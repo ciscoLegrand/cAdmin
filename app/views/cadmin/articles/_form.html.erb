@@ -1,79 +1,106 @@
 <%# TODO: add style and new fields to complete this form %>
-<%= form_with(model: article, data: {"controller": "quill", "action": "quill#save", turbo: false}, html: {id: 'base'}) do |form| %>
-  <% if article.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
 
-      <ul>
-        <% article.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+  <%= form_with(model: article, data: {"controller": "quill", "action": "quill#save", turbo: false}, html: {id: 'base', class: 'article__form'}) do |form| %>
+    <% if article.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+        <ul>
+          <% article.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field is-horizontal">
+      <div class="field-body">
+        <div class="field">
+          <%= form.label :published_at, class: 'label ' %>
+          <div class="control is-expanded  has-icons-right">
+            <%= form.text_field :published_at,  autocomplete: "off", class: 'input is-medium',placeholder: "#{Time.now.strftime('%d-%m-%Y')}",  data: { controller: "flatpickr",flatpickr_default_date: Time.zone.local(2021,1,1),flatpickr_max_date: Time.zone.yesterday, flatpickr_date_format: "Y-m-d", flatpickr_locale: locale } %>
+            <%= inline_svg_tag('cadmin/icons/ico-calendar.svg', class: 'icon is-small is-right ')%>
+          </div>
+        </div>
+        <div class="field">
+        <%# TODO: REVIEW WHY DONT RUN FLATPICKR %>
+          <%= form.label :unpublished_at, class: 'label' %>
+          <div class="control is-expanded  has-icons-right">
+            <%= form.text_field :unpublished_at,  autocomplete: "off", class: 'input is-medium',placeholder: "#{Time.now.strftime('%d-%m-%Y')}", data: { controller: "flatpickr"} %>
+            <%= inline_svg_tag('cadmin/icons/ico-calendar.svg', class: 'icon is-small is-right')%>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="field">
+      <%= form.label :title, class: 'label' %>
+      <div class="control">
+      <%= form.text_field :title, class: 'input' %>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= form.label :content, class: 'label' %>
+      <div class="control">
+      <%= form.hidden_field :content, class: 'content ',data: {"quill-target": "content"} %>
+        <div data-quill-target="editor" class="article__quill is-fullwidth ">
+          <%= raw article.content %>
+        </div> 
+      </div>
+    </div>
+
+    <div class="field is-horizontal">
+      <div class="field-body">
+        <div class="field">
+          <%= form.label :metatitle, class: 'label' %>
+          <div class="control is-expanded">
+          <%= form.text_field :metatitle, class: 'input' %>
+          </div>
+        </div>
+        <div class="field">
+          <%= form.label :metadata, class: 'label' %>
+          <div class="control is-expanded">
+          <%= form.text_field :metadata, class: 'input'%>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= form.hidden_field :user_id, value: current_cadmin_user.id %>
+    <% if 1 == 0 %>        
+      <div class="field">
+        <div class="file has-name">
+          <%= form.label :image , class: 'label' %>
+          <div class="control">
+            <%= image_tag form.object.image_url if form.object.cached_image_data %>
+            <%= form.hidden_field :image, value: form.object.cached_image_data %>
+            <%= form.file_field :image, class: 'input' %>    
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :image %>
+      <div data-controller="uppy" class="is-relative">
+        <div data-uppy-target="container"></div>
+        <%= form.hidden_field :image, value: form.object.cached_image_data, data: { uppy_target: 'input' } %>
+        <% if  article.image_data.present? %>
+          <div class="uppy__image">
+            <%= link_to  article.document.file.metadata["filename"]  %>
+          </div>
         <% end %>
-      </ul>
+        <div class="upload_container">
+          <%= link_to"", "", target: '_blank', data: {uppy_target: 'preview'} %>
+          <span data-action="click->uppy#removeFile">Eliminar</span>
+        </div>
+      </div>
     </div>
+    <!-- TODO: translate -->
+    <div class="actions my-6">
+      <%= form.submit 'new', class: "button is-success mx-2" %>
+      <%= link_to 'back', articles_path, class: "button has-background-white-ter mx-2" %>
+    </div>
+
   <% end %>
-
-  <div class="field is-horizontal">
-    <div class="field">
-      <%= form.label :published_at %>
-      <div class="control  has-icons-right">
-        <%= form.text_field :published_at,  autocomplete: "off", class: 'input is-medium',placeholder: "#{Time.now.strftime('%d-%m-%Y')}", data: { controller: "flatpickr" } %>
-        <%= inline_svg_tag('cadmin/icons/ico-calendar.svg', class: 'icon is-small is-right')%>
-      </div>
-    </div>
-    <div class="field">
-    <%# TODO: REVIEW WHY DONT RUN FLATPICKR %>
-      <%= form.label :unpublished_at %>
-      <div class="control  has-icons-right">
-        <%= form.text_field :unpublished_at,  autocomplete: "off", class: 'input is-medium',placeholder: "#{Time.now.strftime('%d-%m-%Y')}", data: { controller: "flatpickr" } %>
-        <%= inline_svg_tag('cadmin/icons/ico-calendar.svg', class: 'icon is-small is-right')%>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="field">
-    <%= form.label :title %>
-    <div class="control">
-    <%= form.text_field :title %>
-    </div>
-  </div>
-
-  <div class="field">
-    <%= form.label :content %>
-    <div class="control">
-    <%= form.hidden_field :content, class: 'content',data: {"quill-target": "content"} %>
-      <div data-quill-target="editor" class="is-fullwidth">
-        <%= raw article.content %>
-      </div> 
-    </div>
-  </div>
-
-  <div class="field is-horizontal">
-    <div class="field">
-      <%= form.label :metatitle %>
-      <div class="control">
-      <%= form.text_field :metatitle %>
-      </div>
-    </div>
-    <div class="field">
-      <%= form.label :metadata %>
-      <div class="control">
-      <%= form.text_field :metadata %>
-      </div>
-    </div>
-  </div>
-  <%= form.hidden_field :user_id, value: current_cadmin_user.id %>
-  <div class="field">
-    <div class="file has-name">
-      <%= form.label :image , class: 'label required-form__mark' %>
-      <div class="control">
-        <%= image_tag form.object.image_url if form.object.cached_image_data %>
-        <%= form.hidden_field :image, value: form.object.cached_image_data %>
-        <%= form.file_field :image, class: 'input' %>    
-    </div>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>

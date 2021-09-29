@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_23_174731) do
+ActiveRecord::Schema.define(version: 2021_09_29_123645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2021_09_23_174731) do
     t.string "title", null: false
     t.text "content", null: false
     t.integer "status", default: 0, null: false
-    t.date "published_at", default: "2021-09-23", null: false
+    t.date "published_at", default: "2021-09-29", null: false
     t.date "unpublished_at"
     t.string "metatitle"
     t.string "metadata"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2021_09_23_174731) do
     t.string "address"
     t.date "birthdate"
     t.text "avatar_data"
+    t.datetime "deleted_at"
     t.string "role", default: "user", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -82,6 +83,7 @@ ActiveRecord::Schema.define(version: 2021_09_23_174731) do
     t.index ["invited_by_type", "invited_by_id"], name: "index_cadmin_users_on_invited_by"
     t.index ["phone"], name: "index_cadmin_users_on_phone", unique: true
     t.index ["reset_password_token"], name: "index_cadmin_users_on_reset_password_token", unique: true
+    t.index ["username"], name: "index_cadmin_users_on_username", unique: true
   end
 
   create_table "cadmin_web_modules", force: :cascade do |t|

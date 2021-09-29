@@ -11,5 +11,5 @@ Shrine.plugin :cached_attachment_data # enables retaining cached file across for
 Shrine.plugin :restore_cached_data  # extracts metadata for assigned cached files
 Shrine.plugin :validation_helpers
 Shrine.plugin :validation
-Shrine.plugin :download_endpoint, prefix: "images"
+Shrine.plugin :upload_endpoint, url: true
 # Shrine.plugin :remove_attachment #allows you to delete attachments through checkboxes on the web form

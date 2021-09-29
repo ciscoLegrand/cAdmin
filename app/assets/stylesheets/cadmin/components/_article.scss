@@ -1,0 +1,15 @@
+.article {
+  &__title{
+    position: absolute;
+    width: 70%;
+    left: 15%;
+    top: -119px;
+  }
+  &__form {
+    width: 70%;
+    margin: 0 auto;
+  }
+  &__quill {
+    height:30rem;
+  }
+}

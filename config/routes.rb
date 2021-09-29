@@ -1,4 +1,6 @@
 Cadmin::Engine.routes.draw do
+  mount Shrine.upload_endpoint(:cache) => "/upload"
+  
   root to: "dashboard#index"
   resources :web_modules
   
