@@ -1,0 +1,16 @@
+<%= turbo_frame_tag :article do %>
+  <div class="section">
+    <figure class="image is-16by9 mb-6">
+      <%= image_tag @article.image_url if @article.image %>
+    </figure>
+    <div class="content is-relative">
+      <div class="box article__title">
+        <h1><%= @article.title %></h1>
+        <h3><%= @article.user.name%></h3>
+      </div>
+      <div class="section has-text-left">
+        <%= raw @article.content %>
+      </div>
+    </div>
+  </div>
+<% end %>

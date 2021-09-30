@@ -19,3 +19,35 @@
   }
   
 }
+
+
+.upload_container {
+  display: none;
+
+  &.active {
+    display: block;
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    border: 2px dashed #adadad;
+  }
+
+  & > a {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  & > span {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+}
+
+

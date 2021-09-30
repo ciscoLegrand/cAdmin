@@ -1,25 +1,11 @@
   <%= link_to 'Edit', edit_article_path(@article), class: 'button is-outlined is-success' %> | <%= link_to 'Back', articles_path, class: 'button is-outlined is-info' %>
 <div class="container">
   <div class="section">
-<%= link_to 'Edit', edit_article_path(@article) %> |
-<%= link_to 'Back', articles_path %>
     <div class="columns">
       <div class="column is-three-quarters">
-        <%= turbo_frame_tag :article do %>
-          <div class="section">
-            <figure class="image is-16by9 mb-6">
-              <%= image_tag @article.image_url if @article.image %>
-            </figure>
-            <div class="content">
-              <h1><%= @article.title %></h1>
-              <div class="has-text-left">
-                <%= raw @article.content %>
-              </div>
-            </div>
-          </div>
-        <% end %>
-        
-
+        <!-- todo: turbo frame to article-->
+        <%#= turbo_frame_tag :article, loading: :lazy, src: article_path(@article)  %>
+        <%= render 'article'%>
         <!--TODO: COMENTARIOS SECTION-->
         <div class="section">
           <div class="box">
@@ -27,7 +13,7 @@
               <%= render @article.comments %>
               <%#= turbo_frame_tag :comments, loading: :lazy, src: @article.comments %>
             <% end %>
-
+            <!--todo: turboframe to comments form-->
             <article class="media mb-3 comments">
               <figure class="media-left">
                 <p class="image is-64x64 ">
@@ -74,55 +60,50 @@
       </div>
       <!--TODO: buscador y articulos relacionados-->
       <div class="column">
-        <div class="section">
-          <div class="field is-grouped">
-            <p class="control is-expanded">
-              <input class="input" type="text" placeholder="Find a repository">
-            </p>
-            <p class="control">
-              <a class="button is-primary">
-                Search
-              </a>
-            </p>
+        <div class="article__sticky">
+          <div class="section">
+            <%= form_tag articles_path, method: :get do %>
+              <div class="field has-addons">
+                <div class="control">
+                  <%= text_field_tag :title,params[:title],placeholder: :title, class: 'input'%>
+                </div>
+                <%= button_tag(type:"submit", class: "button is-info is-halfwidth") do %>
+                  Buscar <%= inline_svg_tag('cadmin/icons/ico-document-search.svg', class: 'icon is-16x16 has-text-white ml-4')%>
+                <% end %>
+              </div>
+            <% end %>            
           </div>
-        </div>
-        <div class="section">
-          <aside class="menu">
-            <p class="menu-label">
-              Últimos articulos
-            </p>
-            <ul class="menu-list">
-              <% @articles.each do |article| %>
-                <li><h2 class="subtitle is-size-5 has-background-white-ter has-text-dark my-3"><%=link_to article.title, article %></h2></li>
-              <% end %>
-            </ul>
-
-
-          </aside>
-
-        </div>
-        <div class="section">
-          <aside class="menu">
-            <p class="menu-label">
-              カテゴリ
-            </p>
-            <ul class="menu-list">
-              <li><a>Lorem ipsum dolor sit amet, consectetur.</a></li>
-              <li><a>Lorem ipsum dolor sit amet, consectetur.</a></li>
-              <li><a>Lorem ipsum dolor sit amet, consectetur.</a></li>
-              <li><a>Lorem ipsum dolor sit amet, consectetur.</a></li>
-              <li><a>Lorem ipsum dolor sit amet, consectetur.</a></li>
-              <li><a>Lorem ipsum dolor sit amet, consectetur.</a></li>
-            </ul>
-
-
-          </aside>
-
+          <div class="section">
+            <aside class="menu">
+              <p class="menu-label">
+                Últimos articulos
+              </p>
+              <ul class="menu-list">
+                <% @articles.limit(5).each do |article| %>
+                  <li><h2 class="subtitle is-size-5 has-background-white-ter has-text-dark my-3"><%=link_to article.title, article %></h2></li>
+                <% end %>
+              </ul>
+            </aside>
+          </div>
+          <!--todo: create tags and category for articles-->
+          <div class="section">
+            <aside class="menu">
+              <p class="menu-label">
+                Categorias
+              </p>
+              <ul class="menu-list">
+                <li><a>Lorem ipsum dolor sit amet, consectetur.</a></li>
+                <li><a>Lorem ipsum dolor sit amet, consectetur.</a></li>
+                <li><a>Lorem ipsum dolor sit amet, consectetur.</a></li>
+                <li><a>Lorem ipsum dolor sit amet, consectetur.</a></li>
+                <li><a>Lorem ipsum dolor sit amet, consectetur.</a></li>
+                <li><a>Lorem ipsum dolor sit amet, consectetur.</a></li>
+              </ul>
+            </aside>
+          </div>
         </div>
 
       </div>
-
     </div>
-
   </div>
 </div>
