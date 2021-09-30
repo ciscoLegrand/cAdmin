@@ -10,23 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_29_123645) do
+ActiveRecord::Schema.define(version: 2021_09_30_132327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cadmin_article_categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "cadmin_articles", force: :cascade do |t|
     t.string "title", null: false
     t.text "content", null: false
     t.integer "status", default: 0, null: false
-    t.date "published_at", default: "2021-09-29", null: false
+    t.date "published_at", default: "2021-09-30", null: false
     t.date "unpublished_at"
     t.string "metatitle"
     t.string "metadata"
+    t.text "tags"
     t.text "image_data"
     t.bigint "user_id", null: false
+    t.bigint "article_category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["article_category_id"], name: "index_cadmin_articles_on_article_category_id"
     t.index ["user_id"], name: "index_cadmin_articles_on_user_id"
   end
 
@@ -45,7 +54,7 @@ ActiveRecord::Schema.define(version: 2021_09_29_123645) do
     t.string "name", default: "", null: false
     t.string "first_name", default: "", null: false
     t.string "email", default: "", null: false
-    t.integer "phone", null: false
+    t.string "phone", null: false
     t.integer "postal_code"
     t.string "province"
     t.string "address"
@@ -102,6 +111,7 @@ ActiveRecord::Schema.define(version: 2021_09_29_123645) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "cadmin_articles", "cadmin_article_categories", column: "article_category_id"
   add_foreign_key "cadmin_articles", "cadmin_users", column: "user_id"
   add_foreign_key "cadmin_comments", "cadmin_articles", column: "article_id"
   add_foreign_key "cadmin_comments", "cadmin_users", column: "user_id"

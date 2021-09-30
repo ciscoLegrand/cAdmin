@@ -1,4 +1,5 @@
 Cadmin::Engine.routes.draw do
+  resources :article_categories
   mount Shrine.upload_endpoint(:cache) => "/upload"
   
   root to: "dashboard#index"

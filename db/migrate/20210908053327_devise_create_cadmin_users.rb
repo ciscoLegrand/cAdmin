@@ -8,7 +8,7 @@ class DeviseCreateCadminUsers < ActiveRecord::Migration[6.1]
       t.string :name ,           null: false, default: ""
       t.string :first_name,            null: false, default: ""
       t.string :email,              null: false, default: ""
-      t.integer :phone, null: false
+      t.string :phone, null: false
       t.integer :postal_code
       t.string :province
       t.string :address 

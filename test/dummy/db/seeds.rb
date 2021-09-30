@@ -1,0 +1,1 @@
+Cadmin::User.create(name: 'cisco', username: 'ciscolegrand', email: 'test@test.com',phone: '+34625650792', password: 'test123')

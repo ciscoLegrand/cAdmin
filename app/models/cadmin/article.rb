@@ -3,9 +3,12 @@ module Cadmin
     include PgSearch::Model  
     include ImageUploader::Attachment(:image)
     belongs_to :user
+    belongs_to :article_category
+    
     has_many :comments
     delegate :username, :name, to: :user
-
+    delegate :name, to: :article_category
+    
     enum status: [:pendig, :published, :unpublished, :drafts ]
 
     validates :title, :content, :image, presence: true

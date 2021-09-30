@@ -3,7 +3,7 @@ require_dependency "cadmin/application_controller"
 module Cadmin
   class ArticlesController < ApplicationController
     before_action :set_article, only: [:show, :edit, :update, :destroy]
-    before_action :set_unpublish
+    
     add_breadcrumb 'Articulos'
 
     # GET /articles
@@ -59,12 +59,7 @@ module Cadmin
       redirect_to articles_url, notice: 'Article was successfully destroyed.'
     end
 
-    def set_unpublish  
-      # complete unpublish and rest of status actions    
-      if Time.now.strftime('%d-%m-%y') > @article.unpublished_at.strftime('%d-%m-%y') 
-        @article.update(status: 2)
-      end
-    end
+    # todo: set status
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_article
@@ -73,7 +68,7 @@ module Cadmin
       
       # Only allow a list of trusted parameters through.
       def article_params
-        params.require(:article).permit(:title, :content,:status,:published_at,:unpublished_at,:metatitle,:metadata, :user_id,:image)
+        params.require(:article).permit(:title, :content,:status,:published_at,:unpublished_at,:metatitle,:metadata, :user_id,:article_category_id,:image)
       end
   end
 end

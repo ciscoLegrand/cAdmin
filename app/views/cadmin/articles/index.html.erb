@@ -40,7 +40,7 @@
 
             <div class="content">
               <h2 class="title is-size-4"><%= link_to article.title, article %></h2>
-              <div class="has-text-left mb-4"><%= article.content.truncate(100, separator: /\n/)%></div>
+              <div class="has-text-left mb-4"><%= raw article.content.truncate(100, separator: /\n/)%></div>
               <div class="article__date">
                 <time datetime="<%= article.created_at.strftime('%d-%m-%y')%>">Publicado el: <%= article.published_at.strftime('%d-%m-%y')%></time>
                 
