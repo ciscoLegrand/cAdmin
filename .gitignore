@@ -8,7 +8,6 @@
 /test/dummy/log/*.log
 /test/dummy/storage/
 /test/dummy/tmp/
-/test/dummy/db/*
 !/test/dummy/db/seeds.rb
 /test/dummy/public/*
 .byebug_history

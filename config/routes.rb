@@ -1,4 +1,7 @@
 Cadmin::Engine.routes.draw do
+  resources :locations
+  resources :services
+  resources :events
   mount Shrine.upload_endpoint(:cache) => "/upload"
   resources :article_categories
   resources :tags

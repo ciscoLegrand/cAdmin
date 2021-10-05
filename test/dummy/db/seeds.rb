@@ -69,7 +69,7 @@ names = [
   Cadmin::User.create(name: "#{name}",username: "#{username}",phone: "#{phone}", email: "test#{count}@test.com",password:'test123')
 end
 
-Cadmin::Tag.create(name: "Ruby")
-Cadmin::Tag.create(name: "Stimulusjs")
-Cadmin::Tag.create(name: "RoR")
-Cadmin::Tag.create(name: "Turbo")
+# Cadmin::Tag.create(name: "Ruby")
+# Cadmin::Tag.create(name: "Stimulusjs")
+# Cadmin::Tag.create(name: "RoR")
+# Cadmin::Tag.create(name: "Turbo")

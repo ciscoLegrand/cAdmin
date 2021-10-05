@@ -1,0 +1,74 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @event.name %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @event.type %>
+</p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @event.number %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @event.date %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @event.location %>
+</p>
+
+<p>
+  <strong>Total amount:</strong>
+  <%= @event.total_amount %>
+</p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @event.start_time %>
+</p>
+
+<p>
+  <strong>Extra hour:</strong>
+  <%= @event.extra_hour %>
+</p>
+
+<p>
+  <strong>Employee:</strong>
+  <%= @event.employee_id %>
+</p>
+
+<p>
+  <strong>Substitute:</strong>
+  <%= @event.substitute_id %>
+</p>
+
+<p>
+  <strong>Deposit:</strong>
+  <%= @event.deposit %>
+</p>
+
+<p>
+  <strong>Payment method:</strong>
+  <%= @event.payment_method %>
+</p>
+
+<p>
+  <strong>Charged:</strong>
+  <%= @event.charged %>
+</p>
+
+<p>
+  <strong>Observations:</strong>
+  <%= @event.observations %>
+</p>
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>

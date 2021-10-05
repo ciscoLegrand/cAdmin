@@ -1,0 +1,67 @@
+<%= form_with(model: service) do |form| %>
+  <% if service.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(service.errors.count, "error") %> prohibited this service from being saved:</h2>
+
+      <ul>
+        <% service.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :short_dscription %>
+    <%= form.text_area :short_dscription %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :metatitle %>
+    <%= form.text_field :metatitle %>
+  </div>
+
+  <div class="field">
+    <%= form.label :metadescription %>
+    <%= form.text_area :metadescription %>
+  </div>
+
+  <div class="field">
+    <%= form.label :features %>
+    <%= form.text_area :features %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.text_field :price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hour_price %>
+    <%= form.text_field :hour_price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_hour %>
+    <%= form.text_field :extra_hour %>
+  </div>
+
+  <div class="field">
+    <%= form.label :initial_hours %>
+    <%= form.number_field :initial_hours %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
