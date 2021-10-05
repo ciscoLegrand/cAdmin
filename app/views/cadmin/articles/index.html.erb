@@ -43,12 +43,12 @@
               <div class="has-text-left mb-4"><%= raw article.content.truncate(100, separator: /\n/)%></div>
               <div class="article__date">
                 <time datetime="<%= article.created_at.strftime('%d-%m-%y')%>">Publicado el: <%= article.published_at.strftime('%d-%m-%y')%></time>
-                
                 <span class="tag is-warning is-pulled-right"> <%= article.unpublish? %> </span>
-                
+                <br>
+                <span class="tag article__tag is-info has-text-white"><%= raw article.tags.map(&:name).map { |t| link_to "##{t}", tag_path(t) }.join('&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ') %></span>
               </div>
             </div>
-          </div>
+          </div>  
           <footer class="card-footer article__cfooter">
             <a href="#" class="card-footer-item"><%= link_to 'Show', article %></a>
             <a href="#" class="card-footer-item"><%= link_to 'Edit', edit_article_path(article) %></a>

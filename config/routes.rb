@@ -1,6 +1,7 @@
 Cadmin::Engine.routes.draw do
-  resources :article_categories
   mount Shrine.upload_endpoint(:cache) => "/upload"
+  resources :article_categories
+  resources :tags
   
   root to: "dashboard#index"
   resources :web_modules
@@ -8,7 +9,8 @@ Cadmin::Engine.routes.draw do
   resources :articles do
     resources :comments
   end
-  
+  # get 'tags/:tag', to: 'articles#index', as: :tag
+
   match '/usuarios', to: 'users#index', via: :get, as: :users  
   # # devise_for :cadmin_users, class_name: "Cadmin::User", module: :devise
   # devise_for :users, controllers: { invitations: 'devise/invitations' }

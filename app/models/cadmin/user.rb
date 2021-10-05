@@ -9,8 +9,8 @@ module Cadmin
     validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true # para no permitir caracteres especiales
     validates :role, presence: true
 
-    has_many :articles
-    has_many :comments
+    has_many :articles, dependent: :destroy
+    has_many :comments, dependent: :destroy
 
     validates :email, presence: true, uniqueness: true
     validates :username, presence: true, uniqueness: { case_sensitive: false }, on: :update

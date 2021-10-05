@@ -12,12 +12,17 @@ module Cadmin
       # articles = @articles.filter_by_search(params['title']) if params['title'].present?
 
       # @pagy,@articles= pagy(articles, items: 5)
+
+      params[:tag] ? @article = Article.tagged_with(params[:tag]) : @articles = Article.all
     end
     
     # GET /articles/1
     def show
       add_breadcrumb @article.title
       @articles = Article.order(created_at: 'DESC').all
+      @categories = ArticleCategory.all
+      @tags = Article.tag_counts
+
       # TODO: search results
       articles = articles.filter_by_search(params['title']) if params['title'].present?
       # TODO: COMPLETAR COMENTARIOS ASOCIADOS A ARTICULOS
@@ -68,7 +73,7 @@ module Cadmin
       
       # Only allow a list of trusted parameters through.
       def article_params
-        params.require(:article).permit(:title, :content,:status,:published_at,:unpublished_at,:metatitle,:metadata, :user_id,:article_category_id,:image)
+        params.require(:article).permit(:title, :content,:status,:published_at,:unpublished_at,:metatitle,:metadata, :user_id,:article_category_id,:tag_list, :tag, {tag_ids: []}, :tag_ids,:image)
       end
   end
 end

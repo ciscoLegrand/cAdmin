@@ -26,11 +26,16 @@
           </li>
           <li>
             <%= link_to new_article_path  , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'new_article', action: 'click->menu#set_active_menu_item'} do %>
-              Nuevo Articulos<%= inline_svg_tag('cadmin/icons/ico-document-add.svg', class:'icon ')%>
+              Crear Articulo<%= inline_svg_tag('cadmin/icons/ico-document-add.svg', class:'icon ')%>
             <% end %>
           <li>
             <%= link_to new_article_category_path  , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'new_category', action: 'click->menu#set_active_menu_item'} do %>
-              Nuevo Categoria<%= inline_svg_tag('cadmin/icons/ico-document-add.svg', class:'icon ')%>
+              Crear Categoria<%= inline_svg_tag('cadmin/icons/ico-document-add.svg', class:'icon ')%>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to new_tag_path  , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'new_tag', action: 'click->menu#set_active_menu_item'} do %>
+              Crear tag<%= inline_svg_tag('cadmin/icons/ico-document-add.svg', class:'icon ')%>
             <% end %>
           </li>
           </li>

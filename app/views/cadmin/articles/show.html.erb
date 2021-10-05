@@ -85,6 +85,18 @@
               </ul>
             </aside>
           </div>
+          <div class="section">
+            <aside class="menu">
+              <p class="menu-label">
+                TAGS
+              </p>
+              <ul class="menu-list">
+                <% @article.tag_list.split(',').to_a.each do |tag| %>
+                 <li class="tag is-warning"> <%= "#{tag}" %> </li>
+                <% end %>       
+              </ul>
+            </aside>
+          </div>
           <!--todo: create tags and category for articles-->
           <div class="section">
             <aside class="menu">
@@ -92,12 +104,10 @@
                 Categorias
               </p>
               <ul class="menu-list">
-                <li><a>Lorem ipsum dolor sit amet, consectetur.</a></li>
-                <li><a>Lorem ipsum dolor sit amet, consectetur.</a></li>
-                <li><a>Lorem ipsum dolor sit amet, consectetur.</a></li>
-                <li><a>Lorem ipsum dolor sit amet, consectetur.</a></li>
-                <li><a>Lorem ipsum dolor sit amet, consectetur.</a></li>
-                <li><a>Lorem ipsum dolor sit amet, consectetur.</a></li>
+                <% @categories.limit(4).each do |category| %>
+                  <li><%= link_to category.name, category %></li> 
+                <% end %>    
+                <li> <%= link_to 'Más categorías', article_categories_path %> </li>            
               </ul>
             </aside>
           </div>
