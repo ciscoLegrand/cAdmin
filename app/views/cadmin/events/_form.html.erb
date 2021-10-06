@@ -1,4 +1,4 @@
-<%= form_with(model: event) do |form| %>
+<%= form_with(model: event,  data: {"controller": "quill", "action": "quill#save", turbo: false},html: {class: 'events__form'}) do |form| %>
   <% if event.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
@@ -11,83 +11,92 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :type %>
-    <%= form.text_field :type %>
-  </div>
-
-  <div class="field">
-    <%= form.label :number %>
-    <%= form.number_field :number %>
-  </div>
-
-  <div class="field">
-    <%= form.label :date %>
-    <%= form.date_select :date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :location %>
-    <%= form.text_field :location %>
-  </div>
-
-  <div class="field">
-    <%= form.label :total_amount %>
-    <%= form.text_field :total_amount %>
-  </div>
-
-  <div class="field">
-    <%= form.label :start_time %>
-    <%= form.text_field :start_time %>
-  </div>
-
-  <div class="field">
-    <%= form.label :extra_hour %>
-    <%= form.number_field :extra_hour %>
-  </div>
-
-  <div class="field">
-    <%= form.label :employee, class: 'label' %>
-      <%= form.hidden_field :employee_id%>
-    <div class="control is-expanded">
-      <%= select_tag :employee_id,options_from_collection_for_select(Cadmin::User.all, 'id', 'name'), prompt: 'Selecciona usuario', class: 'article__select', data: {controller: "slimselect"} %>
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <%= form.label :name, class: 'lablel' %>
+        <%= form.text_field :name, class: 'input' %>
+      </div>
+      <div class="field">
+        <%= form.label :type_name, class: 'lablel' %>
+        <%= form.text_field :type_name, class: 'input' %>
+      </div>
+      <div class="field">
+        <div class="control">
+        <%= form.label :number, class: 'lablel' %>
+        <%= form.number_field :number, class: 'input' %>
+        </div>
+      </div>
+      <div class="field">
+        <%= form.label :date, class: 'label ' %>
+        <div class="control is-expanded  has-icons-right">
+          <%= form.text_field :date,  autocomplete: "off", class: 'input is-medium',placeholder: "#{Time.now.strftime('%d-%m-%Y')}",  data: { controller: "flatpickr",flatpickr_default_date: Time.now,flatpickr_max_date: Time.zone.yesterday, flatpickr_date_format: "Y-m-d", flatpickr_locale: locale } %>
+          <%= inline_svg_tag('cadmin/icons/ico-calendar.svg', class: 'icon is-small is-right ')%>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="field">
-    <%= form.label :substitute, class: 'label' %>
-      <%= form.hidden_field :substitute_id%>
-    <div class="control is-expanded">
-      <%= select_tag :substitute_id,options_from_collection_for_select(Cadmin::User.all, 'id', 'name'), prompt: 'Selecciona usuario', class: 'article__select', data: {controller: "slimselect"} %>
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <%= form.label :location, class: 'lablel' %>
+        <%= form.text_field :location, class: 'input' %>
+        <%= select_tag :user_id,options_from_collection_for_select(Cadmin::Location.all, 'id', 'name'), prompt: 'Selecciona restaurante', class: 'article__select', data: {controller: "slimselect"} %>
+      </div>
+      <div class="field">
+        <%= form.label :guests, class: 'lablel' %>
+        <%= form.number_field :guests, class: 'input' %>
+      </div>
+      <div class="field">
+        <%= form.label :user, class: 'label' %>
+        <%= form.hidden_field :user_id%>
+        <div class="control is-expanded">
+          <!--TODO: obtener usuario desde slimselect-->
+          <%= select_tag :user_id,options_from_collection_for_select(Cadmin::User.all, 'id', 'name'), prompt: 'Selecciona usuario', class: 'article__select', data: {controller: "slimselect"} %>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="field">
-    <%= form.label :deposit %>
-    <%= form.text_field :deposit %>
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <%= form.label :start_time, class: 'lablel' %>
+        <%= form.text_field :start_time, class: 'input' %>
+      </div>
+      <div class="field">
+        <%= form.label :total_amount, class: 'lablel' %>
+        <%= form.text_field :total_amount, class: 'input' %>
+      </div>
+      <div class="field">
+        <%= form.label :deposit %>
+        <%= form.text_field :deposit %>
+      </div>
+      <div class="field">
+        <%= form.label :extra_hours, class: 'lablel' %>
+        <%= form.number_field :extra_hours, class: 'input' %>
+      </div>
+      <div class="field">
+        <%= form.label :charged, class: 'label' %> 
+        <%= form.check_box :charged, class:"switch" %>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :payment_method %>
-    <%= form.text_field :payment_method %>
-  </div>
 
-  <div class="field">
-    <%= form.label :charged %>
-    <%= form.check_box :charged %>
-  </div>
+    <div class="field">
+      <%= form.label :observations, class: 'label' %>
+      <div class="control">
+      <%= form.hidden_field :observations, class: 'content ',data: {"quill-target": "content"} %>
+        <div data-quill-target="editor" class="events__quill is-fullwidth ">
+          <%= raw event.observations %>
+        </div> 
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :observations %>
-    <%= form.text_area :observations %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+    <div class="actions my-6">
+      <%= form.submit 'new', class: "button is-success mx-2" %>
+      <%= link_to 'back', events_path, class: "button has-background-white-ter mx-2" %>
+    </div>
 <% end %>

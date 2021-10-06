@@ -1,4 +1,4 @@
-<%= form_with(model: service) do |form| %>
+<%= form_with(model: service,data: {"controller": "quill", "action": "quill#save", turbo: false}, html: {class: 'events__form'}) do |form| %>
   <% if service.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(service.errors.count, "error") %> prohibited this service from being saved:</h2>
@@ -11,57 +11,64 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <%= form.label :name, class:'label' %>
+        <%= form.text_field :name, class: 'input' %>
+      </div>
+
+      <div class="field">
+        <%= form.label :price, class:'label' %>
+        <%= form.text_field :price, class:'input' %>
+      </div>
+
+      <div class="field">
+        <%= form.label :hour_price, class:'label' %>
+        <%= form.text_field :hour_price, class:'input' %>
+      </div>
+    </div>
+  </div>
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <%= form.label :short_dscription, class:'label' %>
+        <%= form.text_area :short_dscription, class: 'textarea' %>
+      </div>
+
+      <div class="field">
+        <%= form.label :description, class:'label' %>
+        <%= form.text_area :description, class:'textarea' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <%= form.label :metatitle, class:'label' %>
+        <%= form.text_field :metatitle, class:'input' %>
+      </div>
+
+      <div class="field">
+        <%= form.label :metadescription, class:'label' %>
+        <%= form.text_area :metadescription, class:'textarea' %>
+      </div>
+    </div>
   </div>
 
   <div class="field">
-    <%= form.label :short_dscription %>
-    <%= form.text_area :short_dscription %>
+    <%= form.label :features, class: 'label' %>
+    <div class="control">
+    <%= form.hidden_field :features, class: 'content ',data: {"quill-target": "content"} %>
+      <div data-quill-target="editor" class="events__quill is-fullwidth ">
+        <%= raw service.features %>
+      </div> 
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :metatitle %>
-    <%= form.text_field :metatitle %>
-  </div>
-
-  <div class="field">
-    <%= form.label :metadescription %>
-    <%= form.text_area :metadescription %>
-  </div>
-
-  <div class="field">
-    <%= form.label :features %>
-    <%= form.text_area :features %>
-  </div>
-
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.text_field :price %>
-  </div>
-
-  <div class="field">
-    <%= form.label :hour_price %>
-    <%= form.text_field :hour_price %>
-  </div>
-
-  <div class="field">
-    <%= form.label :extra_hour %>
-    <%= form.text_field :extra_hour %>
-  </div>
-
-  <div class="field">
-    <%= form.label :initial_hours %>
-    <%= form.number_field :initial_hours %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions my-6">
+    <%= form.submit 'new', class: "button is-success mx-2" %>
+    <%= link_to 'back', services_path, class: "button has-background-white-ter mx-2" %>
   </div>
 <% end %>

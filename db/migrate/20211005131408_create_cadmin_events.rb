@@ -6,15 +6,14 @@ class CreateCadminEvents < ActiveRecord::Migration[6.1]
       t.string :number, null: false 
       t.date :date, null: false
       t.string :location
-      t.float :total_amount
+      t.integer :guests
       t.integer :start_time
-      t.integer :extra_hour
-      t.references :employee, null: true, foreign_key: {to_table: :cadmin_users}
-      t.references :substitute, null: true, foreign_key: {to_table: :cadmin_users}
+      t.integer :extra_hours
+      t.references :user, null: false, foreign_key: {to_table: :cadmin_users}
       t.references :service, null: true, foreign_key: {to_table: :cadmin_services}
       t.references :place, null:true, foreign_key: {to_table: :cadmin_locations}
       t.float :deposit
-      t.string :payment_method
+      t.float :total_amount
       t.boolean :charged, null: false, default: false
       t.text :observations
 

@@ -1,4 +1,4 @@
-<%= form_with(model: location) do |form| %>
+<%= form_with(model: location, html: {class: 'events__form'}) do |form| %>
   <% if location.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(location.errors.count, "error") %> prohibited this location from being saved:</h2>
@@ -12,31 +12,32 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.label :name, class: 'label' %>
+    <%= form.text_field :name, class:'input' %>
   </div>
 
   <div class="field">
-    <%= form.label :address %>
-    <%= form.text_area :address %>
+    <%= form.label :address, class: 'label' %>
+    <%= form.text_area :address, class:'input' %>
   </div>
 
   <div class="field">
-    <%= form.label :postal_code %>
-    <%= form.number_field :postal_code %>
+    <%= form.label :postal_code, class: 'label' %>
+    <%= form.number_field :postal_code, class:'input' %>
   </div>
 
   <div class="field">
-    <%= form.label :province %>
-    <%= form.text_field :province %>
+    <%= form.label :province, class: 'label' %>
+    <%= form.text_field :province,class: 'input' %>
   </div>
 
   <div class="field">
-    <%= form.label :coords %>
-    <%= form.text_area :coords %>
+    <%= form.label :coords, class: 'label' %>
+    <%= form.text_area :coords, class:'input' %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions my-6">
+    <%= form.submit 'new', class: "button is-success mx-2" %>
+    <%= link_to 'back', locations_path, class: "button has-background-white-ter mx-2" %>
   </div>
 <% end %>

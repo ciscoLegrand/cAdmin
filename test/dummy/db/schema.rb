@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_05_133812) do
+ActiveRecord::Schema.define(version: 2021_10_05_201621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,23 +54,21 @@ ActiveRecord::Schema.define(version: 2021_10_05_133812) do
     t.string "number", null: false
     t.date "date", null: false
     t.string "location"
-    t.float "total_amount"
+    t.integer "guests"
     t.integer "start_time"
-    t.integer "extra_hour"
-    t.bigint "employee_id"
-    t.bigint "substitute_id"
+    t.integer "extra_hours"
+    t.bigint "user_id", null: false
     t.bigint "service_id"
     t.bigint "place_id"
     t.float "deposit"
-    t.string "payment_method"
+    t.float "total_amount"
     t.boolean "charged", default: false, null: false
     t.text "observations"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["employee_id"], name: "index_cadmin_events_on_employee_id"
     t.index ["place_id"], name: "index_cadmin_events_on_place_id"
     t.index ["service_id"], name: "index_cadmin_events_on_service_id"
-    t.index ["substitute_id"], name: "index_cadmin_events_on_substitute_id"
+    t.index ["user_id"], name: "index_cadmin_events_on_user_id"
   end
 
   create_table "cadmin_locations", force: :cascade do |t|
@@ -85,15 +83,13 @@ ActiveRecord::Schema.define(version: 2021_10_05_133812) do
 
   create_table "cadmin_services", force: :cascade do |t|
     t.string "name"
-    t.text "short_dscription"
-    t.text "description"
-    t.string "metatitle"
-    t.text "metadescription"
-    t.text "features"
     t.float "price"
     t.float "hour_price"
-    t.float "extra_hour"
-    t.integer "initial_hours"
+    t.text "short_dscription"
+    t.text "description"
+    t.text "features"
+    t.string "metatitle"
+    t.text "metadescription"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -181,8 +177,7 @@ ActiveRecord::Schema.define(version: 2021_10_05_133812) do
   add_foreign_key "cadmin_comments", "cadmin_users", column: "user_id"
   add_foreign_key "cadmin_events", "cadmin_locations", column: "place_id"
   add_foreign_key "cadmin_events", "cadmin_services", column: "service_id"
-  add_foreign_key "cadmin_events", "cadmin_users", column: "employee_id"
-  add_foreign_key "cadmin_events", "cadmin_users", column: "substitute_id"
+  add_foreign_key "cadmin_events", "cadmin_users", column: "user_id"
   add_foreign_key "cadmin_taggings", "cadmin_articles", column: "article_id"
   add_foreign_key "cadmin_taggings", "cadmin_tags", column: "tag_id"
 end
