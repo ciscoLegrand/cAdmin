@@ -113,9 +113,8 @@
           <%= form.label :tags, class: 'label' %>
             <%= form.hidden_field :tag_ids%>
           <div class="control is-expanded">
-            <%= select_tag :tag_ids,options_from_collection_for_select(Cadmin::Tag.all, 'id', 'name'), prompt: 'Selecciona usuario', class: 'article__select', data: {controller: "slimselect"}, multiple: true %>
+            <%= form.select :tag_ids, Cadmin::Tag.all.map { |t| [t.name, t.id] }, { include_blank: "All" }, {  prompt: 'Selecciona usuario',class: "article__select",data: {controller: "slimselect"} , multiple: true } %>
           </div>
-          <%#= form.text_area :tag_ids, as: :select, collection: Cadmin::Tag.order(:name), label_method: :name, input_html: {multiple: true} %>
         </div>
       </div>
     </div>

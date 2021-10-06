@@ -1,4 +1,4 @@
-import flatpickr from 'https://cdn.skypack.dev/stimulus-flatpickr@v1.3.3';
+import flatpickr from 'https://esm.sh/stimulus-flatpickr?deps=stimulus@2.0.0';
 
 import { Spanish } from 'https://esm.sh/flatpickr/dist/l10n/es.js';
 export default class extends flatpickr {

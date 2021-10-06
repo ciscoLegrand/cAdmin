@@ -1,35 +1,28 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Locations</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Address</th>
-      <th>Postal code</th>
-      <th>Province</th>
-      <th>Coords</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @locations.each do |location| %>
-      <tr>
-        <td><%= location.name %></td>
-        <td><%= location.address %></td>
-        <td><%= location.postal_code %></td>
-        <td><%= location.province %></td>
-        <td><%= location.coords %></td>
-        <td><%= link_to 'Show', location %></td>
-        <td><%= link_to 'Edit', edit_location_path(location) %></td>
-        <td><%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Location', new_location_path %>
+  <div class="container">
+    <%= link_to 'New Location', new_location_path, class:'button is-outlined is-success my-4' %> 
+    <div class="columns is-multiline is-justify-content-space-between">    
+      <% @locations.each do |location| %>
+        <div class="card column is-4 my-3">
+          <div class="card-image">
+            <%= raw location.coords%>
+          </div>
+          <div class="card-content">
+            <div class="media">
+              <div class="media-content">
+                <p class="title is-4"><%= link_to location.name, location%></p>
+                <p class="subtitle is-6"><%= location.province%></p>
+              </div>
+            </div>
+            <div class="content">
+              <%= location.address%>.
+              <br>
+              <%= location.postal_code %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>

@@ -69,7 +69,19 @@ names = [
   Cadmin::User.create(name: "#{name}",username: "#{username}",phone: "#{phone}", email: "test#{count}@test.com",password:'test123')
 end
 
+Cadmin::Location.create(name: 'Pazo de Sober', address:'', province: 'Ourense')
+Cadmin::Location.create(name: 'Pazo Torrexunqueira', address:'', province: 'A Coruña')
+Cadmin::Location.create(name: 'Pazo de Roxos', address:'', province: 'A Coruña')
+Cadmin::Service.create(name: 'Gramola', price: 550.00, hour_price: 90.00)
+Cadmin::Service.create(name: 'Carro vintage', price: 650.00, hour_price: 90.00)
+
+Cadmin::ArticleCategory.create(name: 'Web Development')
+Cadmin::ArticleCategory.create(name: 'FrontEnd')
+Cadmin::ArticleCategory.create(name: 'BackEnd')
+
 # Cadmin::Tag.create(name: "Ruby")
 # Cadmin::Tag.create(name: "Stimulusjs")
 # Cadmin::Tag.create(name: "RoR")
 # Cadmin::Tag.create(name: "Turbo")
+
+puts Cadmin::Service.last

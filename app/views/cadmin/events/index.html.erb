@@ -14,7 +14,8 @@
       <th>Start time</th>
       <th>Extra hour</th>
       <th>Employee</th>
-      <th>Substitute</th>
+      <th>place id</th>
+      <th>service id</th>
       <th>Deposit</th>
       <th>Payment method</th>
       <th>Charged</th>
@@ -27,19 +28,20 @@
     <% @events.each do |event| %>
       <tr>
         <td><%= event.name %></td>
-        <td><%= event.type %></td>
+        <td><%= event.type_name %></td>
         <td><%= event.number %></td>
         <td><%= event.date %></td>
         <td><%= event.location %></td>
         <td><%= event.total_amount %></td>
         <td><%= event.start_time %></td>
-        <td><%= event.extra_hour %></td>
-        <td><%= event.employee_id %></td>
-        <td><%= event.substitute_id %></td>
+        <td><%= event.extra_hours %></td>
+        <td><%= event.user_id %></td>
         <td><%= event.deposit %></td>
-        <td><%= event.payment_method %></td>
+        <td><%= event.place_id %></td>
+        <td><%= event.service_id %></td>
+        
         <td><%= event.charged %></td>
-        <td><%= event.observations %></td>
+        <td><%= raw event.observations %></td>
         <td><%= link_to 'Show', event %></td>
         <td><%= link_to 'Edit', edit_event_path(event) %></td>
         <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>

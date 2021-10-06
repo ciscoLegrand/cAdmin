@@ -7,7 +7,7 @@
 
 <p>
   <strong>Type:</strong>
-  <%= @event.type %>
+  <%= @event.type_name %>
 </p>
 
 <p>
@@ -37,17 +37,17 @@
 
 <p>
   <strong>Extra hour:</strong>
-  <%= @event.extra_hour %>
+  <%= @event.extra_hours %>
 </p>
 
 <p>
   <strong>Employee:</strong>
-  <%= @event.employee_id %>
+  <%= @event.user_id %>
 </p>
 
 <p>
-  <strong>Substitute:</strong>
-  <%= @event.substitute_id %>
+  <strong>place_id:</strong>
+  <%= @event.place_id %>
 </p>
 
 <p>
@@ -57,7 +57,7 @@
 
 <p>
   <strong>Payment method:</strong>
-  <%= @event.payment_method %>
+  <%= @event.service_id %>
 </p>
 
 <p>
@@ -67,7 +67,7 @@
 
 <p>
   <strong>Observations:</strong>
-  <%= @event.observations %>
+  <%= raw  @event.observations %>
 </p>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |

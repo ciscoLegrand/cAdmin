@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_05_201621) do
+ActiveRecord::Schema.define(version: 2021_10_06_123012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2021_10_05_201621) do
     t.string "title", null: false
     t.text "content", null: false
     t.integer "status", default: 0, null: false
-    t.date "published_at", default: "2021-10-05", null: false
+    t.date "published_at", default: "2021-10-06", null: false
     t.date "unpublished_at"
     t.string "metatitle"
     t.string "metadata"

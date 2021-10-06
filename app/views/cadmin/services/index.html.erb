@@ -13,8 +13,7 @@
       <th>Features</th>
       <th>Price</th>
       <th>Hour price</th>
-      <th>Extra hour</th>
-      <th>Initial hours</th>
+
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -30,8 +29,8 @@
         <td><%= service.features %></td>
         <td><%= service.price %></td>
         <td><%= service.hour_price %></td>
-        <td><%= service.extra_hour %></td>
-        <td><%= service.initial_hours %></td>
+  
+  
         <td><%= link_to 'Show', service %></td>
         <td><%= link_to 'Edit', edit_service_path(service) %></td>
         <td><%= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' } %></td>
