@@ -56,9 +56,9 @@
                 <td><%= event.type_name %></td>
                 <td><%= event.number %></td>
                 <td data-label="date"><small class="has-text-grey is-abbr-like" title="<%= event.date %>"><%= event.date.strftime('%d-%m-%y') %></small></td>
-                <td><%= event.place_id || '' %></td>
+                <td><%= link_to event.placename, Cadmin::Location.find_by_id(event.place_id)  %></td>
                 <td><%= event.user_name %></td>
-                <td><%= event.service_id %></td>
+                <td><%= event.service_ids.to_a %></td>
                 <td><%= event.deposit || 0 %></td>                    
                 <td><%= raw event.observations.truncate(27, separator: /\s/) %></td>
                 <td>

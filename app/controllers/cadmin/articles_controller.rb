@@ -43,7 +43,7 @@ module Cadmin
       @article = Article.new(article_params)
 
       if @article.save
-        redirect_to @article, notice: 'Article was successfully created.'
+        redirect_to articles_path, notice: 'Article was successfully created.'
       else
         render :new
       end
@@ -52,7 +52,7 @@ module Cadmin
     # PATCH/PUT /articles/1
     def update
       if @article.update(article_params)
-        redirect_to @article, notice: 'Article was successfully updated.'
+        redirect_to articles_path, notice: 'Article was successfully updated.'
       else
         render :edit
       end
@@ -73,7 +73,7 @@ module Cadmin
       
       # Only allow a list of trusted parameters through.
       def article_params
-        params.require(:article).permit(:title, :content,:status,:published_at,:unpublished_at,:metatitle,:metadata, :user_id,:article_category_id,:tag_list, :tag, {tag_ids: []}, :tag_ids,:image)
+        params.require(:article).permit(:title, :content,:status,:published_at,:unpublished_at,:metatitle,:metadata, :user_id,:article_category_id,:tag_list, :tag, {tag_ids: []},:image)
       end
   end
 end

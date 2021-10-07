@@ -112,8 +112,8 @@
         <div class="field">
           <%= form.label :tags, class: 'label' %>
             <%= form.hidden_field :tag_ids%>
-          <div class="control is-expanded">
-            <%= form.select :tag_ids, Cadmin::Tag.all.map { |t| [t.name, t.id] }, { include_blank: "All" }, {  prompt: 'Selecciona usuario',class: "article__select",data: {controller: "slimselect"} , multiple: true } %>
+          <div class="control is-expanded" data-controller="tomselect">
+            <%= form.select :tag_ids, Cadmin::Tag.all.map { |t| [t.name, t.id] }, { include_blank: "All" }, {  prompt: 'Selecciona usuario', id: 'select-service', class: "article__select",data: { tomselect_target: 'tagsField' } , multiple: true } %>
           </div>
         </div>
       </div>

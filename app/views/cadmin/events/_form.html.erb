@@ -40,8 +40,8 @@
   <div class="field is-horizontal">
     <div class="field-body">
       <div class="field">
-        <%= form.label :location, class: 'label' %>
-        <%= form.select :location_id, Cadmin::Location.all.map { |l| [l.name, l.id] }, { include_blank: "All" }, { class: "select_inside_col",data: {controller: "slimselect"}} %>
+        <%= form.label :place, class: 'label' %>
+        <%= form.collection_select :place_id, Cadmin::Location.all, :id ,:name, {}, {  prompt: 'Selecciona localizacións',class: "select_inside_col",data: {controller: "slimselect"}} %>
       </div>
       <div class="field">
         <%= form.label :guests, class: 'label' %>
@@ -50,7 +50,7 @@
       <div class="field">
         <%= form.label :user, class: 'label' %>        
         <div class="control is-expanded">
-          <%= form.select :user_id, Cadmin::User.all.map { |d| [d.name, d.id] }, { include_blank: "All" }, { class: "select_inside_col",data: {controller: "slimselect"}} %>
+          <%= form.collection_select :user_id, Cadmin::User.all, :id ,:name, {}, {  prompt: 'Selecciona usuario',class: "select_inside_col",data: {controller: "slimselect"}} %>
         </div>
       </div>
     </div>
@@ -60,8 +60,8 @@
     <div class="field-body">
       <div class="field">
         <%= form.label :services, class: 'label' %>
-        <div class="control is-expanded">
-          <%= form.select :service_id, Cadmin::Service.all.map { |s| [s.name, s.id] }, { include_blank: "All" }, {  prompt: 'Selecciona usuario',class: "article__select",data: {controller: "slimselect"}} %>
+        <div class="control is-expanded"  data-controller="tomselect">          
+            <%= form.select(:service_ids, options_for_select(Cadmin::Service.all.map{ |s| [s.name, s.id] }), {include_blank: true}, id: 'service-multi', class: 'form-select', data: { tomselect_target: 'tagsField' }, multiple: true) %>
         </div>
       </div>
       <div class="field">

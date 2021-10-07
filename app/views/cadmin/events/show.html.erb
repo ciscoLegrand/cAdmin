@@ -21,11 +21,6 @@
 </p>
 
 <p>
-  <strong>Location:</strong>
-  <%= @event.location %>
-</p>
-
-<p>
   <strong>Total amount:</strong>
   <%= @event.total_amount %>
 </p>
@@ -47,7 +42,7 @@
 
 <p>
   <strong>place_id:</strong>
-  <%= @event.location_name if @event.place_id.present?%>
+  <%= @event.placename if @event.place_id.present?%>
 </p>
 
 <p>
@@ -57,7 +52,7 @@
 
 <p>
   <strong>Service:</strong>
-  <%= @event.service_id%>
+  <%= @event.service_ids%>
 </p>
 
 <p>

@@ -9,6 +9,8 @@ module Cadmin
     has_many :taggings, dependent: :destroy
     has_many :tags, through: :taggings
 
+    serialize :tag_ids, Array
+
     delegate :username, :name, to: :user
     delegate :name, to: :article_category, prefix: :category
     

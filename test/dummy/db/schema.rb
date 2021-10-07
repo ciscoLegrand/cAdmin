@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_06_181018) do
+ActiveRecord::Schema.define(version: 2021_10_08_060149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,13 +25,14 @@ ActiveRecord::Schema.define(version: 2021_10_06_181018) do
     t.string "title", null: false
     t.text "content", null: false
     t.integer "status", default: 0, null: false
-    t.date "published_at", default: "2021-10-06", null: false
+    t.date "published_at", default: "2021-10-08", null: false
     t.date "unpublished_at"
     t.string "metatitle"
     t.string "metadata"
     t.text "image_data"
     t.bigint "user_id", null: false
     t.bigint "article_category_id", null: false
+    t.text "tags_ids", default: "--- []\n"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["article_category_id"], name: "index_cadmin_articles_on_article_category_id"
@@ -53,21 +54,18 @@ ActiveRecord::Schema.define(version: 2021_10_06_181018) do
     t.string "type_name", default: "wedding", null: false
     t.string "number", null: false
     t.date "date", null: false
-    t.string "location"
     t.integer "guests"
     t.integer "start_time"
     t.integer "extra_hours"
     t.bigint "user_id", null: false
-    t.bigint "service_id"
-    t.bigint "place_id"
+    t.text "services_ids", default: "--- []\n"
+    t.integer "place_id"
     t.float "deposit"
     t.float "total_amount"
     t.boolean "charged", default: false, null: false
     t.text "observations"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["place_id"], name: "index_cadmin_events_on_place_id"
-    t.index ["service_id"], name: "index_cadmin_events_on_service_id"
     t.index ["user_id"], name: "index_cadmin_events_on_user_id"
   end
 
@@ -176,8 +174,6 @@ ActiveRecord::Schema.define(version: 2021_10_06_181018) do
   add_foreign_key "cadmin_articles", "cadmin_users", column: "user_id"
   add_foreign_key "cadmin_comments", "cadmin_articles", column: "article_id"
   add_foreign_key "cadmin_comments", "cadmin_users", column: "user_id"
-  add_foreign_key "cadmin_events", "cadmin_locations", column: "place_id"
-  add_foreign_key "cadmin_events", "cadmin_services", column: "service_id"
   add_foreign_key "cadmin_events", "cadmin_users", column: "user_id"
   add_foreign_key "cadmin_taggings", "cadmin_articles", column: "article_id"
   add_foreign_key "cadmin_taggings", "cadmin_tags", column: "tag_id"

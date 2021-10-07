@@ -11,6 +11,7 @@ class CreateCadminArticles < ActiveRecord::Migration[6.1]
       t.text :image_data
       t.references :user, null: false, foreign_key: {to_table: :cadmin_users}
       t.references :article_category, null: false, foreign_key: {to_table: :cadmin_article_categories}
+      t.text :tags_ids, default: [].to_yaml
 
       t.timestamps
     end
