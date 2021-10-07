@@ -2,12 +2,17 @@
 
 <h1>Locations</h1>
   <div class="container">
-    <%= link_to 'New Location', new_location_path, class:'button is-outlined is-success my-4' %> 
+    <%= link_to 'New Location', new_location_path, class:'button is-outlined is-success mx-2 my-4' %> 
     <div class="columns is-multiline is-justify-content-space-between">    
       <% @locations.each do |location| %>
         <div class="card column is-4 my-3">
           <div class="card-image">
-            <%= raw location.coords%>
+            <iframe src="<%= location.coords %>"
+                    width="100%" height="300" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy">
+            </iframe>
           </div>
           <div class="card-content">
             <div class="media">

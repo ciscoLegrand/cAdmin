@@ -42,12 +42,12 @@
 
 <p>
   <strong>Employee:</strong>
-  <%= @event.user_id %>
+  <%= @event.user_name %>
 </p>
 
 <p>
   <strong>place_id:</strong>
-  <%= @event.place_id %>
+  <%= @event.location_name if @event.place_id.present?%>
 </p>
 
 <p>
@@ -56,8 +56,8 @@
 </p>
 
 <p>
-  <strong>Payment method:</strong>
-  <%= @event.service_id %>
+  <strong>Service:</strong>
+  <%= @event.service_id%>
 </p>
 
 <p>

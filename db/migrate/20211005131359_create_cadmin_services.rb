@@ -7,6 +7,7 @@ class CreateCadminServices < ActiveRecord::Migration[6.1]
       t.text :short_dscription
       t.text :description
       t.text :features
+      t.integer :stock
       t.string :metatitle
       t.text :metadescription
 

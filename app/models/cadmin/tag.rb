@@ -3,6 +3,6 @@ module Cadmin
     has_many :taggings
     has_many :articles, through: :taggings
 
-    validates :name, null: false, uniqueness: true
+    validates :name, presence: true, uniqueness: true
   end
 end

@@ -14,7 +14,7 @@ module Cadmin
     
     enum status: [:pendig, :published, :unpublished, :drafts ]
 
-    validates :title, :content, :image, presence: true
+    validates :title, :content, presence: true
 
     def self.tagged_with(name)
       Tag.find_by!(name: name).articles

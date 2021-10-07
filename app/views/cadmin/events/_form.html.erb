@@ -59,12 +59,14 @@
   <div class="field is-horizontal">
     <div class="field-body">
       <div class="field">
-        <%= form.label :start_time, class: 'label' %>
-        <%= form.text_field :start_time, class: 'input' %>
+        <%= form.label :services, class: 'label' %>
+        <div class="control is-expanded">
+          <%= form.select :service_id, Cadmin::Service.all.map { |s| [s.name, s.id] }, { include_blank: "All" }, {  prompt: 'Selecciona usuario',class: "article__select",data: {controller: "slimselect"}} %>
+        </div>
       </div>
       <div class="field">
-        <%= form.label :total_amount, class: 'label' %>
-        <%= form.text_field :total_amount, class: 'input' %>
+        <%= form.label :start_time, class: 'label' %>
+        <%= form.text_field :start_time, class: 'input' %>
       </div>
       <div class="field">
         <%= form.label :deposit, class: 'label' %>
@@ -73,10 +75,6 @@
       <div class="field">
         <%= form.label :extra_hours, class: 'label' %>
         <%= form.number_field :extra_hours, class: 'input' %>
-      </div>
-      <div class="field">
-        <%= form.label :charged, class: 'label' %> 
-        <%= form.check_box :charged, class:"switch" %>
       </div>
     </div>
   </div>

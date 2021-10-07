@@ -6,7 +6,9 @@ module Cadmin
 
     # GET /events
     def index
-      @events = Event.all
+      
+      # @users = current_cadmin_user.where(deleted_at: nil).pluck(:id) #devuelve array de users´ids
+      @events = current_cadmin_user.admin? ? Event.all : current_cadmin_user.events.all
     end
 
     # GET /events/1
@@ -36,6 +38,9 @@ module Cadmin
     # PATCH/PUT /events/1
     def update
       if @event.update(event_params)
+        if @event.user_id.present?
+          # todo:  sending a message that a new event is added to user events! 
+        end
         redirect_to @event, notice: 'Event was successfully updated.'
       else
         render :edit
@@ -56,7 +61,7 @@ module Cadmin
 
       # Only allow a list of trusted parameters through.
       def event_params
-        params.require(:event).permit(:name, :type_name, :number, :date, :location, :guests, :start_time, :extra_hours, :user_id, :place_id, :deposit, :total_amount, :charged, :observations, service_ids: [])
+        params.require(:event).permit(:name, :type_name, :number, :date, :location, :guests, :start_time, :extra_hours, :user_id, :place_id, :deposit, :total_amount, :charged, :observations, :service_id)
       end
   end
 end

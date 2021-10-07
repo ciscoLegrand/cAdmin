@@ -42,6 +42,12 @@ $table-head-cell-border-width: 0 0 1px;
 $scheme-invert: hsl(0, 0%, 4%);
 $shadow: 0 0.5em 1em -0.125em rgba($scheme-invert, 0.1), 0 0px 0 1px rgba($scheme-invert, 0.02);
 
+// _table.scss variables
+$default-padding: 10px;
+$base-color: $primary;
+$base-color-light:hsl(227, 95%, 42%);;
+$table-avatar-size: 64px;
+$table-avatar-size-mobile: 64px;
 // fonts
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap');
 $family-sans-serif: 'Raleway', sans-serif;
