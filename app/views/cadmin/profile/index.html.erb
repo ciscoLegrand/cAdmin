@@ -1,6 +1,62 @@
-<h1>Profile#index</h1>
-<p>Find me in app/views/cadmin/profile/index.html.erb</p>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <div class="is-user-avatar image has-max-width is-aligned-center navbar-item">
+      <% if current_cadmin_user.avatar_data.present? %>
+        <figure class=" image mr-3"><%= image_tag current_cadmin_user.avatar_url, class:'is-rounded ccard__avatar'  %></figure>
+      <% else %>
+        <span class="ccard__letter_user"><%= current_cadmin_user.email[0] %></span> 
+      <% end %>
+    </div>
+    <input type="text" readonly value="<%= current_cadmin_user.username %>" class="input is-static">
+  </div>
 
-<%= link_to current_cadmin_user.username,edit_profile_path(id: current_cadmin_user.id)%>
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-end">
+      <%= link_to current_cadmin_user.username,edit_profile_path(id: current_cadmin_user.id), class: 'button is-outlined navbar-item'%>   
 
-<%= link_to 'my events', '#' %>
+      <%= link_to 'my events', events_path, class: 'button is-outlined navbar-item' %>
+
+      <%= link_to 'my profile', profile_show_path(id: current_cadmin_user.id), class: 'button is-outlined navbar-item'%>
+    </div>
+  </div>
+</nav>
+
+
+
+  <div class="container">
+    <section class="section">
+      <div class="tile is-parent">
+        <div class="card tile is-child">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span class="icon"><i class="mdi mdi-account default"></i></span>
+              Profile
+            </p>
+          </header>
+          <div class="card-content">
+            <div class="is-user-avatar image has-max-width is-aligned-center">
+              <% if current_cadmin_user.avatar_data.present? %>
+                <figure class=" image mr-3"><%= image_tag current_cadmin_user.avatar_url, class:'is-rounded ccard__avatar'  %></figure>
+              <% else %>
+                <span class="ccard__letter_user"><%= current_cadmin_user.email[0] %></span> 
+              <% end %>
+            </div>
+            <hr>
+            <div class="field">
+              <label class="label">Name</label>
+              <div class="control is-clearfix">
+                <input type="text" readonly value="<%= current_cadmin_user.username %>" class="input is-static">
+              </div>
+            </div>
+            <hr>
+            <div class="field">
+              <label class="label">E-mail</label>
+              <div class="control is-clearfix">
+                <input type="text" readonly value="<%= current_cadmin_user.email %>" class="input is-static">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
