@@ -6,13 +6,12 @@ module Cadmin
 
     delegate :name, to: :user, prefix: :user
 
-
     def servicename 
       names=[]
       self.service_ids.each do |ser| 
        names << Service.find_by_id(ser).name if ser.present?
       end
-      names
+      names.split(',').join(' ')
     end
 
 

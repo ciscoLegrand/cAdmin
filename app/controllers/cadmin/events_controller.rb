@@ -5,10 +5,11 @@ module Cadmin
     before_action :set_event, only: [:show, :edit, :update, :destroy]
 
     # GET /events
-    def index
-      
+    def index      
       # @users = current_cadmin_user.where(deleted_at: nil).pluck(:id) #devuelve array de users´ids
-      @events = current_cadmin_user.admin? ? Event.all : current_cadmin_user.events.all
+      events = current_cadmin_user.admin? ? Event.all : current_cadmin_user.events.all
+      @events= events.order(params[:sort])
+      @total = employee_salary(@events)
     end
 
     # GET /events/1
@@ -39,7 +40,7 @@ module Cadmin
     def update
       if @event.update(event_params)
         if @event.user_id.present?
-          # todo:  sending a message that a new event is added to user events! 
+          # todo: sending a message that a new event is added to user events! 
         end
         redirect_to @event, notice: 'Event was successfully updated.'
       else
@@ -51,6 +52,16 @@ module Cadmin
     def destroy
       @event.destroy
       redirect_to events_url, notice: 'Event was successfully destroyed.'
+    end
+
+         
+    # TODO: refactor this method for validate type event and $
+    def employee_salary(events)
+      total = 0
+      events.each do |event|
+        total += event.extra_hours.present? ? 160 + (event.extra_hours * 40) : 160
+      end
+      total
     end
 
     private

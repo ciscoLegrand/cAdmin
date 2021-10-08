@@ -24,10 +24,10 @@
                 <span class="check"></span>
               </label>
             </th>
-            <th>Name</th>
-            <th>Type</th>
+            <th><%= link_to 'Name', sort: 'name' %></th>
+            <th><%= link_to 'Type', sort: 'type_name' %></th>
             <th>Number</th>
-            <th>Date</th>
+            <th><%= link_to 'Date', sort: 'date' %></th>
             <th>Location</th>
             <th>Employee</th>
             <th>service id</th>
@@ -43,8 +43,7 @@
           </tr>
           </thead>
           <tbody>
-
-            <% @events.each do |event| %>
+            <% @events.each do |event| %>           
               <tr>
                 <td class="is-checkbox-cell">
                   <label class="b-checkbox checkbox">
@@ -52,21 +51,21 @@
                     <span class="check"></span>
                   </label>
                 </td>
-                <td><%= event.name %></td>
+                <td><%= event.name  %></td>
                 <td><%= event.type_name %></td>
                 <td><%= event.number %></td>
                 <td data-label="date"><small class="has-text-grey is-abbr-like" title="<%= event.date %>"><%= event.date.strftime('%d-%m-%y') %></small></td>
                 <td><%= link_to event.placename, Cadmin::Location.find_by_id(event.place_id)  %></td>
                 <td><%= event.user_name %></td>
-                <td><%= event.service_ids.to_a %></td>
+                <td><%= event.servicename %></td>
                 <td><%= event.deposit || 0 %></td>                    
                 <td><%= raw event.observations.truncate(27, separator: /\s/) %></td>
                 <td>
                   <!--TODO REVIEW THIS PART-->
                   <%= form_with(model: event,html: {class: 'events events__form'}) do |form| %>
                     <div class="media-content is-flex is-flex-direction-column is-align-items-center">                      
-                      <%= form.check_box event.charged, class:"switch" %>
-                      <%= form.submit 'co', class:'button is-small'%>                
+                      <%= form.check_box :charged, class:"switch" %>
+                      <%= form.submit 'ok', class:'button is-small'%>                
                     </div>  
                   <% end %>
                 </td>
@@ -84,6 +83,13 @@
                 </td>
               </tr>
             <% end %>
+            <tr>
+              <td colspan="8">
+              </td>
+              <th>Total: </th>
+              <td><%= @total %></td>
+              <td colspan="2"></td>
+            </tr>
           </tbody>
         </table>
       </div>
