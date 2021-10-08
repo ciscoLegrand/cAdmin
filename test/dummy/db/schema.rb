@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_08_060149) do
+ActiveRecord::Schema.define(version: 2021_10_08_151627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2021_10_08_060149) do
     t.text "image_data"
     t.bigint "user_id", null: false
     t.bigint "article_category_id", null: false
-    t.text "tags_ids", default: "--- []\n"
+    t.text "tag_ids"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["article_category_id"], name: "index_cadmin_articles_on_article_category_id"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2021_10_08_060149) do
     t.integer "start_time"
     t.integer "extra_hours"
     t.bigint "user_id", null: false
-    t.text "services_ids", default: "--- []\n"
+    t.text "service_ids"
     t.integer "place_id"
     t.float "deposit"
     t.float "total_amount"

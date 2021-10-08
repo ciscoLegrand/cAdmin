@@ -6,9 +6,15 @@ module Cadmin
 
     delegate :name, to: :user, prefix: :user
 
+
     def servicename 
-      Service.find_by_id( self.service_id).name 
+      names=[]
+      self.service_ids.each do |ser| 
+       names << Service.find_by_id(ser).name if ser.present?
+      end
+      names
     end
+
 
     def placename 
       Location.find_by_id( self.place_id).name if self.place_id.present? 
