@@ -2,7 +2,7 @@ require_dependency "cadmin/application_controller"
 
 module Cadmin
   class ArticlesController < ApplicationController
-    before_action :set_article, only: [:show, :edit, :new, :create,:update, :destroy]
+    before_action :set_article, only: [:show, :edit, :create,:update, :destroy]
     
     add_breadcrumb 'Articulos'
 

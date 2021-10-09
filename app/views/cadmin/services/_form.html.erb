@@ -1,10 +1,10 @@
-<%= form_with(model: service,data: {"controller": "quill", "action": "quill#save", turbo: false}, html: {class: 'events__form'}) do |form| %>
-  <% if service.errors.any? %>
+<%= form_with(model: [@main, @service],data: {"controller": "quill", "action": "quill#save", turbo: false}, html: {class: 'events__form'}) do |form| %>
+  <% if @service.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(service.errors.count, "error") %> prohibited this service from being saved:</h2>
+      <h2><%= pluralize(@service.errors.count, "error") %> prohibited this service from being saved:</h2>
 
       <ul>
-        <% service.errors.each do |error| %>
+        <% @service.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -67,8 +67,35 @@
     </div>
   </div>
 
+    <%# if 1 == 0 %>        
+      <div class="field">
+        <div class="file has-name">
+          <%= form.label :image , class: 'label' %>
+          <div class="control">
+            <%= image_tag form.object.image_url if form.object.cached_image_data %>
+            <%= form.hidden_field :image, value: form.object.cached_image_data %>
+            <%= form.file_field :image, class: 'input' %>    
+          </div>
+        </div>
+      </div>
+    <%# end %>
+    <%if 1== 0 %>
+        <div class="field">
+          <%= form.label :image %>
+          <div data-controller="uppy" class="is-relative">
+            <div data-uppy-target="container"></div>
+            <%= form.hidden_field :image, value: form.object.cached_image_data,data: { "uppy-target": 'input' } %>
+            <%#= form.hidden_field :image, value: article.cached_image_data, data: { uppy_target: 'input' } %>
+            <div class="upload_container">
+              <%= link_to"", "", target: '_blank', data: {"uppy-target": 'preview'} %>
+              <span data-action="click->uppy#removeFile">Eliminar</span>
+            </div>
+          </div>
+        </div>
+    <% end %>
+    
   <div class="actions my-6">
     <%= form.submit 'new', class: "button is-success mx-2" %>
-    <%= link_to 'back', services_path, class: "button has-background-white-ter mx-2" %>
+    <%= link_to 'back', main_service_services_path, class: "button has-background-white-ter mx-2" %>
   </div>
 <% end %>

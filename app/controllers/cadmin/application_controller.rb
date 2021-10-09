@@ -9,6 +9,7 @@ module Cadmin
     before_action :configure_permitted_parameters, if: :devise_controller?
     before_action :set_breadcrumbs
     before_action :set_web_module
+    before_action :set_main_services
     protected
    
     def configure_permitted_parameters
@@ -19,6 +20,10 @@ module Cadmin
       devise_parameter_sanitizer.permit :accept_invitation, keys: added_attrs
     end
     
+    def set_main_services
+      @main_services =  MainService.all 
+    end  
+
     def set_breadcrumbs
       add_breadcrumb 'Inicio', root_path
     end

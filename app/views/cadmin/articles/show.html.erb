@@ -4,16 +4,16 @@
     <div class="columns">
       <div class="column is-three-quarters">
         <!-- todo: turbo frame to article-->
-        <%#= turbo_frame_tag :article, loading: :lazy, src: article_path(@article)  %>
+        <%#= turbo_frame_tag :article, loading: :lazy, src: @article %>
         <%= render 'article'%>
         <!--TODO: COMENTARIOS SECTION-->
         <div class="section">
           <div class="box">
+            <!--todo: turboframe to comments form-->  
             <% if @article.comments.present? %>
               <%= render @article.comments %>
               <%#= turbo_frame_tag :comments, loading: :lazy, src: @article.comments %>
             <% end %>
-            <!--todo: turboframe to comments form-->
             <article class="media mb-3 comments">
               <figure class="media-left">
                 <p class="image is-64x64 ">

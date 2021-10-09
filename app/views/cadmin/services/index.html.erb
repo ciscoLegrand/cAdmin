@@ -2,43 +2,36 @@
 
 <h1>Services</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Short dscription</th>
-      <th>Description</th>
-      <th>Metatitle</th>
-      <th>Metadescription</th>
-      <th>Features</th>
-      <th>Price</th>
-      <th>Hour price</th>
+  <div class="container">
+    <%= link_to 'New service', new_main_service_service_path, class:'button is-outlined is-success mx-2 my-4' %> 
+    <div class="columns is-multiline is-centered">    
+      <% @services.each do |service| %>
+        <div class="card column is-3 m-3">
+          <div class="card-image">
+            <figure class="image is-16by9">
+              <%= image_tag service.image_url if service.image %>
+            </figure>
+          </div>
+          <hr>
+          <div class="card-content">
+            <div class="media">
+              <div class="media-content">
+                <p class="title is-4"><%= link_to service.name, main_service_service_path(id: service)%></p>
+                <p class="subtitle is-6"><%= raw service.description%></p>
+              </div>
+            </div>
+            <hr>
+            <div class="content">
+              <%= service.short_dscription%>.
+              <br>
+              <%= service.description %>
+              <br>
+            </div>
+          </div>
+          <%= link_to 'edit', edit_main_service_service_path(id: service) , class:'button is-outlined is-success' if current_cadmin_user.admin? %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @services.each do |service| %>
-      <tr>
-        <td><%= service.name %></td>
-        <td><%= service.short_dscription %></td>
-        <td><%= service.description %></td>
-        <td><%= service.metatitle %></td>
-        <td><%= service.metadescription %></td>
-        <td><%= service.features %></td>
-        <td><%= service.price %></td>
-        <td><%= service.hour_price %></td>
-  
-  
-        <td><%= link_to 'Show', service %></td>
-        <td><%= link_to 'Edit', edit_service_path(service) %></td>
-        <td><%= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Service', new_service_path %>
+<%#= link_to 'New Service', new_main_service_service_path %>

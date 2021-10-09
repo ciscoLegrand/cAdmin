@@ -1,5 +1,3 @@
-<%# TODO: add style and new fields to complete this form %>
-
   <%= form_with(model: article, data: {"controller": "quill", "action": "quill#save", turbo: false}, html: {id: 'base', class: 'article__form'}) do |form| %>
     <% if article.errors.any? %>
       <div id="error_explanation">
@@ -23,7 +21,6 @@
           </div>
         </div>
         <div class="field">
-        <%# TODO: REVIEW WHY DONT RUN FLATPICKR %>
           <%= form.label :unpublished_at, class: 'label' %>
           <div class="control is-expanded  has-icons-right">
             <%= form.text_field :unpublished_at,  autocomplete: "off", class: 'input is-medium',placeholder: "#{Time.now.strftime('%d-%m-%Y')}", data: { controller: "flatpickr"} %>
