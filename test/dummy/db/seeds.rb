@@ -72,11 +72,18 @@ end
 Cadmin::Location.create(name: 'Pazo de Sober', address:'', province: 'Ourense', coords: 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11773.328252979665!2d-7.5782942!3d42.4632258!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xef2b2a08af49abd1!2sEurostars%20Pazo%20de%20Sober!5e0!3m2!1ses!2ses!4v1633541381275!5m2!1ses!2ses')
 Cadmin::Location.create(name: 'Pazo Torrexunqueira', address:'', province: 'A Coruña', coords: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2937.1379029682535!2d-8.952797634284133!3d42.594817578235926!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2f3bde581aaaab%3A0x31e1591dbcd13520!2sPazo%20Torre%20de%20Xunqueiras!5e0!3m2!1ses!2ses!4v1633541591180!5m2!1ses!2ses')
 Cadmin::Location.create(name: 'Pazo de Adran', address:'', province: 'A Coruña', coords: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1498939.4986847232!2d-9.138688094933547!3d42.7964627560893!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2f021b39d486d3%3A0xecb479c5f0974632!2sPazo%20de%20Adr%C3%A1n!5e0!3m2!1ses!2ses!4v1633541675159!5m2!1ses!2ses')
-Cadmin::Service.create(name: 'Gramola', price: 550.00, hour_price: 90.00)
-Cadmin::Service.create(name: 'Moon', price: 650.00, hour_price: 90.00)
-Cadmin::Service.create(name: 'Carro vintage', price: 750.00, hour_price: 90.00)
-Cadmin::Service.create(name: 'VWT1', price: 850.00, hour_price: 90.00)
-Cadmin::Service.create(name: 'Piano', price: 950.00, hour_price: 90.00)
+
+Cadmin::MainService.create(name: 'Cabinas', description: 'Nuestras cabinas')
+Cadmin::MainService.create(name: 'Jbx', description: 'Nuestras luces')
+Cadmin::MainService.create(name: 'Picmaton', description: 'Nuestros fotomatones')
+
+Cadmin::Service.create(name: 'Gramola', price: 550.00, hour_price: 90.00, main_service_id: 1)
+Cadmin::Service.create(name: 'Moon', price: 650.00, hour_price: 90.00, main_service_id: 1)
+Cadmin::Service.create(name: 'Carro vintage', price: 750.00, hour_price: 90.00, main_service_id: 1)
+Cadmin::Service.create(name: 'VWT1', price: 850.00, hour_price: 90.00, main_service_id: 1)
+Cadmin::Service.create(name: 'Piano', price: 950.00, hour_price: 90.00, main_service_id: 1)
+Cadmin::Service.create(name: 'Picmaton', price: 450.00, hour_price: 50.00, main_service_id: 2)
+Cadmin::Service.create(name: 'Iluminacion base', price: 1450.00, main_service_id: 3)
 
 Cadmin::ArticleCategory.create(name: 'Web Development')
 Cadmin::ArticleCategory.create(name: 'FrontEnd')
@@ -93,6 +100,10 @@ Cadmin::Article.create(title: 'Hello world', content: 'Hello fkn world from seed
 Cadmin::Event.create(name: 'maria y juan', type_name:'wedding', number:'0000001', date: '10/08/2022', guests: 100, start_time: 3, user_id: 1, place_id: 1, observations: 'evento creado con seeds')
 Cadmin::Event.create(name: 'pepas y pepes', type_name:'wedding', number:'0000002', date: '10/06/2022', guests: 146, start_time: 3, user_id: 1,  place_id: 2, observations: 'evento creado con seeds')
 Cadmin::Event.create(name: 'marion y jon', type_name:'wedding', number:'0000003', date: '01/05/2022', guests: 213, start_time: 3, user_id: 4,  place_id: 3, observations: 'evento creado con seeds')
+
+Cadmin::Discount.create(name: 'gramola', type_discount: 'cabinas', description: 'descuento por llevar la cabina mas rata', percentage: 5)
+Cadmin::Discount.create(name: 'Hoteles Oca', type_discount: 'cabinas', description: 'descuento cadena hoteles oca ', percentage: 15)
+Cadmin::Discount.create(name: 'Bendoiro family', type_discount: 'cabinas', description: 'descuento cadena de choias bendoiro y cia ', percentage: 10)
 
 puts Cadmin::Service.last.name
 puts Cadmin::ArticleCategory.last.name

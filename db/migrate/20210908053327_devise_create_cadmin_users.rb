@@ -4,14 +4,17 @@ class DeviseCreateCadminUsers < ActiveRecord::Migration[6.1]
   def change
     create_table :cadmin_users do |t|
       ## Database authenticatable
-      t.string :username,            null: false, default: ""
-      t.string :name ,           null: false, default: ""
-      t.string :first_name,            null: false, default: ""
-      t.string :email,              null: false, default: ""
+      t.string :username, null: false, default: ""
+      t.string :name , null: false, default: ""
+      t.string :first_name, null: false, default: ""
+      t.string :email, null: false, default: ""
       t.string :phone, null: false
       t.integer :postal_code
+      t.string :city
       t.string :province
-      t.string :address 
+      t.text :address
+      t.text :shipping_address 
+      t.text :billing_address
       t.date :birthdate 
       t.text :avatar_data
       t.datetime :deleted_at
