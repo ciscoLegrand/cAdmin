@@ -28,3 +28,10 @@
     overflow-x: scroll;
   }
 }
+
+.is-scrollable-y-touch{
+  overflow-y: scroll;
+  @include until($tablet) {
+    overflow-y: scroll;
+  }
+}

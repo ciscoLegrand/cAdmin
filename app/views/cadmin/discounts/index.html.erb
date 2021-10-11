@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Discounts</h1>
+
+<div class="columns is-multiline">
+  <% @discounts.each do |discount| %>
+    <div class="card column is-3">
+      <header class="card-header">
+        <span class="card-header-title">
+          <%= link_to discount.name, discount %>
+        </span>
+        <span class="tag is-success subtitle is-size-5"><%= discount.percentage %>%</span>
+      </header>
+      <div class="card-content">
+        <div class="content">
+          <%= raw discount.description %>
+          <br>
+          <time
+            datetime="<%= discount.start_date if discount.start_date.present? %>"><%= discount.start_date if discount.start_date.present? %></time>
+          <time
+            datetime="<%= discount.end_date if discount.end_date.present? %>"><%= discount.end_date if discount.end_date.present? %></time>
+        </div>
+      </div>
+      <footer class="card-footer has-backgroud-white-ter">
+        <%= link_to 'Edit', edit_discount_path(discount), class:'button is-outlined is-warning mr-3' %>
+        <%= link_to 'Destroy', discount, method: :delete, data: { confirm: 'Are you sure?' }, class:'button is-outlined is-primary ml-3' %>
+      </footer>
+    </div>
+  <% end %>
+</div>
+
+<br>
+
+<%= link_to 'New Discount', new_discount_path %>

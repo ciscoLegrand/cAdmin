@@ -1,0 +1,56 @@
+<%= form_with(model: discount, data: {"controller": "quill", "action": "quill#save", turbo: false},html: {class: 'events events__form'}) do |form| %>
+  <% if discount.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(discount.errors.count, "error") %> prohibited this discount from being saved:</h2>
+
+      <ul>
+        <% discount.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name, class:'label' %>
+    <%= form.text_field :name, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :type_discount, class:'label' %>
+    <%= form.text_field :type_discount,class: 'input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description, class: 'label' %>
+    <div class="control">
+    <%= form.hidden_field :description, class: 'content ',data: {"quill-target": "content"} %>
+      <div data-quill-target="editor" class="events__quill is-fullwidth ">
+        <%= raw discount.description %>
+      </div> 
+    </div>
+  </div>
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <%= form.label :percentage, class:'label' %>
+        <%= form.number_field :percentage,step: :any,class: 'input' %>
+      </div>
+
+      <div class="field">
+        <%= form.label :amount, class:'label' %>
+        <%= form.number_field :amount,step: :any,class: 'input' %>
+      </div>    
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :observations, class:'label' %>
+    <%= form.text_area :observations,class: 'textarea events__quill' %>
+  </div>
+
+    <div class="actions my-6">
+      <%= form.submit 'new', class: "button is-success mx-2" %>
+      <%= link_to 'back', discounts_path, class: "button has-background-white-ter mx-2" %>
+    </div>
+<% end %>
