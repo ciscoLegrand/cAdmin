@@ -4,7 +4,7 @@ module Cadmin
 
     #! display select roles
     def permitted_roles
-      current_cadmin_user.superadmin? ? [['Usuario', 'user'],['Empleado', 'employee'], ['Administrador', 'admin'], ['Superadministrador', 'superadmin']] : [['Usuario', 'user'],['Empleado', 'employee'], ['Administrador', 'admin']]
+      current_cadmin_user.superadmin? ? [['Usuario', 'user'],['Empleado', 'employee'], ['Administrador', 'admin'],['Cliente','customer'], ['Superadministrador', 'superadmin']] : [['Usuario', 'user'],['Empleado', 'employee'], ['Cliente', 'customer'],['Administrador', 'admin']]
     end
 
     def permitted_status

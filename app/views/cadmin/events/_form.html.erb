@@ -10,12 +10,16 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field is-horizontal">
     <div class="field-body">
       <div class="field">
-        <%= form.label :name, class: 'label' %>
-        <%= form.text_field :name, class: 'input' %>
+        <%= form.label :name, class: 'label' %>        
+        <div class="control is-expanded">
+          <%= link_to new_cadmin_user_invitation_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'invite', action: 'click->menu#set_active_menu_item'} do %>
+          Crear cliente<%= inline_svg_tag('cadmin/icons/ico-user-add.svg', class:'icon ')%>
+          <% end %>
+          <%= form.collection_select :name, Cadmin::User.where(role: 'customer').all, :id ,:name, {prompt: 'Selecciona cliente'}, {  prompt: 'Selecciona usuario',class: "select_inside_col",data: {controller: "slimselect"}} %>
+        </div>
       </div>
       <div class="field">
         <%= form.label :type_name, class: 'label' %>
@@ -50,7 +54,7 @@
       <div class="field">
         <%= form.label :user, class: 'label' %>        
         <div class="control is-expanded">
-          <%= form.collection_select :user_id, Cadmin::User.all, :id ,:name, {}, {  prompt: 'Selecciona usuario',class: "select_inside_col",data: {controller: "slimselect"}} %>
+          <%= form.collection_select :user_id, Cadmin::User.where(role: 'employee').all, :id ,:name, {prompt: 'Selecciona empleado'}, {  prompt: 'Selecciona usuario',class: "select_inside_col",data: {controller: "slimselect"}} %>
         </div>
       </div>
     </div>

@@ -7,25 +7,62 @@
     <h2 class="title is-size-3-desktop is-size-5-touch is-family-primary has-text-centered"><%= t "devise.invitations.new.header" %></h2>
     <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post,class:'login__logform',turbo: false }) do |f| %>
       
-      <%= f.hidden_field :phone, value: rand(9**9).to_i %>
       <% resource.class.invite_key_fields.each do |field| -%>
         <div class="field login__logform__eigthywidth my-3">
           <%= f.label field, class: 'login__label' %><br />
           <%= f.text_field field, class: 'login__input' %>
         </div>
-      <% end -%>
-      
-          
-          
-        <div class="field login__logform__eigthywidth my-3">
-          <div class="control">
-            <%= f.label :role, class: 'login__label' %>
-            <%# ! permitted_roles being located in application_helper.rb %>
-            <%= f.select :role, permitted_roles, {prompt: 'Selecciona un rol de usuario'},{ class: 'select is-fullwidth is-focused'} %>
+      <% end -%>      
+      <div class="field is-success  login__logform__eigthywidth my-3">
+        <%= f.label :username, class: 'login__label is-size-5-desktop' %>
+        <%= f.text_field :username, autofocus: true, autocomplete: "username", class: 'login__input' %>
+      </div>
+
+      <div class="field is-horizontal login__logform__eigthywidth">
+        <div class="field-body">
+          <div class="field login__logform__eigthywidth my-3">
+            <%= f.label :name, class: 'login__label is-size-5-desktop' %>
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'login__input' %>
           </div>
-            
-          
+          <div class="field login__logform_eigthywidth my-3">
+            <%= f.label :last_name, class: 'login__label is-size-5-desktop' %>
+            <%= f.text_field :last_name, autofocus: true, autocomplete: "name", class: 'login__input' %>
+          </div>
         </div>
+      </div>
+      <div class="field login__logform__eigthywidth my-3">
+        <%= f.label :phone, class: 'login__label is-size-5-desktop' %>
+        <%= f.number_field :phone, autofocus: true, autocomplete: "phone", class: 'login__input' %>
+      </div>
+
+        <div class="field login__logform__eigthywidth my-3">
+          <%= f.label :address, class: 'login__label is-size-5-desktop' %>
+          <%= f.text_field :address, autofocus: true, autocomplete: "phone", class: 'login__input' %>
+        </div>
+      <div class="field is-horizontal login__logform__eigthywidth">
+        <div class="field-body">
+          <div class="field login__logform__eigthywidth my-3">
+            <%= f.label :city, class: 'login__label is-size-5-desktop' %>
+            <%= f.text_field :city, autofocus: true, autocomplete: "phone", class: 'login__input' %>
+          </div>
+          <div class="field login__logform__eigthywidth my-3">
+            <%= f.label :province, class: 'login__label is-size-5-desktop' %>
+            <%= f.text_field :province, autofocus: true, autocomplete: "phone", class: 'login__input' %>
+          </div>
+          <div class="field login__logform__eigthywidth my-3">
+            <%= f.label :postal_code, class: 'login__label is-size-5-desktop' %>
+            <%= f.number_field :postal_code, autofocus: true, autocomplete: "phone", class: 'login__input' %>
+          </div>
+        </div>
+      </div>
+      <%#= f.hidden_field :phone, value: rand(9**9).to_i %>        
+      <div class="field login__logform__eigthywidth my-3">
+        <div class="control">
+          <%= f.label :role, class: 'login__label' %>
+          <%# ! permitted_roles being located in application_helper.rb %>
+          <%= f.select :role, permitted_roles, {prompt: 'Selecciona un rol de usuario'},{ class: 'select is-fullwidth is-focused'} %>
+        </div>        
+      </div>
 
       <div class="actions is-relative login__logform__eigthywidth mt-6 is-flex is-justify-content-center">
         <%= f.submit t("devise.invitations.new.submit_button"), class: 'button login__logform__logbutton is-rounded is-clickable' %>       

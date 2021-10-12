@@ -1,7 +1,7 @@
 class Cadmin::UsersController < ApplicationController
   before_action :authenticate_cadmin_user!
   before_action :set_title
-  before_action :set_user, only: [:edit, :update]
+  before_action :set_user, only: [:edit, :update, :show]
 
 
   def index 
@@ -38,6 +38,9 @@ class Cadmin::UsersController < ApplicationController
     end
   end
   
+  def info 
+  end
+
   private
   def set_user
     @user = Cadmin::User.find(params[:id])

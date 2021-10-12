@@ -12,6 +12,7 @@ Cadmin::Engine.routes.draw do
   resources :tags
   resources :discounts  
   resources :web_modules
+  resources  :users
 
   resources :main_services do
     resources :services
@@ -21,8 +22,7 @@ Cadmin::Engine.routes.draw do
     resources :comments
   end
   # get 'tags/:tag', to: 'articles#index', as: :tag
-
-  match '/usuarios', to: 'users#index', via: :get, as: :users  
+ 
   # # devise_for :cadmin_users, class_name: "Cadmin::User", module: :devise
   # devise_for :users, controllers: { invitations: 'devise/invitations' }
   devise_for  :cadmin_users, 
@@ -43,7 +43,7 @@ Cadmin::Engine.routes.draw do
     post 'register', to: 'user_registrations#create', as: :registration
     get 'profile', to: 'user_registrations#edit', as: :edit_profile
     put 'profile', to: 'user_registrations#update', as: :update_profile
-    get 'logout', to: 'users_sessions#destroy', as: :logout
+    get 'logout', to: 'user_sessions#destroy', as: :logout
     # delete 'signout' => 'user_sessions#destroy', as: :logout
   end
 

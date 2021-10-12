@@ -39,7 +39,7 @@ module Cadmin
       end
 
       def invited_cadmin_user_params
-        params.require(:cadmin_user).permit(:name, :username, :last_name,:phone,:email, :role, :password, :password_confirmation, :invitation_token)
+        params.require(:cadmin_user).permit(:name, :username, :last_name,:phone,:email,:address,:city,:province,:postal_code, :role, :password, :password_confirmation, :invitation_token)
       end
   end
 end

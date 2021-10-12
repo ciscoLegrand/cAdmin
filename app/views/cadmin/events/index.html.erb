@@ -51,7 +51,7 @@
                     <span class="check"></span>
                   </label>
                 </td>
-                <td><%= event.name  %></td>
+                <td><%= link_to Cadmin::User.find(event.name).name, user_path(Cadmin::User.find(event.name)) %></td>
                 <td><%= event.type_name %></td>
                 <td><%= event.number %></td>
                 <td data-label="date"><small class="has-text-grey is-abbr-like" title="<%= event.date %>"><%= event.date.strftime('%d-%m-%y') %></small></td>

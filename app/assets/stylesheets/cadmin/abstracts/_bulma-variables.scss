@@ -9,7 +9,7 @@ $white: hsl(0,0%,100%);
 $grey-darker: hsl(0,0%,24%);
 $grey-dark: hsl(0,0%,40%);
 $grey-lighter: hsl(0,0%,90%);
-$primary-light: hsla(227, 95%, 22%, 0.5%);
+$primary-light: rgba(3, 26, 109, 0.404);
 $primary-lightest: rgba(0, 95%, 22%, 0.35%);
 
 
@@ -45,7 +45,7 @@ $shadow: 0 0.5em 1em -0.125em rgba($scheme-invert, 0.1), 0 0px 0 1px rgba($schem
 // _table.scss variables
 $default-padding: 10px;
 $base-color: $primary;
-$base-color-light:hsl(227, 95%, 42%);;
+$base-color-light:$primary-light;
 $table-avatar-size: 64px;
 $table-avatar-size-mobile: 64px;
 // fonts

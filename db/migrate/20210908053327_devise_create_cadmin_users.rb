@@ -6,7 +6,7 @@ class DeviseCreateCadminUsers < ActiveRecord::Migration[6.1]
       ## Database authenticatable
       t.string :username, null: false, default: ""
       t.string :name , null: false, default: ""
-      t.string :first_name, null: false, default: ""
+      t.string :last_name, null: false, default: ""
       t.string :email, null: false, default: ""
       t.string :phone, null: false
       t.integer :postal_code

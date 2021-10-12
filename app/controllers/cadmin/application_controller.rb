@@ -13,7 +13,7 @@ module Cadmin
     protected
    
     def configure_permitted_parameters
-      added_attrs = [:name, :username, :email,:phone, :password, :password_confirmation, :remember_me, :avatar]
+      added_attrs = [:name, :last_name, :username, :email,:phone, :password, :password_confirmation, :remember_me, :avatar, :address, :city, :province, :postal_code, :shipping_address, :billing_address]
       devise_parameter_sanitizer.permit :sign_in, keys: [:email, :password]
       devise_parameter_sanitizer.permit :register, keys: added_attrs
       devise_parameter_sanitizer.permit :account_update, keys: added_attrs

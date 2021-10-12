@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_09_193369) do
+ActiveRecord::Schema.define(version: 2021_10_12_180359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2021_10_09_193369) do
     t.string "title", null: false
     t.text "content", null: false
     t.integer "status", default: 0, null: false
-    t.date "published_at", default: "2021-10-09", null: false
+    t.date "published_at", default: "2021-10-12", null: false
     t.date "unpublished_at"
     t.string "metatitle"
     t.string "metadata"
@@ -139,7 +139,7 @@ ActiveRecord::Schema.define(version: 2021_10_09_193369) do
   create_table "cadmin_users", force: :cascade do |t|
     t.string "username", default: "", null: false
     t.string "name", default: "", null: false
-    t.string "first_name", default: "", null: false
+    t.string "last_name", default: "", null: false
     t.string "email", default: "", null: false
     t.string "phone", null: false
     t.integer "postal_code"
