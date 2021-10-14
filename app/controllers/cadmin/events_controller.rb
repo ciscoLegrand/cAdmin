@@ -6,8 +6,9 @@ module Cadmin
 
     # GET /events
     def index      
+      events = Event.all
       # @users = current_cadmin_user.where(deleted_at: nil).pluck(:id) #devuelve array de users´ids
-      events = current_cadmin_user.admin? ? Event.all : current_cadmin_user.events.all
+      # events = current_cadmin_user.admin? ? Event.all : current_cadmin_user.events.all
       @events= events.order(params[:sort])
       @total = employee_salary(@events)
     end
@@ -39,8 +40,18 @@ module Cadmin
     # PATCH/PUT /events/1
     def update
       if @event.update(event_params)
-        if @event.user_id.present?
+        if @event.employee_id.present?
           # todo: sending a message that a new event is added to user events! 
+          @conversation = Cadmin::Conversation
+          if @conversation.where(recipient_id: @event.employee_id).first.present?            
+            @message = @conversation.where(recipient_id: @event.employee_id).first.messages.create(body:"<a href='#{events_path}'>Tienes un nuevo evento: #{@event.date}</a>", user_id: current_cadmin_user.id)
+            @message.save
+          else
+            @conversation.create(sender_id:current_cadmin_user.id, recipient_id:@event.employee_id )
+            @conversation.save  
+            @message = @conversation.messages.create(body:"<a href='#{events_path}'>Tienes un nuevo evento: #{@event.date}</a>", user_id: current_cadmin_user.id)
+            @message.save
+          end
         end
         redirect_to @event, notice: 'Event was successfully updated.'
       else
@@ -72,7 +83,7 @@ module Cadmin
 
       # Only allow a list of trusted parameters through.
       def event_params
-        params.require(:event).permit(:name, :type_name, :number, :date, :guests, :start_time, :extra_hours, :user_id, :place_id, :deposit, :total_amount, :charged, :observations, service_ids: [])
+        params.require(:event).permit(:customer_id, :type_name, :number, :date, :guests, :start_time, :extra_hours, :employee_id, :place_id, :deposit, :total_amount, :charged, :observations, service_ids: [])
       end
   end
 end

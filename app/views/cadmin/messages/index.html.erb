@@ -1,0 +1,33 @@
+<%= turbo_frame_tag :messages do %>
+  <h3 class="title is-5"><%= Cadmin::User.find(@conversation.sender_id).username %></h3>
+  <% @messages.each do |message| %>
+  <% if message.body %>
+    <% user = Cadmin::User.find(message.user_id) %>
+    <%if message.user_id != current_cadmin_user.id %>  
+      <div class="box is-pulled-left" style="width:70%;background:rgba(255,0,0,0.2)">
+      <span class="tag is-link is-pulled-right"><%= message.created_at.strftime('%H:%M') %></span> 
+    <% end %>
+    <%if message.user_id == current_cadmin_user.id %>  
+      <div class="box is-pulled-right" style="width:70%;background:rgba(0,255,0,0.2)">
+      <span class="tag is-success is-pulled-right"><%= message.created_at.strftime('%H:%M') %></span> 
+    <% end %>
+      <%= raw message.body %>  
+    </div>
+      
+      <br>
+  <% end %>
+  <% end %>
+  <%= form_for [@conversation, @message],data: {"controller": "quill", "action": "quill#save", turbo: false}, html: {id: 'base', class: 'article__form'} do |f| %>
+    <div class="field">
+      <div class="control">
+      <%= f.hidden_field :body, class: 'content ',data: {"quill-target": "content"} %>
+        <div data-quill-target="editor" class="is-fullwidth ">
+          <%= raw @conversation.messages.last %>
+        </div> 
+      </div>
+    </div>
+  <%= f.text_field :user_id, value: current_cadmin_user.id, type: "hidden" %>
+  <%= f.submit "Send Reply" %>
+  <% end %>
+
+<% end %>

@@ -1,0 +1,27 @@
+<%= form_with(model: message,data: {"controller": "quill", "action": "quill#save", turbo: false}, html: {id: 'base', class: 'article__form'}) do |form| %>
+  <% if message.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(message.errors.count, "error") %> prohibited this message from being saved:</h2>
+
+      <ul>
+        <% message.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <div class="field">
+      <%= form.label :body, class: 'label' %>
+      <div class="control">
+      <%= form.hidden_field :body, class: 'content ',data: {"quill-target": "content"} %>
+        <div data-quill-target="editor" class="article__quill is-fullwidth ">
+          <%= raw article.content %>
+        </div> 
+      </div>
+    </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

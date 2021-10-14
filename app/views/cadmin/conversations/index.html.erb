@@ -1,0 +1,27 @@
+<h1>My Inbox</h1>
+
+<div class="container">
+  <div class="columns">
+    <aside class="column is-2 is-narrow-mobile is-fullheight section is-hidden-mobile">
+    <p class="menu-label is-hidden-touch">Conversations</p>
+    <ul class="menu-list">
+      <li><%= link_to 'nueva conversacion', new_conversation_path, class: 'button is-outlined is-success' %></li>
+      <% @conversations.each do |conversation| %>
+        <% if conversation.sender_id == current_cadmin_user.id || conversation.recipient_id == current_cadmin_user.id %>
+          <% if conversation.sender_id == current_cadmin_user.id %>
+          <% recipient = Cadmin::User.find(conversation.recipient_id) %>
+          <% else %>
+          <% recipient = Cadmin::User.find(conversation.sender_id) %>
+          <% end %>
+          <li><%= link_to recipient.username, conversation_messages_path(conversation)%></li>
+        <% end %> 
+      <% end %>
+    </ul>
+  </aside>
+  <div class="column is-8 box">
+    <%= turbo_frame_tag :messages, loading: :lazy, src: conversation_messages_path(4)    %>
+  </div>
+  </div>
+</div>
+
+ <h3> <%= link_to 'nueva conversacion', new_conversation_path %></h3>

@@ -2,7 +2,7 @@
 
 <p>
   <strong>Name:</strong>
-  <%= @event.name %>
+  <%= Cadmin::User.find(@event.customer_id).name %>
 </p>
 
 <p>
@@ -37,7 +37,7 @@
 
 <p>
   <strong>Employee:</strong>
-  <%= @event.user_name %>
+  <%= Cadmin::User.find(@event.employee_id).name %>
 </p>
 
 <p>

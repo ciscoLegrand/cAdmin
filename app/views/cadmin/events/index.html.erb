@@ -51,12 +51,12 @@
                     <span class="check"></span>
                   </label>
                 </td>
-                <td><%= link_to Cadmin::User.find(event.name).name, user_path(Cadmin::User.find(event.name)) %></td>
+                <td><%= link_to Cadmin::User.find(event.customer_id).name, user_path(Cadmin::User.find(event.customer_id)) %></td>
                 <td><%= event.type_name %></td>
                 <td><%= event.number %></td>
                 <td data-label="date"><small class="has-text-grey is-abbr-like" title="<%= event.date %>"><%= event.date.strftime('%d-%m-%y') %></small></td>
                 <td><%= link_to event.placename, Cadmin::Location.find_by_id(event.place_id)  %></td>
-                <td><%= event.user_name %></td>
+                <td><%= Cadmin::User.find(event.employee_id).name %></td>
                 <td><%= event.servicename %></td>
                 <td><%= event.deposit || 0 %></td>                    
                 <td><%= raw event.observations.truncate(27, separator: /\s/) %></td>

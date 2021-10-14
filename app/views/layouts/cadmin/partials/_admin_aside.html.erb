@@ -101,7 +101,7 @@
           </span>
           <ul data-menu-target="dropdown">
             <li>
-              <%= link_to root_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'inbound', action: 'click->menu#set_active_menu_item'} do %>
+              <%= link_to conversations_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'inbound', action: 'click->menu#set_active_menu_item'} do %>
                 Buzon<%= inline_svg_tag('cadmin/icons/ico-key.svg', class:'icon ')%>
               <% end %>
             </li>

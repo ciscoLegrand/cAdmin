@@ -1,0 +1,24 @@
+<%= form_with(model: conversation) do |form| %>
+  <% if conversation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(conversation.errors.count, "error") %> prohibited this conversation from being saved:</h2>
+
+      <ul>
+        <% conversation.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :sender_id, value: current_cadmin_user.id %>
+
+  <div class="field">
+    <%= form.label :recipient_id %>
+    <%= form.collection_select :recipient_id, Cadmin::User.all, :id ,:name, {prompt: 'Selecciona cliente'}, {  prompt: 'Selecciona usuario',class: "select_inside_col",data: {controller: "slimselect"}} %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

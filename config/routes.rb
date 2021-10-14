@@ -1,7 +1,7 @@
 Cadmin::Engine.routes.draw do
   mount Shrine.upload_endpoint(:cache) => "/upload"
   root to: "dashboard#index"
-
+  
   get 'profile/index'
   get 'profile/edit'
   get 'profile/show'
@@ -13,7 +13,10 @@ Cadmin::Engine.routes.draw do
   resources :discounts  
   resources :web_modules
   resources  :users
-
+  
+  resources :conversations do 
+    resources :messages
+  end
   resources :main_services do
     resources :services
   end

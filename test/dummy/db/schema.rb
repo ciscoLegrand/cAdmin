@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_12_180359) do
+ActiveRecord::Schema.define(version: 2021_10_13_203749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2021_10_12_180359) do
     t.string "title", null: false
     t.text "content", null: false
     t.integer "status", default: 0, null: false
-    t.date "published_at", default: "2021-10-12", null: false
+    t.date "published_at", default: "2021-10-13", null: false
     t.date "unpublished_at"
     t.string "metatitle"
     t.string "metadata"
@@ -49,6 +49,14 @@ ActiveRecord::Schema.define(version: 2021_10_12_180359) do
     t.index ["user_id"], name: "index_cadmin_comments_on_user_id"
   end
 
+  create_table "cadmin_conversations", force: :cascade do |t|
+    t.integer "sender_id"
+    t.integer "recipient_id"
+    t.string "title"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "cadmin_discounts", force: :cascade do |t|
     t.string "name"
     t.string "type_discount"
@@ -67,7 +75,8 @@ ActiveRecord::Schema.define(version: 2021_10_12_180359) do
   end
 
   create_table "cadmin_events", force: :cascade do |t|
-    t.string "name", null: false
+    t.integer "customer_id", null: false
+    t.integer "employee_id"
     t.string "type_name", default: "wedding", null: false
     t.string "number", null: false
     t.date "date", null: false
@@ -80,10 +89,8 @@ ActiveRecord::Schema.define(version: 2021_10_12_180359) do
     t.float "total_amount"
     t.boolean "charged", default: false, null: false
     t.text "observations"
-    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_cadmin_events_on_user_id"
   end
 
   create_table "cadmin_locations", force: :cascade do |t|
@@ -102,6 +109,16 @@ ActiveRecord::Schema.define(version: 2021_10_12_180359) do
     t.integer "position"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "cadmin_messages", force: :cascade do |t|
+    t.text "body"
+    t.bigint "conversation_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["conversation_id"], name: "index_cadmin_messages_on_conversation_id"
+    t.index ["user_id"], name: "index_cadmin_messages_on_user_id"
   end
 
   create_table "cadmin_services", force: :cascade do |t|
@@ -207,7 +224,8 @@ ActiveRecord::Schema.define(version: 2021_10_12_180359) do
   add_foreign_key "cadmin_comments", "cadmin_users", column: "user_id"
   add_foreign_key "cadmin_discounts", "cadmin_events", column: "event_id"
   add_foreign_key "cadmin_discounts", "cadmin_services", column: "service_id"
-  add_foreign_key "cadmin_events", "cadmin_users", column: "user_id"
+  add_foreign_key "cadmin_messages", "cadmin_conversations", column: "conversation_id"
+  add_foreign_key "cadmin_messages", "cadmin_users", column: "user_id"
   add_foreign_key "cadmin_services", "cadmin_main_services", column: "main_service_id"
   add_foreign_key "cadmin_taggings", "cadmin_articles", column: "article_id"
   add_foreign_key "cadmin_taggings", "cadmin_tags", column: "tag_id"
