@@ -36,8 +36,13 @@ module Cadmin
 
     # TODO: move validations to concern
     def user?
-      %w(user employee admin superadmin).include?(self.role)
+      %w(user admin superadmin).include?(self.role)
     end
+
+    def customer?
+      %w(customer admin superadmin).include?(self.role)
+    end
+
     def employee?
       %w(employee admin superadmin).include?(self.role)
     end

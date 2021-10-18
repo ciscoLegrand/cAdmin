@@ -5,13 +5,26 @@
     <% user = Cadmin::User.find(message.user_id) %>
     <%if message.user_id != current_cadmin_user.id %>  
       <div class="box is-pulled-left" style="width:70%;background:rgba(255,0,0,0.2)">
-      <span class="tag is-link is-pulled-right"><%= message.created_at.strftime('%H:%M') %></span> 
+      <span class="tag is-link is-pulled-right  mr-4"><%= message.created_at.strftime('%H:%M') %></span> 
     <% end %>
     <%if message.user_id == current_cadmin_user.id %>  
       <div class="box is-pulled-right" style="width:70%;background:rgba(0,255,0,0.2)">
-      <span class="tag is-success is-pulled-right"><%= message.created_at.strftime('%H:%M') %></span> 
+      <span class="tag is-success is-pulled-right mr-4"><%= message.created_at.strftime('%H:%M') %></span>       
     <% end %>
-      <%= raw message.body %>  
+      <span class="is-pulled-left">
+      <%= raw message.body %> 
+      </span>
+      <div class="is-pulled-right mr-4">
+        <span class="checkmark">
+          <div class="checkmark__stem <%= message.viewed ?  'checkmark__red' : ''  %>"></div>
+          <div class="checkmark__kick <%= message.viewed ?  'checkmark__red' : ''  %>"></div>
+        </span>
+        <span class="checkmark">
+          <div class="checkmark__stem <%= message.viewed ?  'checkmark__red' : ''  %>"></div>
+          <div class="checkmark__kick <%= message.viewed ?  'checkmark__red' : ''  %>"></div>
+        </span>
+        <%#= button_to '', @conversation.messages.find(id: message.id), method: :delete, class: 'delete is-medium',  data: { confirm: 'Are you sure?' }%>
+      </div> 
     </div>
       
       <br>

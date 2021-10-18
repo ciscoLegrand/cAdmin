@@ -1,7 +1,7 @@
 module Cadmin
   class Event < ApplicationRecord
     belongs_to :customer, foreign_key: :customer_id, class_name: 'User'
-    belongs_to :employee, foreign_key: :customer_id, class_name: 'User'
+    belongs_to :employee, foreign_key: :employee_id, class_name: 'User'
     
     validates :number, presence: true, uniqueness: true
     serialize :service_ids, Array

@@ -31,31 +31,14 @@
             <span class="panel-heading subtitle is-size-6 | has-text-left"><%= render_breadcrumbs separator: ' > '  %></span>           
           </div>
           <div class="is-flex is-flex-direction-row is-justify-content-flex-end">
-            <div data-controller="dropdown" class="dropdown is-up is-justify-content-center p-3">
-              <div class="dropdown-trigger">
-                <button class="button has-text-white is-fullwidth sidebar__button_user p-5" aria-haspopup="true" aria-controls="dropdown-menu" data-action="click->dropdown#show_options">
-                  <% if current_cadmin_user.avatar_data.present? %>
-                    <figure class=" image mr-3"><%= image_tag current_cadmin_user.avatar_url, class:'is-rounded sidebar__avatar'  %></figure>
-                  <% else %>
-                    <span class="sidebar__letter_user"><%= current_cadmin_user.email[0] %></span> 
-                  <% end %>
-                  <span><%= current_cadmin_user.email %></span>
-                  <span class="icon is-small">
-                    <i class="fas fa-angle-up" aria-hidden="true"></i>
-                  </span>
-                </button>
-              </div>
-              <div class="dropdown-menu pr-3" data-dropdown-target="button" id="dropdown-menu" role="menu">
-                <div class="dropdown-content is-pulled-right">
-                  <div class="dropdown-item">
-                    <div class="dropdown-content">
-                      <%= button_to "Cerrar Sesión", logout_path, method: :get, class: "dropdown-item", data: {turbo: false} %>
-                      <%= link_to "Mi Cuenta", profile_index_path, class: "dropdown-item has-text-centered p-0" %>                      
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <%= link_to profile_index_path, class: 'button is-fullwidth header__button_user p-5' do%>
+              <% if current_cadmin_user.avatar_data.present? %>
+                <figure class=" image mr-3"><%= image_tag current_cadmin_user.avatar_url, class:'is-rounded sidebar__avatar'  %></figure>
+              <% else %>
+                <span class="sidebar__letter_user"><%= current_cadmin_user.email[0] %></span> 
+              <% end %>
+              <span><%= current_cadmin_user.username %></span>   
+            <% end %>
           </div>
         </header>
       <% end %>

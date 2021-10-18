@@ -8,12 +8,14 @@
 @import "layouts/sidebar";
 
 @import "components/article";
-@import "components/menu";
-@import "components/switch_modules";
-@import "components/module_card_component";
-@import "components/login_form";
-@import "components/notifications";
+@import "components/card";
+@import "components/checkmark";
 @import "components/comments";
-@import "components/uppy";
 @import "components/events";
+@import "components/login_form";
+@import "components/menu";
+@import "components/module_card_component";
+@import "components/notifications";
+@import "components/switch_modules";
 @import "components/table";
+@import "components/uppy";

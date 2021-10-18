@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_13_203749) do
+ActiveRecord::Schema.define(version: 2021_10_15_204457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2021_10_13_203749) do
     t.string "title", null: false
     t.text "content", null: false
     t.integer "status", default: 0, null: false
-    t.date "published_at", default: "2021-10-13", null: false
+    t.date "published_at", default: "2021-10-15", null: false
     t.date "unpublished_at"
     t.string "metatitle"
     t.string "metadata"
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(version: 2021_10_13_203749) do
 
   create_table "cadmin_messages", force: :cascade do |t|
     t.text "body"
+    t.boolean "viewed", default: false
     t.bigint "conversation_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false

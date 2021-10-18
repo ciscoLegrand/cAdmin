@@ -29,7 +29,7 @@ module Cadmin
       @message = @conversation.messages.new(message_params)
 
       if @message.save
-        redirect_to conversation_messages_path(@conversation), notice: 'Message was successfully created.'
+        redirect_to conversations_path(id: @conversation.id), notice: 'Message was successfully created.'
       else
         render :new
       end
@@ -47,7 +47,7 @@ module Cadmin
     # DELETE /messages/1
     def destroy
       @message.destroy
-      redirect_to messages_url, notice: 'Message was successfully destroyed.'
+      redirect_to conversations_path(id: @conversation.id), notice: 'Message was successfully destroyed.'
     end
 
     private
@@ -62,7 +62,7 @@ module Cadmin
 
       # Only allow a list of trusted parameters through.
       def message_params
-        params.require(:message).permit(:body, :user_id)
+        params.require(:message).permit(:body, :user_id, :viewed)
       end
   end
 end

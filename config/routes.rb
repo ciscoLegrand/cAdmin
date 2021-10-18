@@ -5,7 +5,7 @@ Cadmin::Engine.routes.draw do
   get 'profile/index'
   get 'profile/edit'
   get 'profile/show'
-  
+
   resources :locations
   resources :events
   resources :article_categories

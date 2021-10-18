@@ -12,4 +12,18 @@
       display: block;
     }
   }
+  &__button_user {
+    background-color: transparent;
+    border: 0;
+  }
+
+  &__button_user:hover {
+    background-color: $secondary;
+    color: $white;
+  }
+  
+  &__button_user:focus {
+    background-color: $tertiary;
+    border-color: transparent;
+  }
 }

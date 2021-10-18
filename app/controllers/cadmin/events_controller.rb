@@ -8,7 +8,11 @@ module Cadmin
     def index      
       events = Event.all
       # @users = current_cadmin_user.where(deleted_at: nil).pluck(:id) #devuelve array de users´ids
-      # events = current_cadmin_user.admin? ? Event.all : current_cadmin_user.events.all
+      # events = current_cadmin_user.admin? ? Event.all : current_cadmin_user.events.all 
+      events = events.where(customer_id: current_cadmin_user.id) if current_cadmin_user.customer?
+      events = events.where(employee_id: current_cadmin_user.id) if current_cadmin_user.employee?
+      events = events if current_cadmin_user.admin?
+      # events = current_cadmin_user.events.where(customer_id: current_cadmin_user.id) if current_cadmin_user.where(role: 'customer')
       @events= events.order(params[:sort])
       @total = employee_salary(@events)
     end
@@ -41,16 +45,12 @@ module Cadmin
     def update
       if @event.update(event_params)
         if @event.employee_id.present?
-          # todo: sending a message that a new event is added to user events! 
           @conversation = Cadmin::Conversation
           if @conversation.where(recipient_id: @event.employee_id).first.present?            
-            @message = @conversation.where(recipient_id: @event.employee_id).first.messages.create(body:"<a href='#{events_path}'>Tienes un nuevo evento: #{@event.date}</a>", user_id: current_cadmin_user.id)
-            @message.save
+            @message = @conversation.where(recipient_id: @event.employee_id).first.messages.create(body:"<a href='#{events_path}'>Tienes un nuevo evento: #{@event.date}</a>", user_id: current_cadmin_user.id)         
           else
             @conversation.create(sender_id:current_cadmin_user.id, recipient_id:@event.employee_id )
-            @conversation.save  
             @message = @conversation.messages.create(body:"<a href='#{events_path}'>Tienes un nuevo evento: #{@event.date}</a>", user_id: current_cadmin_user.id)
-            @message.save
           end
         end
         redirect_to @event, notice: 'Event was successfully updated.'
