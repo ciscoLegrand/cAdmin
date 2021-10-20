@@ -1,4 +1,4 @@
-<%= content_tag :div, id: dom_id(message) do %>
+<%= content_tag :div, id: dom_id(message), turbo: '_top' do %>
   <% if message.body %>
     <% user = Cadmin::User.find(message.user_id) %>
     <%if message.user_id != current_cadmin_user.id %>  
@@ -24,7 +24,5 @@
         <%#= button_to '', @conversation.messages.find(id: message.id), method: :delete, class: 'delete is-medium',  data: { confirm: 'Are you sure?' }%>
       </div> 
     </div>
-    
-    <br>
   <% end %>
 <% end %>

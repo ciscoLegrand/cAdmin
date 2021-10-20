@@ -22,6 +22,12 @@ module Cadmin
     end
 
     scope :sort_by_date, -> { order('date ASC') }
-
+    # ! SEARCH BETWEEN DATES 
+    scope :filter_between_dates, -> (start_date, end_date) { where(date: start_date..end_date) }
+    scope :filter_by_user_id, -> (user_id) { where(user_id: user_id)}
+    
+    # ! pgsearch busqueda por campos de texto
+    scope :filter_by_number, -> (number) { where(number: number)}
+    # pg_search_scope :filter_by_name, against: :name
   end
 end

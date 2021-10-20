@@ -9,6 +9,11 @@ module Cadmin
     def index
       @messages = @conversation.messages
       @message = @conversation.messages.new
+      
+      @messages.where(viewed: false).each do |message|
+        message.viewed = true
+        message.save
+      end
     end
 
     # GET /messages/1

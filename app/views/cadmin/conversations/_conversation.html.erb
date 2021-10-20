@@ -1,5 +1,4 @@
 <%= turbo_frame_tag :conversation do %>
-
   <% if conversation.sender_id == current_cadmin_user.id || conversation.recipient_id == current_cadmin_user.id %>
     <% if conversation.sender_id == current_cadmin_user.id %>
     <% recipient = Cadmin::User.find(conversation.recipient_id) %>
@@ -13,5 +12,5 @@
       <% end %>
       <%= button_to '', conversation, method: :delete, class: 'delete is-medium has-background-warning',  data: { confirm: 'Are you sure?' } %>
     </li>
-  
+  <% end %>
 <% end %>

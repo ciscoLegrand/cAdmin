@@ -13,11 +13,7 @@ module Cadmin
 
     # GET /conversations/1
     def show
-      @messages = @conversation.messages
-      @messages.where(viewed: false).each do |message|
-        message.viewed = true
-        message.save
-      end
+
     end
 
     # GET /conversations/new

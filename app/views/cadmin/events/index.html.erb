@@ -1,4 +1,8 @@
-<%= link_to 'New Event', new_event_path, class: 'button is-success is-outlined' %>
+
+<%= render Cadmin::SearchFormComponent.new(path: events_path,params: 'number',  button:'')%>
+
+
+<%= link_to 'New Event', new_event_path, class: 'button is-success is-outlined' if current_cadmin_user.admin? %>
 
 
 

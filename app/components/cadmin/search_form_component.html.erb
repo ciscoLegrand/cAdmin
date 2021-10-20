@@ -1,0 +1,38 @@
+<!-- TODO: DONT WORK-->
+<div class=" mx-5 searcher">
+  <%= form_tag "#{path}", method: :get do %>
+    <div class="field is-horizontal has-addons">
+      <div class="field-body">
+        <div class="field">
+          <div class="control is-expanded">
+            <%= select_tag 'user_id',options_from_collection_for_select( Cadmin::User.all, 'id' ,'name'), prompt: 'Selecciona usuario', class: 'searcher__select', data: {controller: "slimselect"} %>
+          </div>
+        </div>
+        <div class="field">
+          <div class="control is-expanded has-icons-right">
+            <%= text_field_tag :"#{parametters}",params[:"#{parametters}"], class: 'input'%>
+            <%= inline_svg_tag('icons/ico-search.svg', class: 'icon is-small is-right has text-dark') %>
+          </div>
+        </div>
+          
+        <div class="field">
+          <div class="control is-expanded has-icons-right ">
+            <%= text_field_tag :start_date, Date.today, class: 'input', placeholder: 'Fecha inicio', data: { controller: "flatpickr",flatpickr_date_format: "Y-m-d", flatpickr_locale: locale }%>
+            <%= inline_svg_tag('icons/ico-calendar.svg', class: 'icon is-small is-right has text-dark') %>
+          </div>
+        </div>
+        <div class="field">
+          <div class="control is-expanded has-icons-right">
+            <%= text_field_tag :end_date, Date.today, class: 'input',placeholder: 'Fecha fin', data: { controller: "flatpickr",   flatpickr_date_format: "Y-m-d", flatpickr_locale: locale}%>
+            <%= inline_svg_tag('icons/ico-calendar.svg', class: 'icon is-small is-right has text-dark') %>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <%= button_tag(type:"submit", class: "button is-black", style: 'width: 20%;') do %>
+          Buscar <%= inline_svg_tag('icons/ico-document-search.svg', class: 'icon is-16x16 has-text-white ml-4')%>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
