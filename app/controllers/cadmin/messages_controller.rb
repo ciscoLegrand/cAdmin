@@ -26,10 +26,14 @@ module Cadmin
 
     # POST /messages
     def create
-      @message = @conversation.messages.new(message_params)
+      @message = @conversation.messages.create!(message_params)
 
       if @message.save
-        redirect_to conversations_path(id: @conversation.id), notice: 'Message was successfully created.'
+        respond_to do |format|
+          format.turbo_stream
+          format.html { redirect_to conversations_path(id: @conversation.id) }
+        end
+        
       else
         render :new
       end

@@ -1,5 +1,16 @@
 <h1>New Message</h1>
 
-<%= render 'form', message: @message %>
-
-<%= link_to 'Back', messages_path %>
+<%= turbo_frame_tag :new_message do %>
+  <%= form_for [@conversation, @message],data: {"controller": "quill", "action": "quill#save", turbo: false}, html: {id: 'base', class: 'article__form'} do |f| %>
+    <div class="field">
+      <div class="control">
+      <%= f.hidden_field :body, class: 'content ',data: {"quill-target": "content"} %>
+        <div data-quill-target="editor" class="is-fullwidth ">
+          <%= raw @conversation.messages.last %>
+        </div> 
+      </div>
+    </div>
+    <%= f.text_field :user_id, value: current_cadmin_user.id, type: "hidden" %>
+    <%= f.submit "Send Reply" %>
+  <% end %>
+<% end %>

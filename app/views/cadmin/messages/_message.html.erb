@@ -1,6 +1,4 @@
-<%= turbo_frame_tag :messages do %>
-  <h3 class="title is-5"><%= link_to Cadmin::User.find(@conversation.sender_id).username, "#{@conversation}/messages" %></h3>
-  <% @messages.each do |message| %>
+<%= content_tag :div, id: dom_id(message) do %>
   <% if message.body %>
     <% user = Cadmin::User.find(message.user_id) %>
     <%if message.user_id != current_cadmin_user.id %>  
@@ -26,9 +24,7 @@
         <%#= button_to '', @conversation.messages.find(id: message.id), method: :delete, class: 'delete is-medium',  data: { confirm: 'Are you sure?' }%>
       </div> 
     </div>
-      
-      <br>
+    
+    <br>
   <% end %>
-  <% end %>
-  <%= turbo_frame_tag :new_message,loading: :lazy, turbo: '_top', src: new_conversation_message_path(@conversation) %>
 <% end %>
