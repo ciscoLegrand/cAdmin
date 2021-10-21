@@ -1,4 +1,4 @@
-<%= content_tag :div, id: dom_id(message), turbo: '_top' do %>
+<%= content_tag :div, id: dom_id(message) do %>
   <% if message.body %>
     <% user = Cadmin::User.find(message.user_id) %>
     <%if message.user_id != current_cadmin_user.id %>  

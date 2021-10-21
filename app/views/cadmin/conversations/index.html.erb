@@ -25,7 +25,7 @@
       </ul>
     </aside>
     <div class="column is-8 box">
-      <%= turbo_frame_tag :messages, loading: :lazy,turbo: '_top', src: conversation_messages_path(params['id'])  if params['id'].present?  %>
+      <%= turbo_frame_tag :messages, loading: :lazy,target: '_top', src: conversation_messages_path(params['id'])  if params['id'].present?  %>
     </div>
   </div>
 </div>

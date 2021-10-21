@@ -10,14 +10,14 @@
   <header class="card-header">
     <p class="card-header-title">
       <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
-      Clients
+      Events
     </p>
     <a href="#" class="card-header-icon">
       <span class="icon"><i class="mdi mdi-reload"></i></span>
     </a>
   </header>
   <div class="card-content">
-    <div class="b-table has-pagination">
+    <div class="b-table has-pagination is-scrollable-touch">
       <div class="table-wrapper has-mobile-cards">
         <table class="table is-fullwidth is-striped is-hoverable is-fullwidth is-scrollable-touch">
           <thead>
@@ -28,12 +28,12 @@
                 <span class="check"></span>
               </label>
             </th>
-            <th><%= link_to 'Name', sort: 'name' %></th>
+            <th><%= link_to 'Name', sort: 'customer_id' %></th>
             <th><%= link_to 'Type', sort: 'type_name' %></th>
-            <th>Number</th>
+            <th><%= link_to 'Number', sort: 'number' %></th>
             <th><%= link_to 'Date', sort: 'date' %></th>
-            <th>Location</th>
-            <th>Employee</th>
+            <th><%= link_to 'Location', sort: 'place_id' %></th>
+            <th><%= link_to 'Employee', sort: 'employee_id' %></th>
             <th>service id</th>
             <th>Deposit</th>
             <th>Observations</th>
@@ -96,4 +96,7 @@
             </tr>
           </tbody>
         </table>
+        <div class="box">
+          <%== pagy_bulma_nav(@pagy) %>
+        </div>
       </div>

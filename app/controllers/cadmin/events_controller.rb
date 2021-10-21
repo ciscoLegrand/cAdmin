@@ -6,20 +6,27 @@ module Cadmin
 
     # GET /events
     def index      
-      events = Event.all
+      #! get events
       # @users = current_cadmin_user.where(deleted_at: nil).pluck(:id) #devuelve array de users´ids      
-      events = events.where(customer_id: current_cadmin_user.id) if current_cadmin_user.customer?
-      events = events.where(employee_id: current_cadmin_user.id) if current_cadmin_user.employee?
-      events = events if current_cadmin_user.admin?
+      events = Event.where(customer_id: current_cadmin_user.id) if current_cadmin_user.customer?
+      events = Event.where(employee_id: current_cadmin_user.id) if current_cadmin_user.employee?
+      events = Event.all if current_cadmin_user.admin?
       # events = current_cadmin_user.events.where(customer_id: current_cadmin_user.id) if current_cadmin_user.where(role: 'customer')
 
+      #! search events
       events = events.filter_by_number(params[:number]) if params[:number].present?
       events = events.filter_by_user_id(params[:user_id]) if params[:user_id].present?
       events = events.filter_between_dates(params['start_date'], params['end_date']) if params['start_date'].present? && params['end_date'].present?
 
-
+      #! sort events
       @events= events.order(params[:sort])
-      @total = employee_salary(@events)
+
+      #! get total price events
+      @total = employee_salary(@events) if current_cadmin_user.employee?
+      @total = total_event(@events) if current_cadmin_user.admin? 
+      
+      #! paginate events
+      @pagy, @events = pagy(events, items: 10 )
     end
 
     # GET /events/1
@@ -77,6 +84,12 @@ module Cadmin
       events.each do |event|
         total += event.extra_hours.present? ? 160 + (event.extra_hours * 40) : 160
       end
+      total
+    end
+
+    def total_event(events)
+      total = 0
+        # TODO: develop thif function for calculate total amount generate in each event
       total
     end
 

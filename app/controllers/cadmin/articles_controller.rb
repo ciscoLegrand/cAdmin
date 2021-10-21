@@ -2,7 +2,7 @@ require_dependency "cadmin/application_controller"
 
 module Cadmin
   class ArticlesController < ApplicationController
-    before_action :set_article, only: [:show, :edit, :create,:update, :destroy]
+    before_action :set_article, only: [:show, :edit,:update, :destroy]
     
     add_breadcrumb 'Articulos'
 
@@ -40,7 +40,7 @@ module Cadmin
 
     # POST /articles
     def create
-      @article = Article.new(article_params)
+      @article = Article.create(article_params)
 
       if @article.save
         redirect_to  @article, notice: 'Article was successfully created.'
