@@ -45,7 +45,7 @@
     <div class="field-body">
       <div class="field">
         <%= form.label :place, class: 'label' %>
-        <%= form.collection_select :place_id, Cadmin::Location.all, :id ,:name, {}, {  prompt: 'Selecciona localizacións',class: "select_inside_col",data: {controller: "slimselect"}} %>
+        <%= form.collection_select :place_id, Cadmin::Location.all, :id ,:name, {}, {  prompt: 'Selecciona localización',class: "select_inside_col",data: {controller: "slimselect"}} %>
       </div>
       <div class="field">
         <%= form.label :guests, class: 'label' %>
@@ -64,8 +64,9 @@
     <div class="field-body">
       <div class="field">
         <%= form.label :services, class: 'label' %>
+        <%= form.label event.servicename, class: 'label' if event.servicename.present? %>
         <div class="control is-expanded"  data-controller="tomselect">          
-            <%= form.select(:service_ids, options_for_select(Cadmin::Service.all.map{ |s| [s.name, s.id] }), {include_blank: true}, id: 'service-multi', class: 'form-select', data: { tomselect_target: 'tagsField' }, multiple: true) %>
+            <%= form.select(:service_ids, options_for_select(Cadmin::Service.all.map{ |s| [s.name, s.id] }),{} , {include_blank: true, id: 'service-multi', class: 'form-select', data: { tomselect_target: 'tagsField' }, multiple: true}) %>
         </div>
       </div>
       <div class="field">

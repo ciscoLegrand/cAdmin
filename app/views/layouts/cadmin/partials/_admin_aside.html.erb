@@ -25,13 +25,13 @@
             <% end %>
           </li>
           <li>
-            <%= link_to events_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'event', action: 'click->menu#set_active_menu_item'} do %>
+            <%= link_to agenda_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'agenda', action: 'click->menu#set_active_menu_item'} do %>
               Agenda<%= inline_svg_tag('cadmin/icons/ico-user-add.svg', class:'icon ')%>
             <% end %>
           </li>
           <% if current_cadmin_user.admin? %>
             <li>
-              <%= link_to discounts_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'places', action: 'click->menu#set_active_menu_item'}  do %>
+              <%= link_to discounts_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'discounts', action: 'click->menu#set_active_menu_item'}  do %>
                 Descuentos<%= inline_svg_tag('cadmin/icons/ico-user-add.svg', class:'icon ')%>
               <% end %>
             </li>
@@ -68,6 +68,11 @@
           <%= inline_svg_tag('cadmin/icons/ico-cog.svg', class:'icon mx-4')%> Servicios
         </span>
         <ul data-menu-target="dropdown">
+          <li>
+            <%= link_to new_main_service_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'create_main_service', action: 'click->menu#set_active_menu_item'} do %>
+              Nueva categoria<%= inline_svg_tag('cadmin/icons/ico-user-add.svg', class:'icon ')%>
+            <% end %>
+          </li>
           <% @main_services.each do |main|%>
             <li>
               <%= link_to main_service_services_path(main) , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': "#{main.name}", action: 'click->menu#set_active_menu_item'} do %>

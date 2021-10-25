@@ -6,6 +6,8 @@ Cadmin::Engine.routes.draw do
   get 'profile/edit'
   get 'profile/show'
 
+  match '/agenda', to: "dashboard#agenda",  via: :get, as: :agenda
+  
   resources :locations
   resources :events
   resources :article_categories

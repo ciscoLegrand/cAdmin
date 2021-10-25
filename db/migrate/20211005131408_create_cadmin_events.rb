@@ -8,7 +8,7 @@ class CreateCadminEvents < ActiveRecord::Migration[6.1]
       t.date :date, null: false
       t.integer :guests
       t.integer :start_time
-      t.integer :extra_hours
+      t.integer :extra_hours, null: false, default: 0
       t.text :service_ids
       t.integer :place_id
       t.float :deposit

@@ -8,9 +8,9 @@ module Cadmin
     def index      
       #! get events
       # @users = current_cadmin_user.where(deleted_at: nil).pluck(:id) #devuelve array de users´ids      
-      events = Event.where(customer_id: current_cadmin_user.id) if current_cadmin_user.customer?
-      events = Event.where(employee_id: current_cadmin_user.id) if current_cadmin_user.employee?
-      events = Event.all if current_cadmin_user.admin?
+      events = Event.where(customer_id: current_cadmin_user.id).order('date DESC') if current_cadmin_user.customer?
+      events = Event.where(employee_id: current_cadmin_user.id).order('date DESC') if current_cadmin_user.employee?
+      events = Event.all.order('date DESC') if current_cadmin_user.admin?
       # events = current_cadmin_user.events.where(customer_id: current_cadmin_user.id) if current_cadmin_user.where(role: 'customer')
 
       #! search events
@@ -19,11 +19,11 @@ module Cadmin
       events = events.filter_between_dates(params['start_date'], params['end_date']) if params['start_date'].present? && params['end_date'].present?
 
       #! sort events
-      @events= events.order(params[:sort])
+      events= events.order(params[:sort])
 
       #! get total price events
-      @total = employee_salary(@events) if current_cadmin_user.employee?
-      @total = total_event(@events) if current_cadmin_user.admin? 
+      @total = employee_salary(events) if current_cadmin_user.employee?
+      @total = total_event(events) if current_cadmin_user.admin? 
       
       #! paginate events
       @pagy, @events = pagy(events, items: 10 )
@@ -45,7 +45,7 @@ module Cadmin
     # POST /events
     def create
       @event = Event.new(event_params)
-
+      @event.total_amount = @event.total_services_amount
       if @event.save
         redirect_to @event, notice: 'Event was successfully created.'
       else
@@ -55,7 +55,8 @@ module Cadmin
 
     # PATCH/PUT /events/1
     def update
-      if @event.update(event_params)
+      if @event.update(event_params)        
+        @event.update(total_amount: @event.total_services_amount)
         if @event.employee_id.present?
           @conversation = Cadmin::Conversation
           if @conversation.where(recipient_id: @event.employee_id).first.present?            
@@ -82,14 +83,16 @@ module Cadmin
     def employee_salary(events)
       total = 0
       events.each do |event|
-        total += event.extra_hours.present? ? 160 + (event.extra_hours * 40) : 160
+        total +=  160 + (event.extra_hours * 40) 
       end
       total
     end
 
     def total_event(events)
       total = 0
-        # TODO: develop thif function for calculate total amount generate in each event
+      events.each do |event|
+        total += event.total_services_amount
+      end 
       total
     end
 

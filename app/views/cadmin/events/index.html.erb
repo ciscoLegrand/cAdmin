@@ -36,10 +36,11 @@
             <th><%= link_to 'Employee', sort: 'employee_id' %></th>
             <th>service id</th>
             <th>Deposit</th>
-            <th>Observations</th>
+            <th>Pendiente</th>
+            <th>Total amount</th>
             <th>Charged</th>
             <% if 1 == 0 %>
-              <th>Total amount</th>
+              <th>Observations</th>
               <th>Start time</th>
               <th>Extra hour</th>
             <% end %>
@@ -55,15 +56,16 @@
                     <span class="check"></span>
                   </label>
                 </td>
-                <td><%= link_to Cadmin::User.find(event.customer_id).name, user_path(Cadmin::User.find(event.customer_id)) %></td>
+                <td><%= link_to event.customer_name, user_path(Cadmin::User.find(event.customer_id)) %></td>
                 <td><%= event.type_name %></td>
                 <td><%= event.number %></td>
                 <td data-label="date"><small class="has-text-grey is-abbr-like" title="<%= event.date %>"><%= event.date.strftime('%d-%m-%y') %></small></td>
                 <td><%= link_to event.placename, Cadmin::Location.find_by_id(event.place_id)  %></td>
-                <td><%= Cadmin::User.find(event.employee_id).name %></td>
+                <td><%= event.employee_name %></td>
                 <td><%= event.servicename %></td>
-                <td><%= event.deposit || 0 %></td>                    
-                <td><%= raw event.observations.truncate(27, separator: /\s/) %></td>
+                <td><%= event.deposit || 0 %></td>     
+                <td><%= event.total_amount - event.deposit %></td>               
+                <td><%= event.total_amount || 0 %></td>
                 <td>
                   <!--TODO REVIEW THIS PART-->
                   <%= form_with(model: event,html: {class: 'events events__form'}) do |form| %>
@@ -74,7 +76,7 @@
                   <% end %>
                 </td>
                 <% if 1 == 0 %>
-                  <td><%= event.total_amount || 0 %></td>
+                  <td><%= raw event.observations.truncate(27, separator: /\s/) %></td>
                   <td><%= event.start_time %></td>
                   <td><%= event.extra_hours || 0 %></td>
                 <% end %>
@@ -88,7 +90,7 @@
               </tr>
             <% end %>
             <tr>
-              <td colspan="8">
+              <td colspan="9">
               </td>
               <th>Total: </th>
               <td><%= @total %></td>
