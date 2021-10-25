@@ -83,8 +83,12 @@
                 <td class="is-actions-cell">
                   <div class="buttons is-right">
                     <%= link_to inline_svg_tag('cadmin/icons/ico-eye.svg', class: 'icon is-medium has-text-primary'), event,data:{turbo_frame: "_top"}, class: 'button is-clickable' %>
-                    <%= link_to inline_svg_tag('cadmin/icons/ico-edit.svg', class: 'icon is-medium has-text-primary'), edit_event_path(event), data:{turbo_frame: "_top"}, class: 'button is-clickable' %>
-                    <%#= link_to inline_svg_tag('cadmin/icons/ico-trash.svg', class: 'has-background-primary'), event, method: :delete, data: { confirm: 'Are you sure?' }, class:"button is-small is-danger" %>
+                    <% if current_cadmin_user.admin? %>
+                      <%= link_to inline_svg_tag('cadmin/icons/ico-edit.svg', class: 'icon is-medium has-text-primary'), edit_event_path(event), data:{turbo_frame: "_top"}, class: 'button is-clickable' %>
+                      <%= button_to event, method: :delete, data: { confirm: 'Are you sure?' }, class:"button is-clickable"  do %>
+                        <%=  inline_svg_tag('cadmin/icons/ico-trash.svg', class: 'icon is-medium has-text-primary') %>
+                      <% end %>    
+                    <% end %>
                   </div>
                 </td>
               </tr>

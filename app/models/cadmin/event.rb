@@ -7,7 +7,7 @@ module Cadmin
     serialize :service_ids, Array
 
     delegate :name, :last_name, :avatar, :email, :phone, :address, :city, :province, :postal_code, :shipping_address, :billing_address, to: :customer, prefix: :customer
-    delegate :name, :phone, :avatar, to: :employee, prefix: :employee
+    delegate :id, :name, :phone, :avatar, to: :employee, prefix: :employee
     delegate :name, to: :location, prefix: :location
 
     def servicename 
@@ -25,11 +25,13 @@ module Cadmin
         unless ser == ""
           ids << ser.to_i
         end
-        ids.each do |id|
-          service = Service.find(id)
+      end
+      ids.each do |id|
+        service = Service.find(id)
+        if self.extra_hours.present? 
           t_hours = service.hour_price * self.extra_hours
-          total += service.price + t_hours
         end
+        total += service.price + t_hours
       end
       total
     end 

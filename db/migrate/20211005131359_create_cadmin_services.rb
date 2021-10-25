@@ -3,7 +3,7 @@ class CreateCadminServices < ActiveRecord::Migration[6.1]
     create_table :cadmin_services do |t|
       t.string :name
       t.float :price
-      t.float :hour_price
+      t.float :hour_price, null: false, default: 0
       t.text :short_dscription
       t.text :description
       t.text :features

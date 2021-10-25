@@ -11,8 +11,8 @@ class CreateCadminEvents < ActiveRecord::Migration[6.1]
       t.integer :extra_hours, null: false, default: 0
       t.text :service_ids
       t.integer :place_id
-      t.float :deposit
-      t.float :total_amount
+      t.float :deposit, null: false, default: 0
+      t.float :total_amount, null: false, default: 0
       t.boolean :charged, null: false, default: false
       t.text :observations   
 

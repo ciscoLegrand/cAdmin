@@ -34,6 +34,7 @@ module Cadmin
           @unviewed_messages += conversation.messages.where(viewed: false).count
         end
       end
+      @unviewed_messages
     end
 
     def set_breadcrumbs

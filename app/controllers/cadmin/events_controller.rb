@@ -60,10 +60,10 @@ module Cadmin
         if @event.employee_id.present?
           @conversation = Cadmin::Conversation
           if @conversation.where(recipient_id: @event.employee_id).first.present?            
-            @message = @conversation.where(recipient_id: @event.employee_id).first.messages.create!(body:"<a href='#{events_path}'>Tienes un nuevo evento: #{@event.date}</a>", user_id: current_cadmin_user.id)         
+            @message = @conversation.where(recipient_id: @event.employee_id).first.messages.create(body:"<a href='#{events_path}'>Tienes un nuevo evento: #{@event.date}</a>", user_id: current_cadmin_user.id)         
           else
-            @conversation.create(sender_id:current_cadmin_user.id, recipient_id:@event.employee_id )
-            @message = @conversation.messages.create!(body:"<a href='#{events_path}'>Tienes un nuevo evento: #{@event.date}</a>", user_id: current_cadmin_user.id)
+            @converstarion.create(sender_id:current_cadmin_user.id, recipient_id:@event.employee_id )
+            @message = @conversation.messages.create(body:"<a href='#{events_path}'>Tienes un nuevo evento: #{@event.date}</a>", user_id: current_cadmin_user.id)
           end
         end
         redirect_to @event, notice: 'Event was successfully updated.'

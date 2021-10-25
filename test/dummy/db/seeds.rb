@@ -2,7 +2,8 @@ Cadmin::User.create(name: 'cisco', username: 'ciscolegrand', email: 'test@test.c
 Cadmin::User.create(name: 'yona', username: 'yonidrama', email: 'customer1@test.com',phone: '+34625650392', password: 'test123', role: 'customer')
 Cadmin::User.create(name: 'pepas', username: 'en_la_discoteca', email: 'customer2@test.com',phone: '+34625650192', password: 'test123', role: 'customer')
 Cadmin::User.create(name: 'pacos', username: 'pacosindajaus', email: 'customer3@test.com',phone: '+34625650292', password: 'test123', role: 'customer')
-
+Cadmin::User.create(name: 'drama', username: 'queen', email: 'employee1@test.com',phone: '+34625350192', password: 'test123', role: 'employee')
+Cadmin::User.create(name: 'franchy', username: 'franchyto', email: 'employee2@test.com',phone: '+34625651292', password: 'test123', role: 'employee')
 count = 0
 names = [
       "Aaran", "Aaren", "Aarez", "Aarman", "Aaron", "Aaron-James", "Aarron", "Aaryan", "Aaryn", "Aayan", "Aazaan", "Abaan", "Abbas", "Abdallah", "Abdalroof", "Abdihakim", "Abdirahman", "Abdisalam", 
@@ -100,9 +101,9 @@ Cadmin::Tag.create(name: "Turbo")
 
 Cadmin::Article.create(title: 'Hello world', content: 'Hello fkn world from seeds!', status: 1,user_id: 1, article_category_id: 1)
 
-Cadmin::Event.create(customer_id: 3, type_name:'wedding', number:'0000001', date: '10/08/2022', guests: 100, start_time: 3, employee_id: 1, place_id: 1, observations: 'evento creado con seeds')
-Cadmin::Event.create(customer_id: 4, type_name:'wedding', number:'0000002', date: '10/06/2022', guests: 146, start_time: 3, employee_id: 1, place_id: 1, observations: 'evento creado con seeds')
-Cadmin::Event.create(customer_id: 2, type_name:'wedding', number:'0000003', date: '01/05/2022', guests: 213, start_time: 3, employee_id: 4, place_id: 3, observations: 'evento creado con seeds')
+Cadmin::Event.create(customer_id: 3, type_name:'wedding', number:'0000001', date: '10/08/2022', guests: 100, start_time: 3, employee_id: 5, place_id: 1, observations: 'evento creado con seeds')
+Cadmin::Event.create(customer_id: 4, type_name:'wedding', number:'0000002', date: '10/06/2022', guests: 146, start_time: 3, employee_id: 5, place_id: 1, observations: 'evento creado con seeds')
+Cadmin::Event.create(customer_id: 2, type_name:'wedding', number:'0000003', date: '01/05/2022', guests: 213, start_time: 3, employee_id: 6, place_id: 3, observations: 'evento creado con seeds')
 
 Cadmin::Discount.create(name: 'gramola', type_discount: 'cabinas', description: 'descuento por llevar la cabina mas rata', percentage: 5)
 Cadmin::Discount.create(name: 'Hoteles Oca', type_discount: 'cabinas', description: 'descuento cadena hoteles oca ', percentage: 15)

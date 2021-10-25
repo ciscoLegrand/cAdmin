@@ -1,5 +1,5 @@
 <div class="columns is-mobile is-centered">
-  <div class="card column is-8 m-3">
+  <div class="card column is-6 m-3" style="height: fit-content;">
     <div class="card-header is-justify-content-space-between">
       <div class="card-header-title "> 
         <h4 class="title is-size-5"><%= @event.customer_name %></h4> 
@@ -9,14 +9,43 @@
         <%= @event.number %>
       </div>
     </div>
-    <% if @event.employee_id.present? %>
+    
+    <div class="card-content">
+      <h3 class="subtitle is-size-5">Datos del evento:</h3>
+      fecha, restaurante, nomes, servicios, n_evento, telefono, email, hora ceremonia, importe, desconto, horas salida, dj titular, fianza, pago, factura, dj auxiliar, datos facturacion, observacións
+      <div class="content">
+        <ul>
+          <li> Email: <%= @event.customer_email%> </li>
+          <li> Telefono: <%= @event.customer_phone%> </li>
+          <li> Dirección facturación: <%= @event.customer_billing_address%> </li>
+        </ul>
+      </div>
+    </div>
+    <% if current_cadmin_user.admin? %>
+    <hr>
       <div class="card-content">
+        <h3 class="subtitle is-size-5">Datos del cliente:</h3>
+        fecha, restaurante, nomes, servicios, n_evento, telefono, email, hora ceremonia, importe, desconto, horas salida, dj titular, fianza, pago, factura, dj auxiliar, datos facturacion, observacións
+        <div class="content">
+          <ul>
+            <li> Email: <%= @event.customer_email%> </li>
+            <li> Telefono: <%= @event.customer_phone%> </li>
+            <li> Dirección facturación: <%= @event.customer_billing_address%> </li>
+          </ul>
+        </div>
+      </div>
+    <% end %>          
+
+    <% if @event.employee_id.present? %>
+    <hr>
+      <div class="card-content">
+        <h4 class="subtitle">Dj Para la boda</h4>
         <div class="is-flex is-flex-direction-row">
           <figure class="image is-128x128">
             <%= image_tag @event.employee_avatar, class: 'is-rounded' if @event.employee_avatar.present? %>
             <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
           </figure>
-          <div class="is-flex is-flex-direction-column">
+          <div class="is-flex is-flex-direction-column is-justify-content-center is-align-items-center" style="width:100%;">
             <span><%= @event.employee_name%></span>
             <span><%= @event.employee_phone%></span>          
           </div>
@@ -24,11 +53,7 @@
       </div>
     <% end %>
     <hr>
-    <% if current_cadmin_user.admin? %>
-      <div class="card-content">
-        fecha, restaurante, nomes, servicios, n_evento, telefono, email, hora ceremonia, importe, desconto, horas salida, dj titular, fianza, pago, factura, dj auxiliar, datos facturacion, observacións
-      </div>
-    <% end %>
+
     <div class="card-content">
       <div class="content">
        <h5 class="subtitle is-size-5"> Observaciones</h5>
@@ -47,45 +72,47 @@
       </footer>
     </div>  
   </div>
+  <% if @event.service_ids %>
+    <div class="column is-size-6">
+      <h2 class="title is-size-4 has-text-centered"> Servicios contratados.</h2>
+      <div class="columns is-mobile is-multiline is-centered">
+        <% @event.service_ids.each do |service_id| %>
+          <% unless service_id == "" %>
+            <% service = Cadmin::Service.find(service_id)   %>
+            <div class="card column is-4 m-3">
+              <div class="card-header">
+                <div class="card-header-title "> 
+                  <div class="title is-size-5 has-text-centered" style="width:100%;"><%= service.name %></div> 
+                </div>
+              </div>
+              <div class="card-image">
+                <figure class="image is-16by9">
+                  <%= image_tag service.image_url if service.image %>
+                </figure>
+              </div>
+              <hr>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <p class="subtitle is-6"><%= raw service.description  %></p>
+                  </div>
+                </div>
+                <hr>
+                <div class="content">
+                  <%= service.short_dscription%>.
+                  <br>
+                  <%= service.description %>
+                  <hr>
+                  <div>Precio: <span class="tag is-success is-size-5"><%= service.price %></span></div>
+                  
+                </div>
+              </div>  
+            </div>         
+          <% end %>           
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>
 
-<% if @event.service_ids %>
-  <h2 class="title is-size-4 has-text-centered"> Servicios contratados.</h2>
-  <div class="columns is-mobile is-multiline is-centered">
-    <% @event.service_ids.each do |service_id| %>
-      <% unless service_id == "" %>
-        <% service = Cadmin::Service.find(service_id)   %>
-        <div class="card column is-4 m-3">
-          <div class="card-header">
-            <div class="card-header-title "> 
-              <div class="title is-size-5 has-text-centered" style="width:100%;"><%= service.name %></div> 
-            </div>
-          </div>
-          <div class="card-image">
-            <figure class="image is-16by9">
-              <%= image_tag service.image_url if service.image %>
-            </figure>
-          </div>
-          <hr>
-          <div class="card-content">
-            <div class="media">
-              <div class="media-content">
-                <p class="subtitle is-6"><%= raw service.description  %></p>
-              </div>
-            </div>
-            <hr>
-            <div class="content">
-              <%= service.short_dscription%>.
-              <br>
-              <%= service.description %>
-              <hr>
-              <div>Precio: <span class="tag is-success is-size-5"><%= service.price %></span></div>
-              
-            </div>
-          </div>  
-        </div>         
-      <% end %>           
-    <% end %>
-  </div>
-<% end %>
 

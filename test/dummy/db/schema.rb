@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_20_122219) do
+ActiveRecord::Schema.define(version: 2021_10_25_130170) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2021_10_20_122219) do
     t.string "title", null: false
     t.text "content", null: false
     t.integer "status", default: 0, null: false
-    t.date "published_at", default: "2021-10-20", null: false
+    t.date "published_at", default: "2021-10-25", null: false
     t.date "unpublished_at"
     t.string "metatitle"
     t.string "metadata"
@@ -82,11 +82,11 @@ ActiveRecord::Schema.define(version: 2021_10_20_122219) do
     t.date "date", null: false
     t.integer "guests"
     t.integer "start_time"
-    t.integer "extra_hours"
+    t.integer "extra_hours", default: 0, null: false
     t.text "service_ids"
     t.integer "place_id"
-    t.float "deposit"
-    t.float "total_amount"
+    t.float "deposit", default: 0.0, null: false
+    t.float "total_amount", default: 0.0, null: false
     t.boolean "charged", default: false, null: false
     t.text "observations"
     t.datetime "created_at", precision: 6, null: false
@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 2021_10_20_122219) do
   create_table "cadmin_services", force: :cascade do |t|
     t.string "name"
     t.float "price"
-    t.float "hour_price"
+    t.float "hour_price", default: 0.0, null: false
     t.text "short_dscription"
     t.text "description"
     t.text "features"
