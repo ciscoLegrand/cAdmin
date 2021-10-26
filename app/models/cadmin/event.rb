@@ -1,14 +1,19 @@
 module Cadmin
   class Event < ApplicationRecord
     belongs_to :customer, foreign_key: :customer_id, class_name: 'User'
-    belongs_to :employee, foreign_key: :employee_id, class_name: 'User'
+    belongs_to :employee, optional: true, foreign_key: :employee_id, class_name: 'User'
+    has_one :interview
     
     validates :number, presence: true, uniqueness: true
     serialize :service_ids, Array
 
-    delegate :name, :last_name, :avatar, :email, :phone, :address, :city, :province, :postal_code, :shipping_address, :billing_address, to: :customer, prefix: :customer
-    delegate :id, :name, :phone, :avatar, to: :employee, prefix: :employee
+    delegate :name, :last_name, :avatar, :email, :phone, :address, :birthdate, :city, :province, :postal_code, :shipping_address, :billing_address, to: :customer, prefix: :customer
+    delegate :name, :phone, :avatar, to: :employee, prefix: :employee
     delegate :name, to: :location, prefix: :location
+
+    PERMITED_EVENT = [
+      'Boda', 'Cena', 'Comunion', 'Despedida','Cumpleaños', 'Bodas de plata/oro'
+    ]
 
     def servicename 
       names=[]

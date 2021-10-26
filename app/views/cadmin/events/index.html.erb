@@ -28,13 +28,13 @@
                 <span class="check"></span>
               </label>
             </th>
-            <th><%= link_to 'Name', sort: 'customer_id' %></th>
+            <th><%= link_to 'Title', sort: 'title' %></th>
             <th><%= link_to 'Type', sort: 'type_name' %></th>
             <th><%= link_to 'Number', sort: 'number' %></th>
             <th><%= link_to 'Date', sort: 'date' %></th>
             <th><%= link_to 'Location', sort: 'place_id' %></th>
             <th><%= link_to 'Employee', sort: 'employee_id' %></th>
-            <th>service id</th>
+            <th>services</th>
             <th>Deposit</th>
             <th>Pendiente</th>
             <th>Total amount</th>
@@ -56,12 +56,12 @@
                     <span class="check"></span>
                   </label>
                 </td>
-                <td><%= link_to event.customer_name, user_path(Cadmin::User.find(event.customer_id)) %></td>
+                <td><%= event.title %></td>
                 <td><%= event.type_name %></td>
                 <td><%= event.number %></td>
                 <td data-label="date"><small class="has-text-grey is-abbr-like" title="<%= event.date %>"><%= event.date.strftime('%d-%m-%y') %></small></td>
                 <td><%= link_to event.placename, Cadmin::Location.find_by_id(event.place_id)  %></td>
-                <td><%= event.employee_name %></td>
+                <td><%= event.employee_name if event.employee_id.present? %></td>
                 <td><%= event.servicename %></td>
                 <td><%= event.deposit || 0 %></td>     
                 <td><%= event.total_amount - event.deposit %></td>               

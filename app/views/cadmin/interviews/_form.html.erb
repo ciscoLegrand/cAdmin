@@ -1,0 +1,87 @@
+<%= form_with(model: interview) do |form| %>
+  <% if interview.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(interview.errors.count, "error") %> prohibited this interview from being saved:</h2>
+
+      <ul>
+        <% interview.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :event_id %>
+    <%= form.text_field :event_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :employee_id %>
+    <%= form.text_field :employee_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ceremony_music %>
+    <%= form.text_field :ceremony_music %>
+  </div>
+
+  <div class="field">
+    <%= form.label :appetizer_music %>
+    <%= form.text_field :appetizer_music %>
+  </div>
+
+  <div class="field">
+    <%= form.label :banquet_music %>
+    <%= form.text_field :banquet_music %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ceremony_time %>
+    <%= form.text_field :ceremony_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :entry %>
+    <%= form.text_field :entry %>
+  </div>
+
+  <div class="field">
+    <%= form.label :bridal_dance %>
+    <%= form.text_field :bridal_dance %>
+  </div>
+
+  <div class="field">
+    <%= form.label :garter %>
+    <%= form.check_box :garter %>
+  </div>
+
+  <div class="field">
+    <%= form.label :garter_music %>
+    <%= form.text_field :garter_music %>
+  </div>
+
+  <div class="field">
+    <%= form.label :figures %>
+    <%= form.check_box :figures %>
+  </div>
+
+  <div class="field">
+    <%= form.label :figures_music %>
+    <%= form.text_field :figures_music %>
+  </div>
+
+  <div class="field">
+    <%= form.label :gift_information %>
+    <%= form.text_area :gift_information %>
+  </div>
+
+  <div class="field">
+    <%= form.label :observations %>
+    <%= form.text_area :observations %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

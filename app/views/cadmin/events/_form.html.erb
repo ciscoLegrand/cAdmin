@@ -10,6 +10,12 @@
       </ul>
     </div>
   <% end %>
+  <div class="field">
+    <div class="control">
+    <%= form.label :title, class: 'label' %>
+    <%= form.text_field :title, class: 'input' %>
+    </div>
+  </div>
   <div class="field is-horizontal">
     <div class="field-body">
       <div class="field">
@@ -23,7 +29,7 @@
       </div>
       <div class="field">
         <%= form.label :type_name, class: 'label' %>
-        <%= form.text_field :type_name, class: 'input' %>
+        <%= form.select :type_name, Cadmin::Event::PERMITED_EVENT, {prompt: 'Selecciona cliente'}, {  prompt: 'Selecciona tipo de evento',class: "select_inside_col",data: {controller: "slimselect"}} %>
       </div>
       <div class="field">
         <div class="control">
@@ -64,10 +70,10 @@
     <div class="field-body">
       <div class="field">
         <%= form.label :services, class: 'label' %>
-        <%= form.label event.servicename, class: 'label' if event.servicename.present? %>
         <div class="control is-expanded"  data-controller="tomselect">          
             <%= form.select(:service_ids, options_for_select(Cadmin::Service.all.map{ |s| [s.name, s.id] }),{} , {include_blank: true, id: 'service-multi', class: 'form-select', data: { tomselect_target: 'tagsField' }, multiple: true}) %>
         </div>
+        <%= form.label event.servicename, class: 'label' if event.servicename.present? %>
       </div>
       <div class="field">
         <%= form.label :start_time, class: 'label' %>

@@ -11,30 +11,65 @@
     </div>
     
     <div class="card-content">
-      <h3 class="subtitle is-size-5">Datos del evento:</h3>
-      fecha, restaurante, nomes, servicios, n_evento, telefono, email, hora ceremonia, importe, desconto, horas salida, dj titular, fianza, pago, factura, dj auxiliar, datos facturacion, observacións
-      <div class="content">
-        <ul>
-          <li> Email: <%= @event.customer_email%> </li>
-          <li> Telefono: <%= @event.customer_phone%> </li>
-          <li> Dirección facturación: <%= @event.customer_billing_address%> </li>
-        </ul>
-      </div>
-    </div>
-    <% if current_cadmin_user.admin? %>
-    <hr>
-      <div class="card-content">
-        <h3 class="subtitle is-size-5">Datos del cliente:</h3>
-        fecha, restaurante, nomes, servicios, n_evento, telefono, email, hora ceremonia, importe, desconto, horas salida, dj titular, fianza, pago, factura, dj auxiliar, datos facturacion, observacións
-        <div class="content">
-          <ul>
-            <li> Email: <%= @event.customer_email%> </li>
-            <li> Telefono: <%= @event.customer_phone%> </li>
-            <li> Dirección facturación: <%= @event.customer_billing_address%> </li>
-          </ul>
+      <div class="columns">
+        <div class="column is-6">
+          <h3 class="title is-size-5">Datos del evento:</h3>         
+          <div class="content">
+              <table class="table is-fullwidth is-striped is-hoverable is-fullwidth is-scrollable-touch">
+                <tr>
+                  <th>Invitados:</th>
+                  <td><%= @event.guests%></td>
+                </tr>
+                <tr>
+                  <th>Deposito:</th>
+                  <td><%= @event.deposit%></td>
+                </tr>
+                <tr>
+                  <th>Total:</th>
+                  <td><%= @event.total_amount - @event.deposit %> </td>
+                </tr>
+              </table>
+          </div>
+        </div>
+        <div class="column is-6">
+          <% if current_cadmin_user.admin? %>
+            <h3 class="title is-size-5">Datos del cliente:</h3>
+            <div class="content">
+              <table class="table is-fullwidth is-striped is-hoverable is-fullwidth is-scrollable-touch">
+                <tr>
+                  <th>Nombre:</th>
+                  <td><%= @event.customer_name%></td>
+                </tr>
+                <tr>
+                  <th>Apellidos:</th>
+                  <td><%= @event.customer_last_name%></td>
+                </tr>
+                <tr>
+                  <th>Email:</th>
+                  <td><%= @event.customer_email%> </td>
+                </tr>
+                <tr>
+                  <th>Cumpleaños:</th>
+                  <td><%= @event.customer_birthdate %></td>
+                </tr>
+                <tr>
+                  <th>Teléfono:</th>
+                  <td><%= @event.customer_phone%></td>
+                </tr>
+                <tr>
+                  <th>Ciudad:</th>
+                  <td><%= @event.customer_city %></td>
+                </tr>
+                <tr>
+                  <th>Dir. facturación:</th>
+                  <td> <%= @event.customer_billing_address%></td>
+                </tr>
+              </table>
+            </div>
+          <% end %>
         </div>
       </div>
-    <% end %>          
+    </div>
 
     <% if @event.employee_id.present? %>
     <hr>
@@ -47,7 +82,15 @@
           </figure>
           <div class="is-flex is-flex-direction-column is-justify-content-center is-align-items-center" style="width:100%;">
             <span><%= @event.employee_name%></span>
-            <span><%= @event.employee_phone%></span>          
+
+            <span>              
+                <%= link_to ("https://api.whatsapp.com/send?phone=#{ @event.employee_phone}" ), class: 'mr-3 is-flex' do %>    
+                  <figure class="icon is-medium has-text-primary">
+                    <%=inline_svg_tag('cadmin/icons/ico-whatsapp.svg', class:'mr-3')%>
+                  </figure>
+                  <%= @event.employee_phone%>
+                <% end %>   
+            </span>          
           </div>
         </div>      
       </div>

@@ -3,6 +3,7 @@ class CreateCadminEvents < ActiveRecord::Migration[6.1]
     create_table :cadmin_events do |t|
       t.integer :customer_id, null: false 
       t.integer :employee_id, null: true
+      t.string :title
       t.string :type_name, null: false, default: 'wedding'
       t.string :number, null: false 
       t.date :date, null: false

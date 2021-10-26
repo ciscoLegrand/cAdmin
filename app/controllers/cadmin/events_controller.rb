@@ -62,7 +62,7 @@ module Cadmin
           if @conversation.where(recipient_id: @event.employee_id).first.present?            
             @message = @conversation.where(recipient_id: @event.employee_id).first.messages.create(body:"<a href='#{events_path}'>Tienes un nuevo evento: #{@event.date}</a>", user_id: current_cadmin_user.id)         
           else
-            @converstarion.create(sender_id:current_cadmin_user.id, recipient_id:@event.employee_id )
+            @conversation = @conversation.create(sender_id:current_cadmin_user.id, recipient_id:@event.employee_id )
             @message = @conversation.messages.create(body:"<a href='#{events_path}'>Tienes un nuevo evento: #{@event.date}</a>", user_id: current_cadmin_user.id)
           end
         end
@@ -77,13 +77,16 @@ module Cadmin
       @event.destroy
       redirect_to events_url, notice: 'Event was successfully destroyed.'
     end
-
          
     # TODO: refactor this method for validate type event and $
     def employee_salary(events)
       total = 0
       events.each do |event|
-        total +=  160 + (event.extra_hours * 40) 
+        if event.type_name == 'Boda'
+          total +=  160 + (event.extra_hours * 40) 
+        else
+          total += 80 + (event.extra_hours * 20) 
+        end
       end
       total
     end
@@ -104,7 +107,7 @@ module Cadmin
 
       # Only allow a list of trusted parameters through.
       def event_params
-        params.require(:event).permit(:customer_id, :type_name, :number, :date, :guests, :start_time, :extra_hours, :employee_id, :place_id, :deposit, :total_amount, :charged, :observations, service_ids: [])
+        params.require(:event).permit(:customer_id, :title, :type_name, :number, :date, :guests, :start_time, :extra_hours, :employee_id, :place_id, :deposit, :total_amount, :charged, :observations,service_ids: [])
       end
   end
 end

@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Interviews</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>Employee</th>
+      <th>Ceremony music</th>
+      <th>Appetizer music</th>
+      <th>Banquet music</th>
+      <th>Ceremony time</th>
+      <th>Entry</th>
+      <th>Bridal dance</th>
+      <th>Garter</th>
+      <th>Garter music</th>
+      <th>Figures</th>
+      <th>Figures music</th>
+      <th>Gift information</th>
+      <th>Observations</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @interviews.each do |interview| %>
+      <tr>
+        <td><%= interview.event_id %></td>
+        <td><%= interview.employee_id %></td>
+        <td><%= interview.ceremony_music %></td>
+        <td><%= interview.appetizer_music %></td>
+        <td><%= interview.banquet_music %></td>
+        <td><%= interview.ceremony_time %></td>
+        <td><%= interview.entry %></td>
+        <td><%= interview.bridal_dance %></td>
+        <td><%= interview.garter %></td>
+        <td><%= interview.garter_music %></td>
+        <td><%= interview.figures %></td>
+        <td><%= interview.figures_music %></td>
+        <td><%= interview.gift_information %></td>
+        <td><%= interview.observations %></td>
+        <td><%= link_to 'Show', interview %></td>
+        <td><%= link_to 'Edit', edit_interview_path(interview) %></td>
+        <td><%= link_to 'Destroy', interview, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Interview', new_interview_path %>
