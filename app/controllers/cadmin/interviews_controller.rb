@@ -3,6 +3,7 @@ require_dependency "cadmin/application_controller"
 module Cadmin
   class InterviewsController < ApplicationController
     before_action :set_interview, only: [:show, :edit, :update, :destroy]
+    before_action :set_event, only: [:show, :new, :create, :edit, :update, :destroy]
 
     # GET /interviews
     def index
@@ -14,17 +15,16 @@ module Cadmin
     end
 
     # GET /interviews/new
-    def new
-      @interview = Interview.new
-    end
-
+    def new      
+      @interview = @event.interview
+    end 
     # GET /interviews/1/edit
     def edit
     end
 
     # POST /interviews
     def create
-      @interview = Interview.new(interview_params)
+      @interview = @event.interview
 
       if @interview.save
         redirect_to @interview, notice: 'Interview was successfully created.'
@@ -53,7 +53,9 @@ module Cadmin
       def set_interview
         @interview = Interview.find(params[:id])
       end
-
+      def set_event 
+        @event = Event.find(params[:event_id])
+      end
       # Only allow a list of trusted parameters through.
       def interview_params
         params.require(:interview).permit(:event_id, :employee_id, :ceremony_music, :appetizer_music, :banquet_music, :ceremony_time, :entry, :bridal_dance, :garter, :garter_music, :figures, :figures_music, :gift_information, :observations)

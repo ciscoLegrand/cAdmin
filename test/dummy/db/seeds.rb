@@ -101,9 +101,9 @@ Cadmin::Tag.create(name: "Turbo")
 
 Cadmin::Article.create(title: 'Hello world', content: 'Hello fkn world from seeds!', status: 1,user_id: 1, article_category_id: 1)
 
-Cadmin::Event.create(customer_id: 3, type_name:'wedding', number:'0000001', date: '10/08/2022', guests: 100, start_time: 3, employee_id: 5, place_id: 1, observations: 'evento creado con seeds')
-Cadmin::Event.create(customer_id: 4, type_name:'wedding', number:'0000002', date: '10/06/2022', guests: 146, start_time: 3, employee_id: 5, place_id: 1, observations: 'evento creado con seeds')
-Cadmin::Event.create(customer_id: 2, type_name:'wedding', number:'0000003', date: '01/05/2022', guests: 213, start_time: 3, employee_id: 6, place_id: 3, observations: 'evento creado con seeds')
+Cadmin::Event.create(title: 'Marcos y Carolina',customer_id: 3, type_name:'wedding', number:'0000001', date: '10/08/2022', guests: 100, start_time: 3, employee_id: 5, place_id: 1, observations: 'evento creado con seeds')
+Cadmin::Event.create(title: 'Eva y Juan',customer_id: 4, type_name:'wedding', number:'0000002', date: '10/06/2022', guests: 146, start_time: 3, employee_id: 5, place_id: 1, observations: 'evento creado con seeds')
+Cadmin::Event.create(title: 'Alicia y Bea',customer_id: 2, type_name:'wedding', number:'0000003', date: '01/05/2022', guests: 213, start_time: 3, employee_id: 6, place_id: 3, observations: 'evento creado con seeds')
 
 Cadmin::Discount.create(name: 'gramola', type_discount: 'cabinas', description: 'descuento por llevar la cabina mas rata', percentage: 5)
 Cadmin::Discount.create(name: 'Hoteles Oca', type_discount: 'cabinas', description: 'descuento cadena hoteles oca ', percentage: 15)

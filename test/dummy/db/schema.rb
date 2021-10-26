@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_25_190969) do
+ActiveRecord::Schema.define(version: 2021_10_26_134155) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2021_10_25_190969) do
     t.string "title", null: false
     t.text "content", null: false
     t.integer "status", default: 0, null: false
-    t.date "published_at", default: "2021-10-25", null: false
+    t.date "published_at", default: "2021-10-26", null: false
     t.date "unpublished_at"
     t.string "metatitle"
     t.string "metadata"
@@ -86,12 +86,34 @@ ActiveRecord::Schema.define(version: 2021_10_25_190969) do
     t.integer "extra_hours", default: 0, null: false
     t.text "service_ids"
     t.integer "place_id"
+    t.text "discount_ids"
     t.float "deposit", default: 0.0, null: false
     t.float "total_amount", default: 0.0, null: false
     t.boolean "charged", default: false, null: false
     t.text "observations"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "cadmin_interviews", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.bigint "employee_id_id", null: false
+    t.string "ceremony_music"
+    t.string "appetizer_music"
+    t.string "banquet_music"
+    t.string "ceremony_time"
+    t.string "entry"
+    t.string "bridal_dance"
+    t.boolean "garter"
+    t.string "garter_music"
+    t.boolean "figures"
+    t.string "figures_music"
+    t.text "gift_information"
+    t.text "observations"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["employee_id_id"], name: "index_cadmin_interviews_on_employee_id_id"
+    t.index ["event_id"], name: "index_cadmin_interviews_on_event_id"
   end
 
   create_table "cadmin_locations", force: :cascade do |t|
@@ -226,6 +248,8 @@ ActiveRecord::Schema.define(version: 2021_10_25_190969) do
   add_foreign_key "cadmin_comments", "cadmin_users", column: "user_id"
   add_foreign_key "cadmin_discounts", "cadmin_events", column: "event_id"
   add_foreign_key "cadmin_discounts", "cadmin_services", column: "service_id"
+  add_foreign_key "cadmin_interviews", "cadmin_events", column: "event_id"
+  add_foreign_key "cadmin_interviews", "cadmin_users", column: "employee_id_id"
   add_foreign_key "cadmin_messages", "cadmin_conversations", column: "conversation_id"
   add_foreign_key "cadmin_messages", "cadmin_users", column: "user_id"
   add_foreign_key "cadmin_services", "cadmin_main_services", column: "main_service_id"

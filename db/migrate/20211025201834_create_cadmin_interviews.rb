@@ -2,7 +2,7 @@ class CreateCadminInterviews < ActiveRecord::Migration[6.1]
   def change
     create_table :cadmin_interviews do |t|
       t.references :event, null: false, foreign_key:  {to_table: :cadmin_events}
-      t.references :employee_id, null: false, foreign_key: true
+      t.references :employee_id, null: false, foreign_key: {to_table: :cadmin_users}
       t.string :ceremony_music
       t.string :appetizer_music
       t.string :banquet_music

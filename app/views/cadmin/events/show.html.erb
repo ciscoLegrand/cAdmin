@@ -1,3 +1,5 @@
+
+<%= link_to 'New Interview', new_event_interview_path(@event), class: 'button is-success is-outlined' if current_cadmin_user.employee? %>
 <div class="columns is-mobile is-centered">
   <div class="card column is-6 m-3" style="height: fit-content;">
     <div class="card-header is-justify-content-space-between">
@@ -9,7 +11,6 @@
         <%= @event.number %>
       </div>
     </div>
-    
     <div class="card-content">
       <div class="columns">
         <div class="column is-6">
@@ -19,6 +20,10 @@
                 <tr>
                   <th>Invitados:</th>
                   <td><%= @event.guests%></td>
+                </tr>
+                <tr>
+                  <th>Descuento:</th>
+                  <td><%= @event.discountnames%></td>
                 </tr>
                 <tr>
                   <th>Deposito:</th>

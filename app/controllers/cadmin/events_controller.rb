@@ -107,7 +107,7 @@ module Cadmin
 
       # Only allow a list of trusted parameters through.
       def event_params
-        params.require(:event).permit(:customer_id, :title, :type_name, :number, :date, :guests, :start_time, :extra_hours, :employee_id, :place_id, :deposit, :total_amount, :charged, :observations,service_ids: [])
+        params.require(:event).permit(:customer_id, :title, :type_name, :number, :date, :guests, :start_time, :extra_hours, :employee_id, :place_id, :deposit, :total_amount, :charged, :observations,service_ids: [], discount_ids: [])
       end
   end
 end

@@ -1,25 +1,28 @@
 Cadmin::Engine.routes.draw do
-  resources :interviews
   mount Shrine.upload_endpoint(:cache) => "/upload"
   root to: "dashboard#index"
   
   get 'profile/index'
   get 'profile/edit'
   get 'profile/show'
-
+  
   match '/agenda', to: "dashboard#agenda",  via: :get, as: :agenda
   
   resources :locations
-  resources :events
   resources :article_categories
   resources :tags
   resources :discounts  
   resources :web_modules
   resources  :users
   
+  resources :events do 
+    resources :interviews
+  end
+  
   resources :conversations do 
     resources :messages
   end
+  
   resources :main_services do
     resources :services
   end

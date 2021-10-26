@@ -12,6 +12,7 @@ module Cadmin
     has_many :articles, dependent: :destroy
     has_many :comments, dependent: :destroy
     has_many :events
+    has_many :interviews, dependent: :destroy
 
     validates :email, presence: true, uniqueness: true
     validates :username, presence: true, uniqueness: { case_sensitive: false }, on: :update

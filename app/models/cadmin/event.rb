@@ -6,6 +6,7 @@ module Cadmin
     
     validates :number, presence: true, uniqueness: true
     serialize :service_ids, Array
+    serialize :discount_ids, Array
 
     delegate :name, :last_name, :avatar, :email, :phone, :address, :birthdate, :city, :province, :postal_code, :shipping_address, :billing_address, to: :customer, prefix: :customer
     delegate :name, :phone, :avatar, to: :employee, prefix: :employee
@@ -19,6 +20,14 @@ module Cadmin
       names=[]
       self.service_ids.each do |ser| 
        names << Service.find(ser).name if ser.present?
+      end
+      names.split(',').join(', ')
+    end
+
+    def discountnames
+      names=[]
+      self.discount_ids.each do |dis| 
+       names << Discount.find(dis).name if dis.present?
       end
       names.split(',').join(', ')
     end

@@ -10,31 +10,21 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
-    <div class="control">
-    <%= form.label :title, class: 'label' %>
-    <%= form.text_field :title, class: 'input' %>
-    </div>
-  </div>
   <div class="field is-horizontal">
     <div class="field-body">
       <div class="field">
-        <%= form.label :customer_id, class: 'label' %>        
-        <div class="control is-expanded">
-          <%= link_to new_cadmin_user_invitation_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'invite', action: 'click->menu#set_active_menu_item'} do %>
-          Crear cliente<%= inline_svg_tag('cadmin/icons/ico-user-add.svg', class:'icon ')%>
-          <% end %>
-          <%= form.collection_select :customer_id, Cadmin::User.where(role: 'customer').all, :id ,:name, {prompt: 'Selecciona cliente'}, {  prompt: 'Selecciona usuario',class: "select_inside_col",data: {controller: "slimselect"}} %>
+        <div class="control">
+        <%= form.label :title, class: 'label' %>
+        <%= form.text_field :title, class: 'input' %>
         </div>
       </div>
       <div class="field">
-        <%= form.label :type_name, class: 'label' %>
-        <%= form.select :type_name, Cadmin::Event::PERMITED_EVENT, {prompt: 'Selecciona cliente'}, {  prompt: 'Selecciona tipo de evento',class: "select_inside_col",data: {controller: "slimselect"}} %>
-      </div>
-      <div class="field">
-        <div class="control">
-        <%= form.label :number, class: 'label' %>
-        <%= form.number_field :number, class: 'input' %>
+        <%= form.label :customer_id, class: 'label' %>        
+        <div class="control is-expanded">
+          <%= form.collection_select :customer_id, Cadmin::User.where(role: 'customer').all, :id ,:name, {prompt: 'Selecciona cliente'}, {  prompt: 'Selecciona usuario',class: "select_inside_col",data: {controller: "slimselect"}} %>
+          <%= link_to new_cadmin_user_invitation_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'invite', action: 'click->menu#set_active_menu_item'} do %>
+          Crear cliente<%= inline_svg_tag('cadmin/icons/ico-user-add.svg', class:'icon ')%>
+          <% end %>
         </div>
       </div>
       <div class="field">
@@ -46,6 +36,28 @@
       </div>
     </div>
   </div>
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <%= form.label :type_name, class: 'label' %>
+        <%= form.select :type_name, Cadmin::Event::PERMITED_EVENT, {prompt: 'Selecciona cliente'}, {  prompt: 'Selecciona tipo de evento',class: "select_inside_col",data: {controller: "slimselect"}} %>
+      </div>
+      <div class="field">
+        <div class="control">
+        <%= form.label :number, class: 'label' %>
+        <%= form.number_field :number, class: 'input' %>
+        </div>
+      </div>
+      <div class="field">
+        <%= form.label :discount_ids, class: 'label' %>
+        <div class="control is-expanded"  data-controller="tomselect">          
+            <%= form.select(:discount_ids, options_for_select(Cadmin::Discount.all.map{ |s| [s.name, s.id] }),{} , {include_blank: true, id: 'service-multi', class: 'form-select', data: { tomselect_target: 'tagsField' }, multiple: true}) %>
+        </div>
+        <%= form.label event.servicename, class: 'label' if event.servicename.present? %>
+      </div>
+
+    </div>
+  </div>
 
   <div class="field is-horizontal">
     <div class="field-body">
@@ -54,14 +66,17 @@
         <%= form.collection_select :place_id, Cadmin::Location.all, :id ,:name, {}, {  prompt: 'Selecciona localización',class: "select_inside_col",data: {controller: "slimselect"}} %>
       </div>
       <div class="field">
-        <%= form.label :guests, class: 'label' %>
-        <%= form.number_field :guests, class: 'input' %>
-      </div>
-      <div class="field">
         <%= form.label :customer_id, class: 'label' %>        
         <div class="control is-expanded">
           <%= form.collection_select :employee_id, Cadmin::User.where(role: 'employee').all, :id ,:name, {prompt: 'Selecciona empleado'}, {  prompt: 'Selecciona usuario',class: "select_inside_col",data: {controller: "slimselect"}} %>
         </div>
+      </div>
+      <div class="field">
+        <%= form.label :services, class: 'label' %>
+        <div class="control is-expanded"  data-controller="tomselect">          
+            <%= form.select(:service_ids, options_for_select(Cadmin::Service.all.map{ |s| [s.name, s.id] }),{} , {include_blank: true, id: 'service-multi', class: 'form-select', data: { tomselect_target: 'tagsField' }, multiple: true}) %>
+        </div>
+        <%= form.label event.servicename, class: 'label' if event.servicename.present? %>
       </div>
     </div>
   </div>
@@ -69,11 +84,8 @@
   <div class="field is-horizontal">
     <div class="field-body">
       <div class="field">
-        <%= form.label :services, class: 'label' %>
-        <div class="control is-expanded"  data-controller="tomselect">          
-            <%= form.select(:service_ids, options_for_select(Cadmin::Service.all.map{ |s| [s.name, s.id] }),{} , {include_blank: true, id: 'service-multi', class: 'form-select', data: { tomselect_target: 'tagsField' }, multiple: true}) %>
-        </div>
-        <%= form.label event.servicename, class: 'label' if event.servicename.present? %>
+        <%= form.label :guests, class: 'label' %>
+        <%= form.number_field :guests, class: 'input' %>
       </div>
       <div class="field">
         <%= form.label :start_time, class: 'label' %>

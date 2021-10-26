@@ -1,8 +1,8 @@
 class CreateCadminEvents < ActiveRecord::Migration[6.1]
   def change
     create_table :cadmin_events do |t|
-      t.integer :customer_id, null: false 
-      t.integer :employee_id, null: true
+      t.integer :customer_id, null: false, foreign_key: {to_table: :cadmin_users}
+      t.integer :employee_id, null: true, foreign_key: {to_table: :cadmin_users}
       t.string :title
       t.string :type_name, null: false, default: 'wedding'
       t.string :number, null: false 
@@ -12,6 +12,7 @@ class CreateCadminEvents < ActiveRecord::Migration[6.1]
       t.integer :extra_hours, null: false, default: 0
       t.text :service_ids
       t.integer :place_id
+      t.text :discount_ids 
       t.float :deposit, null: false, default: 0
       t.float :total_amount, null: false, default: 0
       t.boolean :charged, null: false, default: false

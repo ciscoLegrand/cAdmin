@@ -11,7 +11,8 @@ module Cadmin
     before_action :set_web_module
     before_action :set_main_services
     before_action :set_unviewed_messages 
-    
+    before_action :set_events
+
     protected
 
     def configure_permitted_parameters
@@ -25,7 +26,9 @@ module Cadmin
     def set_main_services
       @main_services =  MainService.all 
     end  
-
+    def set_events
+      @events = Event.all
+    end 
     def set_unviewed_messages 
       @unviewed_messages = 0
       if current_cadmin_user.present?

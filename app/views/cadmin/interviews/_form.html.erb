@@ -1,4 +1,4 @@
-<%= form_with(model: interview) do |form| %>
+<%= form_with(model:[ @event, interview]) do |form| %>
   <% if interview.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(interview.errors.count, "error") %> prohibited this interview from being saved:</h2>
@@ -11,15 +11,9 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :event_id %>
-    <%= form.text_field :event_id %>
-  </div>
 
-  <div class="field">
-    <%= form.label :employee_id %>
-    <%= form.text_field :employee_id %>
-  </div>
+  <%= form.hidden_field :event_id, value: params['event_id'] %>
+  <%= form.hidden_field :employee_id, value: current_cadmin_user.id %>
 
   <div class="field">
     <%= form.label :ceremony_music %>

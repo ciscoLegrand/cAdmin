@@ -25,6 +25,11 @@
             <% end %>
           </li>
           <li>
+            <%= link_to event_interviews_path(@events), class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'interviews', action: 'click->menu#set_active_menu_item'} do %>
+              Entrevistas<%= inline_svg_tag('cadmin/icons/ico-user-add.svg', class:'icon ')%>
+            <% end %>
+          </li>
+          <li>
             <%= link_to agenda_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'agenda', action: 'click->menu#set_active_menu_item'} do %>
               Agenda<%= inline_svg_tag('cadmin/icons/ico-user-add.svg', class:'icon ')%>
             <% end %>
