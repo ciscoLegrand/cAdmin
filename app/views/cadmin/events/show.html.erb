@@ -1,5 +1,8 @@
+<% if @event.employee_id == current_cadmin_user.id%>
+  <%= link_to 'Interview', @event.interview.present? ? edit_event_interview_path(@event)  : new_event_interview_path(@event), class: 'button is-success is-outlined' if   current_cadmin_user.employee? %>
+<% end %>
 
-<%= link_to 'Interview', @event.interview.present? ? edit_event_interview_path(@event)  : new_event_interview_path(@event), class: 'button is-success is-outlined' if current_cadmin_user.employee? %>
+
 <div class="columns is-mobile is-centered">
   <div class="card column is-6 m-3" style="height: fit-content;">
     <div class="card-header is-justify-content-space-between">

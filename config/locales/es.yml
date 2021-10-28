@@ -1,0 +1,180 @@
+es:
+  currency: '€'
+  errors:
+    blank: 'No puede estar en blanco'
+    taken: 'Ya existe'
+  
+  activerecord: 
+    attributes:
+      cadmin/article_category:
+        name: 'Nombre'
+      cadmin/article:
+        title: 'Título'
+        content: 'Cuerpo'
+        status: 'Status'
+        published_at: 'Publicar el '
+        unpublished_at: 'Ocultar el '
+        article_category_id: 'Categoría'
+      cadmin/comment:
+      cadmin/conversation:
+      cadmin/discount:
+        name: 'Nombre'
+        type_discount: 'Tipo de descuento'
+        percentage: 'Porcentage'
+        amount: 'Cantidad'
+        start_date: 'Fecha inicio'
+        end_date: 'Fecha fin'
+        observations: 'Observaciones'
+        event_id: 'Evento' 
+        service_id: 'Servicio'
+      cadmin/event:
+        title: 'Título'
+        customer_id: 'Cliente'
+        date: 'Fecha'
+        type_name: 'Tipo de evento'
+        number: 'Número'
+        discount_ids: 'Descuentos'
+        place: 'Lugar del evento'
+        employee_id: 'Empleado'
+        service_isd: 'Servicios'
+        guests: 'Invitados'
+        start_time: 'Horas de salida'
+        deposit: 'Fianza'
+        extra_hours: 'Horas extra'
+        observations: 'Observaciones'
+      cadmin/interview:
+        event: 'Evento' 
+        employee_id: 'Empleado'
+        ceremony_music: 'Música para la ceremonia'
+        appetizer_music: 'Música para el aperitivo'
+        banquet_music: 'Música para el banquete'
+        ceremony_time: 'Hora de la ceremonia'
+        entry: 'Entrada al banquete'
+        bridal_dance: 'Baile nupcial'
+        garter: 'Liga'
+        garter_music: 'Música para la liga'
+        figures: 'Figuras de novios'
+        figures_music: 'Musica entrega figuras'
+        gift_information: 'Más regalos'
+        observations: 'Observaciones'
+      cadmin/location:
+        name: 'Nombre'
+        address: 'Dirección'
+        postal_code: 'Código postal'
+        province: 'Provincia'
+        coords: 'Coordenadas'
+      cadmin/main_service:
+      cadmin/message:
+      cadmin/service:
+        name: 'Nombre'
+        price: 'Precio'
+        hour_price: 'Precio por hora'
+        short_description: 'Descripción corta'
+        description: 'Descripción'
+        features: 'Características'
+        main_service_id: 'Categoría'
+      cadmin/tag:
+      cadmin:/tagging:
+      cadmin/user:
+        username: 'Nombre de usuario'
+        name: 'Nombre' 
+        last_name: 'Apellidos'
+        phone: 'Teléfono'
+        birthdate: 'Cumpleaños'
+        Address: 'Direcciíon'
+        shipping_address: 'Dirección de envío'
+        billing_address: 'Dirección de facturación'
+        city: 'Ciudad'
+        Province: 'Provincia'
+        postal_code: 'Código postal'
+        role: 'Permisos'
+      cadmin/web_modules:
+
+  helpers:
+    submit:
+      create: 'Guardar'
+      update: 'Guardar'
+    placeholder:
+      cadmin/article_category:
+      cadmin/article:
+      cadmin/comment:
+      cadmin/conversation:
+      cadmin/discount:
+      cadmin/event:
+        title: 'Título'
+        customer: 'Cliente'
+        date: 'Fecha'
+        type_name: 'Tipo de evento'
+        number: 'Número'
+        discount_ids: 'Descuentos'
+        place: 'Lugar del evento'
+        employee_id: 'Empleado'
+        service_isd: 'Servicios'
+        guests: 'Invitados'
+        start_time: 'Horas de salida'
+        deposit: 'Fianza'
+        extra_hours: 'Horas extra'
+        observations: 'Observaciones'
+      cadmin/interview:
+      cadmin/location:
+      cadmin/main_service:
+      cadmin/message:
+      cadmin/service:
+      cadmin/tag:
+      cadmin:/tagging:
+      cadmin/user:
+        username: 'Nombre de usuario'
+        name: 'Nombre' 
+        last_name: 'Apellidos'
+      cadmin/web_modules:
+
+  cadmin:
+    article_categories:
+    articles:
+    comments:
+    conversations:
+    dashboard:
+    discounts:
+    events:
+      index:
+        new: 'Nuevo evento'
+        title: 'Título'
+        customer: 'Cliente'
+        date: 'Fecha'
+        type_name: 'Tipo de evento'
+        number: 'Número'
+        discount_ids: 'Descuentos'
+        place_id: 'Lugar del evento'
+        employee_id: 'Empleado'
+        service_ids: 'Servicios'
+        guests: 'Invitados'
+        start_time: 'Horas de salida'
+        deposit: 'Fianza'
+        pending: 'Pendiente'
+        total_amount: 'Total'
+        charged: 'Cobrado'
+        extra_hours: 'Horas extra'
+        actions: 'Acciones'
+        observations: 'Observaciones'
+      new:
+        title: 'Nuevo evento'
+      edit:
+        title: 'Editar evento'
+      form:
+        create: 'Guardar'
+        cancel: 'Volver'
+    interviews:
+    locations:
+    main_services:
+    messages:
+    profile:
+    services: 
+    tags:
+    user_invitations:
+      new: 
+        username: 'Nickname'
+    user_registrations:
+    user_sessions:
+    users:
+    web_modules:
+    
