@@ -89,7 +89,8 @@
     <%= form.label :observations, class: 'label' %>
     <%= form.text_area :observations, class: 'events__quill' %>
   </div>
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions my-6">
+    <%= form.submit "#{t '.create'}'", class: "button is-success mx-2" %>
+    <%= link_to "#{t '.cancel'}", :back, class: "button has-background-white-ter mx-2" %>
   </div>
 <% end %>

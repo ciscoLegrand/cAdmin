@@ -24,7 +24,8 @@ es:
         amount: 'Cantidad'
         start_date: 'Fecha inicio'
         end_date: 'Fecha fin'
-        observations: 'Observaciones'
+        description: 'Descripción'
+        observations: 'Comentarios'
         event_id: 'Evento' 
         service_id: 'Servicio'
       cadmin/event:
@@ -41,7 +42,7 @@ es:
         start_time: 'Horas de salida'
         deposit: 'Fianza'
         extra_hours: 'Horas extra'
-        observations: 'Observaciones'
+        observations: 'Comentarios'
       cadmin/interview:
         event: 'Evento' 
         employee_id: 'Empleado'
@@ -56,7 +57,7 @@ es:
         figures: 'Figuras de novios'
         figures_music: 'Musica entrega figuras'
         gift_information: 'Más regalos'
-        observations: 'Observaciones'
+        observations: 'Comentarios'
       cadmin/location:
         name: 'Nombre'
         address: 'Dirección'
@@ -114,7 +115,7 @@ es:
         start_time: 'Horas de salida'
         deposit: 'Fianza'
         extra_hours: 'Horas extra'
-        observations: 'Observaciones'
+        observations: 'Comentarios'
       cadmin/interview:
       cadmin/location:
       cadmin/main_service:
@@ -135,6 +136,15 @@ es:
     conversations:
     dashboard:
     discounts:
+      index:
+        title: 'Descuentos'
+        create: 'Añadir'
+        cancel: 'Volver'
+        edit: 'Editar'
+        destroy: 'Eliminar'
+      form:
+        create: 'Guardar'
+        cancel: 'Volver'        
     events:
       index:
         new: 'Nuevo evento'
@@ -155,7 +165,29 @@ es:
         charged: 'Cobrado'
         extra_hours: 'Horas extra'
         actions: 'Acciones'
-        observations: 'Observaciones'
+        observations: 'Comentarios'
+      show:
+        interview: 'Entrevista'
+        cancel: 'Volver'
+        event_title: 'Datos del evento'
+        guests: 'Invitados'
+        discount: 'Descuento'
+        deposit: 'Fianza'
+        total_amount: 'Total'
+        place_id: 'Lugar'
+        date: 'Fecha'
+        client_title: 'Datos del cliente'
+        name: 'Nombre'
+        last_name: 'Apellidos'
+        email: 'Email'
+        birthdate: 'Cumpleaños'
+        phone: 'Teléfono'
+        city: 'Ciudad'
+        billing_address: 'Dir. de facturación'
+        observations: 'Comentarios'
+        service_title: 'Servicios contratados'
+        service_price: 'Precio'
+        employee_title: 'Dj para la boda'
       new:
         title: 'Nuevo evento'
       edit:
@@ -164,11 +196,28 @@ es:
         create: 'Guardar'
         cancel: 'Volver'
     interviews:
+      form:
+        create: 'Guardar'
+        cancel: 'Volver'
     locations:
+      index:
+        title: 'Localizaciones'
+        create: 'Añadir'
+        cancel: 'Volver'
+      form:
+        create: 'Guardar'
+        cancel: 'Volver'
     main_services:
+      form:
+        create: 'Guardar'
+        cancel: 'Volver'
     messages:
+
     profile:
     services: 
+      form:
+        create: 'Guardar'
+        cancel: 'Volver'
     tags:
     user_invitations:
       new: 
@@ -177,4 +226,7 @@ es:
     user_sessions:
     users:
     web_modules:
+      form:
+        create: 'Guardar'
+        cancel: 'Volver'
     

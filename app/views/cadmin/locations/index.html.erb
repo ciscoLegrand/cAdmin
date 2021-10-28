@@ -1,33 +1,34 @@
-<p id="notice"><%= notice %></p>
+<h1><%= t '.title' %></h1>
 
-<h1>Locations</h1>
-  <div class="container">
-    <%= link_to 'New Location', new_location_path, class:'button is-outlined is-success mx-2 my-4' %> 
-    <div class="columns is-multiline is-justify-content-space-between">    
-      <% @locations.each do |location| %>
-        <div class="card column is-4 my-3">
-          <div class="card-image">
-            <iframe src="<%= location.coords %>"
-                    width="100%" height="300" 
-                    style="border:0;" 
-                    allowfullscreen="" 
-                    loading="lazy">
-            </iframe>
+<%= link_to "#{t '.create'}'", new_location_path, class:'button is-outlined is-success mx-2' %> 
+<%= link_to "#{t '.cancel'}", :back, class: "button has-background-white-ter mx-2" %>
+  
+<div class="container mt-4">  
+  <div class="columns is-multiline is-mobile is-justify-content-space-between">    
+    <% @locations.each do |location| %>
+      <div class="card column is-4 my-3">
+        <div class="card-image">
+          <iframe src="<%= location.coords %>"
+                  width="100%" height="300" 
+                  style="border:0;" 
+                  allowfullscreen="" 
+                  loading="lazy">
+          </iframe>
+        </div>
+        <div class="card-content">
+          <div class="media">
+            <div class="media-content">
+              <p class="title is-4"><%= link_to location.name, location%></p>
+              <p class="subtitle is-6"><%= location.province%></p>
+            </div>
           </div>
-          <div class="card-content">
-            <div class="media">
-              <div class="media-content">
-                <p class="title is-4"><%= link_to location.name, location%></p>
-                <p class="subtitle is-6"><%= location.province%></p>
-              </div>
-            </div>
-            <div class="content">
-              <%= location.address%>.
-              <br>
-              <%= location.postal_code %>
-            </div>
+          <div class="content">
+            <%= location.address%>.
+            <br>
+            <%= location.postal_code %>
           </div>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
+</div>

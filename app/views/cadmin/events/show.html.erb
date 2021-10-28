@@ -1,9 +1,9 @@
 <% if @event.employee_id == current_cadmin_user.id%>
-  <%= link_to 'Interview', @event.interview.present? ? edit_event_interview_path(@event)  : new_event_interview_path(@event), class: 'button is-success is-outlined' if   current_cadmin_user.employee? %>
+  <%= link_to "#{t '.interview'}", @event.interview.present? ? edit_event_interview_path(@event)  : new_event_interview_path(@event), class: 'button is-success is-outlined' if   current_cadmin_user.employee? %>
 <% end %>
+<%= link_to "#{t '.cancel'}", events_path, class: "button has-background-white-ter mx-2" %>
 
-
-<div class="columns is-mobile is-centered">
+<div class="columns is-mobile is-centered mt-4">
   <div class="card column is-6 m-3" style="height: fit-content;">
     <div class="card-header is-justify-content-space-between">
       <div class="card-header-title "> 
@@ -17,24 +17,32 @@
     <div class="card-content">
       <div class="columns">
         <div class="column is-6">
-          <h3 class="title is-size-5">Datos del evento:</h3>         
+          <h3 class="title is-size-5"><%= t '.event_title' %></h3>         
           <div class="content">
               <table class="table is-fullwidth is-striped is-hoverable is-fullwidth is-scrollable-touch">
                 <tr>
-                  <th>Invitados:</th>
+                  <th><%= t '.guests' %></th>
                   <td><%= @event.guests%></td>
                 </tr>
                 <tr>
-                  <th>Descuento:</th>
+                  <th><%= t '.discount' %></th>
                   <td><%= @event.discountnames%></td>
                 </tr>
                 <tr>
-                  <th>Deposito:</th>
+                  <th><%= t '.deposit' %></th>
                   <td><%= @event.deposit%></td>
                 </tr>
                 <tr>
-                  <th>Total:</th>
+                  <th><%= t '.total_amount' %></th>
                   <td><%= @event.total_amount - @event.deposit %> </td>
+                </tr>
+                <tr>
+                  <th><%= t '.place_id' %></th>
+                  <td> <%= link_to @event.placename, Cadmin::Location.find(@event.place_id) if @event.place_id.present?%> </td>
+                </tr>
+                <tr>
+                  <th><%= t '.date' %></th>
+                  <td><%= @event.date  %> </td>
                 </tr>
               </table>
           </div>
@@ -45,31 +53,31 @@
             <div class="content">
               <table class="table is-fullwidth is-striped is-hoverable is-fullwidth is-scrollable-touch">
                 <tr>
-                  <th>Nombre:</th>
+                  <th><%= t '.name' %></th>
                   <td><%= @event.customer_name%></td>
                 </tr>
                 <tr>
-                  <th>Apellidos:</th>
+                  <th><%= t '.last_name' %></th>
                   <td><%= @event.customer_last_name%></td>
                 </tr>
                 <tr>
-                  <th>Email:</th>
+                  <th><%= t '.email' %></th>
                   <td><%= @event.customer_email%> </td>
                 </tr>
                 <tr>
-                  <th>Cumpleaños:</th>
+                  <th><%= t '.birthdate' %></th>
                   <td><%= @event.customer_birthdate %></td>
                 </tr>
                 <tr>
-                  <th>Teléfono:</th>
+                  <th><%= t '.phone' %></th>
                   <td><%= @event.customer_phone%></td>
                 </tr>
                 <tr>
-                  <th>Ciudad:</th>
+                  <th><%= t '.city' %></th>
                   <td><%= @event.customer_city %></td>
                 </tr>
                 <tr>
-                  <th>Dir. facturación:</th>
+                  <th><%= t '.billing_address' %></th>
                   <td> <%= @event.customer_billing_address%></td>
                 </tr>
               </table>
@@ -82,7 +90,7 @@
     <% if @event.employee_id.present? %>
     <hr>
       <div class="card-content">
-        <h4 class="subtitle">Dj Para la boda</h4>
+        <h4 class="subtitle"><%= t '.employee_title' %></h4>
         <div class="is-flex is-flex-direction-row">
           <figure class="image is-128x128">
             <%= image_tag @event.employee_avatar, class: 'is-rounded' if @event.employee_avatar.present? %>
@@ -90,7 +98,6 @@
           </figure>
           <div class="is-flex is-flex-direction-column is-justify-content-center is-align-items-center" style="width:100%;">
             <span><%= @event.employee_name%></span>
-
             <span>              
                 <%= link_to ("https://api.whatsapp.com/send?phone=#{ @event.employee_phone}" ), class: 'mr-3 is-flex' do %>    
                   <figure class="icon is-medium has-text-primary">
@@ -107,16 +114,10 @@
 
     <div class="card-content">
       <div class="content">
-       <h5 class="subtitle is-size-5"> Observaciones</h5>
+       <h5 class="subtitle is-size-5"> <%= t '.observations' %></h5>
         <%= raw  @event.observations %>
       </div>
       <footer class="card-footer">
-        <div class="card-footer-item is-flex-direction-column is-align-items-start"> 
-        <% if @event.placename.present? %>
-          <div class="subtitle is-size-6">Lugar: <%= link_to @event.placename, Cadmin::Location.find(@event.place_id) if @event.place_id.present?%></div>
-        <% end %>
-        <span class="">Fecha: <%= @event.date  %> </span>
-        </div>
         <div class="card-footer-item">
           <div> <%= @event.charged ? 'Pagado' : 'Pendiente'  %> <span class="tag <%= @event.charged ? 'is-success' : 'is-warning'  %> is-size-5"><%= @event.total_amount %>€</span></div>
         </div>
@@ -125,7 +126,7 @@
   </div>
   <% if @event.service_ids %>
     <div class="column is-size-6">
-      <h2 class="title is-size-4 has-text-centered"> Servicios contratados.</h2>
+      <h2 class="title is-size-4 has-text-centered"><%= t '.service_title' %></h2>
       <div class="columns is-mobile is-multiline is-centered">
         <% @event.service_ids.each do |service_id| %>
           <% unless service_id == "" %>
