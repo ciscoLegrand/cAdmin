@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_26_134155) do
+ActiveRecord::Schema.define(version: 2021_10_27_202156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2021_10_26_134155) do
     t.string "title", null: false
     t.text "content", null: false
     t.integer "status", default: 0, null: false
-    t.date "published_at", default: "2021-10-26", null: false
+    t.date "published_at", default: "2021-10-27", null: false
     t.date "unpublished_at"
     t.string "metatitle"
     t.string "metadata"
@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(version: 2021_10_26_134155) do
 
   create_table "cadmin_interviews", force: :cascade do |t|
     t.bigint "event_id", null: false
-    t.bigint "employee_id_id", null: false
+    t.integer "employee_id"
     t.string "ceremony_music"
     t.string "appetizer_music"
     t.string "banquet_music"
@@ -112,7 +112,6 @@ ActiveRecord::Schema.define(version: 2021_10_26_134155) do
     t.text "observations"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["employee_id_id"], name: "index_cadmin_interviews_on_employee_id_id"
     t.index ["event_id"], name: "index_cadmin_interviews_on_event_id"
   end
 
@@ -249,7 +248,6 @@ ActiveRecord::Schema.define(version: 2021_10_26_134155) do
   add_foreign_key "cadmin_discounts", "cadmin_events", column: "event_id"
   add_foreign_key "cadmin_discounts", "cadmin_services", column: "service_id"
   add_foreign_key "cadmin_interviews", "cadmin_events", column: "event_id"
-  add_foreign_key "cadmin_interviews", "cadmin_users", column: "employee_id_id"
   add_foreign_key "cadmin_messages", "cadmin_conversations", column: "conversation_id"
   add_foreign_key "cadmin_messages", "cadmin_users", column: "user_id"
   add_foreign_key "cadmin_services", "cadmin_main_services", column: "main_service_id"

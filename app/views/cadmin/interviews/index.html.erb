@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Interviews</h1>
+<% @interviews.each do |interview| %>
 <div class="columns is-mobile is-multiline is-vcentered">
   <div class="column is-3">
     <div class="card box">
@@ -17,8 +18,8 @@
             </figure>
           </div>
           <div class="media-content">
-            <p class="title is-4">John Smith</p>
-            <p class="subtitle is-6">@johnsmith</p>
+            <p class="title is-4"><%=interview.appetizer_music%></p>
+            <p class="subtitle is-6"><%= interview.employee_name%></p>
           </div>
         </div>
 
@@ -33,7 +34,7 @@
     </div>
   </div>
 </div>
-<% @interviews.each do |interview| %>
+  
 <% end %>
 
 

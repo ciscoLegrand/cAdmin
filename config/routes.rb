@@ -11,14 +11,13 @@ Cadmin::Engine.routes.draw do
   resources :locations
   resources :article_categories
   resources :tags
-  resources :discounts  
+  resources :discounts
   resources :web_modules
-  resources  :users
+  resources  :users  
   
-  resources :events do 
-    resources :interviews
+  resources :events do
+    resources :interviews  
   end
-  
   resources :conversations do 
     resources :messages
   end

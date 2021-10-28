@@ -1,33 +1,52 @@
-<%= form_with(model:[ @event, interview]) do |form| %>
-  <% if interview.errors.any? %>
+<%= form_with(model:[ @event, @interview], data: {"controller": "quill", "action": "quill#save", turbo: false},html: {class: 'events events__form'}) do |form| %>
+  <% if @interview.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(interview.errors.count, "error") %> prohibited this interview from being saved:</h2>
+      <h2><%= pluralize(@interview.errors.count, "error") %> prohibited this interview from being saved:</h2>
 
       <ul>
-        <% interview.errors.each do |error| %>
+        <% @interview.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
+  
+  <%= form.hidden_field :employee_id, value: @event.employee.id if @event.employee.id == current_cadmin_user.id %>
+  
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <%= form.label :ceremony_music, class: 'label' %>
+        <%= form.text_field :ceremony_music, class: 'input' %>
+      </div>
 
-  <%= form.hidden_field :event_id, value: params['event_id'] %>
-  <%= form.hidden_field :employee_id, value: current_cadmin_user.id %>
+      <div class="field">
+        <%= form.label :appetizer_music, class: 'label' %>
+        <%= form.text_field :appetizer_music, class: 'input' %>
+      </div>
 
-  <div class="field">
-    <%= form.label :ceremony_music %>
-    <%= form.text_field :ceremony_music %>
+      <div class="field">
+        <%= form.label :banquet_music, class: 'label' %>
+        <%= form.text_field :banquet_music, class: 'input' %>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :appetizer_music %>
-    <%= form.text_field :appetizer_music %>
-  </div>
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <%= form.label :entry,class: 'label' %>
+        <%= form.text_field :entry, class: 'input' %>
+      </div>
 
-  <div class="field">
-    <%= form.label :banquet_music %>
-    <%= form.text_field :banquet_music %>
+      <div class="field">
+        <%= form.label :bridal_dance,class: 'label' %>
+        <%= form.text_field :bridal_dance, class: 'input' %>
+      </div>
+
+   
+    </div>
   </div>
 
   <div class="field">
@@ -35,46 +54,41 @@
     <%= form.text_field :ceremony_time %>
   </div>
 
-  <div class="field">
-    <%= form.label :entry %>
-    <%= form.text_field :entry %>
-  </div>
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <%= form.label :garter,class: 'label' %>
+        <%= form.check_box :garter, class: 'checkbox' %>
+      </div>
 
-  <div class="field">
-    <%= form.label :bridal_dance %>
-    <%= form.text_field :bridal_dance %>
-  </div>
+      <div class="field">
+        <%= form.label :garter_music,class: 'label' %>
+        <%= form.text_field :garter_music, class: 'input' %>
+      </div> 
+      <div class="field">
+        <%= form.label :figures %>
+        <%= form.check_box :figures %>
+      </div>
 
-  <div class="field">
-    <%= form.label :garter %>
-    <%= form.check_box :garter %>
+      <div class="field">
+        <%= form.label :figures_music %>
+        <%= form.text_field :figures_music %>
+      </div>
+    </div>
   </div>
-
+    <div class="field">
+      <%= form.label :gift_information, class: 'label' %>
+      <div class="control">
+      <%= form.hidden_field :gift_information, class: 'content ',data: {"quill-target": "content"} %>
+        <div data-quill-target="editor" class="events__quill">
+          <%= raw interview.observations %>
+        </div> 
+      </div>
+    </div>
   <div class="field">
-    <%= form.label :garter_music %>
-    <%= form.text_field :garter_music %>
+    <%= form.label :observations, class: 'label' %>
+    <%= form.text_area :observations, class: 'events__quill' %>
   </div>
-
-  <div class="field">
-    <%= form.label :figures %>
-    <%= form.check_box :figures %>
-  </div>
-
-  <div class="field">
-    <%= form.label :figures_music %>
-    <%= form.text_field :figures_music %>
-  </div>
-
-  <div class="field">
-    <%= form.label :gift_information %>
-    <%= form.text_area :gift_information %>
-  </div>
-
-  <div class="field">
-    <%= form.label :observations %>
-    <%= form.text_area :observations %>
-  </div>
-
   <div class="actions">
     <%= form.submit %>
   </div>
