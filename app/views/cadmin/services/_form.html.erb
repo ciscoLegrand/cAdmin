@@ -72,7 +72,7 @@
         <div class="file has-name">
           <%= form.label :image , class: 'label' %>
           <div class="control">
-            <%= image_tag form.object.image_url if form.object.cached_image_data %>
+            <%= image_tag form.object.derivation_url(:desktop, 600, 400) if form.object.cached_image_data %>
             <%= form.hidden_field :image, value: form.object.cached_image_data %>
             <%= form.file_field :image, class: 'input' %>    
           </div>
@@ -95,7 +95,7 @@
     <% end %>
     
   <div class="actions my-6">
-    <%= form.submit 'new', class: "button is-success mx-2" %>
-    <%= link_to 'back', main_service_services_path, class: "button has-background-white-ter mx-2" %>
+    <%= form.submit "#{t '.create'}", class: "button is-success mx-2" %>
+    <%= link_to "#{t '.cancel'}", main_service_services_path, class: "button has-background-white-ter mx-2" %>
   </div>
 <% end %>

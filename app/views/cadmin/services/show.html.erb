@@ -1,42 +1,20 @@
-<p id="notice"><%= notice %></p>
-<!--TODO: STYLE AND TRANSLATE THIS PAGE-->
-<p>
-  <strong>Name:</strong>
-  <%= @service.name %>
-</p>
+<!-- slider images -->
+<section class="section is-flex is-justify-content-center service pt-1">
+  <div class="column is-9">
+    <h1 class="title is-size-1-desktop has-text-centered is-fullwidth"><%= @service.name  %></h1>
+    <figure class="image is-5by3">
+      <%= image_tag @service.image_url if @service.image %>
+    </figure>
+    <hr class="has-background-white-ter">
+    <div class="service__content">
+      <%= @service.description %>
+    </div>
+    <hr class="has-background-white-ter">
+    <div class="service__content">
+    <%= raw @service.features %>
+    </div>
+  </div>
+</section>
 
-<p>
-  <strong>Short dscription:</strong>
-  <%= @service.short_dscription %>
-</p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @service.description %>
-</p>
-
-<p>
-  <strong>Metatitle:</strong>
-  <%= @service.metatitle %>
-</p>
-
-<p>
-  <strong>Metadescription:</strong>
-  <%= @service.metadescription %>
-</p>
-
-<p>
-  <strong>Features:</strong>
-  <%=raw  @service.features %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @service.price %>
-</p>
-
-<p>
-  <strong>Hour price:</strong>
-  <%= @service.hour_price %>
-</p>
 

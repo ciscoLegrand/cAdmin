@@ -308,6 +308,9 @@ es:
       index:
         title: 'Servicios'
         create: 'Nuevo servicio'
+        edit: 'Editar'
+        destroy: 'Eliminar'
+        create: 'Añadir'
       show:
         # TODO add translations to show view
         name: 'Nombre'

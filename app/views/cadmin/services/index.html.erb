@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Services</h1>
+<h1><%= t '.title'%></h1>
 
   <div class="container">
-    <%= link_to 'New service', new_main_service_service_path, class:'button is-outlined is-success mx-2 my-4' %> 
+    <%= link_to "#{t '.create'}", new_main_service_service_path, class:'button is-outlined is-success mx-2 my-4' %> 
     <div class="columns is-multiline is-centered">    
       <% @services.each do |service| %>
         <div class="card column is-3 m-3">
@@ -28,7 +28,8 @@
               <br>
             </div>
           </div>
-          <%= link_to 'edit', edit_main_service_service_path(id: service) , class:'button is-outlined is-success' if current_cadmin_user.admin? %>
+          <%= link_to "#{t '.edit'}", edit_main_service_service_path(id: service) , class:'button is-outlined is-success' if current_cadmin_user.admin? %>
+          <%= link_to "#{t '.destroy'}", root_path , class:'button is-outlined is-success' if current_cadmin_user.admin? %> <!-- todo: boton eliminar -->
         </div>
       <% end %>
     </div>
