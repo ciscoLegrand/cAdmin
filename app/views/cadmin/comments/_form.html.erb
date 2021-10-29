@@ -11,7 +11,7 @@
       <%= form_with(model: [@article, @article.comments.build], local: true,data: {"controller": "quill", "action": "quill#save", turbo: false}, html: {id: 'base'}) do |form| %>
         <% if comment.errors.any? %>
           <div id="error_explanation">
-            <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+            <h2><%= pluralize(comment.errors.count, "error") %> <%= t '.error' %></h2>
 
             <ul>
               <% comment.errors.each do |error| %>

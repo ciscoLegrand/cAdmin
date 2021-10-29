@@ -1,9 +1,10 @@
-  <%= link_to 'Edit', edit_article_path(@article), class: 'button is-outlined is-success' %> | <%= link_to 'Back', articles_path, class: 'button is-outlined is-info' %>
+  <%= link_to "#{t '.edit'}", edit_article_path(@article), class: 'button is-outlined is-success' %> | <%= link_to 'Back', articles_path, class: 'button is-outlined is-info' %>
 <div class="container">
   <div class="section">
     <div class="columns">
       <div class="column is-three-quarters">
         <!-- todo: turbo frame to article-->
+        <!-- TODO: PAGINATION AND REFACTOR THIS PAGE-->
         <%#= turbo_frame_tag :article, loading: :lazy, src: @article %>
         <%= render 'article'%>
         <!--TODO: COMENTARIOS SECTION-->
@@ -68,7 +69,7 @@
                   <%= text_field_tag :title,params[:title],placeholder: :title, class: 'input'%>
                 </div>
                 <%= button_tag(type:"submit", class: "button is-info is-halfwidth") do %>
-                  Buscar <%= inline_svg_tag('cadmin/icons/ico-document-search.svg', class: 'icon is-16x16 has-text-white ml-4')%>
+                  <%= t '.search' %> <%= inline_svg_tag('cadmin/icons/ico-document-search.svg', class: 'icon is-16x16 has-text-white ml-4')%>
                 <% end %>
               </div>
             <% end %>            
@@ -76,7 +77,7 @@
           <div class="section">
             <aside class="menu">
               <p class="menu-label">
-                Últimos articulos
+                <%= t '.last_articles' %>
               </p>
               <ul class="menu-list">
                 <% @articles.limit(5).each do |article| %>
@@ -88,7 +89,7 @@
           <div class="section">
             <aside class="menu">
               <p class="menu-label">
-                TAGS
+                <%= t '.tags' %>
               </p>
               <ul class="menu-list">
                 <% @article.tag_list.split(',').to_a.each do |tag| %>
@@ -101,13 +102,13 @@
           <div class="section">
             <aside class="menu">
               <p class="menu-label">
-                Categorias
+                <%= t '.categories' %>
               </p>
               <ul class="menu-list">
                 <% @categories.limit(4).each do |category| %>
                   <li><%= link_to category.name, category %></li> 
                 <% end %>    
-                <li> <%= link_to 'Más categorías', article_categories_path %> </li>            
+                <li> <%= link_to "#{t '.more'}", article_categories_path %> </li>            
               </ul>
             </aside>
           </div>

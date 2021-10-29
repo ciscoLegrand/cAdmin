@@ -1,13 +1,13 @@
 
 <div class="section">
-  <%= link_to 'New Article', new_article_path, class:'button is-success ' %>
+  <%= link_to "#{t '.create'}", new_article_path, class:'button is-success ' %>
   <%= form_tag articles_path, class: 'is-pulled-right', method: :get do %>
     <div class="field has-addons">
       <div class="control">
         <%= text_field_tag :title,params[:title],placeholder: :title, class: 'input is-info'%>
       </div>
       <%= button_tag(type:"submit", class: "button is-info is-halfwidth") do %>
-        Buscar <%= inline_svg_tag('cadmin/icons/ico-search.svg', class: 'icon is-16x16 has-text-white ml-4')%>
+        <%= t '.search' %> <%= inline_svg_tag('cadmin/icons/ico-search.svg', class: 'icon is-16x16 has-text-white ml-4')%>
       <% end %>
     </div>
   <% end %>            
@@ -42,7 +42,7 @@
               <h2 class="title is-size-4"><%= link_to article.title, article %></h2>
               <div class="has-text-left mb-4"><%= raw article.content.truncate(100, separator: /\n/)%></div>
               <div class="article__date">
-                <time datetime="<%= article.created_at.strftime('%d-%m-%y')%>">Publicado el: <%= article.published_at.strftime('%d-%m-%y')%></time>
+                <time datetime="<%= article.created_at.strftime('%d-%m-%y')%>"><%= t '.published_at' %> <%= article.published_at.strftime('%d-%m-%y')%></time>
                 <span class="tag is-warning is-pulled-right"> <%= article.unpublish? %> </span>
                 <br>
                 <span class="tag article__tag is-info has-text-white"><%= raw article.tags.map(&:name).map { |t| link_to "##{t}", tag_path(t) }.join('&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ') %></span>
@@ -50,9 +50,9 @@
             </div>
           </div>  
           <footer class="card-footer article__cfooter">
-            <a href="#" class="card-footer-item"><%= link_to 'Show', article %></a>
-            <a href="#" class="card-footer-item"><%= link_to 'Edit', edit_article_path(article) %></a>
-            <a href="#" class="card-footer-item"><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></a>
+            <a href="#" class="card-footer-item"><%= link_to "#{t '.read_more'}", article %></a>
+            <a href="#" class="card-footer-item"><%= link_to  "#{t '.edit'}", edit_article_path(article) %></a>
+            <a href="#" class="card-footer-item"><%= link_to  "#{t '.destroy'}", article, method: :delete, data: { confirm: 'Are you sure?' } %></a>
           </footer>
         </div>
       </div>

@@ -1,31 +1,30 @@
-<p id="notice"><%= notice %></p>
-
+<%= link_to "#{t '.edit'}", edit_location_path(@location), class: "button is-outlined is-warning mx-2" %>
+<%= link_to "#{t '.cancel'}", :back, class: "button has-background-white-ter mx-2" %>
 <p>
-  <strong>Name:</strong>
+  <strong><%= t '.name' %></strong>
   <%= @location.name %>
 </p>
 
 <p>
-  <strong>Address:</strong>
+  <strong><%= t '.address' %></strong>
   <%= @location.address %>
 </p>
 
 <p>
-  <strong>Postal code:</strong>
+  <strong><%= t '.postal_code' %></strong>
   <%= @location.postal_code %>
 </p>
 
 <p>
-  <strong>Province:</strong>
+  <strong><%= t '.province' %></strong>
   <%= @location.province %>
 </p>
 
 <p>
-  <strong>Coords:</strong>
+  <strong><%= t '.coords' %></strong>
 
 
   <%= raw @location.coords %>
 </p>
 
-<%= link_to 'Edit', edit_location_path(@location) %> |
-<%= link_to 'Back', locations_path %>
+

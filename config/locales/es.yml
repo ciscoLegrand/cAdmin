@@ -15,8 +15,11 @@ es:
         published_at: 'Publicar el '
         unpublished_at: 'Ocultar el '
         article_category_id: 'Categoría'
+        image: 'Imagen'
       cadmin/comment:
       cadmin/conversation:
+        recipient_id: 'enviar a'
+        sender_id: 'enviar desde'
       cadmin/discount:
         name: 'Nombre'
         type_discount: 'Tipo de descuento'
@@ -65,6 +68,8 @@ es:
         province: 'Provincia'
         coords: 'Coordenadas'
       cadmin/main_service:
+        name: 'Nombre'
+        description: 'Descripción'
       cadmin/message:
       cadmin/service:
         name: 'Nombre'
@@ -131,9 +136,52 @@ es:
 
   cadmin:
     article_categories:
+      new:
+        title: 'Nueva categoría'
+      edit: 
+        title: 'Editar categoría'
+      show:
+        edit: 'Editar categoría'
+        cancel: 'Volver' 
+        name: 'Categoría'
+      form:
+        create: 'Guardar'
+        cancel: 'Volver'
     articles:
+      index:
+        create: 'Añadir'
+        search: 'Buscar'
+        published_at: 'Publicado el '
+        read_more: 'Ver más'
+        edit: 'Editar'
+        destroy: 'Eliminar'
+      show: 
+        edit: 'Editar'
+        search: 'Buscar'
+        last_articles: 'ÚLTIMOS ARTICULOS'
+        tags: 'TAGS'
+        categories: 'CATEGORÍAS'
+        more: 'Más Categorías'
+      new: 
+        title: 'Nuevo artículo'
+      edit:
+        title: 'Editar artículo'
+      form:
+        create: 'Guardar'
+        cancel: 'Volver'
     comments:
+      form: ' han impedido guardar el comentario'
     conversations:
+      index: 
+        title: 'Conversaciones'
+        create: 'Nueva conversación'
+      edit:
+        title: 'Editar conversación' 
+      new: 
+        title: 'Nuevo conversación'
+      form: 
+        create: 'Guardar'
+        cancel: 'Volver'
     dashboard:
     discounts:
       index:
@@ -142,6 +190,10 @@ es:
         cancel: 'Volver'
         edit: 'Editar'
         destroy: 'Eliminar'
+      new:
+        title: 'Nuevo descuento'
+      edit: 
+        title: 'Editar descuento'
       form:
         create: 'Guardar'
         cancel: 'Volver'        
@@ -204,17 +256,72 @@ es:
         title: 'Localizaciones'
         create: 'Añadir'
         cancel: 'Volver'
+      new: 
+        title: 'Nueva localización'
+      edit:
+        title: 'Editar localización'
+      show:
+        name: 'Nombre' 
+        address: 'Dirección'
+        postal_code: 'Código postal'
+        coords: 'Coordenadas'
+        edit: 'Editar'
+        cancel: 'Volver'
       form:
         create: 'Guardar'
         cancel: 'Volver'
     main_services:
+      new: 
+        title: 'Nueva categoría'
+      edit:
+        title: 'Editar categoría'
       form:
         create: 'Guardar'
         cancel: 'Volver'
     messages:
-
+      new:
+        create: 'Enviar'
+        cancel: 'Volver'
     profile:
+      index: 
+        events: 'Mis eventos'
+        profile: 'Cuenta'
+        username: 'Nickname'
+        email: 'Email'
+      show:
+        edit_title: 'Editar cuenta'
+        avatar: 'Avatar'
+        pick_file: 'Selecciona imagen'
+        name: 'Nombre'
+        required_name: 'Nombre es obligatorio'
+        required_email: 'Email es obligatorio'
+        email: 'email'
+        create: 'Guardar'
+        edit_password: 'Cambiar contraseña'
+        current_password: 'Contraseña actual'
+        required_current_pass: 'Contraseña actual es obligatoria'
+        new_password: 'Nueva contraseña'
+        required_new_pass: 'Nueva contraseña es obligatoria'
+        confirm_pass: 'Confirma contraseña'
+        required_confirm_pass: 'Confirmar contraseña es obligatorio'
     services: 
+      index:
+        title: 'Servicios'
+        create: 'Nuevo servicio'
+      show:
+        # TODO add translations to show view
+        name: 'Nombre'
+        short_description: 'Descripción corta'
+        description: 'Descripción'
+        metatitle: 'Metatítulo'
+        metadescription: 'Metadescripción'
+        features: 'Características'
+        price: 'precio'
+        hour_price: 'Hora extra'
+      new:
+        title: 'Nuevo servicio'
+      edit:
+        title: 'Editar servicio'
       form:
         create: 'Guardar'
         cancel: 'Volver'

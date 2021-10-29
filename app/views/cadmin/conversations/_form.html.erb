@@ -13,13 +13,19 @@
   <% end %>
 
   <%= form.hidden_field :sender_id, value: current_cadmin_user.id %>
+    <div class="columns">
+      <div class="field is-horizontal">
+        <div class="column is-6">
+        <%= form.label :recipient_id, class: 'label' %>
+        </div>
+        <div class="column is-12">
+        <%= form.collection_select :recipient_id, Cadmin::User.all, :id ,:name, {prompt: 'Selecciona usuario'}, {  prompt: 'Selecciona usuario',class: "select_inside_col",data: {controller: "slimselect"}} %>
+        </div>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :recipient_id %>
-    <%= form.collection_select :recipient_id, Cadmin::User.all, :id ,:name, {prompt: 'Selecciona cliente'}, {  prompt: 'Selecciona usuario',class: "select_inside_col",data: {controller: "slimselect"}} %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+    <div class="actions my-6">
+      <%= form.submit "#{t '.create'}'", class: "button is-success mx-2" %>
+      <%= link_to "#{t '.cancel'}", :back, class: "button has-background-white-ter mx-2" %>
+    </div>
 <% end %>
