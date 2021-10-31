@@ -6,12 +6,11 @@ module Cadmin
 
     # GET /events
     def index      
+      # @users = current_cadmin_user.where(deleted_at: nil).pluck(:id) #devuelve array de users´ids importante si hacemos soft delete de users      
+      
       #! get events
-      # @users = current_cadmin_user.where(deleted_at: nil).pluck(:id) #devuelve array de users´ids      
-      events = Event.where(customer_id: current_cadmin_user.id).order('date DESC') if current_cadmin_user.customer?
-      events = Event.where(employee_id: current_cadmin_user.id).order('date DESC') if current_cadmin_user.employee?
+      events = Event.where(customer_id: current_cadmin_user.id).order('date DESC') if current_cadmin_user.customer? || current_cadmin_user.employee?      
       events = Event.all.order('date DESC') if current_cadmin_user.admin?
-      # events = current_cadmin_user.events.where(customer_id: current_cadmin_user.id) if current_cadmin_user.where(role: 'customer')
 
       #! search events
       events = events.filter_by_number(params[:number]) if params[:number].present?
@@ -23,7 +22,7 @@ module Cadmin
 
       #! get total price events
       @total = employee_salary(events) if current_cadmin_user.employee?
-      @total = total_event(events) if current_cadmin_user.admin? 
+      @total = total_events if current_cadmin_user.admin? 
       
       #! paginate events
       @pagy, @events = pagy(events, items: 10 )
@@ -36,6 +35,7 @@ module Cadmin
     # GET /events/new
     def new
       @event = Event.new
+      @event.event_services.build
     end
 
     # GET /events/1/edit
@@ -44,9 +44,9 @@ module Cadmin
 
     # POST /events
     def create
-      @event = Event.new(event_params)
-      @event.total_amount = @event.total_services_amount
+      @event = Event.new(event_params)      
       if @event.save
+        @event.update(total_amount: @event.total_services_amount)
         redirect_to @event, notice: 'Event was successfully created.'
       else
         render :new
@@ -83,17 +83,17 @@ module Cadmin
       total = 0
       events.each do |event|
         if event.type_name == 'Boda'
-          total +=  160 + (event.extra_hours * 40) 
+          total +=  160 
         else
-          total += 80 + (event.extra_hours * 20) 
+          total += 80
         end
       end
       total
     end
 
-    def total_event(events)
+    def total_events
       total = 0
-      events.each do |event|
+      Event.all.each do |event|
         total += event.total_services_amount
       end 
       total
@@ -107,7 +107,9 @@ module Cadmin
 
       # Only allow a list of trusted parameters through.
       def event_params
-        params.require(:event).permit(:customer_id, :title, :type_name, :number, :date, :guests, :start_time, :extra_hours, :employee_id, :place_id, :deposit, :total_amount, :charged, :observations,service_ids: [], discount_ids: [])
+        params.require(:event).permit(:customer_id, :title, :type_name, :number, :date, :guests, :employee_id, 
+                                      :place_id, :deposit, :total_amount, :charged, :observations, 
+                                      event_services_attributes: [:event_id, :service_id, :discount_id, :start_time, :overtime, :total_amount])
       end
   end
 end

@@ -26,6 +26,7 @@
               <br>
               <%= service.description %>
               <br>
+              <%= service.price if current_cadmin_user.admin?%>
             </div>
           </div>
           <%= link_to "#{t '.edit'}", edit_main_service_service_path(id: service) , class:'button is-outlined is-success' if current_cadmin_user.admin? %>

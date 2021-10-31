@@ -3,6 +3,8 @@
 <% end %>
 <%= link_to "#{t '.cancel'}", events_path, class: "button has-background-white-ter mx-2" %>
 
+
+
 <div class="columns is-mobile is-centered mt-4">
   <div class="card column is-6 m-3" style="height: fit-content;">
     <div class="card-header is-justify-content-space-between">
@@ -25,16 +27,16 @@
                   <td><%= @event.guests%></td>
                 </tr>
                 <tr>
-                  <th><%= t '.discount' %></th>
-                  <td><%= @event.discountnames%></td>
-                </tr>
-                <tr>
                   <th><%= t '.deposit' %></th>
                   <td><%= @event.deposit%></td>
                 </tr>
                 <tr>
+                  <th><%= t '.pendig_amount' %></th>
+                  <td><%= number_with_precision(@event.total_services_amount - @event.deposit,precision:2) %> </td>
+                </tr>
+                <tr>
                   <th><%= t '.total_amount' %></th>
-                  <td><%= @event.total_amount - @event.deposit %> </td>
+                  <td><%= number_with_precision(@event.total_services_amount, precision: 2) %> </td>
                 </tr>
                 <tr>
                   <th><%= t '.place_id' %></th>
@@ -124,6 +126,8 @@
       </footer>
     </div>  
   </div>
+  <% if 1 == 0 %>
+    
   <% if @event.service_ids %>
     <div class="column is-size-6">
       <h2 class="title is-size-4 has-text-centered"><%= t '.service_title' %></h2>
@@ -164,6 +168,7 @@
         <% end %>
       </div>
     </div>
+  <% end %>
   <% end %>
 </div>
 

@@ -55,10 +55,10 @@
                 <td data-label="date"><small class="has-text-grey is-abbr-like" title="<%= event.date %>"><%= event.date.strftime('%d-%m-%y') %></small></td>
                 <td><%= link_to event.placename, Cadmin::Location.find_by_id(event.place_id)  %></td>
                 <td><%= event.employee_name if event.employee_id.present? %></td>
-                <td><%= event.servicename %></td>
-                <td><%= event.deposit || 0 %></td>     
-                <td><%= event.total_amount - event.deposit %></td>               
-                <td><%= event.total_amount || 0 %></td>
+                <td><%= event.servicenames  %></td>
+                <td><%= number_with_precision(event.deposit, precision: 2) %></td>     
+                <td><%= number_with_precision(event.total_services_amount - event.deposit, precision: 2) %></td>               
+                <td><%= number_with_precision(event.total_services_amount, precision: 2) %></td> 
                 <td>
                   <!--TODO REVIEW THIS PART-->
                   <%= form_with(model: event,html: {class: 'events events__form'}) do |form| %>
@@ -85,7 +85,7 @@
               <td colspan="9">
               </td>
               <th><%= t '.total_amount' %> </th>
-              <td><%= @total %></td>
+              <td><%= number_with_precision(@total, precision: 2) %></td>
               <td colspan="2"></td>
             </tr>
           </tbody>

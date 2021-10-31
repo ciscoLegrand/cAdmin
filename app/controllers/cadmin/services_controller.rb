@@ -26,6 +26,7 @@ module Cadmin
     # POST /services
     def create
       @service = @main.services.build(service_params)
+      @service.price_no_vat = @service.no_vat
 
       if @service.save
         redirect_to main_service_services_path, notice: 'Service was successfully created.'
@@ -37,6 +38,7 @@ module Cadmin
     # PATCH/PUT /services/1
     def update
       if @service.update(service_params)
+        @service.update(price_no_vat: @service.no_vat) 
         redirect_to main_service_services_path, notice: 'Service was successfully updated.'
       else
         render :edit
@@ -62,7 +64,8 @@ module Cadmin
 
       # Only allow a list of trusted parameters through.
       def service_params
-        params.require(:service).permit(:name, :short_dscription, :description, :metatitle, :metadescription, :features, :price, :hour_price, :extra_hour, :initial_hours, :main_service_id,:image)
+        params.require(:service).permit(:name, :short_dscription, :description, :metatitle, :metadescription, :features, 
+                                        :stock, :price, :vat, :price_no_vat, :hour_price, :main_service_id,:image)
       end
   end
 end

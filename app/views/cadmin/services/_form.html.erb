@@ -22,7 +22,7 @@
         <%= form.label :price, class:'label' %>
         <%= form.text_field :price, class:'input' %>
       </div>
-
+      
       <div class="field">
         <%= form.label :hour_price, class:'label' %>
         <%= form.text_field :hour_price, class:'input' %>
@@ -72,7 +72,7 @@
         <div class="file has-name">
           <%= form.label :image , class: 'label' %>
           <div class="control">
-            <%= image_tag form.object.derivation_url(:desktop, 600, 400) if form.object.cached_image_data %>
+            <%= image_tag form.object.image_url if form.object.cached_image_data %>
             <%= form.hidden_field :image, value: form.object.cached_image_data %>
             <%= form.file_field :image, class: 'input' %>    
           </div>

@@ -32,20 +32,23 @@ es:
         event_id: 'Evento' 
         service_id: 'Servicio'
       cadmin/event:
-        title: 'Título'
+        title: 'Nombre evento'
         customer_id: 'Cliente'
         date: 'Fecha'
         type_name: 'Tipo de evento'
-        number: 'Número'
-        discount_ids: 'Descuentos'
+        number: 'Número'        
         place: 'Lugar del evento'
-        employee_id: 'Empleado'
-        service_isd: 'Servicios'
+        employee_id: 'Empleado'        
         guests: 'Invitados'
-        start_time: 'Horas de salida'
         deposit: 'Fianza'
-        extra_hours: 'Horas extra'
+        
         observations: 'Comentarios'
+      cadmin/event_service:
+        service_id: 'Servicio'
+        discount_id: 'Descuento'
+        overtime: 'Horas extra'
+        start_time: 'Horas de salida'
+      
       cadmin/interview:
         event: 'Evento' 
         employee_id: 'Empleado'
@@ -119,7 +122,7 @@ es:
         guests: 'Invitados'
         start_time: 'Horas de salida'
         deposit: 'Fianza'
-        extra_hours: 'Horas extra'
+        overtime: 'Horas extra'
         observations: 'Comentarios'
       cadmin/interview:
       cadmin/location:
@@ -215,7 +218,7 @@ es:
         pending: 'Pendiente'
         total_amount: 'Total'
         charged: 'Cobrado'
-        extra_hours: 'Horas extra'
+        overtime: 'Horas extra'
         actions: 'Acciones'
         observations: 'Comentarios'
       show:
@@ -225,6 +228,7 @@ es:
         guests: 'Invitados'
         discount: 'Descuento'
         deposit: 'Fianza'
+        pending_amount: 'Pendiente'
         total_amount: 'Total'
         place_id: 'Lugar'
         date: 'Fecha'
@@ -245,8 +249,14 @@ es:
       edit:
         title: 'Editar evento'
       form:
+        title_event: 'Datos del evento'
+        title_services: 'Servicios contratados'
+        new_client: 'Crear cliente'
+        add_item: 'Añadir servicio'
         create: 'Guardar'
         cancel: 'Volver'
+      event_service_fields:
+        remove_item: 'Eliminar'
     interviews:
       form:
         create: 'Guardar'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_28_124349) do
+ActiveRecord::Schema.define(version: 2021_11_01_104900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2021_10_28_124349) do
     t.string "title", null: false
     t.text "content", null: false
     t.integer "status", default: 0, null: false
-    t.date "published_at", default: "2021-10-28", null: false
+    t.date "published_at", default: "2021-10-31", null: false
     t.date "unpublished_at"
     t.string "metatitle"
     t.string "metadata"
@@ -66,12 +66,23 @@ ActiveRecord::Schema.define(version: 2021_10_28_124349) do
     t.date "start_date"
     t.date "end_date"
     t.text "observations"
-    t.bigint "event_id"
-    t.bigint "service_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["event_id"], name: "index_cadmin_discounts_on_event_id"
-    t.index ["service_id"], name: "index_cadmin_discounts_on_service_id"
+  end
+
+  create_table "cadmin_event_services", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.bigint "service_id", null: false
+    t.bigint "discount_id", default: 1, null: false
+    t.integer "start_time"
+    t.integer "overtime", default: 0, null: false
+    t.float "total_amount", default: 0.0, null: false
+    t.boolean "remove", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["discount_id"], name: "index_cadmin_event_services_on_discount_id"
+    t.index ["event_id"], name: "index_cadmin_event_services_on_event_id"
+    t.index ["service_id"], name: "index_cadmin_event_services_on_service_id"
   end
 
   create_table "cadmin_events", force: :cascade do |t|
@@ -82,17 +93,22 @@ ActiveRecord::Schema.define(version: 2021_10_28_124349) do
     t.string "number", null: false
     t.date "date", null: false
     t.integer "guests"
-    t.integer "start_time"
-    t.integer "extra_hours", default: 0, null: false
-    t.text "service_ids"
     t.integer "place_id"
-    t.text "discount_ids"
     t.float "deposit", default: 0.0, null: false
     t.float "total_amount", default: 0.0, null: false
     t.boolean "charged", default: false, null: false
     t.text "observations"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "cadmin_interview_options", force: :cascade do |t|
+    t.string "gift"
+    t.string "song"
+    t.bigint "interview_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["interview_id"], name: "index_cadmin_interview_options_on_interview_id"
   end
 
   create_table "cadmin_interviews", force: :cascade do |t|
@@ -146,7 +162,9 @@ ActiveRecord::Schema.define(version: 2021_10_28_124349) do
 
   create_table "cadmin_services", force: :cascade do |t|
     t.string "name"
-    t.float "price"
+    t.float "price", default: 0.0, null: false
+    t.float "vat", default: 21.0, null: false
+    t.float "price_no_vat", default: 0.0, null: false
     t.float "hour_price", default: 0.0, null: false
     t.text "short_dscription"
     t.text "description"
@@ -245,8 +263,10 @@ ActiveRecord::Schema.define(version: 2021_10_28_124349) do
   add_foreign_key "cadmin_articles", "cadmin_users", column: "user_id"
   add_foreign_key "cadmin_comments", "cadmin_articles", column: "article_id"
   add_foreign_key "cadmin_comments", "cadmin_users", column: "user_id"
-  add_foreign_key "cadmin_discounts", "cadmin_events", column: "event_id"
-  add_foreign_key "cadmin_discounts", "cadmin_services", column: "service_id"
+  add_foreign_key "cadmin_event_services", "cadmin_discounts", column: "discount_id"
+  add_foreign_key "cadmin_event_services", "cadmin_events", column: "event_id"
+  add_foreign_key "cadmin_event_services", "cadmin_services", column: "service_id"
+  add_foreign_key "cadmin_interview_options", "cadmin_interviews", column: "interview_id"
   add_foreign_key "cadmin_interviews", "cadmin_events", column: "event_id"
   add_foreign_key "cadmin_messages", "cadmin_conversations", column: "conversation_id"
   add_foreign_key "cadmin_messages", "cadmin_users", column: "user_id"

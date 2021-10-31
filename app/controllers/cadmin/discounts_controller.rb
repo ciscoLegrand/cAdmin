@@ -56,7 +56,7 @@ module Cadmin
 
       # Only allow a list of trusted parameters through.
       def discount_params
-        params.require(:discount).permit(:name, :type_discount, :description, :percentage,:start_date,:end_date, :amount, :observations, :event_id, :service_id)
+        params.require(:discount).permit(:name, :type_discount, :description, :percentage,:start_date,:end_date, :amount, :observations)
       end
   end
 end
