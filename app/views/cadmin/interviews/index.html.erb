@@ -1,41 +1,35 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Interviews</h1>
-<% @interviews.each do |interview| %>
-<div class="columns is-mobile is-multiline is-vcentered">
-  <div class="column is-3">
-    <div class="card box">
-      <div class="card-image">
-        <figure class="image is-4by3">
-          <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-        </figure>
-      </div>
-      <div class="card-content">
-        <div class="media">
-          <div class="media-left">
-            <figure class="image is-48x48">
-              <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-            </figure>
-          </div>
-          <div class="media-content">
-            <p class="title is-4"><%=interview.appetizer_music%></p>
-            <p class="subtitle is-6"><%= interview.employee_name%></p>
-          </div>
-        </div>
+<!-- TODO: botones para filtrar por completo, incompleto, fechas -->
 
+
+<h1>Interviews</h1>
+<div class="columns is-mobile is-multiline is-vcentered">
+<% @interviews.each do |interview| %>
+  <div class="column is-3">
+    <div class="card p-3">
+      <span class="tag <%= Time.now >= interview.event_date ?  'is-success' : 'is-danger' %> is-pulled-right"><%= Time.now >= interview.event_date ?  'completed' : 'pending' %></span>
+      <div class="card-content">
         <div class="content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-          <a href="#">#css</a> <a href="#">#responsive</a>
-          <br>
-          <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+          <%= link_to event_interview_path(interview.event_id, interview) do %>
+            <h4 class="title is-size-4"><%= interview.event_title.present? ? interview.event_title : interview.event_customer_name  %></h4>          
+          <% end %>
+          <h4 class="title is-size-5"><%= interview.event_placename %></h4>
+          <time datetime="<%= interview.event_date %>" class="is-size-5"><%= interview.event_date  %></time>
         </div>
       </div>
+      <footer class="card-footer mt-3 pt-2">
+        <div class="label mr-2">Última vez editado: </div>
+        <time datetime="<%= interview.updated_at %>" class="is-size-6"><%= interview.updated_at.strftime('%d-%m-%Y [%H:%M]')  %></time>
+        <% if current_cadmin_user.admin? %>
+          <span class="tag is-rounded is-danger is-light ml-2"><%= interview.employee_name %></span>
+        <% end %>
+      </footer>
     </div>
   </div>
+<% end %>
 </div>
   
-<% end %>
 
 
 

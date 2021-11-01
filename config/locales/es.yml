@@ -41,14 +41,12 @@ es:
         employee_id: 'Empleado'        
         guests: 'Invitados'
         deposit: 'Fianza'
-        
         observations: 'Comentarios'
       cadmin/event_service:
         service_id: 'Servicio'
         discount_id: 'Descuento'
         overtime: 'Horas extra'
         start_time: 'Horas de salida'
-      
       cadmin/interview:
         event: 'Evento' 
         employee_id: 'Empleado'
@@ -83,6 +81,7 @@ es:
         features: 'Características'
         main_service_id: 'Categoría'
       cadmin/tag:
+        name: 'Nombre'
       cadmin:/tagging:
       cadmin/user:
         username: 'Nombre de usuario'
@@ -326,7 +325,6 @@ es:
         destroy: 'Eliminar'
         create: 'Añadir'
       show:
-        # TODO add translations to show view
         name: 'Nombre'
         short_description: 'Descripción corta'
         description: 'Descripción'
@@ -343,6 +341,15 @@ es:
         create: 'Guardar'
         cancel: 'Volver'
     tags:
+      index:
+        title: 'Tag'
+        name: 'Nombre'
+        add: 'Añadir'
+      form:
+        create: 'Guardar'
+        cancel: 'Volver'
+      new:
+        title: 'Nuevo Tag'
     user_invitations:
       new: 
         username: 'Nickname'

@@ -1,4 +1,3 @@
-<!--TODO: REFACTOR AND STYLE ALL CATEGORIES VIEWS -->
 <%= form_with(model: article_category, class: 'article__form') do |form| %>
   <% if article_category.errors.any? %>
     <div id="error_explanation">
@@ -17,9 +16,8 @@
     <%= form.text_field :name, class: 'input is-medium' %>
   </div>
 
-    <!-- TODO: translate -->
-    <div class="actions my-6">
-      <%= form.submit "#{t '.create'}", class: "button is-success mx-2" %>
-      <%= link_to "#{t '.cancel'}", article_categories_path, class: "button has-background-white-ter mx-2" %>
+  <div class="actions my-6">
+    <%= form.submit "#{t '.create'}", class: "button is-success mx-2" %>
+    <%= link_to "#{t '.cancel'}", article_categories_path, class: "button has-background-white-ter mx-2" %>
     </div>
 <% end %>

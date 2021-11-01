@@ -3,9 +3,9 @@ require_dependency "cadmin/application_controller"
 module Cadmin
   class LocationsController < ApplicationController
     before_action :set_location, only: [:show, :edit, :update, :destroy]
-
     # GET /locations
     def index
+      add_breadcrumb 'Restaurantes'
       @locations = Location.all
     end
 

@@ -1,74 +1,103 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Event:</strong>
-  <%= @interview.event_id %>
-</p>
+<h3 class="title is-size-4 has-text-centered has-background-white-ter p-3"><%= @interview.event_title %></h3>
 
-<p>
-  <strong>Employee:</strong>
-  <%= @interview.employee_id %>
-</p>
-
-<p>
-  <strong>Ceremony music:</strong>
-  <%= @interview.ceremony_music %>
-</p>
-
-<p>
-  <strong>Appetizer music:</strong>
-  <%= @interview.appetizer_music %>
-</p>
-
-<p>
-  <strong>Banquet music:</strong>
-  <%= @interview.banquet_music %>
-</p>
-
-<p>
-  <strong>Ceremony time:</strong>
-  <%= @interview.ceremony_time %>
-</p>
-
-<p>
-  <strong>Entry:</strong>
-  <%= @interview.entry %>
-</p>
-
-<p>
-  <strong>Bridal dance:</strong>
-  <%= @interview.bridal_dance %>
-</p>
-
-<p>
-  <strong>Garter:</strong>
-  <%= @interview.garter %>
-</p>
-
-<p>
-  <strong>Garter music:</strong>
-  <%= @interview.garter_music %>
-</p>
-
-<p>
-  <strong>Figures:</strong>
-  <%= @interview.figures %>
-</p>
-
-<p>
-  <strong>Figures music:</strong>
-  <%= @interview.figures_music %>
-</p>
-
-<p>
-  <strong>Gift information:</strong>
-  <%= @interview.gift_information %>
-</p>
-
-<p>
-  <strong>Observations:</strong>
-  <%= @interview.observations %>
-</p>
-
-<%= link_to 'Edit', edit_interview_path(@interview) %> |
-<%= link_to 'Back', interviews_path %>
+<div class="container">
+  <h3 class="title is-size-5 has-background-white-ter p-3">Información del evento</h3>
+  <div class="columns is-multiline">
+    <div class="column is-one-third">
+      <div class="label is-size-6 is-pulled-left">Nombre: </div> 
+      <div class="is-size-5 has-tex-left"><%= @interview.event_customer_name%></div>
+    </div>
+    <div class="column is-one-third">
+      <div class="label is-size-6 is-pulled-left">Teléfono: </div> 
+      <div class="is-size-5 has-tex-left"><%= @interview.event_customer_phone %></div>
+    </div>
+    <div class="column is-one-third">
+      <div class="label is-size-6 is-pulled-left">Email: </div> 
+      <div class="is-size-5 has-tex-left"><%= @interview.event_customer_email %></div>
+    </div>
+    <div class="column is-one-third">
+      <div class="label is-size-6 is-pulled-left">Fecha: </div> 
+      <div class="is-size-5 has-tex-left"><%= @interview.event_date%></div>
+    </div>
+    <div class="column is-one-third">
+      <div class="label is-size-6 is-pulled-left">Hora: </div> 
+      <div class="is-size-5 has-tex-left"><%= @interview.ceremony_time %></div>
+    </div>
+    <div class="column is-one-third">
+      <div class="label is-size-6 is-pulled-left">Lugar: </div> 
+      <div class="is-size-5 has-tex-left"><%= @interview.event_placename %></div>
+    </div>
+  </div>
+  
+  <h3 class="title is-size-5 has-background-white-ter p-3">Musica del evento</h3>
+  <div class="columns">
+    <div class="column is-one-third">
+      <div class="label is-size-6 is-pulled-left">Ceremonia: </div> 
+      <div class="is-size-5 has-tex-left"><%= @interview.ceremony_music%></div>
+    </div>
+    <div class="column is-one-third">
+      <div class="label is-size-6 is-pulled-left">Aperitivos: </div> 
+      <div class="is-size-5 has-tex-left"><%= @interview.appetizer_music%></div>
+    </div>
+    <div class="column is-one-third">
+      <div class="label is-size-6 is-pulled-left">Banquete: </div> 
+      <div class="is-size-5 has-tex-left"><%= @interview.banquet_music%></div>
+    </div>
+  </div>
+  
+  <h3 class="title is-size-5 has-background-white-ter p-3">Entrada y más</h3>
+  <div class="columns is-multiline">
+    <div class="column is-one-third">
+      <div class="label is-size-6 is-pulled-left">Entrada: </div> 
+      <div class="is-size-5 has-tex-left"><%= @interview.entry %></div>
+    </div>  
+    <div class="column is-one-third"></div>
+    <div class="column is-one-third">
+      <div class="label is-size-6 is-pulled-left">Baile nupcial: </div> 
+      <div class="is-size-5 has-tex-left"><%= @interview.bridal_dance %></div>
+    </div>  
+  </div>
+  
+  <h3 class="title is-size-5 has-background-white-ter p-3">Regalos y detalles</h3>
+  <div class="columns">
+    <% if @interview.garter %>
+      <div class="column is-one-third">
+        <div class="label is-size-6 is-pulled-left">Liga: </div> 
+        <div class="is-size-5 has-tex-left"><%= @interview.garter_music %></div>
+      </div>    
+    <% end %>
+    <div class="column is-one-third"></div>
+    <% if @interview.figures %>
+      <div class="column is-one-third">
+        <div class="label is-size-6 is-pulled-left">Figuras novios: </div> 
+        <div class="is-size-5 has-tex-left"><%= @interview.figures_music%></div>
+      </div>
+    <% end %>
+  </div>
+  
+  <h3 class="title is-size-5 has-background-white-ter p-3">Otros regalos y detalles</h3>
+  <div class="columns is-multiline">
+    <% @interview.interview_options.each do |option| %>
+      <div class="column is-one-third">
+        <div class="label is-size-6 is-pulled-left"><%= option.gift %></div> 
+        <div class="is-size-5 has-tex-left"><%= option.song %></div>
+      </div>
+    <% end %>
+  </div>
+  
+  <h3 class="title is-size-5 has-background-white-ter p-3">Comentarios regalos y detalles</h3>
+  <div class="columns is-multiline">
+    <div class="column is-3"></div>
+    <div class="column is-6"><%=raw @interview.gift_information %></div>
+    <div class="column is-3"></div>
+  </div>
+  
+  <h3 class="title is-size-5 has-background-white-ter p-3">Comentarios</h3>
+  <div class="columns is-multiline">
+    <div class="column is-3"></div>
+    <div class="column is-6"><%=raw @interview.observations %></div>
+    <div class="column is-3"></div>
+  </div>
+</div>

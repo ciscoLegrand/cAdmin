@@ -3,9 +3,9 @@ require_dependency "cadmin/application_controller"
 module Cadmin
   class EventsController < ApplicationController
     before_action :set_event, only: [:show, :edit, :update, :destroy, :charged]
-    
     # GET /events
     def index      
+      add_breadcrumb 'Eventos'
       # @users = current_cadmin_user.where(deleted_at: nil).pluck(:id) #devuelve array de users´ids importante si hacemos soft delete de users      
       
       #! get events

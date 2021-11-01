@@ -4,10 +4,10 @@ module Cadmin
   class InterviewsController < ApplicationController
     before_action :set_interview, only: [:show, :edit, :update, :destroy]
     before_action :set_event, only: [:show,:new,:create,:edit,:uptade,:destroy]
-    
     # GET /interviews
     def index      
       #! get interviews
+      add_breadcrumb 'Entrevistas'
       # @users = current_cadmin_user.where(deleted_at: nil).pluck(:id) #devuelve array de users´ids 
       @interviews = current_cadmin_user.admin? ? Interview.all : Interview.where(employee_id: current_cadmin_user.id)
     end
@@ -59,8 +59,9 @@ module Cadmin
         @interview = Event.find(params[:event_id]).interview
       end
       def set_event 
-        @event = Event.find(params[:event_id])
+        @event = Event.find(params[:event_id]) 
       end
+
       # Only allow a list of trusted parameters through.
       def interview_params
         params.require(:interview).permit(:event_id, :employee_id, :ceremony_music, :appetizer_music, :banquet_music, :ceremony_time, :entry, 

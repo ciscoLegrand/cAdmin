@@ -90,35 +90,33 @@
   </div>
 
 
-    <div class="field">
-      <%= form.label :observations, class: 'label' %>
-      <div class="control">
-      <%= form.hidden_field :observations, class: 'content ',data: {"quill-target": "content"} %>
-        <div data-quill-target="editor" class="events__quill is-fullwidth ">
-          <%= raw event.observations %>
-        </div> 
-      </div>
+  <div class="field">
+    <%= form.label :observations, class: 'label' %>
+    <div class="control">
+    <%= form.hidden_field :observations, class: 'content ',data: {"quill-target": "content"} %>
+      <div data-quill-target="editor" class="events__quill is-fullwidth ">
+        <%= raw event.observations %>
+      </div> 
     </div>
+  </div>
     
-    <!-- TODO: nested form with stimulus-->
-    <hr class="has-background-white-ter">
-    <h3 class="title is-size-4"><%= t '.title_services' %></h3>
-    <div data-controller="nested-form">
-      <template data-nested-form-target="template">
-        <%= form.fields_for :event_services, event.event_services.new, child_index: 'TEMPLATE_RECORD' do |event_service| %>
-          <%= render 'event_service_fields', form: event_service %>
-        <% end %>
-      </template>
-      
-      <%= form.fields_for :event_services do |event_service| %> 
-        <%= render 'event_service_fields', form: event_service %> 
-      <% end %>      
-      
-      <div class="actions my-4"  data-nested-form-target="add_item">
-        <%= link_to "#{t '.add_item'}", "#",class: 'button is-outlined is-success', data: { action: "nested-form#add_association" } %>
-      </div>
-      
-    </div>
+  <hr class="has-background-white-ter">
+  <h3 class="title is-size-4"><%= t '.title_services' %></h3>
+  <div data-controller="nested-form">
+    <template data-nested-form-target="template">
+      <%= form.fields_for :event_services, event.event_services.new, child_index: 'TEMPLATE_RECORD' do |event_service| %>
+        <%= render 'event_service_fields', form: event_service %>
+      <% end %>
+    </template>
+    
+    <%= form.fields_for :event_services do |event_service| %> 
+      <%= render 'event_service_fields', form: event_service %> 
+    <% end %>      
+    
+    <div class="actions my-4"  data-nested-form-target="add_item">
+      <%= link_to "#{t '.add_item'}", "#",class: 'button is-outlined is-success', data: { action: "nested-form#add_association" } %>
+    </div>    
+  </div>
 
     <div class="actions my-6">
       <%= form.submit "#{t '.create'}", class: "button is-success mx-2" %>

@@ -3,6 +3,7 @@ require_dependency "cadmin/application_controller"
 module Cadmin
   class DiscountsController < ApplicationController
     before_action :set_discount, only: [:show, :edit, :update, :destroy]
+    add_breadcrumb 'Descuentos'
 
     # GET /discounts
     def index
