@@ -42,7 +42,7 @@
           </thead>
           <tbody>
             <% @events.each do |event| %>           
-              <tr>
+              <tr  data-controller='charged'>
                 <td class="is-checkbox-cell">
                   <label class="b-checkbox checkbox">
                     <input type="checkbox" value="false">
@@ -59,18 +59,12 @@
                 <td><%= number_with_precision(event.deposit, precision: 2) %></td>     
                 <td><%= number_with_precision(event.total_services_amount - event.deposit, precision: 2) %></td>               
                 <td><%= number_with_precision(event.total_services_amount, precision: 2) %></td> 
-                <td>
-                  <!--TODO REVIEW THIS PART-->
-                  <%= form_with(model: event,html: {class: 'events events__form'}) do |form| %>
-                    <div class="media-content is-flex is-flex-direction-column is-align-items-center">                      
-                      <%= form.check_box :charged, class:"switch" %>
-                      <%= form.submit 'ok', class:'button is-small'%>                
-                    </div>  
-                  <% end %>
-                </td>
+                <td data-charged-target="tag" class="<%= event.charged == true ? 'has-background-success' : 'default'%>"><%= event.charged? ? 'Cobrado' : 'Pendiente' %> </td>
                 <td class="is-actions-cell">
-                  <div class="buttons is-right">
-                    <%= link_to inline_svg_tag('cadmin/icons/ico-eye.svg', class: 'icon is-medium has-text-primary'), event,data:{turbo_frame: "_top"}, class: 'button is-clickable' %>
+                  <div class="buttons is-right">                    
+                    <!-- todo: REVISAR ENLACE QUE NO REDIRIJA Y QUE ACTUALICE DATO -->
+                    <%= link_to inline_svg_tag('cadmin/icons/ico-euro.svg', class: 'icon is-medium has-text-primary') , charged_event_path(event), data: {action: 'charged#change',  turbo: false},  class: 'button is-clickable' %>
+                    <%= link_to inline_svg_tag('cadmin/icons/ico-eye.svg', class: 'icon is-medium has-text-primary'), event ,data:{turbo_frame: "_top"}, class: 'button is-clickable' %>
                     <% if current_cadmin_user.admin? %>
                       <%= link_to inline_svg_tag('cadmin/icons/ico-edit.svg', class: 'icon is-medium has-text-primary'), edit_event_path(event), data:{turbo_frame: "_top"}, class: 'button is-clickable' %>
                       <%= button_to event, method: :delete, data: { confirm: 'Are you sure?' }, class:"button is-clickable"  do %>

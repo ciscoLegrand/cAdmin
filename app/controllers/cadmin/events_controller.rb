@@ -2,7 +2,7 @@ require_dependency "cadmin/application_controller"
 
 module Cadmin
   class EventsController < ApplicationController
-    before_action :set_event, only: [:show, :edit, :update, :destroy]
+    before_action :set_event, only: [:show, :edit, :update, :destroy, :charged]
     
     # GET /events
     def index      
@@ -80,6 +80,12 @@ module Cadmin
     def destroy
       @event.destroy
       redirect_to events_url, notice: 'Event was successfully destroyed.'
+    end
+
+    def charged 
+      @event.update(charged: !@event.charged)
+      #todo: review this to prevent
+      redirect_to events_path
     end
 
     # TODO: refactor this method for validate type event and $
