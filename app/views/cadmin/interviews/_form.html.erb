@@ -1,3 +1,5 @@
+<h1 class="title is-size-4 has-text-centered"><%= @event.title.present? ? @event.title : @event.customer_name %></h1>
+
 <%= form_with(model:[ @event, @interview], data: {"controller": "quill", "action": "quill#save", turbo: false},html: {class: 'events events__form'}) do |form| %>
   <% if @interview.errors.any? %>
     <div id="error_explanation">
@@ -56,26 +58,47 @@
 
   <div class="field is-horizontal">
     <div class="field-body">
-      <div class="field">
+      <div class="field" data-controller="hide">
         <%= form.label :garter,class: 'label' %>
-        <%= form.check_box :garter, class: 'checkbox' %>
+        <%= form.check_box :garter, class: 'checkbox', data: {action: "hide#isChecked"} %>
       </div>
 
-      <div class="field">
+      <div class="field" data-hide-target="inputField">
         <%= form.label :garter_music,class: 'label' %>
         <%= form.text_field :garter_music, class: 'input' %>
       </div> 
       <div class="field">
-        <%= form.label :figures %>
-        <%= form.check_box :figures %>
+        <%= form.label :figures, class: 'label' %>
+        <%= form.check_box :figures, class: 'checkbox' %>
       </div>
 
       <div class="field">
-        <%= form.label :figures_music %>
-        <%= form.text_field :figures_music %>
+        <%= form.label :figures_music, class: 'label' %>
+        <%= form.text_field :figures_music, class: 'input' %>
       </div>
     </div>
   </div>
+
+  <h1><%= t '.more_details' %></h1>
+  <div data-controller="nested-form">
+    <template data-nested-form-target='template'>
+      <%= form.fields_for :interview_options, @interview.interview_options.new, child_index: 'TEMPLATE_RECORD' do |option| %>
+        <%= render 'interview_option_fields', form: option %>
+      <% end %>
+    </template>
+
+    <%= form.fields_for :interview_options do |option| %>
+      <%= render 'interview_option_fields', form: option %>
+    <% end %>
+
+    <div data-nested-form-target="add_item">
+      <%= link_to "#{t '.add'}", "#",class: 'button is-success is-outlined mt-3', data: { action: "nested-form#add_association" } %>
+    </div>
+  </div>
+
+
+
+
     <div class="field">
       <%= form.label :gift_information, class: 'label' %>
       <div class="control">
@@ -87,7 +110,7 @@
     </div>
   <div class="field">
     <%= form.label :observations, class: 'label' %>
-    <%= form.text_area :observations, class: 'events__quill' %>
+    <%= form.text_area :observations, class: 'events__quill is-fullwidth p-5' %>
   </div>
   <div class="actions my-6">
     <%= form.submit "#{t '.create'}'", class: "button is-success mx-2" %>

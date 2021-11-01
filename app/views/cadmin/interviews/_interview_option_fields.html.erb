@@ -1,0 +1,16 @@
+
+
+
+<div class='nested-fields'>
+  <div class='field is-horizontal'>
+    <%= form.hidden_field :_destroy %>
+    <div class="field-body">
+      <%= form.text_field :gift, placeholder: 'regalo', class: 'input mr-2' %>
+      <%= form.text_field :song, placeholder: 'cancion', class: 'input mx-2' %>
+
+    </div>
+    <small>
+      <%= link_to "Eliminar", "#", class: 'button is-warning is-outlined',data: { action: "click->nested-form#remove_association" } %>
+    </small>
+  </div>
+</div>

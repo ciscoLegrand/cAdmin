@@ -10,21 +10,30 @@
       </ul>
     </div>
   <% end %>
+  <h3 class="title is-size-4"><%= t '.title_event' %></h3>
+  <hr class="has-background-white-ter">
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <%= form.label :customer_id, class: 'label' %>        
+        <div class="control is-expanded">
+          <%= form.collection_select :customer_id, Cadmin::User.where(role: 'customer').all, :id ,:name, {prompt: 'Selecciona cliente'}, {  prompt: 'Selecciona usuario',class: "select_inside_col",data: {controller: "slimselect"}} %>
+        </div>
+      </div>
+      <div class="field">
+        <%= form.label "#{t '.new_client'}", class: 'label' %>
+        <%= link_to new_cadmin_user_invitation_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'invite', action: 'click->menu#set_active_menu_item'} do %>
+          Crear cliente<%= inline_svg_tag('cadmin/icons/ico-user-add.svg', class:'icon ')%>
+        <% end %>
+      </div>
+    </div>
+  </div>
   <div class="field is-horizontal">
     <div class="field-body">
       <div class="field">
         <div class="control">
         <%= form.label :title, class: 'label' %>
         <%= form.text_field :title,placeholder: true, class: 'input' %>
-        </div>
-      </div>
-      <div class="field">
-        <%= form.label :customer_id, class: 'label' %>        
-        <div class="control is-expanded">
-          <%= form.collection_select :customer_id, Cadmin::User.where(role: 'customer').all, :id ,:name, {prompt: 'Selecciona cliente'}, {  prompt: 'Selecciona usuario',class: "select_inside_col",data: {controller: "slimselect"}} %>
-          <%= link_to new_cadmin_user_invitation_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'invite', action: 'click->menu#set_active_menu_item'} do %>
-          Crear cliente<%= inline_svg_tag('cadmin/icons/ico-user-add.svg', class:'icon ')%>
-          <% end %>
         </div>
       </div>
       <div class="field">
@@ -48,14 +57,6 @@
         <%= form.number_field :number, class: 'input' %>
         </div>
       </div>
-      <div class="field">
-        <%= form.label :discount_ids, class: 'label' %>
-        <div class="control is-expanded"  data-controller="tomselect">          
-            <%= form.select(:discount_ids, options_for_select(Cadmin::Discount.all.map{ |s| [s.name, s.id] }),{} , {include_blank: true, id: 'service-multi', class: 'form-select', data: { tomselect_target: 'tagsField' }, multiple: true}) %>
-        </div>
-        <%= form.label event.servicename, class: 'label' if event.servicename.present? %>
-      </div>
-
     </div>
   </div>
 
@@ -66,38 +67,24 @@
         <%= form.collection_select :place_id, Cadmin::Location.all, :id ,:name, {}, {  prompt: 'Selecciona localización',class: "select_inside_col",data: {controller: "slimselect"}} %>
       </div>
       <div class="field">
-        <%= form.label :employee_id, class: 'label' %>        
-        <div class="control is-expanded">
-          <%= form.collection_select :employee_id, Cadmin::User.where(role: 'employee').all, :id ,:name, {prompt: 'Selecciona empleado'}, {  prompt: 'Selecciona usuario',class: "select_inside_col",data: {controller: "slimselect"}} %>
-        </div>
+        <%= form.label :guests, class: 'label' %>
+        <%= form.number_field :guests, class: 'input' %>
       </div>
-      <div class="field">
-        <%= form.label :services, class: 'label' %>
-        <div class="control is-expanded"  data-controller="tomselect">          
-            <%= form.select(:service_ids, options_for_select(Cadmin::Service.all.map{ |s| [s.name, s.id] }),{} , {include_blank: true, id: 'service-multi', class: 'form-select', data: { tomselect_target: 'tagsField' }, multiple: true}) %>
-        </div>
-        <%= form.label event.servicename, class: 'label' if event.servicename.present? %>
-      </div>
+
     </div>
   </div>
 
   <div class="field is-horizontal">
     <div class="field-body">
       <div class="field">
-        <%= form.label :guests, class: 'label' %>
-        <%= form.number_field :guests, class: 'input' %>
-      </div>
-      <div class="field">
-        <%= form.label :start_time, class: 'label' %>
-        <%= form.text_field :start_time, class: 'input' %>
+        <%= form.label :employee_id, class: 'label' %>        
+        <div class="control is-expanded">
+          <%= form.collection_select :employee_id, Cadmin::User.where(role: 'employee').all, :id ,:name, {prompt: 'Selecciona empleado'}, {  prompt: 'Selecciona usuario',class: "select_inside_col",data: {controller: "slimselect"}} %>
+        </div>
       </div>
       <div class="field">
         <%= form.label :deposit, class: 'label' %>
         <%= form.text_field :deposit, class: 'input' %>
-      </div>
-      <div class="field">
-        <%= form.label :extra_hours, class: 'label' %>
-        <%= form.number_field :extra_hours, class: 'input' %>
       </div>
     </div>
   </div>
@@ -111,6 +98,26 @@
           <%= raw event.observations %>
         </div> 
       </div>
+    </div>
+    
+    <!-- TODO: nested form with stimulus-->
+    <hr class="has-background-white-ter">
+    <h3 class="title is-size-4"><%= t '.title_services' %></h3>
+    <div data-controller="nested-form">
+      <template data-nested-form-target="template">
+        <%= form.fields_for :event_services, event.event_services.new, child_index: 'TEMPLATE_RECORD' do |event_service| %>
+          <%= render 'event_service_fields', form: event_service %>
+        <% end %>
+      </template>
+      
+      <%= form.fields_for :event_services do |event_service| %> 
+        <%= render 'event_service_fields', form: event_service %> 
+      <% end %>      
+      
+      <div class="actions my-4"  data-nested-form-target="add_item">
+        <%= link_to "#{t '.add_item'}", "#",class: 'button is-outlined is-success', data: { action: "nested-form#add_association" } %>
+      </div>
+      
     </div>
 
     <div class="actions my-6">

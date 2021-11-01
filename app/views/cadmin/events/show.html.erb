@@ -1,5 +1,6 @@
 <% if @event.employee_id == current_cadmin_user.id%>
-  <%= link_to "#{t '.interview'}", @event.interview.present? ? edit_event_interview_path(@event)  : new_event_interview_path(@event), class: 'button is-success is-outlined' if   current_cadmin_user.employee? %>
+  <%#= @event.interview.inspect%>
+  <%= link_to "#{t '.interview'}", @event.interview.present? ? edit_event_interview_path(@event, @interview)  : new_event_interview_path(@event), class: 'button is-success is-outlined' if   current_cadmin_user.employee? %>
 <% end %>
 <%= link_to "#{t '.cancel'}", events_path, class: "button has-background-white-ter mx-2" %>
 
@@ -126,50 +127,50 @@
       </footer>
     </div>  
   </div>
-  <% if 1 == 0 %>
+  <%# if 1 == 0 %>
     
-  <% if @event.service_ids %>
+  <%# if @event.service_ids %>
     <div class="column is-size-6">
       <h2 class="title is-size-4 has-text-centered"><%= t '.service_title' %></h2>
       <div class="columns is-mobile is-multiline is-centered">
-        <% @event.service_ids.each do |service_id| %>
-          <% unless service_id == "" %>
-            <% service = Cadmin::Service.find(service_id)   %>
+        <% @event.event_services.each do |service| %>
+          
+            
             <div class="card column is-4 m-3">
               <div class="card-header">
                 <div class="card-header-title "> 
-                  <div class="title is-size-5 has-text-centered" style="width:100%;"><%= service.name %></div> 
+                  <div class="title is-size-5 has-text-centered" style="width:100%;"><%= service.service_name %></div> 
                 </div>
               </div>
               <div class="card-image">
                 <figure class="image is-16by9">
-                  <%= image_tag service.image_url if service.image %>
+                  <%= image_tag service.service_image_url if service.service_image %>
                 </figure>
               </div>
               <hr>
               <div class="card-content">
                 <div class="media">
                   <div class="media-content">
-                    <p class="subtitle is-6"><%= raw service.description  %></p>
+                    <p class="subtitle is-6"><%= raw service.service_description  %></p>
                   </div>
                 </div>
                 <hr>
                 <div class="content">
-                  <%= service.short_dscription%>.
+                  <%= service.service_short_dscription%>.
                   <br>
-                  <%= service.description %>
+                  <%= service.service_description %>
                   <hr>
-                  <div>Precio: <span class="tag is-success is-size-5"><%= service.price %></span></div>
+                  <div>Precio: <span class="tag is-success is-size-5"><%= service.service_price %></span></div>
                   
                 </div>
               </div>  
             </div>         
-          <% end %>           
+                
         <% end %>
       </div>
     </div>
-  <% end %>
-  <% end %>
+  <%# end %>
+  <%# end %>
 </div>
 
 

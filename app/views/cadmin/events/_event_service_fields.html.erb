@@ -1,0 +1,29 @@
+
+<div class="nested-fields">             
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <%= form.hidden_field :_destroy %>
+        <%= form.label :service_id, class:'label' %>
+        <div class="control is-expanded" data-controller="tomselect">          
+          <%= form.collection_select :service_id, Cadmin::Service.all, :id ,:name, {}, {include_blank: true, class: 'form-select', data: { tomselect_target: 'tagsField' }} %>
+        </div>
+      </div>
+      <div class="field">
+        <%= form.label :discount_id, class: 'label' %>
+        <div class="control is-expanded"  data-controller="tomselect">          
+          <%= form.collection_select :discount_id, Cadmin::Discount.all, :id ,:name, {}, {include_blank: true, class: 'form-select', data: { tomselect_target: 'tagsField' }} %>
+        </div>
+      </div>
+      <div class="field">
+        <%= form.label :overtime, class: 'label' %>
+        <%= form.number_field :overtime, class: 'input' %>
+      </div>
+      <div class="field">
+        <%= form.label :button, class: 'label',style:'opacity:0;' %>
+        <%= link_to "#{t '.remove_item'}", "#", class: 'button is-outlined is-warning',data: {action: "click->nested-form#remove_association"}%>
+      </div>
+      
+    </div>
+  </div>
+</div>

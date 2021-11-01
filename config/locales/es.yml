@@ -62,7 +62,7 @@ es:
         garter_music: 'Música para la liga'
         figures: 'Figuras de novios'
         figures_music: 'Musica entrega figuras'
-        gift_information: 'Más regalos'
+        gift_information: 'Otros detalles'
         observations: 'Comentarios'
       cadmin/location:
         name: 'Nombre'
@@ -259,8 +259,12 @@ es:
         remove_item: 'Eliminar'
     interviews:
       form:
+        more_details: 'Más detalles'
+        add: 'Añadir'
         create: 'Guardar'
         cancel: 'Volver'
+      interview_option_fields:
+
     locations:
       index:
         title: 'Localizaciones'

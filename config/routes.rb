@@ -7,6 +7,7 @@ Cadmin::Engine.routes.draw do
   get 'profile/show'
   
   match '/agenda', to: "dashboard#agenda",  via: :get, as: :agenda
+  match '/interviews', to: "interviews#index",  via: :get, as: :interviews
   
   resources :locations
   resources :article_categories

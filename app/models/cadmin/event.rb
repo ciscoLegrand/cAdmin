@@ -4,7 +4,8 @@ module Cadmin
     belongs_to :employee, optional: true, foreign_key: :employee_id, class_name: 'User'
     has_one :interview
     has_many :event_services, dependent: :destroy 
-    accepts_nested_attributes_for :event_services, allow_destroy: true #, reject_if: proc { |att| att['service_id'].blank? }
+    accepts_nested_attributes_for :event_services, allow_destroy: true, reject_if: proc { |attr| attr['service_id'].blank? }
+    
     
     validates :number, presence: true, uniqueness: true  
 
@@ -17,11 +18,11 @@ module Cadmin
     ]
 
     #! nested attributes of event_service getting from events controller
-    def event_services_attributes=(event_services_atttirbutes)
-      event_services_atttirbutes.each do |i, event_service_attributes| 
-        self.event_services.build(event_service_attributes)
-      end
-    end
+    # def event_services_attributes=(event_services_atttirbutes)
+    #   event_services_atttirbutes.each do |i, event_service_attributes| 
+    #     self.event_services.build(event_service_attributes)
+    #   end
+    # end
 
     def servicenames 
       self.event_services.map(&:service_name).join(', ')

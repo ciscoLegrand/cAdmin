@@ -3,7 +3,7 @@ require_dependency "cadmin/application_controller"
 module Cadmin
   class EventsController < ApplicationController
     before_action :set_event, only: [:show, :edit, :update, :destroy]
-
+    
     # GET /events
     def index      
       # @users = current_cadmin_user.where(deleted_at: nil).pluck(:id) #devuelve array de users´ids importante si hacemos soft delete de users      
@@ -30,22 +30,25 @@ module Cadmin
 
     # GET /events/1
     def show
+      @interview = Interview.find_by(event_id: @event.id)
     end
 
     # GET /events/new
     def new
       @event = Event.new
-      @event.event_services.build
+      # @event.event_services.build
     end
 
     # GET /events/1/edit
     def edit
+      # @event.event_services.build
     end
 
     # POST /events
     def create
-      @event = Event.new(event_params)      
+      @event = Event.new(event_params)  
       if @event.save
+        
         @event.update(total_amount: @event.total_services_amount)
         redirect_to @event, notice: 'Event was successfully created.'
       else
@@ -55,8 +58,9 @@ module Cadmin
 
     # PATCH/PUT /events/1
     def update
-      if @event.update(event_params)        
+      if @event.update(event_params)  
         @event.update(total_amount: @event.total_services_amount)
+        
         if @event.employee_id.present?
           @conversation = Cadmin::Conversation
           if @conversation.where(recipient_id: @event.employee_id).first.present?            
@@ -77,7 +81,7 @@ module Cadmin
       @event.destroy
       redirect_to events_url, notice: 'Event was successfully destroyed.'
     end
-         
+
     # TODO: refactor this method for validate type event and $
     def employee_salary(events)
       total = 0
@@ -104,12 +108,11 @@ module Cadmin
       def set_event
         @event = Event.find(params[:id])
       end
-
       # Only allow a list of trusted parameters through.
       def event_params
         params.require(:event).permit(:customer_id, :title, :type_name, :number, :date, :guests, :employee_id, 
                                       :place_id, :deposit, :total_amount, :charged, :observations, 
-                                      event_services_attributes: [:event_id, :service_id, :discount_id, :start_time, :overtime, :total_amount])
+                                      event_services_attributes: [:_destroy, :id, :event_id, :service_id, :discount_id, :start_time, :overtime, :total_amount])
       end
   end
 end

@@ -104,7 +104,7 @@ Cadmin::Discount.create(name: 'gramola', type_discount: 'cabinas', description: 
 Cadmin::Discount.create(name: 'Hoteles Oca', type_discount: 'cabinas', description: 'descuento cadena hoteles oca ', percentage: 15)
 Cadmin::Discount.create(name: 'Bendoiro family', type_discount: 'cabinas', description: 'descuento cadena de choias bendoiro y cia ', percentage: 10)
 
-Cadmin::Event.create(title: 'Marcos y Carolina',customer_id: 3, type_name:'wedding', number:'0000001', date: '10/08/2022', guests: 100,  employee_id: 5, place_id: 1, observations: 'evento creado con seeds')
+Cadmin::Event.create(title: 'Marcos y Carolina',customer_id: 3, type_name:'wedding', number:'0000001', date: '10/08/2022', guests: 100,  employee_id: 1, place_id: 1, observations: 'evento creado con seeds')
 Cadmin::Event.create(title: 'Eva y Juan',customer_id: 4, type_name:'wedding', number:'0000002', date: '10/06/2022', guests: 146, employee_id: 5, place_id: 1, observations: 'evento creado con seeds')
 Cadmin::Event.create(title: 'Alicia y Bea',customer_id: 2, type_name:'wedding', number:'0000003', date: '01/05/2022', guests: 213, employee_id: 6, place_id: 3, observations: 'evento creado con seeds')
 
