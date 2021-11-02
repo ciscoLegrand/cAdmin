@@ -297,8 +297,10 @@ es:
         cancel: 'Volver'
     profile:
       index: 
-        events: 'Mis eventos'
-        profile: 'Cuenta'
+        events: 'eventos'
+        messages: 'mensajes'
+        interviews: 'entrevistas'
+        profile: 'cuenta'
         username: 'Nickname'
         email: 'Email'
       show:

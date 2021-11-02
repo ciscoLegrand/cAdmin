@@ -1,29 +1,31 @@
 <div class="container">
-  <div class="columns">
-    <aside class="column is-2 is-narrow-mobile is-fullheight section is-hidden-mobile">
-      <p class="menu-label is-hidden-touch"><%= t '.title' %></p>
-      <ul class="menu-list">
-        <li><%= link_to "#{t '.create'}", new_conversation_path, class: 'button is-outlined is-success mb-6' %></li>
-        <% @conversations.each do |conversation| %>
-          <% if conversation.sender_id == current_cadmin_user.id || conversation.recipient_id == current_cadmin_user.id %>
-            <% if conversation.sender_id == current_cadmin_user.id %>
-            <% recipient = Cadmin::User.find(conversation.recipient_id) %>
-            <% else %>
-            <% recipient = Cadmin::User.find(conversation.sender_id) %>
-            <% end %>
-            <li class="conversation is-flex is-justify-content-flex-end is-align-items-center">
-              <%= link_to recipient.username, conversations_path(id: conversation.id), class: 'ml-2'%>
-              <% if conversation.messages.where(viewed: false).count > 0 %>
-                <span class="tag is-danger mr-2 is-rounded"><%= conversation.messages.where(viewed: false).count%></span>
+  <%= turbo_frame_tag :conversations do %>
+    <div class="columns">
+      <aside class="column is-2 is-narrow-mobile is-fullheight section is-hidden-mobile">
+        <p class="menu-label is-hidden-touch"><%= t '.title' %></p>
+        <ul class="menu-list">
+          <li><%= link_to "#{t '.create'}", new_conversation_path, class: 'button is-outlined is-success mb-6' %></li>
+          <% @conversations.each do |conversation| %>
+            <% if conversation.sender_id == current_cadmin_user.id || conversation.recipient_id == current_cadmin_user.id %>
+              <% if conversation.sender_id == current_cadmin_user.id %>
+              <% recipient = Cadmin::User.find(conversation.recipient_id) %>
+              <% else %>
+              <% recipient = Cadmin::User.find(conversation.sender_id) %>
               <% end %>
-              <%= button_to nil,  conversation, method: :delete, class: 'delete is-medium has-background-warning',  data: { confirm: 'Are you sure?' } %>
-            </li>
-          <% end %> 
-        <% end %>
-      </ul>
-    </aside>
-    <div class="column is-8 box">
-      <%= turbo_frame_tag :messages, loading: :lazy,target: '_top', src: conversation_messages_path(params['id'])  if params['id'].present?  %>
+              <li class="conversation is-flex is-justify-content-flex-end is-align-items-center">
+                <%= link_to recipient.username, conversations_path(id: conversation.id), class: 'ml-2'%>
+                <% if conversation.messages.where(viewed: false).count > 0 %>
+                  <span class="tag is-danger mr-2 is-rounded"><%= conversation.messages.where(viewed: false).count%></span>
+                <% end %>
+                <%= button_to nil,  conversation, method: :delete, class: 'delete is-medium has-background-warning',  data: { confirm: 'Are you sure?' } %>
+              </li>
+            <% end %> 
+          <% end %>
+        </ul>
+      </aside>
+      <div class="column is-8 box">
+        <%= turbo_frame_tag :messages, loading: :lazy,target: '_top', src: conversation_messages_path(params['id'])  if params['id'].present?  %>
+      </div>
     </div>
-  </div>
+  <% end %>
 </div>

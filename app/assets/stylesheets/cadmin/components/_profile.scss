@@ -1,0 +1,22 @@
+.profile {
+  &__letter_user{
+    width: 124px;
+    height:124px;
+    background: green;
+    @include until($tablet){
+      width: 64px;
+      height:64px;
+      background: $tertiary;
+    }
+  }
+  &__rounded{
+    border-radius: 64px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    @include until($tablet) {
+      border-radius: 48px;
+    }
+  }
+}
