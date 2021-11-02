@@ -4,7 +4,7 @@ module Cadmin
   class ConversationsController < ApplicationController
     
     before_action :set_conversation, only: [:show, :edit, :update, :destroy]
-
+    add_breadcrumb 'Mensajes', :conversations_path
     # GET /conversations
     def index
       @users = User.all
@@ -18,6 +18,7 @@ module Cadmin
 
     # GET /conversations/new
     def new
+      add_breadcrumb 'Nueva conversación'
       @conversation = Conversation.new
     end
 

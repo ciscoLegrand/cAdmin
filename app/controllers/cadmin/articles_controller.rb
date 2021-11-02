@@ -4,7 +4,7 @@ module Cadmin
   class ArticlesController < ApplicationController
     before_action :set_article, only: [:show, :edit,:update, :destroy]
     
-    add_breadcrumb 'Articulos'
+    add_breadcrumb 'Articulos', :articles_path
 
     # GET /articles
     def index      
@@ -31,11 +31,13 @@ module Cadmin
 
     # GET /articles/new
     def new
+      add_breadcrumb 'Nuevo artículo'
       @article = Article.new
     end
 
     # GET /articles/1/edit
     def edit
+      add_breadcrumb 'Editar artículo'
     end
 
     # POST /articles

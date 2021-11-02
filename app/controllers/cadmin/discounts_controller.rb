@@ -3,8 +3,8 @@ require_dependency "cadmin/application_controller"
 module Cadmin
   class DiscountsController < ApplicationController
     before_action :set_discount, only: [:show, :edit, :update, :destroy]
-    add_breadcrumb 'Descuentos'
-
+    add_breadcrumb 'Descuentos', :discounts_path
+    
     # GET /discounts
     def index
       @discounts = Discount.all
@@ -16,11 +16,13 @@ module Cadmin
 
     # GET /discounts/new
     def new
+      add_breadcrumb 'Nuevo Descuento'
       @discount = Discount.new
     end
 
     # GET /discounts/1/edit
-    def edit
+    def edit     
+      add_breadcrumb 'Editar Descuento'
     end
 
     # POST /discounts

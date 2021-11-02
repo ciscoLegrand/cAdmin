@@ -3,7 +3,7 @@ require_dependency "cadmin/application_controller"
 module Cadmin
   class MainServicesController < ApplicationController
     before_action :set_main_service, only: [:show, :edit, :update, :destroy]
-
+    
     # GET /main_services
     def index
       @main_services = MainService.all
@@ -15,6 +15,7 @@ module Cadmin
 
     # GET /main_services/new
     def new
+      add_breadcrumb 'Nuevo servicio'
       @main_service = MainService.new
     end
 

@@ -3,7 +3,7 @@ require_dependency "cadmin/application_controller"
 module Cadmin
   class ArticleCategoriesController < ApplicationController
     before_action :set_article_category, only: [:show, :edit, :update, :destroy]
-
+    add_breadcrumb 'Categorías', :article_categories_path
     # GET /article_categories
     def index
       @article_categories = ArticleCategory.all
@@ -11,15 +11,18 @@ module Cadmin
 
     # GET /article_categories/1
     def show
+      add_breadcrumb @article_category.name
     end
 
     # GET /article_categories/new
     def new
+      add_breadcrumb 'Nueva Categoría'
       @article_category = ArticleCategory.new
     end
 
     # GET /article_categories/1/edit
     def edit
+      add_breadcrumb "Editar #{@article_category.name}"
     end
 
     # POST /article_categories

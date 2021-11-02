@@ -5,22 +5,29 @@ module Cadmin
     before_action :set_main_service, only: [:index,:show,:new,:create,:edit,:uptade,:destroy]
     before_action :set_service, only: [:show, :edit, :update, :destroy]
     # GET /services
-    def index
+    def index 
+      add_breadcrumb @main.name
       @services = @main.services.all
     end
 
     # GET /services/1
     def show
+      add_breadcrumb @main.name
+      add_breadcrumb @service.name
     end
 
     # GET /services/new
     def new
+      add_breadcrumb @main.name
+      add_breadcrumb "Nueva #{@main.name.singularize}"
       @service = @main.services.build
     end
 
     # GET /services/1/edit
     def edit
       @service = @main.services.find(params[:id])
+      add_breadcrumb @main.name
+      add_breadcrumb "Editar #{@service.name}"
     end
 
     # POST /services

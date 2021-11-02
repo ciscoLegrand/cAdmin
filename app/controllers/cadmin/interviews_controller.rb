@@ -4,26 +4,30 @@ module Cadmin
   class InterviewsController < ApplicationController
     before_action :set_interview, only: [:show, :edit, :update, :destroy]
     before_action :set_event, only: [:show,:new,:create,:edit,:uptade,:destroy]
+    add_breadcrumb 'Entrevistas', :interviews_path
     # GET /interviews
     def index      
       #! get interviews
-      add_breadcrumb 'Entrevistas'
+      
       # @users = current_cadmin_user.where(deleted_at: nil).pluck(:id) #devuelve array de users´ids 
       @interviews = current_cadmin_user.admin? ? Interview.all : Interview.where(employee_id: current_cadmin_user.id)
     end
 
     # GET /interviews/1
     def show
+      add_breadcrumb @interview.event_title.present? ? @interview.event_title : @interview.event_customer_name
     end
 
     # GET /interviews/new
     def new      
+      add_breadcrumb 'Nueva Entrevista'
       #! has_one asociations build method -> https://stackoverflow.com/questions/2472982/rails-using-build-with-a-has-one-association-in-rails
       @interview = @event.build_interview
       # @interview.interview_options.build 
     end
     # GET /interviews/1/edit
     def edit
+      add_breadcrumb 'Editar Entrevista'
     end
 
     # POST /interviews

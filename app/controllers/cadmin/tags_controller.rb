@@ -3,7 +3,7 @@ require_dependency "cadmin/application_controller"
 module Cadmin
   class TagsController < ApplicationController
     before_action :set_tag, only: [:show, :edit, :update, :destroy]
-
+    add_breadcrumb 'Tags', :tags_path
     # GET /tags
     def index
       @tags = Tag.all
@@ -11,15 +11,18 @@ module Cadmin
 
     # GET /tags/1
     def show
+      add_breadcrumb @tag.name
     end
 
     # GET /tags/new
     def new
+      add_breadcrumb 'Nuevo Tag'
       @tag = Tag.new
     end
 
     # GET /tags/1/edit
     def edit
+      add_breadcrumb "Editar #{@tag.name}"
     end
 
     # POST /tags
