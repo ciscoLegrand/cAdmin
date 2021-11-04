@@ -18,7 +18,7 @@ module Cadmin
       events = events.filter_between_dates(params['start_date'], params['end_date']) if params['start_date'].present? && params['end_date'].present?
 
       #! sort events
-      events= events.order(params[:sort])
+      # events= events.order(params[:sort])
 
       #! get total price events
       @total = employee_salary(events) if current_cadmin_user.employee?

@@ -82,7 +82,7 @@ require 'pagy/extras/bulma'
 # See https://ddnexus.github.io/pagy/extras/items
 require 'pagy/extras/items'
 # Pagy::VARS[:items_param] = :items    # default
-Pagy::VARS[:max_items]   = 250
+# Pagy::VARS[:max_items]   = 250
 # Overflow extra: Allow for easy handling of overflowing pages
 # See https://ddnexus.github.io/pagy/extras/overflow
 # require 'pagy/extras/overflow'
@@ -110,7 +110,7 @@ Pagy::VARS[:max_items]   = 250
 
 # Instance variables
 # See https://ddnexus.github.io/pagy/api/pagy#instance-variables
-Pagy::VARS[:items] = 25
+# Pagy::VARS[:items] = 25
 
 
 # Other Variables

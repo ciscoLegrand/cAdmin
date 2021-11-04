@@ -6,8 +6,8 @@
 
 
 
-<div class="columns is-mobile is-centered mt-4">
-  <div class="card column is-6 m-3" style="height: fit-content;">
+<div class="columns is-multiline is-mobile is-centered mt-4">
+  <div class="card column is-6-desktop is-12-touch m-3" style="height: fit-content;">
     <div class="card-header is-justify-content-space-between">
       <div class="card-header-title "> 
         <h4 class="title is-size-5"><%= @event.customer_name %></h4> 
@@ -130,13 +130,13 @@
   <%# if 1 == 0 %>
     
   <%# if @event.service_ids %>
-    <div class="column is-size-6">
+    <div class="column is-size-6-desktop is-12-touch">
       <h2 class="title is-size-4 has-text-centered"><%= t '.service_title' %></h2>
       <div class="columns is-mobile is-multiline is-centered">
         <% @event.event_services.each do |service| %>
           
             
-            <div class="card column is-4 m-3">
+            <div class="card column is-4-desktop is-10-touch m-3">
               <div class="card-header">
                 <div class="card-header-title "> 
                   <div class="title is-size-5 has-text-centered" style="width:100%;"><%= service.service_name %></div> 

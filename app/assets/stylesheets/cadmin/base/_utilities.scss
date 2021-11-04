@@ -33,3 +33,19 @@
     overflow-y: scroll;
   }
 }
+
+.buttons {
+  @include until($tablet) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+  }
+}
+
+.table td, .table th{
+  @include until($tablet){
+    padding: 0;
+    padding-right: 32px;
+  }
+}

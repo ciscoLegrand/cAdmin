@@ -201,6 +201,7 @@ es:
         cancel: 'Volver'        
     events:
       index:
+        page_title: 'Eventos'
         new: 'Nuevo evento'
         title: 'Título'
         customer: 'Cliente'

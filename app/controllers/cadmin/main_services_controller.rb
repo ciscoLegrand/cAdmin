@@ -25,7 +25,7 @@ module Cadmin
 
     # POST /main_services
     def create
-      @lastposition = MainService.last.position
+      @lastposition = MainService.last.present? ? MainService.last.position : 0
       @main_service = MainService.new(main_service_params)
       @main_service.position = @lastposition.to_i + 1
       
