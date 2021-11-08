@@ -25,6 +25,8 @@ module Cadmin
       def sign_up_params
         params.require(:cadmin_user).permit(:name, :username, :email,:phone, :password, :password_confirmation, :avatar)
       end
-
+      def after_sign_up_path_for(resource)
+        root_path
+      end
   end
 end

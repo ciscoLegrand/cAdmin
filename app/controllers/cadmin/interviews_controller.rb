@@ -35,7 +35,7 @@ module Cadmin
       @interview = @event.build_interview(interview_params)
 
       if @interview.save
-        redirect_to event_interviews_path, notice: 'Interview was successfully created.'
+        redirect_to event_interviews_path, notice: t('.success')
       else
         render :new
       end
@@ -44,7 +44,7 @@ module Cadmin
     # PATCH/PUT /interviews/1
     def update
       if @interview.update(interview_params)
-        redirect_to events_path, notice: 'Interview was successfully updated.'
+        redirect_to events_path, notice: t('.success')
       else
         render :edit
       end

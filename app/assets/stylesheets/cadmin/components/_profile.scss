@@ -1,4 +1,12 @@
 .profile {
+  &__avatar{
+    width: 128px;
+    height: 128px;
+    border-radius: 128px;
+    -webkit-box-shadow: 1px 1px 15px -3px #000000; 
+    box-shadow: 1px 1px 15px -3px #000000;
+    outline: solid #fff 2px;
+  }
   &__letter_user{
     width: 124px;
     height:124px;

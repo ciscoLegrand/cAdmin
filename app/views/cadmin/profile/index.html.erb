@@ -2,7 +2,7 @@
   <div class="is-flex is-flex-direction-row is-justify-content-space-evenly">
     <div class="profile__data is-flex is-flex-direction-row is-justify-content-space-between">
       <% if current_cadmin_user.avatar_data.present? %>
-        <figure class=" image mr-3"><%= image_tag current_cadmin_user.avatar_url, class:'is-rounded profile__avatar'  %></figure>
+        <figure class="mr-3"><%= image_tag current_cadmin_user.avatar_url, class:'is-rounded profile__avatar'  %></figure>
       <% else %>
         <span class="profile__letter_user profile__rounded is-size-1 has-text-white"><%= current_cadmin_user.email[0] %></span> 
       <% end %>

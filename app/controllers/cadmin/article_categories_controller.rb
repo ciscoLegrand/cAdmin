@@ -30,7 +30,7 @@ module Cadmin
       @article_category = ArticleCategory.new(article_category_params)
 
       if @article_category.save
-        redirect_to @article_category, notice: 'Article category was successfully created.'
+        redirect_to @article_category, notice: t('.success')
       else
         render :new
       end
@@ -39,7 +39,7 @@ module Cadmin
     # PATCH/PUT /article_categories/1
     def update
       if @article_category.update(article_category_params)
-        redirect_to @article_category, notice: 'Article category was successfully updated.'
+        redirect_to @article_category, notice: t('.success')
       else
         render :edit
       end

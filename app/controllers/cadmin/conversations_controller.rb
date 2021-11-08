@@ -34,13 +34,13 @@ module Cadmin
         @conversation = Conversation.create!(conversation_params)
       end 
       
-      redirect_to conversation_messages_path(@conversation), notice: 'Conversation was successfully created.'
+      redirect_to conversation_messages_path(@conversation), notice: t('.success')
     end
 
     # PATCH/PUT /conversations/1
     def update
       if @conversation.update(conversation_params)
-        redirect_to @conversation, notice: 'Conversation was successfully updated.'
+        redirect_to @conversation, notice: t('.success')
       else
         render :edit
       end

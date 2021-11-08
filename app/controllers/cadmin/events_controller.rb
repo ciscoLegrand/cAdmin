@@ -53,7 +53,7 @@ module Cadmin
       if @event.save
         
         @event.update(total_amount: @event.total_services_amount)
-        redirect_to @event, notice: 'Event was successfully created.'
+        redirect_to @event, notice: t('.success')
       else
         render :new
       end
@@ -73,7 +73,7 @@ module Cadmin
             @message = @conversation.messages.create(body:"<a href='#{events_path}'>Tienes un nuevo evento: #{@event.date}</a>", user_id: current_cadmin_user.id)
           end
         end
-        redirect_to @event, notice: 'Event was successfully updated.'
+        redirect_to @event, notice: t('.success')
       else
         render :edit
       end

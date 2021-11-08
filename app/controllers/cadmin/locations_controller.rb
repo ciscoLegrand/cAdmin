@@ -30,7 +30,7 @@ module Cadmin
       @location = Location.new(location_params)
 
       if @location.save
-        redirect_to @location, notice: 'Location was successfully created.'
+        redirect_to @location, notice: t('.success')
       else
         render :new
       end
@@ -39,7 +39,7 @@ module Cadmin
     # PATCH/PUT /locations/1
     def update
       if @location.update(location_params)
-        redirect_to @location, notice: 'Location was successfully updated.'
+        redirect_to @location, notice: t('.success')
       else
         render :edit
       end

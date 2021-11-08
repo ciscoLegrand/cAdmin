@@ -36,7 +36,7 @@ module Cadmin
       @service.price_no_vat = @service.no_vat
 
       if @service.save
-        redirect_to main_service_services_path, notice: 'Service was successfully created.'
+        redirect_to main_service_services_path, notice: t('.success')
       else
         render :new
       end

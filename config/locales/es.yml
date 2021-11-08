@@ -149,6 +149,10 @@ es:
       form:
         create: 'Guardar'
         cancel: 'Volver'
+      create: 
+        success: 'Categoría creada correctamente'
+      update:
+        success: 'Categoría actualizado correctamente'
     articles:
       index:
         create: 'Añadir'
@@ -171,6 +175,10 @@ es:
       form:
         create: 'Guardar'
         cancel: 'Volver'
+      create: 
+        success: 'Artículo creado correctamente'
+      update:
+        success: 'Artículo actualizado correctamente'
     comments:
       form: ' han impedido guardar el comentario'
     conversations:
@@ -184,6 +192,10 @@ es:
       form: 
         create: 'Guardar'
         cancel: 'Volver'
+      create: 
+        success: 'Conversación creada correctamente'
+      update:
+        success: 'Conversación actualizada correctamente'
     dashboard:
     discounts:
       index:
@@ -198,7 +210,11 @@ es:
         title: 'Editar descuento'
       form:
         create: 'Guardar'
-        cancel: 'Volver'        
+        cancel: 'Volver'    
+      create: 
+        success: 'Descuento creado correctamente'
+      update:
+        success: 'Descuento actualizado correctamente'  
     events:
       index:
         page_title: 'Eventos'
@@ -257,6 +273,10 @@ es:
         cancel: 'Volver'
       event_service_fields:
         remove_item: 'Eliminar'
+      create: 
+        success: 'Evento creado correctamente'
+      update: 
+        success: 'Evento actualizado correctamente'
     interviews:
       form:
         more_details: 'Más detalles'
@@ -264,7 +284,10 @@ es:
         create: 'Guardar'
         cancel: 'Volver'
       interview_option_fields:
-
+      create: 
+        success: 'Entrevista creada correctamente'
+      update: 
+        success: 'Entrevista creada correctamente'
     locations:
       index:
         title: 'Localizaciones'
@@ -284,6 +307,10 @@ es:
       form:
         create: 'Guardar'
         cancel: 'Volver'
+      create:
+        success: 'Restaurante creado correctamente' 
+      update: 
+        success: 'Restaurante actualizado correctamente'
     main_services:
       new: 
         title: 'Nueva categoría'
@@ -292,6 +319,10 @@ es:
       form:
         create: 'Guardar'
         cancel: 'Volver'
+      create: 
+        success: 'Categoría creada correctamente'
+      update: 
+        success: 'Categoría actualizada correctamente'
     messages:
       new:
         create: 'Enviar'
@@ -343,6 +374,10 @@ es:
       form:
         create: 'Guardar'
         cancel: 'Volver'
+      create: 
+        success: 'Servicio creado correctamente'
+      update: 
+        success: 'Servicio actualizado correctamente'
     tags:
       index:
         title: 'Tag'
@@ -356,6 +391,8 @@ es:
     user_invitations:
       new: 
         username: 'Nickname'
+      create:
+        success: 'Usuario creado correctamente e invitación enviada a su email'
     user_registrations:
     user_sessions:
     users:

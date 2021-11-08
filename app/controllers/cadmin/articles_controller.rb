@@ -45,7 +45,7 @@ module Cadmin
       @article = Article.create(article_params)
 
       if @article.save
-        redirect_to  @article, notice: 'Article was successfully created.'
+        redirect_to  @article,notice: t('.success')
       else
         render :new
       end
@@ -54,7 +54,7 @@ module Cadmin
     # PATCH/PUT /articles/1
     def update
       if @article.update(article_params)
-        redirect_to @article, notice: 'Article was successfully updated.'
+        redirect_to @article, notice: t('.success')
       else
         render :edit
       end

@@ -30,8 +30,7 @@ module Cadmin
       @main_service.position = @lastposition.to_i + 1
       
       if @main_service.save
-        redirect_to @main_service, notice: 'Main service was successfully created.'
-      else
+        redirect_to @main_service, notice: t('.success')
         render :new
       end
     end
@@ -39,7 +38,7 @@ module Cadmin
     # PATCH/PUT /main_services/1
     def update
       if @main_service.update(main_service_params)
-        redirect_to @main_service, notice: 'Main service was successfully updated.'
+        redirect_to @main_service, notice: t('.success')
       else
         render :edit
       end

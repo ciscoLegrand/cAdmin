@@ -47,7 +47,7 @@ module Cadmin
     # PATCH/PUT /messages/1
     def update
       if @message.update(message_params)
-        redirect_to @message, notice: 'Message was successfully updated.'
+        redirect_to @message
       else
         render :edit
       end

@@ -30,7 +30,7 @@ module Cadmin
       @discount = Discount.new(discount_params)
 
       if @discount.save
-        redirect_to @discount, notice: 'Discount was successfully created.'
+        redirect_to @discount, notice: t('.success')
       else
         render :new
       end
@@ -39,8 +39,7 @@ module Cadmin
     # PATCH/PUT /discounts/1
     def update
       if @discount.update(discount_params)
-        redirect_to @discount, notice: 'Discount was successfully updated.'
-      else
+        redirect_to @discount, notice: t('.success')
         render :edit
       end
     end
