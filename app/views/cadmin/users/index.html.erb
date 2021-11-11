@@ -3,11 +3,44 @@
 <div class="clearfix"></div>
 <%= turbo_frame_tag :users do %>  
   <% if @users.present? %>
-    <ul>
-      <% @users.each do |users| %>
-        <li><%= users.email %> | <%= users.role %></li>  
-      <% end %>
-    </ul> 
+    <div class="card-content">
+      <div class="b-table has-pagination is-scrollable-touch">
+        <div class="table-wrapper has-mobile-cards">
+          <table class="table is-fullwidth is-striped is-hoverable is-fullwidth is-scrollable-touch">
+            <thead>
+              <tr>
+                <th></th>
+                <th class="is-size-7-mobile"><%= t '.name' %></th>
+                <th class="is-size-7-mobile"><%= t '.last_name' %></th>
+                <th class="is-size-7-mobile"><%= t '.phone' %></th>
+                <th class="is-size-7-mobile"><%= t '.email' %></th>                
+                <th class="is-size-7-mobile"><%= t '.role' %></th>
+              </tr>
+            </thead>
+            <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td class="is-image-cell">
+                  <div class="image is-32x32">                    
+                    <div class="has-text-white has-background-danger is-size-5 sidebar__letter_user">
+                      <%=  user.name.to_s[0] %>
+                    </div>                    
+                    <!-- <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="is-rounded"> -->
+                  </div>
+                </td>        
+                <td data-label="Name"><%= user.name %></td>
+                <td data-label="Name"><%= user.last_name %></td>
+                <td data-label="Name"><%= user.phone %></td>
+                <td data-label="Email"><%= user.email %></td>                
+                <td  data-label="Role">  <%= user.role %> </td>
+                <td></td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div> 
   <% else %>
     <div class="box is-fullwidth">
       <div class="is-flex is-justify-content-center">

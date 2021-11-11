@@ -1,4 +1,1 @@
-<h1>Dashboard#index</h1>
-<p>Find me in app/views/cadmin/dashboard/index.html.erb</p>
-
-<%= turbo_frame_tag :users, loading: :lazy, src: users_path, model:  Cadmin::User.where.not(sign_in_count: 0).all    %>
+<%= turbo_frame_tag :users, loading: :lazy, src: users_path  %>

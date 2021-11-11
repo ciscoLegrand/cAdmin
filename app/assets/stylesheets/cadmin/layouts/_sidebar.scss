@@ -10,6 +10,12 @@
   display: flex;
   flex-direction: column;
 
+  &__logo{
+    min-height: 64px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1.5rem;
+  }
+
   &.open {
     width: 260px;
     visibility: visible;
@@ -38,12 +44,16 @@
     text-transform: uppercase;
     background-color: $white;
     color: $black !important;
-    width: 24px;
+    width: 32px;
     text-align: center;
     border-radius: 50px;
     float: left;
     margin-right: 10px;
     margin-left: 10px;    
+    height: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
   }
 
   .dropdown-item {

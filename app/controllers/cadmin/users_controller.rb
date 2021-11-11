@@ -1,11 +1,11 @@
 class Cadmin::UsersController < ApplicationController
-  before_action :authenticate_cadmin_user!
   before_action :set_title
   before_action :set_user, only: [:edit, :update, :show]
 
 
   def index 
-    @users = Cadmin::User.all
+    @users = Cadmin::User.all 
+    
   end
   # todo: edit & update users && user account | soft delete user account | 
 
@@ -38,8 +38,7 @@ class Cadmin::UsersController < ApplicationController
     end
   end
   
-  def info 
-  end
+
 
   private
   def set_user

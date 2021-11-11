@@ -5,7 +5,7 @@ class CreateCadminEvents < ActiveRecord::Migration[6.1]
       t.integer :employee_id, null: true, foreign_key: {to_table: :cadmin_users}
       t.string :title
       t.string :type_name, null: false, default: 'wedding'
-      t.string :number, null: false 
+      t.string :number, null: false, unique: true
       t.date :date, null: false
       t.integer :guests 
       t.integer :place_id

@@ -1,88 +1,96 @@
 
 <%= render Cadmin::SearchFormComponent.new(path: events_path,params: 'number',  button:'')%>
 
-
-<%= link_to "#{t '.new'}", new_event_path, class: 'button is-success is-outlined' if current_cadmin_user.admin? %>
-<%= turbo_frame_tag :events do %>
-  <div class="card has-table">
-    <header class="card-header">
-      <p class="card-header-title"> <%= t '.page_title' %> </p>
-    </header>
-    <div class="card-content">
-      <div class="b-table has-pagination is-scrollable-touch">
-        <div class="table-wrapper has-mobile-cards">
-          <table class="table is-fullwidth is-striped is-hoverable is-fullwidth is-scrollable-touch">
-            <thead>
-              <tr>
-                <th class="is-checkbox-cell">
-                  <label class="b-checkbox checkbox">
-                    <input type="checkbox" value="false">
-                    <span class="check"></span>
-                  </label>
-                </th>
-                <th class="is-size-7-mobile"><%= link_to "#{t '.title'}", sort: 'title' %></th>
-                <th class="is-size-7-mobile"><%= link_to "#{t '.type_name'}", sort: 'type_name' %></th>
-                <th class="is-size-7-mobile"><%= link_to "#{t '.number'}", sort: 'number' %></th>
-                <th class="is-size-7-mobile"><%= link_to "#{t '.date'}", sort: 'date' %></th>
-                <th class="is-size-7-mobile"><%= link_to "#{t '.place_id'}", sort: 'place_id' %></th>
-                <th class="is-size-7-mobile"><%= link_to "#{t '.employee_id'}", sort: 'employee_id' %></th>
-                <th class="is-size-7-mobile"><%= t '.service_ids' %></th>
-                <th class="is-size-7-mobile"><%= t '.deposit' %></th>
-                <th class="is-size-7-mobile"><%= t '.pending' %></th>
-                <th class="is-size-7-mobile"><%= t '.total_amount' %></th>
-                <th class="is-size-7-mobile"><%= t '.charged' %></th>
-                <th class="is-size-7-mobile"><%= "#{t '.actions'}" %></th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @events.each do |event| %>           
-                <tr  data-controller='charged'>
-                  <td class="is-checkbox-cell">
+<section class="section"> 
+  <%= turbo_frame_tag :events do %>
+    <div class="card has-table">
+      <header class="card-header is-align-items-center pr-4">
+        <div class="card-header-title"> 
+          <%= link_to "#{t '.new'}", new_event_path, class: 'button is-success is-outlined' if current_cadmin_user.admin? %>
+          <div class="has-text-centered is-fullwidth title is-size-4-desktop is-size-5-touch">
+            <%= t '.page_title' %> 
+          </div>
+        </div>
+        <span class="tag is-warning is-rounded" style="padding-top:5px;"><%= link_to inline_svg_tag('cadmin/icons/ico-refresh.svg', class: 'icon is-small'), events_path%></span>
+      </header>
+      <div class="card-content">
+        <div class="b-table has-pagination is-scrollable-touch">
+          <div class="table-wrapper has-mobile-cards">
+            <table class="table is-fullwidth is-striped is-hoverable is-fullwidth is-scrollable-touch">
+              <thead>
+                <tr>
+                  <th class="is-checkbox-cell">
                     <label class="b-checkbox checkbox">
                       <input type="checkbox" value="false">
                       <span class="check"></span>
                     </label>
-                  </td>
-                  <td class="is-size-7-mobile"><%= event.title %></td>
-                  <td class="is-size-7-mobile"><%= event.type_name %></td>
-                  <td class="is-size-7-mobile"><%= event.number %></td>
-                  <td data-label="date"><small class="has-text-grey is-abbr-like" title="<%= event.date %>"><%= event.date.strftime('%d-%m-%y') %></small></td>
-                  <td class="is-size-7-mobile"><%= link_to event.placename, Cadmin::Location.find_by_id(event.place_id)  %></td>
-                  <td class="is-size-7-mobile"><%= event.employee_name if event.employee_id.present? %></td>
-                  <td class="is-size-7-mobile"><%= event.servicenames  %></td>
-                  <td class="is-size-7-mobile"><%= number_with_precision(event.deposit, precision: 2) %></td>     
-                  <td class="is-size-7-mobile"><%= number_with_precision(event.total_services_amount - event.deposit, precision: 2) %></td>               
-                  <td class="is-size-7-mobile"><%= number_with_precision(event.total_services_amount, precision: 2) %></td> 
-                  <td data-charged-target="tag" class="<%= event.charged == true ? 'has-background-success' : 'default'%> is-size-7-mobile"><%= event.charged? ? 'Cobrado' : 'Pendiente' %> </td>
-                  <td class="is-actions-cell">
-                    <div class="buttons">                    
-                      <!-- todo: REVISAR ENLACE QUE NO REDIRIJA Y QUE ACTUALICE DATO -->
-                      <%= link_to inline_svg_tag('cadmin/icons/ico-euro.svg', class: 'icon is-medium   has-text-primary') , charged_event_path(event), data: {action: 'charged#change',  turbo: false},  class: 'button is-clickable m-0' %>
-                      <%= link_to inline_svg_tag('cadmin/icons/ico-eye.svg', class: 'icon is-medium has-text-primary'), event ,data:{turbo_frame: "_top"}, class: 'button is-clickable m-0' %>
-                      <% if current_cadmin_user.admin? %>
-                        <%= link_to inline_svg_tag('cadmin/icons/ico-edit.svg', class: 'icon is-medium has-text-primary'), edit_event_path(event), data:{turbo_frame: "_top"}, class: 'button is-clickable m-0' %>
-                        <%= button_to event, method: :delete, data: { confirm: 'Are you sure?' }, class:"button is-clickable m-0"  do %>
-                          <%=  inline_svg_tag('cadmin/icons/ico-trash.svg', class: 'icon is-medium has-text-primary') %>
-                        <% end %>    
-                      <% end %>
-                    </div>
-                  </td>
+                  </th>
+                  <th class="is-size-7-mobile"><%= link_to "#{t '.title'}", sort: 'title' %></th>
+                  <th class="is-size-7-mobile"><%= link_to "#{t '.type_name'}", sort: 'type_name' %></th>
+                  <th class="is-size-7-mobile"><%= link_to "#{t '.number'}", sort: 'number' %></th>
+                  <th class="is-size-7-mobile"><%= link_to "#{t '.date'}", sort: 'date' %></th>
+                  <th class="is-size-7-mobile"><%= link_to "#{t '.place_id'}", sort: 'place_id' %></th>
+                  <th class="is-size-7-mobile"><%= link_to "#{t '.employee_id'}", sort: 'employee_id' %></th>
+                  <th class="is-size-7-mobile"><%= t '.service_ids' %></th>
+                  <th class="is-size-7-mobile"><%= t '.deposit' %></th>
+                  <th class="is-size-7-mobile"><%= t '.pending' %></th>
+                  <th class="is-size-7-mobile"><%= t '.total_amount' %></th>
+                  <th class="is-size-7-mobile"><%= t '.charged' %></th>
+                  <th class="is-size-7-mobile"><%= "#{t '.actions'}" %></th>
                 </tr>
-              <% end %>
-              <tr>
-                <td colspan="9">
-                </td>
-                <th><%= t '.total_amount' %> </th>
-                <td><%= number_with_precision(@total, precision: 2) %></td>
-                <td colspan="2"></td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="box">
-            <%== pagy_bulma_nav(@pagy) %>
+              </thead>
+              <tbody>
+                <% @events.each do |event| %>           
+                  <tr  data-controller='charged'>
+                    <td class="is-checkbox-cell">
+                      <label class="b-checkbox checkbox">
+                        <input type="checkbox" value="false">
+                        <span class="check"></span>
+                      </label>
+                    </td>
+                    <td class="is-size-7-mobile"><%= event.title %></td>
+                    <td class="is-size-7-mobile"><%= event.type_name %></td>
+                    <td class="is-size-7-mobile"><%= event.number %></td>
+                    <td data-label="date"><small class="has-text-grey is-abbr-like" title="<%= event.date %>"><%= event.date.strftime('%d-%m-%y') %></small></td>
+                    <td class="is-size-7-mobile"><%= link_to event.placename, Cadmin::Location.find_by_id(event.place_id)  %></td>
+                    <td class="is-size-7-mobile"><%= event.employee_name if event.employee_id.present? %></td>
+                    <td class="is-size-7-mobile"><%= event.servicenames  %></td>
+                    <td class="is-size-7-mobile"><%= number_with_precision(event.deposit, precision: 2) %></td>     
+                    <td class="is-size-7-mobile"><%= number_with_precision(event.total_services_amount - event.deposit, precision: 2) %></td>               
+                    <td class="is-size-7-mobile"><%= "#{number_with_precision(event.total_services_amount, precision: 2)}#{t 'currency'}" %></td> 
+                    <td data-charged-target="tag" class="<%= event.charged == true ? 'has-background-success' : 'default'%> is-size-7-mobile"><%= event.charged? ? 'Cobrado' : 'Pendiente' %> </td>
+                    <td class="is-actions-cell">
+                      <div class="buttons">                    
+                        <!-- todo: REVISAR ENLACE QUE NO REDIRIJA Y QUE ACTUALICE DATO -->
+                        <%= link_to inline_svg_tag('cadmin/icons/ico-euro.svg', class: 'icon is-medium   has-text-primary') , charged_event_path(event), data: {action: 'charged#change',  turbo: false},  class: 'button is-clickable m-0' %>
+                        <%= link_to inline_svg_tag('cadmin/icons/ico-eye.svg', class: 'icon is-medium has-text-primary'), event ,data:{turbo_frame: "_top"}, class: 'button is-clickable m-0' %>
+                        <% if current_cadmin_user.admin? %>
+                          <%= link_to inline_svg_tag('cadmin/icons/ico-edit.svg', class: 'icon is-medium has-text-primary'), edit_event_path(event), data:{turbo_frame: "_top"}, class: 'button is-clickable m-0' %>
+                          <%= button_to event, method: :delete, data: { confirm: 'Are you sure?' }, class:"button is-clickable m-0"  do %>
+                            <%=  inline_svg_tag('cadmin/icons/ico-trash.svg', class: 'icon is-medium has-text-primary') %>
+                          <% end %>    
+                        <% end %>
+                      </div>
+                    </td>
+                  </tr>
+                <% end %>
+                <tr>
+                  <td></td>
+                  <th><%= t '.events_count' %> </th>
+                  <td><%= @events.count%></td>
+                  <td colspan="6"></td>
+                  <th><%= t '.total_amount' %> </th>
+                  <td><%= "#{number_with_precision(@total, precision: 2)}#{t 'currency'}" %></td>
+                  <td colspan="2"></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="box">
+              <%== pagy_bulma_nav(@pagy) %>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</section>

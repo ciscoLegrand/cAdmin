@@ -9,6 +9,7 @@ Cadmin::Engine.routes.draw do
   match '/agenda', to: "dashboard#agenda",  via: :get, as: :agenda
   match '/interviews', to: "interviews#index",  via: :get, as: :interviews
   match '/interviews/:id', to: "interviews#show",  via: :get, as: :interview
+  match '/users', to: "users#index",  via: :get, as: :users
   # match '/charged', to: "events#charged", via: :get, as: :charged
   # match '/charged', to: "events#charged", via: :put, as: :charged
   

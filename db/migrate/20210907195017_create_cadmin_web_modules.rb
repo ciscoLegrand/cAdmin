@@ -11,7 +11,7 @@ class CreateCadminWebModules < ActiveRecord::Migration[6.1]
       t.boolean :invitable
       t.boolean :paypal
       t.boolean :stripe
-      t.boolean :adyen
+      t.boolean :multisafe
 
       t.timestamps
     end

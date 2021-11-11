@@ -1,8 +1,8 @@
 <!-- sidebaar-->
 <aside class="sidebar" data-controller="sidebar" data-action="openSidebar@window->sidebar#open">
 <button class="sidebar__close delete" aria-label="close" data-action="sidebar#close"></button>
-  <div class="has-text-centered">
-    <%= link_to inline_svg_tag("cadmin/icons/ico-home.svg", size: "90", class:"has-text-white-ter"), root_path %>              
+  <div class="has-text-centered has-background-white sidebar__logo">
+    <%#= link_to inline_svg_tag("cadmin/icons/ico-home.svg", size: "90", class:"has-text-white-ter"), root_path %>              
   </div>
   <nav class="vertical" data-controller="menu">
     <ul>
@@ -16,33 +16,35 @@
       </li>
       <li>  
         <span class="panel-block is-flex is-justify-content-flex-start is-align-items-start is-clickable is-hoverable has-no-bottom-line sidebar__arrow" data-action="click->menu#set_active_menu" data-menu="events">
-          <%= inline_svg_tag('cadmin/icons/ico-users.svg', class:'icon mx-4')%> Eventos
+          <%= inline_svg_tag('cadmin/icons/ico-calendar.svg', class:'icon mx-4')%> Eventos
         </span>
         <ul data-menu-target="dropdown">
           <li>
             <%= link_to events_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'event', action: 'click->menu#set_active_menu_item'} do %>
-              Eventos<%= inline_svg_tag('cadmin/icons/ico-user-add.svg', class:'icon ')%>
+              Eventos<%= inline_svg_tag('cadmin/icons/ico-calendar.svg', class:'icon ')%>
             <% end %>
           </li>
           <li>
             <%= link_to interviews_path, class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'interviews', action: 'click->menu#set_active_menu_item'} do %>
-              Entrevistas<%= inline_svg_tag('cadmin/icons/ico-user-add.svg', class:'icon ')%>
+              Entrevistas<%= inline_svg_tag('cadmin/icons/ico-clipboard-list.svg', class:'icon ')%>
             <% end %>
           </li>
-          <li>
-            <%= link_to agenda_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'agenda', action: 'click->menu#set_active_menu_item'} do %>
-              Agenda<%= inline_svg_tag('cadmin/icons/ico-user-add.svg', class:'icon ')%>
-            <% end %>
-          </li>
+          <% if 1 == 0 %>
+            <li>
+              <%= link_to agenda_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'agenda', action: 'click->menu#set_active_menu_item'} do %>
+                Agenda<%= inline_svg_tag('cadmin/icons/ico-calendar.svg', class:'icon ')%>
+              <% end %>
+            </li>  
+          <% end %>
           <% if current_cadmin_user.admin? %>
             <li>
               <%= link_to discounts_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'discounts', action: 'click->menu#set_active_menu_item'}  do %>
-                Descuentos<%= inline_svg_tag('cadmin/icons/ico-user-add.svg', class:'icon ')%>
+                Descuentos<%= inline_svg_tag('cadmin/icons/ico-information-circle.svg', class:'icon ')%>
               <% end %>
             </li>
             <li>
               <%= link_to locations_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'places', action: 'click->menu#set_active_menu_item'}  do %>
-                Restaurantes<%= inline_svg_tag('cadmin/icons/ico-user-add.svg', class:'icon ')%>
+                Restaurantes<%= inline_svg_tag('cadmin/icons/ico-location.svg', class:'icon ')%>
               <% end %>
             </li>
           <% end %>
@@ -51,7 +53,7 @@
       <% if current_cadmin_user.admin? %>
         <li>  
           <span class="panel-block is-flex is-justify-content-flex-start is-align-items-start is-clickable is-hoverable has-no-bottom-line sidebar__arrow" data-action="click->menu#set_active_menu" data-menu="users">
-            <%= inline_svg_tag('cadmin/icons/ico-users.svg', class:'icon mx-4')%> Usuarios
+            <%= inline_svg_tag('cadmin/icons/ico-user-group.svg', class:'icon mx-4')%> Usuarios
           </span>
           <ul data-menu-target="dropdown">
             <li>
@@ -59,29 +61,31 @@
                 Invitar<%= inline_svg_tag('cadmin/icons/ico-user-add.svg', class:'icon ')%>
               <% end %>
             </li>
-            <li>
-              <%= link_to users_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'active', action: 'click->menu#set_active_menu_item'} do %>
-                Usuarios<%= inline_svg_tag('cadmin/icons/ico-user-add.svg', class:'icon ')%>
-              <% end %>
-            </li>
+            <% if 1 == 0 %>
+              <li>
+                <%= link_to users_list_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'active', action: 'click->menu#set_active_menu_item'} do %>
+                  Usuarios<%= inline_svg_tag('cadmin/icons/ico-user-group.svg', class:'icon ')%>
+                <% end %>
+              </li>
+            <% end %>
           </ul>
         </li>
 
       <% end %>
       <li>  
         <span class="panel-block is-flex is-justify-content-flex-start is-align-items-start is-clickable is-hoverable has-no-bottom-line sidebar__arrow" data-action="click->menu#set_active_menu" data-menu="services">
-          <%= inline_svg_tag('cadmin/icons/ico-cog.svg', class:'icon mx-4')%> Servicios
+          <%= inline_svg_tag('cadmin/icons/ico-headset-outline.svg', class:'icon mx-4')%> Servicios
         </span>
         <ul data-menu-target="dropdown">
           <li>
             <%= link_to new_main_service_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'create_main_service', action: 'click->menu#set_active_menu_item'} do %>
-              Nueva categoria<%= inline_svg_tag('cadmin/icons/ico-user-add.svg', class:'icon ')%>
+              Nueva categoria<%= inline_svg_tag('cadmin/icons/ico-plus-circle.svg', class:'icon ')%>
             <% end %>
           </li>
           <% @main_services.each do |main|%>
             <li>
               <%= link_to main_service_services_path(main) , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': "#{main.name}", action: 'click->menu#set_active_menu_item'} do %>
-                <%= main.name.capitalize %><%= inline_svg_tag('cadmin/icons/ico-key.svg', class:'icon ')%>
+                <%= main.name.capitalize %><%= inline_svg_tag('cadmin/icons/ico-view-grid-add.svg', class:'icon ')%>
               <% end %>
             </li>
           <% end %>
@@ -89,12 +93,12 @@
       </li>
       <li>  
         <span class="panel-block is-flex is-justify-content-flex-start is-align-items-start is-clickable is-hoverable has-no-bottom-line sidebar__arrow" data-action="click->menu#set_active_menu" data-menu="mailbox">
-          <%= inline_svg_tag('cadmin/icons/ico-cog.svg', class:'icon mx-4')%> Mensajes <% if @unviewed_messages > 0 %><span class="tag is-danger is-rounded is-flex ml-6"><%= @unviewed_messages %></span> <% end %>
+          <%= inline_svg_tag('cadmin/icons/ico-chat.svg', class:'icon mx-4')%> Mensajes <% if @unviewed_messages > 0 %><span class="tag is-danger is-rounded is-flex ml-6"><%= @unviewed_messages %></span> <% end %>
         </span>
         <ul data-menu-target="dropdown">
           <li>
             <%= link_to conversations_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'inbound', action: 'click->menu#set_active_menu_item'} do %>
-              Buzon <%= inline_svg_tag('cadmin/icons/ico-key.svg', class:'icon ')%>
+              Buzon <%= inline_svg_tag('cadmin/icons/ico-chat.svg', class:'icon ')%>
             <% end %>
           </li>
         </ul>
@@ -102,33 +106,33 @@
       <% if  current_cadmin_user.admin? %>
         <li>  
           <span class="panel-block is-flex is-justify-content-flex-start is-align-items-start is-clickable is-hoverable has-no-bottom-line sidebar__arrow" data-action="click->menu#set_active_menu" data-menu="blog">
-            <%= inline_svg_tag('cadmin/icons/ico-cog.svg', class:'icon mx-4')%> Blog 
+            <%= inline_svg_tag('cadmin/icons/ico-book-open.svg', class:'icon mx-4')%> Blog 
           </span>
           <ul data-menu-target="dropdown">
             <li>
               <%= link_to articles_path  , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'articles', action: 'click->menu#set_active_menu_item'} do %>
-                Articulos<%= inline_svg_tag('cadmin/icons/ico-document.svg', class:'icon ')%>
+                Articulos<%= inline_svg_tag('cadmin/icons/ico-book-open.svg', class:'icon ')%>
               <% end %>
             </li>
             <li>
               <%= link_to new_article_path  , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'new_article', action: 'click->menu#set_active_menu_item'} do %>
-                Crear Articulo<%= inline_svg_tag('cadmin/icons/ico-document-add.svg', class:'icon ')%>
+                Crear Articulo<%= inline_svg_tag('cadmin/icons/ico-plus-circle.svg', class:'icon ')%>
               <% end %>
             <li>
               <%= link_to new_article_category_path  , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'new_category', action: 'click->menu#set_active_menu_item'} do %>
-                Crear Categoria<%= inline_svg_tag('cadmin/icons/ico-document-add.svg', class:'icon ')%>
+                Crear Categoria<%= inline_svg_tag('cadmin/icons/ico-plus-circle.svg', class:'icon ')%>
               <% end %>
             </li>
             <li>
               <%= link_to new_tag_path  , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'new_tag', action: 'click->menu#set_active_menu_item'} do %>
-                Crear tag<%= inline_svg_tag('cadmin/icons/ico-document-add.svg', class:'icon ')%>
+                Crear tag<%= inline_svg_tag('cadmin/icons/ico-plus-circle.svg', class:'icon ')%>
               <% end %>
             </li>
             </li>
           </ul>
         </li>
       <% end %>
-      <% if current_cadmin_user.admin? %>
+      <% if current_cadmin_user.superadmin? %>
         <li>  
           <span class="panel-block is-flex is-justify-content-flex-start is-align-items-start is-clickable is-hoverable has-no-bottom-line sidebar__arrow" data-action="click->menu#set_active_menu" data-menu="conf">
             <%= inline_svg_tag('cadmin/icons/ico-cog.svg', class:'icon mx-4')%> Configuración

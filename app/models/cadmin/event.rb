@@ -33,7 +33,13 @@ module Cadmin
     def placename 
       Location.find_by_id( self.place_id).name if self.place_id.present? 
     end
-
+    #! create unique number of event
+    def create_number
+      user = self.customer_id.to_s.rjust(5,"0") 
+      number = "LGMD/#{user}-#{Time.now.strftime("%d%m%y%H%M")}"
+      self.number = number 
+      self.save
+    end
     #! calculate the total of the event for the associated services and discounts
     def total_services_amount   
       total = 0  

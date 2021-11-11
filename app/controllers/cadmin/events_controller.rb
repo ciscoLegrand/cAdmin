@@ -6,8 +6,7 @@ module Cadmin
     add_breadcrumb 'Eventos', :events_path
     # GET /events
     def index      
-      # @users = current_cadmin_user.where(deleted_at: nil).pluck(:id) #devuelve array de users´ids importante si hacemos soft delete de users      
-      
+      # @users = current_cadmin_user.where(deleted_at: nil).pluck(:id) #devuelve array de users´ids importante si hacemos soft delete de users  
       #! get events
       events = Event.where(customer_id: current_cadmin_user.id).order('date DESC') if current_cadmin_user.customer? || current_cadmin_user.employee?      
       events = Event.all.order('date DESC') if current_cadmin_user.admin?
@@ -22,7 +21,7 @@ module Cadmin
 
       #! get total price events
       @total = employee_salary(events) if current_cadmin_user.employee?
-      @total = total_events if current_cadmin_user.admin? 
+      @total = total_events(events) if current_cadmin_user.admin? 
       
       #! paginate events
       @pagy, @events = pagy(events, items: 10 )
@@ -38,6 +37,7 @@ module Cadmin
     def new
       add_breadcrumb 'Nuevo Evento'
       @event = Event.new
+      
       # @event.event_services.build
     end
 
@@ -49,7 +49,9 @@ module Cadmin
 
     # POST /events
     def create
+      
       @event = Event.new(event_params)  
+      @event.create_number
       if @event.save
         
         @event.update(total_amount: @event.total_services_amount)
@@ -61,6 +63,7 @@ module Cadmin
 
     # PATCH/PUT /events/1
     def update
+      
       if @event.update(event_params)  
         @event.update(total_amount: @event.total_services_amount)
         
@@ -81,6 +84,7 @@ module Cadmin
 
     # DELETE /events/1
     def destroy
+      
       @event.destroy
       redirect_to events_url, notice: 'Event was successfully destroyed.'
     end
@@ -104,9 +108,9 @@ module Cadmin
       total
     end
 
-    def total_events
+    def total_events(events)
       total = 0
-      Event.all.each do |event|
+      events.all.each do |event|
         total += event.total_services_amount
       end 
       total
