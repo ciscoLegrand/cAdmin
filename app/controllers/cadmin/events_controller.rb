@@ -22,7 +22,8 @@ module Cadmin
       #! get total price events
       @total = employee_salary(events) if current_cadmin_user.employee?
       @total = total_events(events) if current_cadmin_user.admin? 
-      
+      #! number of events to show
+      @events_count = events.present? ? events.count : 0
       #! paginate events
       @pagy, @events = pagy(events, items: 10 )
     end
