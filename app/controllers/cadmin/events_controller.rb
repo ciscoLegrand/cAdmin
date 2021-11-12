@@ -25,7 +25,7 @@ module Cadmin
       #! number of events to show
       @events_count = events.present? ? events.count : 0
       #! paginate events
-      @pagy, @events = pagy(events, items: 10 )
+      @pagy, @events = pagy(events, items: 10 ) if @events.present? 
     end
 
     # GET /events/1

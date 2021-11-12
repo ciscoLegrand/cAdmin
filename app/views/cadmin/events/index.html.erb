@@ -85,9 +85,11 @@
                 </tr>
               </tbody>
             </table>
-            <div class="box">
-              <%== pagy_bulma_nav(@pagy) %>
-            </div>
+            <% if @events.present? %>
+              <div class="box">
+                <%== pagy_bulma_nav(@pagy) %>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
