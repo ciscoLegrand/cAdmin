@@ -2,7 +2,7 @@ module Cadmin
   class Event < ApplicationRecord
     belongs_to :customer, foreign_key: :customer_id, class_name: 'User'
     belongs_to :employee, optional: true, foreign_key: :employee_id, class_name: 'User'
-    has_one :interview
+    has_one :interview, dependent: :destroy
     has_many :event_services, dependent: :destroy 
     accepts_nested_attributes_for :event_services, allow_destroy: true, reject_if: proc { |attr| attr['service_id'].blank? }
     

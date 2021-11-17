@@ -10,5 +10,22 @@ module Cadmin
     def permitted_status
       [['Pendiente', 'pending'],['Publicado', 'published'],['Unpublicado','unpublished'],['Borradores','drafts']]
     end
+
+    #! options for sweetalert2
+    def default_swal_options
+      '{
+        "title": "Estás seguro?",
+        "text": "Una vez eliminado no podrás recuperar el registro",
+        "icon": "warning",
+        "showCancelButton": true,
+        "confirmButtonText":  "Eliminar",
+        "cancelButtonText": "Cancelar",
+        "buttonsStyling": false,
+        "customClass": {
+          "confirmButton": "button is-danger mx-2",
+          "cancelButton": "button is-light mx-2"
+        }
+      }'
+    end
   end
 end

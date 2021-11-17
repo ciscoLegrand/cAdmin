@@ -66,7 +66,7 @@
                         <%= link_to inline_svg_tag('cadmin/icons/ico-eye.svg', class: 'icon is-medium has-text-primary'), event ,data:{turbo_frame: "_top"}, class: 'button is-clickable m-0' %>
                         <% if current_cadmin_user.admin? %>
                           <%= link_to inline_svg_tag('cadmin/icons/ico-edit.svg', class: 'icon is-medium has-text-primary'), edit_event_path(event), data:{turbo_frame: "_top"}, class: 'button is-clickable m-0' %>
-                          <%= button_to event, method: :delete, data: { confirm: 'Are you sure?' }, class:"button is-clickable m-0"  do %>
+                          <%= button_to event, method: :delete, data: { controller: "swal", action: "click->swal#fire", swal_options_value: default_swal_options,turbo_frame: "_top" }, class:"button is-clickable m-0"  do %>
                             <%=  inline_svg_tag('cadmin/icons/ico-trash.svg', class: 'icon is-medium has-text-primary') %>
                           <% end %>    
                         <% end %>
