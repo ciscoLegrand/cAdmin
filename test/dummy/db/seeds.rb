@@ -1,8 +1,8 @@
-Cadmin::User.create(name: 'cisco', username: 'ciscolegrand', email: 'test@test.com',phone: '+34625650792', password: 'test123', role: 'admin')
+Cadmin::User.create(name: 'cisco', username: 'admin', email: 'creadix@creadix.com',phone: '+34625650792', password: 'test123', role: 'superadmin')
 Cadmin::User.create(name: 'yona', username: 'yonidrama', email: 'customer1@test.com',phone: '+34625650392', password: 'test123', role: 'customer')
-Cadmin::User.create(name: 'pepas', username: 'en_la_discoteca', email: 'customer2@test.com',phone: '+34625650192', password: 'test123', role: 'customer')
-Cadmin::User.create(name: 'pacos', username: 'pacosindajaus', email: 'customer3@test.com',phone: '+34625650292', password: 'test123', role: 'customer')
-Cadmin::User.create(name: 'drama', username: 'queen', email: 'employee1@test.com',phone: '+34625350192', password: 'test123', role: 'employee')
+Cadmin::User.create(name: 'pepe', username: 'pepito', email: 'customer2@test.com',phone: '+34625650192', password: 'test123', role: 'customer')
+Cadmin::User.create(name: 'paco', username: 'paquito', email: 'customer3@test.com',phone: '+34625650292', password: 'test123', role: 'customer')
+Cadmin::User.create(name: 'cisco', username: 'cisco', email: 'cisco.glez@gmail.com',phone: '+34625350192', password: 'test123', role: 'employee')
 Cadmin::User.create(name: 'franchy', username: 'franchyto', email: 'employee2@test.com',phone: '+34625651292', password: 'test123', role: 'employee')
 count = 0
 names = [
