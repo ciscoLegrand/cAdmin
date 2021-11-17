@@ -99,7 +99,7 @@
     </template>
     
     <%= form.fields_for :event_services do |event_service| %> 
-      <%= render 'event_service_fields', form: event_service %> 
+      <%= render 'event_service_fields', form: event_service if event_service.present? %> 
     <% end %>      
     
     <div class="actions my-4"  data-nested-form-target="add_item">

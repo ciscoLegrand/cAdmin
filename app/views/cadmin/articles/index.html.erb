@@ -49,10 +49,10 @@
               </div>
             </div>
           </div>  
-          <footer class="card-footer article__cfooter">
-            <a href="#" class="card-footer-item"><%= link_to "#{t '.read_more'}", article %></a>
-            <a href="#" class="card-footer-item"><%= link_to  "#{t '.edit'}", edit_article_path(article) %></a>
-            <a href="#" class="card-footer-item"><%= link_to  "#{t '.destroy'}", article, method: :delete, data: { confirm: 'Are you sure?' } %></a>
+          <footer class="card-footer">
+            <%= link_to "#{t '.read_more'}", article, class:"card-footer-item" %>
+            <%= link_to  "#{t '.edit'}", edit_article_path(article), class:"card-footer-item" %>
+            <%= link_to  "#{t '.destroy'}", article, method: :delete, data: { confirm: 'Are you sure?' }, class:"card-footer-item"  %>
           </footer>
         </div>
       </div>

@@ -8,8 +8,8 @@ module Cadmin
     def index      
       # @users = current_cadmin_user.where(deleted_at: nil).pluck(:id) #devuelve array de users´ids importante si hacemos soft delete de users  
       #! get events
-      events = Event.where(customer_id: current_cadmin_user.id).order('date DESC') if current_cadmin_user.customer? || current_cadmin_user.employee?      
-      events = Event.all.order('date DESC') if current_cadmin_user.admin?
+      events = Event.where(customer_id: current_cadmin_user.id) if current_cadmin_user.customer? || current_cadmin_user.employee?      
+      events = Event.all if current_cadmin_user.admin?
 
       #! search events
       events = events.filter_by_number(params[:number]) if params[:number].present?
@@ -25,7 +25,7 @@ module Cadmin
       #! number of events to show
       @events_count = events.present? ? events.count : 0
       #! paginate events
-      @pagy, @events = pagy(events, items: 10 ) if @events.present? 
+      @pagy, @events = pagy(events.order('date DESC'), items: 10) if @events.present? 
     end
 
     # GET /events/1
@@ -92,7 +92,6 @@ module Cadmin
 
     def charged 
       @event.update(charged: !@event.charged)
-      #todo: review this to prevent
       redirect_to events_path
     end
 
