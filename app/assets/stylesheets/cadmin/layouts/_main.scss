@@ -3,7 +3,23 @@ main{
   height: 100vh;
 }
 .main {
-  margin-left: 260px;
+  &__is-10__is-offset-2 {
+    flex: none;
+    width: 83.3333333333%;
+    margin-left: 16.6666666667%;
+    transition: .5s;
+    
+    @include touch {
+      margin-left: unset;
+      width: 100vw;
+    }
+  }
+
+  &__w95{
+    margin-left: 5%;
+    width: 95%;
+    transition: .5s
+  }
 
   @include touch {
     margin-left: 0;

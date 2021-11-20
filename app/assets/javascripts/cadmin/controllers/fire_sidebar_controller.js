@@ -1,7 +1,8 @@
 import { Controller } from 'stimulus'
 
 export default class extends Controller {
-    fire() {
+    fire(e) {
+        e.preventDefault();
         window.dispatchEvent(new CustomEvent("openSidebar"));
     }
 }

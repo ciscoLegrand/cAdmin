@@ -1,12 +1,12 @@
 
 <%= render Cadmin::SearchFormComponent.new(path: events_path,params: 'number',  button:'')%>
+<div class="is-clearfix"></div>
 
-<section class="section"> 
   <%= turbo_frame_tag :events do %>
     <div class="card has-table">
       <header class="card-header is-align-items-center pr-4">
         <div class="card-header-title"> 
-          <%= link_to "#{t '.new'}", new_event_path, target: '_top',class: 'button is-success is-outlined' if current_cadmin_user.admin? %>
+          <%= link_to "#{t '.new'}", new_event_path, target: '_top',class: 'button is-primary is-outlined' if current_cadmin_user.admin? %>
           <div class="has-text-centered is-fullwidth title is-size-4-desktop is-size-5-touch">
             <%= t '.page_title' %> 
           </div>
@@ -42,11 +42,8 @@
               <tbody>
                 <% @events.each do |event| %>           
                   <tr  data-controller='charged'>
-                    <td class="is-checkbox-cell">
-                      <label class="b-checkbox checkbox">
-                        <input type="checkbox" value="false">
-                        <span class="check"></span>
-                      </label>
+                    <td class="is-checkbox-cell">      
+                      <%= check_box_tag :paid, event.id %>
                     </td>
                     <td class="is-size-7-mobile"><%= event.title %></td>
                     <td class="is-size-7-mobile"><%= event.type_name %></td>
@@ -95,4 +92,3 @@
       </div>
     </div>
   <% end %>
-</section>

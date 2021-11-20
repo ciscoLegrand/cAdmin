@@ -3,7 +3,8 @@
   flex: 1;
   overflow-x: hidden;
   overflow-y: auto;
-  
+  padding-top: 1.5rem;
+
   &::-webkit-scrollbar {
     display: none;
   }
@@ -13,9 +14,9 @@
   }
 
   ul ul {
-    background:$primary;
+    background:#E1E1E1;
     padding-left:20px;
-    transition: max-height 0.2s ease-out;
+    transition: max-height 0.5s ease-out;
     max-height:0;
     overflow:hidden;
   }
@@ -25,20 +26,19 @@
   }
   li:hover>span,
   li:hover > a{
-    background: $secondary;
+    background: $tertiary;
     // border-radius: 7px;
     color: $white;
   }
 
   a {
     display:block;
-    color:$white;
     text-decoration:none;
-    // padding:6px 15px;
     transition:0.2s;
 
     &.panel-block:hover{
-      background: $secondary;
+      background: $tertiary;
+      color: white;
     }
   }
 
@@ -49,13 +49,11 @@
 
   span {    
     display:block;
-    color:$white;
     text-decoration:none;
-    // padding: 6px 15px;
-    margin-bottom: 15px;
-    transition:0.2s;
+    padding-bottom: 15px;
+    transition:0.5s;
   }
-
+  span:active,
   span:hover {
     color: $white;
   }
@@ -67,7 +65,7 @@
     border-bottom-left-radius: 7px;
     border-top-right-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
-    color: $white;
+    color: $white !important;
   }
 
   ul .open-menu {

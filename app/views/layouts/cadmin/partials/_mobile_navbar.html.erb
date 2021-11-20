@@ -1,7 +1,7 @@
 <nav class="navbar has-background-white-ter is-fixed-bottom is-hidden-desktop is-flex is-flex-direction-row is-justify-content-space-between" role="navigation"> 
-  <%= link_to events_path, class: 'navbar-item is-expanded is-block has-text-centered is-size-7' do %> 
-    <%= inline_svg_tag('cadmin/icons/ico-document.svg', class: 'icon is-16by16')%> 
-    <p><%=  t '.events' %></p>
+  <%= link_to '', class: 'navbar-item is-expanded is-block has-text-centered is-size-7', data: {controller: 'fire-sidebar', action: 'fire-sidebar#fire'} do %>
+    <%= inline_svg_tag('cadmin/icons/ico-menu.svg', class: 'icon is-16by16')%> 
+    <p><%=  t '.menu' %></p>
   <% end %>
   <%= link_to events_path, class: 'navbar-item is-expanded is-block has-text-centered is-size-7' do %> 
     <%= inline_svg_tag('cadmin/icons/ico-calendar.svg', class: 'icon is-16by16')%> 

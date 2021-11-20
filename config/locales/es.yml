@@ -476,7 +476,7 @@ es:
         cancel: 'Volver'
     profile:
       index: 
-        events: 'eventos'
+        menu: 'menu'
         messages: 'mensajes'
         interviews: 'entrevistas'
         profile: 'cuenta'

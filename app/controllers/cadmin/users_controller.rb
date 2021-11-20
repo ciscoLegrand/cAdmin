@@ -4,8 +4,7 @@ class Cadmin::UsersController < ApplicationController
 
 
   def index 
-    @users = Cadmin::User.all 
-    
+    @users = Cadmin::User.where(role: 'customer') 
   end
   # todo: edit & update users && user account | soft delete user account | 
 

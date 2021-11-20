@@ -23,15 +23,18 @@
     <%= javascript_include_tag "turbo", type: "module-shim" %>
     <%= cadmin_stimulus_include_tags %>
   </head>
-  <body>
+  <body >
     <%= render Cadmin::NotificationComponent.with_collection(flash.to_a) %>
-    <%= render 'layouts/cadmin/partials/admin_aside' if cadmin_user_signed_in? %>
-    <%= render 'layouts/cadmin/partials/mobile_navbar' if cadmin_user_signed_in? %>
-    <main class="column <%= cadmin_user_signed_in? ? 'main is-10 is-offset-2 p-0' : 'is-12 has-background-grey-lighter' %> is-vcentered is-fullheight" >
+    <main class="column <%= cadmin_user_signed_in? ? 'main__is-10__is-offset-2 p-0' : 'is-12 has-background-grey-lighter' %> is-vcentered is-fullheight" 
+          data-controller="decrease"  
+          data-decrease-target="main"         
+          data-decrease-right-value="<%= asset_path("cadmin/icons/ico-chevron-right.svg") %>"
+          data-decrease-left-value="<%= asset_path("cadmin/icons/ico-chevron-left.svg") %>">
+      <%= render 'layouts/cadmin/partials/admin_aside' if cadmin_user_signed_in? %>
+      <%= render 'layouts/cadmin/partials/mobile_navbar' if cadmin_user_signed_in? %>
       <% if cadmin_user_signed_in? %>
         <header class="header panel-heading">
           <div class="is-flex is-align-items-center">
-            <button class="button mr-3 header__menu" data-controller="fire-sidebar" data-action="fire-sidebar#fire"><%= inline_svg_tag("cadmin/icons/ico-menu.svg", class:"icon has-text-link") %></button>
             <span class="panel-heading subtitle is-size-6 is-size-7-touch | has-text-left"><%= render_breadcrumbs separator: ' > ' %></span>           
           </div>
           <div class="is-flex is-flex-direction-row is-justify-content-flex-end">

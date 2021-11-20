@@ -5,15 +5,23 @@
   <div class="login__colform column is-4-desktop is-12-touch is-flex is-flex-direction-column is-align-content-center">
     <h2 class="title is-size-3-desktop is-size-5-touch is-family-primary has-text-centered">Login Usuario</h2>
     <%= form_for(resource, as: resource_name, url: login_path, html:{turbo: false, class:'login__logform'}) do |f| %>
-      <div class="field login__logform__eigthywidth">
-        <%= f.label :email, class: 'login__label is-size-5-desktop' %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'login__input' %>
+      <div class="field login__logform__eigthywidth has-text-left">
+        <p class="control has-icon-right">
+          <%= f.label :email, class:'login__label label is-pulled-left mr-3' %>
+          <%= inline_svg_tag('cadmin/icons/ico-mail.svg', class: 'icon is-small is-right')%>
+        </p>
+
+        <%= f.text_field :email, autofocus: true, class:'login__input', data: {'controller': 'capslock'} %>
       </div>
 
-      <div class="field login__logform__eigthywidth my-6">
-        <%= f.label :password, class: 'login__label is-size-5-desktop' %>
-        <%= f.password_field :password, autocomplete: "current-password", class: 'login__input' %>
+      <div class="field login__logform__eigthywidth  has-text-left"data-controller="password-visibility" 
+                                      data-password-visibility-show-value="<%= asset_path("cadmin/icons/ico-eye.svg") %>"
+                                      data-password-visibility-hide-value="<%= asset_path("cadmin/icons/ico-eye-off.svg") %>">
+        <%= f.label :password, value: "Contraseña:" , class:'login__label label is-pulled-left mr-3'%> 
+        <%= image_tag("cadmin/icons/ico-eye-off.svg", class: "icon is-small is-right", data: {"password-visibility-target": "icon", action: "click->password-visibility#change" }) %>
+        <%= f.password_field :password, autocomplete: "current-password", class: "login__input mt-3 ", data: {"password-visibility-target": "input"} %>
       </div>
+      <span id="output" class="is-pulled-left is-italic has-text-danger is-size-7" data-capslock="output"></span><br>
 
       <% if devise_mapping.rememberable? %>
         <div class="field mb-6">
@@ -37,6 +45,3 @@
     <%#= render "devise/shared/links" %>
   </div>
 </div>
-
-
-

@@ -1,4 +1,5 @@
 //= link cadmin/main.css
 
-//= link_directory ../javascripts/cadmin/controllers
-//= link_directory ../javascripts/cadmin/libraries
+//= link_tree ../javascripts/cadmin/
+
+//= link_tree ../images/cadmin
