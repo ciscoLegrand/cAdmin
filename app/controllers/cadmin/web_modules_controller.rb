@@ -27,7 +27,7 @@ module Cadmin
       @web_module = WebModule.new(web_module_params)
 
       if @web_module.save
-        redirect_to @web_module, notice: 'Web module was successfully created.'
+        redirect_to @web_module, success: 'Web module was successfully created.'
       else
         render :new
       end
@@ -36,7 +36,7 @@ module Cadmin
     # PATCH/PUT /web_modules/1
     def update
       if @web_module.update(web_module_params)
-        redirect_to edit_web_module_path(@web_module), notice: 'Web module was successfully updated.'
+        redirect_to edit_web_module_path(@web_module), success: t('.success')
       else
         render :edit
       end
@@ -45,7 +45,7 @@ module Cadmin
     # DELETE /web_modules/1
     def destroy
       @web_module.destroy
-      redirect_to web_modules_url, notice: 'Web module was successfully destroyed.'
+      redirect_to web_modules_url, success: 'Web module was successfully destroyed.'
     end
 
     private

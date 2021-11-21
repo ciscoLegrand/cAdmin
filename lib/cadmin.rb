@@ -18,9 +18,11 @@ require "image_processing"
 require "pagy"
 
 module Cadmin
-  # class Engine < ::Rails::Engine
+  class Engine < ::Rails::Engine
   #   config.to_prepare do
   #     Devise::SessionsController.layout "application"
   #   end
-  # end
+    config.autoload_paths = %w(#{Cadmin::Engine.root}/app/models/concerns/cadmin)
+    isolate_namespace Cadmin
+  end
 end

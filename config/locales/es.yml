@@ -299,6 +299,8 @@ es:
         success: 'Categoría creada correctamente'
       update:
         success: 'Categoría actualizado correctamente'
+      destroy:
+        success: 'Categoría eliminada correctamente'
     articles:
       index:
         create: 'Añadir'
@@ -325,8 +327,14 @@ es:
         success: 'Artículo creado correctamente'
       update:
         success: 'Artículo actualizado correctamente'
+      destroy: 
+        success: 'Artítulo eliminado correctamente'
     comments:
       form: ' han impedido guardar el comentario'
+      create: 
+        success: 'Comentario creado correctamente'
+      destroy: 
+        success: 'Comentario eliminado correctamente'
     conversations:
       index: 
         title: 'Conversaciones'
@@ -361,6 +369,8 @@ es:
         success: 'Descuento creado correctamente'
       update:
         success: 'Descuento actualizado correctamente'  
+      destroy: 
+        success: 'Descuento eliminado correctamente'
     events:
       index:
         page_title: 'Eventos'
@@ -424,6 +434,8 @@ es:
         success: 'Evento creado correctamente'
       update: 
         success: 'Evento actualizado correctamente'
+      destroy: 
+        success: 'Evento eliminado correctamente'
     interviews:
       form:
         more_details: 'Más detalles'
@@ -435,6 +447,8 @@ es:
         success: 'Entrevista creada correctamente'
       update: 
         success: 'Entrevista creada correctamente'
+      destroy: 
+        success: 'Entrevista eliminada correctamente'
     locations:
       index:
         title: 'Localizaciones'
@@ -458,6 +472,8 @@ es:
         success: 'Restaurante creado correctamente' 
       update: 
         success: 'Restaurante actualizado correctamente'
+      destroy: 
+        success: 'Restaurante eliminado correctamente'
     main_services:
       new: 
         title: 'Nueva categoría'
@@ -470,10 +486,14 @@ es:
         success: 'Categoría creada correctamente'
       update: 
         success: 'Categoría actualizada correctamente'
+      destroy:
+        sucess: 'Categoría eliminada correctamente'
     messages:
       new:
         create: 'Enviar'
         cancel: 'Volver'
+      destroy:
+        success: 'Mensaje elimiinado correctamente'
     profile:
       index: 
         menu: 'menu'
@@ -525,6 +545,8 @@ es:
         success: 'Servicio creado correctamente'
       update: 
         success: 'Servicio actualizado correctamente'
+      destroy:
+        success: 'Servicio eliminado correctamente'
     tags:
       index:
         title: 'Tag'
@@ -553,6 +575,8 @@ es:
       form:
         create: 'Guardar'
         cancel: 'Volver'
+      update:
+        success: 'Módulo actualizado!'
     
   number:
     currency:

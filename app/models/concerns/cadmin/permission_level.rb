@@ -1,10 +1,15 @@
-module Cadmin
+ module Cadmin 
   module PermissionLevel
     extend ActiveSupport::Concern
 
     def user?
-      %w(user employee admin superadmin).include?(self.role)
+      %w(user admin superadmin).include?(self.role)
     end
+
+    def customer?
+      %w(customer admin superadmin).include?(self.role)
+    end
+
     def employee?
       %w(employee admin superadmin).include?(self.role)
     end

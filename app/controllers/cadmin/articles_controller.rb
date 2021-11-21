@@ -45,7 +45,7 @@ module Cadmin
       @article = Article.create(article_params)
 
       if @article.save
-        redirect_to  @article,notice: t('.success')
+        redirect_to  @article,success: t('.success')
       else
         render :new
       end
@@ -54,7 +54,7 @@ module Cadmin
     # PATCH/PUT /articles/1
     def update
       if @article.update(article_params)
-        redirect_to @article, notice: t('.success')
+        redirect_to @article, success: t('.success')
       else
         render :edit
       end
@@ -63,7 +63,7 @@ module Cadmin
     # DELETE /articles/1
     def destroy
       @article.destroy
-      redirect_to articles_url, notice: 'Article was successfully destroyed.'
+      redirect_to articles_url, success: t('.success')
     end
 
     # todo: set status

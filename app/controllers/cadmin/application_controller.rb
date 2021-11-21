@@ -2,7 +2,7 @@ module Cadmin
   class ApplicationController < ActionController::Base
     include Pagy::Backend
 
-    add_flash_types :success, :info, :error, :alert
+    add_flash_types :success, :info, :error, :alert, :notice
     protect_from_forgery with: :exception
 
     before_action :authenticate_cadmin_user!

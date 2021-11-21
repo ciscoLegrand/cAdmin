@@ -36,7 +36,7 @@ module Cadmin
       @service.price_no_vat = @service.no_vat
 
       if @service.save
-        redirect_to main_service_services_path, notice: t('.success')
+        redirect_to main_service_services_path, success: t('.success')
       else
         render :new
       end
@@ -46,7 +46,7 @@ module Cadmin
     def update
       if @service.update(service_params)
         @service.update(price_no_vat: @service.no_vat) 
-        redirect_to main_service_services_path, notice: 'Service was successfully updated.'
+        redirect_to main_service_services_path, success: t('.success')
       else
         render :edit
       end
@@ -57,7 +57,7 @@ module Cadmin
       @service = @main.services.find(params[:id])
 
       @service.destroy
-      redirect_to services_url, notice: 'Service was successfully destroyed.'
+      redirect_to services_url, success: t('.success')
     end
 
     private

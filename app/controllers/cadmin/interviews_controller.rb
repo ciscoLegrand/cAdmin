@@ -35,7 +35,7 @@ module Cadmin
       @interview = @event.build_interview(interview_params)
 
       if @interview.save
-        redirect_to event_interviews_path, notice: t('.success')
+        redirect_to event_interviews_path, success: t('.success')
       else
         render :new
       end
@@ -44,7 +44,7 @@ module Cadmin
     # PATCH/PUT /interviews/1
     def update
       if @interview.update(interview_params)
-        redirect_to events_path, notice: t('.success')
+        redirect_to events_path, success: t('.success')
       else
         render :edit
       end
@@ -54,7 +54,7 @@ module Cadmin
     def destroy
       @interview = Interview.find(params[:id])
       @interview.destroy
-      redirect_to interviews_url, notice: 'Interview was successfully destroyed.'
+      redirect_to interviews_url, success: t(.'success')
     end
 
     private

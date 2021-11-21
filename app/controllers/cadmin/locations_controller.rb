@@ -30,7 +30,7 @@ module Cadmin
       @location = Location.new(location_params)
 
       if @location.save
-        redirect_to @location, notice: t('.success')
+        redirect_to @location, success: t('.success')
       else
         render :new
       end
@@ -39,7 +39,7 @@ module Cadmin
     # PATCH/PUT /locations/1
     def update
       if @location.update(location_params)
-        redirect_to @location, notice: t('.success')
+        redirect_to @location, success: t('.success')
       else
         render :edit
       end
@@ -48,7 +48,7 @@ module Cadmin
     # DELETE /locations/1
     def destroy
       @location.destroy
-      redirect_to locations_url, notice: 'Location was successfully destroyed.'
+      redirect_to locations_url, success: t('.success')
     end
 
     private

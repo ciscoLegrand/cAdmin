@@ -17,13 +17,6 @@ module Cadmin
       'Boda', 'Cena', 'Comunion', 'Despedida','Cumpleaños', 'Bodas de plata/oro'
     ]
 
-    #! nested attributes of event_service getting from events controller
-    # def event_services_attributes=(event_services_atttirbutes)
-    #   event_services_atttirbutes.each do |i, event_service_attributes| 
-    #     self.event_services.build(event_service_attributes)
-    #   end
-    # end
-
     def servicenames 
       self.event_services.map(&:service_name).join(', ')
     end

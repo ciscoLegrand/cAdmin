@@ -56,7 +56,7 @@ module Cadmin
       if @event.save
         
         @event.update(total_amount: @event.total_services_amount)
-        redirect_to @event, notice: t('.success')
+        redirect_to @event, success: t('.success')
       else
         render :new
       end
@@ -77,7 +77,7 @@ module Cadmin
             @message = @conversation.messages.create(body:"<a href='#{events_path}'>Tienes un nuevo evento: #{@event.date}</a>", user_id: current_cadmin_user.id)
           end
         end
-        redirect_to @event, notice: t('.success')
+        redirect_to @event, success: t('.success')
       else
         render :edit
       end
@@ -87,12 +87,12 @@ module Cadmin
     def destroy
       
       @event.destroy
-      redirect_to events_url, notice: 'Event was successfully destroyed.'
+      redirect_to events_url, success: t('.success')
     end
 
     def charged 
       @event.update(charged: !@event.charged)
-      redirect_to events_path
+      # redirect_to events_path
     end
 
     # TODO: refactor this method for validate type event and $

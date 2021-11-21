@@ -8,7 +8,6 @@ main{
     width: 83.3333333333%;
     margin-left: 16.6666666667%;
     transition: .5s;
-    
     @include touch {
       margin-left: unset;
       width: 100vw;
@@ -18,10 +17,11 @@ main{
   &__w95{
     margin-left: 5%;
     width: 95%;
-    transition: .5s
+    transition: .5s;
+    @include touch {
+      margin-left: unset;
+      width: 100vw;
+    }
   }
 
-  @include touch {
-    margin-left: 0;
-  }
 }

@@ -30,7 +30,7 @@ module Cadmin
       @article_category = ArticleCategory.new(article_category_params)
 
       if @article_category.save
-        redirect_to @article_category, notice: t('.success')
+        redirect_to @article_category, success: t('.success')
       else
         render :new
       end
@@ -39,8 +39,9 @@ module Cadmin
     # PATCH/PUT /article_categories/1
     def update
       if @article_category.update(article_category_params)
-        redirect_to @article_category, notice: t('.success')
+        redirect_to @article_category, success: t('.success')
       else
+        flash.now[:alert] = 'Algo ha salido mal' 
         render :edit
       end
     end
@@ -48,7 +49,7 @@ module Cadmin
     # DELETE /article_categories/1
     def destroy
       @article_category.destroy
-      redirect_to article_categories_url, notice: 'Article category was successfully destroyed.'
+      redirect_to article_categories_url, success: 'Article category was successfully destroyed.'
     end
 
     private

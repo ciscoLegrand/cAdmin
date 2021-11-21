@@ -30,7 +30,7 @@ module Cadmin
       @main_service.position = @lastposition.to_i + 1
       
       if @main_service.save
-        redirect_to @main_service, notice: t('.success')
+        redirect_to @main_service, success: t('.success')
         render :new
       end
     end
@@ -38,7 +38,7 @@ module Cadmin
     # PATCH/PUT /main_services/1
     def update
       if @main_service.update(main_service_params)
-        redirect_to @main_service, notice: t('.success')
+        redirect_to @main_service, success: t('.success')
       else
         render :edit
       end
@@ -47,7 +47,7 @@ module Cadmin
     # DELETE /main_services/1
     def destroy
       @main_service.destroy
-      redirect_to main_services_url, notice: 'Main service was successfully destroyed.'
+      redirect_to main_services_url, success: t('.success')
     end
 
     private

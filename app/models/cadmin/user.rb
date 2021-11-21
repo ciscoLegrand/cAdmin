@@ -1,11 +1,19 @@
 module Cadmin
   class User < ApplicationRecord
+    include Cadmin::PermissionLevel
     include PgSearch::Model
 
     include ImageUploader::Attachment(:avatar)
     
-    validates :email, presence: true, uniqueness: true
-    validates :username, presence: true, uniqueness: { case_sensitive: false }, on: :update
+    validates :email, presence: true,
+                      format: { with: /\A(.+)@(.+)\z/ },
+                      uniqueness: { case_sensitive: false },
+                      length: { minimum: 4, maximum: 254 }
+
+    validates :username, presence: true, 
+                         uniqueness: { case_sensitive: false }, 
+                         on: :update
+
     validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true # para no permitir caracteres especiales
     validates :role, presence: true
 
@@ -13,11 +21,6 @@ module Cadmin
     has_many :comments, dependent: :destroy
     has_many :events
     has_many :interviews, dependent: :destroy
-
-    validates :email, presence: true, uniqueness: true
-    validates :username, presence: true, uniqueness: { case_sensitive: false }, on: :update
-    validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true # para no permitir caracteres especiales
-    validates :role , presence: true
 
     # Include default devise modules. Others available are:
     # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -34,24 +37,5 @@ module Cadmin
       :last_name,
       :email
     ]
-
-    # TODO: move validations to concern
-    def user?
-      %w(user admin superadmin).include?(self.role)
-    end
-
-    def customer?
-      %w(customer admin superadmin).include?(self.role)
-    end
-
-    def employee?
-      %w(employee admin superadmin).include?(self.role)
-    end
-    def admin?
-      %w(admin superadmin).include?(self.role)
-    end
-    def superadmin?
-      %w(superadmin).include?(self.role)
-    end
   end
 end

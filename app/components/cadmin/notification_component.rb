@@ -25,7 +25,7 @@ class Cadmin::NotificationComponent < ViewComponent::Base
   def icon
     case @type
     # TODO: change notice by success styles
-    when 'notice'
+    when 'success'
       inline_svg_tag('cadmin/icons/ico-check-circle.svg', class: 'icon is-medium is-success')
     when 'error'
       inline_svg_tag('cadmin/icons/ico-ban.svg', class: 'icon is-medium is-danger')
@@ -38,7 +38,7 @@ class Cadmin::NotificationComponent < ViewComponent::Base
   
   def color_class
     case @type
-    when 'notice'
+    when 'success'
       'success has-text-success'
     when 'error'
       'error has-text-danger'

@@ -56,7 +56,7 @@ module Cadmin
     # DELETE /messages/1
     def destroy
       @message.destroy
-      redirect_to conversations_path(id: @conversation.id), notice: 'Message was successfully destroyed.'
+      redirect_to conversations_path(id: @conversation.id), success: t('.success')
     end
 
     private

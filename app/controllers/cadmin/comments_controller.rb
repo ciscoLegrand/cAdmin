@@ -29,7 +29,7 @@ module Cadmin
       @comment = @article.comments.build(comment_params)
       
       if @comment.save
-        redirect_to @article, notice: 'Comment was successfully created.'
+        redirect_to @article, success: t('.success')
       else
         render :new
       end
@@ -38,7 +38,7 @@ module Cadmin
     # PATCH/PUT /comments/1
     def update
       if @comment.update(comment_params)
-        redirect_to @article, notice: 'Comment was successfully updated.'
+        redirect_to @article, success: 'Comment was successfully updated.'
       else
         render :edit
       end
@@ -49,7 +49,7 @@ module Cadmin
       @article = Article.find(params[:article_id])
       @comment = @article.comments.find(params[:id])
       @comment.destroy
-      redirect_to root_path notice: 'Comment was successfully destroyed.'
+      redirect_to root_path success: t('.success')
     end
 
     private

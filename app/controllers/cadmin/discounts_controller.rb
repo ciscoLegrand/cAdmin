@@ -30,7 +30,7 @@ module Cadmin
       @discount = Discount.new(discount_params)
 
       if @discount.save
-        redirect_to @discount, notice: t('.success')
+        redirect_to @discount, success: t('.success')
       else
         render :new
       end
@@ -39,7 +39,7 @@ module Cadmin
     # PATCH/PUT /discounts/1
     def update
       if @discount.update(discount_params)
-        redirect_to @discount, notice: t('.success')
+        redirect_to @discount, success: t('.success')
         render :edit
       end
     end
@@ -47,7 +47,7 @@ module Cadmin
     # DELETE /discounts/1
     def destroy
       @discount.destroy
-      redirect_to discounts_url, notice: 'Discount was successfully destroyed.'
+      redirect_to discounts_url, success: t('.success')
     end
 
     private
