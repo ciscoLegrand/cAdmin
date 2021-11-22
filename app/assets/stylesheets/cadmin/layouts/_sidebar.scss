@@ -159,15 +159,15 @@
   }
   
   &__arrow{
-    /*background-image: url(asset-path('icons/ico-chevron-down-white.svg')) !important;*/ /* TODO: DESCOMENTAR ENV: PRODUCTION */
-    background-image: url('icons/ico-chevron-down.svg') !important;
+    background-image: url(asset-path('icons/ico-chevron-down-white.svg')) !important; /* DESCOMENTAR ENV: PRODUCTION */
+    // background-image: url('icons/ico-chevron-down.svg') !important;
     background-repeat:no-repeat !important;
     background-position: 96% 6px !important;
     background-size: 25px !important;
   }
   &__arrow:active{
-    /*background-image: url(asset-path('icons/ico-chevron-down-white.svg')) !important;*/ /* TODO: DESCOMENTAR ENV: PRODUCTION */
-    background-image: url('icons/ico-chevron-down.svg') !important;
+    background-image: url(asset-path('icons/ico-chevron-down-white.svg')) !important; /* DESCOMENTAR ENV: PRODUCTION */
+    // background-image: url('icons/ico-chevron-down.svg') !important;
     background-repeat:no-repeat !important;
     background-position: 96% 6px !important;
     background-size: 25px !important;

@@ -24,7 +24,7 @@ class Cadmin::NotificationComponent < ViewComponent::Base
 
   def icon
     case @type
-    # TODO: change notice by success styles
+
     when 'success'
       inline_svg_tag('cadmin/icons/ico-check-circle.svg', class: 'icon is-medium is-success')
     when 'error'
@@ -32,7 +32,7 @@ class Cadmin::NotificationComponent < ViewComponent::Base
     when 'alert'
       inline_svg_tag('cadmin/icons/ico-exclamation-triangle.svg', class: 'icon is-medium is-warning')
     else
-      inline_svg_tag('cadmin/icons/ico-information-circle.svg', class: 'icon is-medium is-warning')
+      inline_svg_tag('cadmin/icons/ico-information-circle.svg', class: 'icon is-medium is-info')
     end
   end
   
