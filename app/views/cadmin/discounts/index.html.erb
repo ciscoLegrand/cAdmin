@@ -1,4 +1,4 @@
-<h1><%= t '.title' %></h1>
+<h1 class="title is-size-4-desktop is-size-5-touch has-text-centered"><%= t '.title' %></h1>
 
 <%= link_to "#{t '.create'}'", new_discount_path, class:'button is-outlined is-primary mx-2' %> 
 <%= link_to "#{t '.cancel'}", :back, class: "button has-background-white-ter mx-2" %>
@@ -7,7 +7,7 @@
   <div class="columns is-multiline is-mobile">
     <% @discounts.each do |discount| %>
       <% next if discount.name == 'default'%>
-      <div class="column is-one-third my-2 ">
+      <div class="column is-one-third-desktop is-5-tablet is-12-mobile my-2 ">
         <div class="box">
         
           <header class="card-header">
