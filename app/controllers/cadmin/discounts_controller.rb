@@ -40,6 +40,7 @@ module Cadmin
     def update
       if @discount.update(discount_params)
         redirect_to @discount, success: t('.success')
+      else
         render :edit
       end
     end

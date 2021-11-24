@@ -122,7 +122,7 @@
       </div>
       <footer class="card-footer">
         <div class="card-footer-item">
-          <div> <%= @event.charged ? 'Pagado' : 'Pendiente'  %> <span class="tag <%= @event.charged ? 'is-success' : 'is-warning'  %> is-size-5"><%= "#{@event.total_amount}  #{t( 'currency')}"%></span></div>
+          <div> <%= @event.charged ? 'Pagado' : 'Pendiente'  %> <span class="tag <%= @event.charged ? 'is-success' : 'is-warning'  %> is-size-5"><%= "#{number_with_precision(@event.total_amount, precision: 2)}#{t( 'currency')}"%></span></div>
         </div>
       </footer>
     </div>  
@@ -144,7 +144,7 @@
               </div>
               <div class="card-image">
                 <figure class="image is-16by9">
-                  <%#= image_tag Service.find(service.service_id).image_url %>
+                  <%= image_tag service.service_image_url if service.service_image_url.present? %>
                 </figure>
               </div>
               <hr>
@@ -160,7 +160,8 @@
                   <br>
                   <%= service.service_description %>
                   <hr>
-                  <div>Precio: <span class="tag is-success is-size-5"><%= service.service_price %></span></div>
+              
+                  <div>Precio: <span class="tag is-success is-size-5"><%= "#{number_with_precision(service.total_amount, precision: 2)}#{t 'currency'}" %></span></div>
                   
                 </div>
               </div>  

@@ -38,14 +38,16 @@ module Cadmin
       total = 0  
       self.event_services.each do |event_service|
         price = event_service.service_price if event_service.service_price.present?
-        discount = (price * event_service.discount_percentage) / 100  if event_service.discount_percentage.present? 
         discount = event_service.discount_amount if event_service.discount_amount.present?
+        discount = (price * event_service.discount_percentage) / 100  if event_service.discount_percentage.present? 
+
         total_hours = event_service.overtime * event_service.service_hour_price
         #! save data on event_service
+
         event_service.total_amount = price - discount + total_hours
         event_service.save
         #!summation price, discounts and overtime
-        total += price - discount + total_hours
+        total += event_service.total_amount
       end
       total
     end 

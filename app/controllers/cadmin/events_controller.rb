@@ -92,7 +92,7 @@ module Cadmin
 
     def charged 
       @event.update(charged: !@event.charged)
-      # redirect_to events_path
+      redirect_to events_path
     end
 
     # TODO: refactor this method for validate type event and $

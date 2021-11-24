@@ -12,7 +12,7 @@ Cadmin::Engine.routes.draw do
   match '/interviews/:id', to: "interviews#show",  via: :get, as: :interview
   match '/users', to: "users#index",  via: :get, as: :users
   # match '/charged', to: "events#charged", via: :get, as: :charged
-  # match '/charged', to: "events#charged", via: :put, as: :charged
+  # match '/events/:id/charged', to: "events#charged", via: :put, as: :charged
   
   resources :locations
   resources :article_categories

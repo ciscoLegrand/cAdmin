@@ -1,10 +1,10 @@
 <div class="container">
   <%= turbo_frame_tag :conversations do %>
     <div class="columns">
-      <aside class="column is-2 is-narrow-mobile is-fullheight section is-hidden-mobile">
+      <aside class="column is-2 is-fullheight section">
         <p class="menu-label is-hidden-touch"><%= t '.title' %></p>
         <ul class="menu-list">
-          <li><%= link_to "#{t '.create'}", new_conversation_path, class: 'button is-outlined is-primary mb-6' %></li>
+          <li><%= link_to "#{t '.create'}", new_conversation_path, target: '_top',class: 'button is-outlined is-primary mb-6' %></li>
           <% @conversations.each do |conversation| %>
             <% if conversation.sender_id == current_cadmin_user.id || conversation.recipient_id == current_cadmin_user.id %>
               <% if conversation.sender_id == current_cadmin_user.id %>

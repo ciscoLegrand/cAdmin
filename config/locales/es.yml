@@ -437,6 +437,12 @@ es:
       destroy: 
         success: 'Evento eliminado correctamente'
     interviews:
+      index: 
+        title: 'Entrevistas'
+      new: 
+        title: 'Nueva entrevista'
+      edit:
+        title: 'Editar entrevista'
       form:
         more_details: 'Más detalles'
         add: 'Añadir'

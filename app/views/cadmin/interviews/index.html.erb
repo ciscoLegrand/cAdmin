@@ -3,7 +3,7 @@
 <!-- TODO: botones para filtrar por completo, incompleto, fechas -->
 <div class="columns is-mobile is-multiline is-vcentered">
 <% @interviews.each do |interview| %>
-  <div class="column is-3">
+  <div class="column is-3-desktop is-6-touch">
     <div class="card p-3">
       <span class="tag <%= Time.now >= interview.event_date ?  'is-success' : 'is-danger' %> is-pulled-right"><%= Time.now >= interview.event_date ?  'completed' : 'pending' %></span>
       <div class="card-content">
@@ -17,7 +17,7 @@
       </div>
       <footer class="card-footer mt-3 pt-2">
         <div class="label mr-2">Última vez editado: </div>
-        <time datetime="<%= interview.updated_at %>" class="is-size-6"><%= interview.updated_at.strftime('%d-%m-%Y [%H:%M]')  %></time>
+        <time datetime="<%= interview.updated_at %>" class="is-size-6"><%= interview.updated_format %></time>
         <% if current_cadmin_user.admin? %>
           <span class="tag is-rounded is-danger is-light ml-2"><%= interview.employee_name %></span>
         <% end %>
