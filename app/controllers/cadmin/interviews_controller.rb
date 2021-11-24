@@ -54,7 +54,7 @@ module Cadmin
     def destroy
       @interview = Interview.find(params[:id])
       @interview.destroy
-      redirect_to interviews_url, success: t(.'success')
+      redirect_to interviews_url, success: t('.success')
     end
 
     private

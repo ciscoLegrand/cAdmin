@@ -31,6 +31,7 @@ module Cadmin
       
       if @main_service.save
         redirect_to @main_service, success: t('.success')
+      else
         render :new
       end
     end
