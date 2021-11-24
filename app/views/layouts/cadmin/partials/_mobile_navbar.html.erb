@@ -1,18 +1,17 @@
 <nav class="navbar has-background-white-ter is-fixed-bottom is-hidden-desktop is-flex is-flex-direction-row is-justify-content-space-between" role="navigation"> 
   <%= link_to '', class: 'navbar-item is-expanded is-block has-text-centered is-size-7', data: {controller: 'fire-sidebar', action: 'fire-sidebar#fire'} do %>
     <%= inline_svg_tag('cadmin/icons/ico-menu.svg', class: 'icon is-16by16')%> 
-    <p><%=  t '.menu' %></p>
   <% end %>
   <%= link_to events_path, class: 'navbar-item is-expanded is-block has-text-centered is-size-7' do %> 
     <%= inline_svg_tag('cadmin/icons/ico-calendar.svg', class: 'icon is-16by16')%> 
-    <p><%=  t '.interviews' %></p>
+    
   <% end %>
-  <%= link_to events_path, class: 'navbar-item is-expanded is-block has-text-centered is-size-7' do %> 
+  <%= link_to conversations_path, class: 'navbar-item is-expanded is-block has-text-centered is-size-7' do %> 
     <%= inline_svg_tag('cadmin/icons/ico-chat.svg', class: 'icon is-16by16')%> 
-    <p><%=  t '.messages' %></p>
+    
   <% end %>
   <%= link_to events_path, class: 'navbar-item is-expanded is-block has-text-centered is-size-7' do %> 
     <%= inline_svg_tag('cadmin/icons/ico-user.svg', class: 'icon is-16by16')%> 
-    <p><%=  t '.profile' %></p>
+    
   <% end %>
 </nav>

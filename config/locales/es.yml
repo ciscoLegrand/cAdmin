@@ -500,6 +500,7 @@ es:
         messages: 'mensajes'
         interviews: 'entrevistas'
         profile: 'cuenta'
+        events: 'Eventos'
         username: 'Nickname'
         email: 'Email'
       show:
