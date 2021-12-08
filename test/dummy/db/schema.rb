@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_01_104900) do
+ActiveRecord::Schema.define(version: 2021_11_01_120860) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2021_11_01_104900) do
     t.string "title", null: false
     t.text "content", null: false
     t.integer "status", default: 0, null: false
-    t.date "published_at", default: "2021-10-31", null: false
+    t.date "published_at", default: "2021-11-01", null: false
     t.date "unpublished_at"
     t.string "metatitle"
     t.string "metadata"
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 2021_11_01_104900) do
   create_table "cadmin_interview_options", force: :cascade do |t|
     t.string "gift"
     t.string "song"
+    t.boolean "remove", default: false, null: false
     t.bigint "interview_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

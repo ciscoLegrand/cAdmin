@@ -1,0 +1,1 @@
+RSpotify::authenticate(ENV["SPOTY_CLIENT"], ENV["SPOTY_SECRET"])

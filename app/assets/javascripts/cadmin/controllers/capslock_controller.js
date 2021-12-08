@@ -11,7 +11,5 @@ export default class extends Controller {
         ? document.getElementById('output').textContent='**Mayúsculas activadas!'      
         : document.getElementById('output').textContent=''
     })
-
-
   }
 }

@@ -69,16 +69,29 @@ Cadmin::Engine.routes.draw do
   # TODO: generate routes for admin and employees
   namespace :admin do
     devise_for :cadmin_user,
-               class_name: "Cadmin::User",
-               controllers: {
-                   sessions: 'cadmin/admin/user_sessions'
-               },
-               skip: [:sessions, :registrations],
-               path_names: { sign_out: 'logout' },
-               path_prefix: :user
-      devise_scope :cadmin_user do
+                class_name: "Cadmin::User",
+                controllers: {
+                  sessions: 'cadmin/admin/user_sessions'
+                },  
+                skip: [:sessions, :registrations],
+                path_names: { sign_out: 'logout' },
+                path_prefix: :user
+    devise_scope :cadmin_user do
       get 'login' => 'user_sessions#new', :as => :login
       post 'login' => 'user_sessions#create', :as => :create_new_session
     end
+  end
+
+  # SPOTIFY API
+  namespace :api do 
+    namespace :v1 do 
+      resources :tracks do 
+        collection do 
+          get :top_100
+          get :random 
+          get :search 
+        end 
+      end 
+    end 
   end
 end
