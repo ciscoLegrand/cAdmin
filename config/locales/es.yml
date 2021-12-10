@@ -436,6 +436,8 @@ es:
         success: 'Evento actualizado correctamente'
       destroy: 
         success: 'Evento eliminado correctamente'
+      cancel:
+        cancelled: 'Cancelado'
     interviews:
       index: 
         title: 'Entrevistas'

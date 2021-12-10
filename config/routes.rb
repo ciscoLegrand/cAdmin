@@ -27,6 +27,7 @@ Cadmin::Engine.routes.draw do
   
   resources :events do
     get 'charged', on: :member 
+    get 'cancel', on: :member
   end
   
   resources :conversations do 

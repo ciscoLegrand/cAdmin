@@ -2,7 +2,7 @@ require_dependency "cadmin/application_controller"
 
 module Cadmin
   class EventsController < ApplicationController
-    before_action :set_event, only: [:show, :edit, :update, :destroy, :charged]
+    before_action :set_event, only: [:show, :edit, :update, :destroy, :charged, :cancel]
     add_breadcrumb 'Eventos', :events_path
     # GET /events
     def index      
@@ -53,8 +53,7 @@ module Cadmin
       
       @event = Event.new(event_params)  
       @event.create_number
-      if @event.save
-        
+      if @event.save        
         @event.update(total_amount: @event.total_services_amount)
         redirect_to @event, success: t('.success')
       else
@@ -95,14 +94,19 @@ module Cadmin
       redirect_to events_path
     end
 
+    def cancel 
+      @event.update(status: 'cancelled', total_amount: 0)
+      redirect_to events_path
+    end
+
     # TODO: refactor this method for validate type event and $
     def employee_salary(events)
       total = 0
-      events.each do |event|
-        if event.type_name == 'Boda'
-          total +=  160 
+      events.each do  |event| 
+        if event.type_name == 'boda'
+         total += 160 
         else
-          total += 80
+          total += 80 
         end
       end
       total
@@ -110,11 +114,14 @@ module Cadmin
 
     def total_events(events)
       total = 0
-      events.all.each do |event|
-        total += event.total_services_amount
-      end 
+      events.all.each  { |event| total += event.total_services_amount unless event.status == 'cancelled' }
       total
     end
+
+    def pending 
+      events = events.status == 'pending'
+    end
+
 
     private
       # Use callbacks to share common setup or constraints between actions.
@@ -124,7 +131,7 @@ module Cadmin
       # Only allow a list of trusted parameters through.
       def event_params
         params.require(:event).permit(:customer_id, :title, :type_name, :number, :date, :guests, :employee_id, 
-                                      :place_id, :deposit, :total_amount, :charged, :observations, 
+                                      :place_id, :deposit, :total_amount, :charged, :observations, :status,
                                       event_services_attributes: [:_destroy, :id, :event_id, :service_id, :discount_id, :start_time, :overtime, :total_amount])
       end
   end

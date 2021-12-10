@@ -27,43 +27,44 @@
                   </th>
                   <th class="is-size-7-mobile"><%= link_to "#{t '.title'}", sort: 'title' %></th>
                   <th class="is-size-7-mobile"><%= link_to "#{t '.type_name'}", sort: 'type_name' %></th>
-                  <th class="is-size-7-mobile"><%= link_to "#{t '.number'}", sort: 'number' %></th>
+                  <th class="is-size-7-mobile is-hidden-mobile"><%= link_to "#{t '.number'}", sort: 'number' %></th>
                   <th class="is-size-7-mobile"><%= link_to "#{t '.date'}", sort: 'date' %></th>
-                  <th class="is-size-7-mobile"><%= link_to "#{t '.place_id'}", sort: 'place_id' %></th>
-                  <th class="is-size-7-mobile"><%= link_to "#{t '.employee_id'}", sort: 'employee_id' %></th>
-                  <th class="is-size-7-mobile"><%= t '.service_ids' %></th>
-                  <th class="is-size-7-mobile"><%= t '.deposit' %></th>
-                  <th class="is-size-7-mobile"><%= t '.pending' %></th>
-                  <th class="is-size-7-mobile"><%= t '.total_amount' %></th>
-                  <th class="is-size-7-mobile"><%= t '.charged' %></th>
+                  <th class="is-size-7-mobile is-hidden-mobile"><%= link_to "#{t '.place_id'}", sort: 'place_id' %></th>
+                  <th class="is-size-7-mobile is-hidden-mobile"><%= link_to "#{t '.employee_id'}", sort: 'employee_id' %></th>
+                  <th class="is-size-7-mobile is-hidden-mobile"><%= t '.service_ids' %></th>
+                  <th class="is-size-7-mobile is-hidden-mobile"><%= t '.deposit' %></th>
+                  <th class="is-size-7-mobile is-hidden-mobile"><%= t '.pending' %></th>
+                  <th class="is-size-7-mobile is-hidden-mobile"><%= t '.total_amount' %></th>
+                  <th class="is-size-7-mobile is-hidden-mobile"><%= t '.charged' %></th>
                   <th class="is-size-7-mobile"><%= "#{t '.actions'}" %></th>
                 </tr>
               </thead>
               <tbody>
                 <% @events.each do |event| %>           
-                  <tr  data-controller='charged'>
+                  <tr  data-controller='charged' class="<%= "has-background-danger-light" if event.status == 'cancelled' %>  <%="has-background-success-light" if event.status == 'completed' %>">
                     <td class="is-checkbox-cell">      
                       <%= check_box_tag :paid, event.id %>
                     </td>
                     <td class="is-size-7-mobile"><%= event.title %></td>
                     <td class="is-size-7-mobile"><%= event.type_name %></td>
-                    <td class="is-size-7-mobile"><%= event.number %></td>
+                    <td class="is-size-7-mobile is-hidden-mobile"><%= event.number %></td>
                     <td data-label="date"><small class="has-text-grey is-abbr-like" title="<%= event.date %>"><%= event.date.strftime('%d-%m-%y') %></small></td>
-                    <td class="is-size-7-mobile"><%= link_to event.placename, Cadmin::Location.find_by_id(event.place_id)  %></td>
-                    <td class="is-size-7-mobile"><%= event.employee_name if event.employee_id.present? %></td>
-                    <td class="is-size-7-mobile"><%= event.servicenames  %></td>
-                    <td class="is-size-7-mobile"><%= number_with_precision(event.deposit, precision: 2) %></td>     
-                    <td class="is-size-7-mobile"><%= number_with_precision(event.total_services_amount - event.deposit, precision: 2) %></td>               
-                    <td class="is-size-7-mobile"><%= "#{number_with_precision(event.total_services_amount, precision: 2)}#{t 'currency'}" %></td> 
-                    <td data-charged-target="tag" class="<%= event.charged == true ? 'has-background-success' : 'default'%> is-size-7-mobile"><%= event.charged? ? 'Cobrado' : 'Pendiente' %> </td>
+                    <td class="is-size-7-mobile is-hidden-mobile"><%= link_to event.placename, Cadmin::Location.find_by_id(event.place_id)  %></td>
+                    <td class="is-size-7-mobile is-hidden-mobile"><%= event.employee_name if event.employee_id.present? %></td>
+                    <td class="is-size-7-mobile is-hidden-mobile"><%= event.servicenames  %></td>
+                    <td class="is-size-7-mobile is-hidden-mobile"><%= number_with_precision(event.deposit, precision: 2) %></td>     
+                    <td class="is-size-7-mobile is-hidden-mobile"><%= number_with_precision(event.total_services_amount - event.deposit, precision: 2) %></td>               
+                    <td class="is-size-7-mobile is-hidden-mobile"><%= event.status == 'cancelled' ? event.total_amount : number_with_precision(event.total_services_amount - event.deposit, precision: 2) %><%= t('currency') %></td> 
+                    <td data-charged-target="tag" class="is-hidden-mobile <%= event.charged == true ? 'has-background-success' : 'default'%> is-size-7-mobile"><%= event.charged? ? 'Cobrado' : 'Pendiente' %> </td>
                     <td class="is-actions-cell">
                       <div class="buttons">                    
                         <!-- todo: REVISAR ENLACE QUE NO REDIRIJA Y QUE ACTUALICE DATO -->
-                        <%= link_to inline_svg_tag('cadmin/icons/ico-euro.svg', class: 'icon is-medium   has-text-primary') , charged_event_path(event), data: {action: 'charged#change',  turbo: false},  class: 'button is-clickable m-0' %>
-                        <%= link_to inline_svg_tag('cadmin/icons/ico-eye.svg', class: 'icon is-medium has-text-primary'), event ,data:{turbo_frame: "_top"}, class: 'button is-clickable m-0' %>
+                        <%= link_to inline_svg_tag('cadmin/icons/ico-euro.svg', class: 'icon is-medium   has-text-primary') , charged_event_path(event), data: {action: 'charged#change',  turbo: false},  class: 'button is-small is-clickable m-0' %>
+                        <%= link_to inline_svg_tag('cadmin/icons/ico-ban.svg', class: 'icon is-medium   has-text-primary') , cancel_event_path(event), data: {action: 'charged#cancel',  turbo: false},  class: 'button is-small is-clickable m-0' %>
+                        <%= link_to inline_svg_tag('cadmin/icons/ico-eye.svg', class: 'icon is-medium has-text-primary'), event ,data:{turbo_frame: "_top"}, class: 'button is-small is-clickable m-0' %>
                         <% if current_cadmin_user.admin? %>
-                          <%= link_to inline_svg_tag('cadmin/icons/ico-edit.svg', class: 'icon is-medium has-text-primary'), edit_event_path(event), data:{turbo_frame: "_top"}, class: 'button is-clickable m-0' %>
-                          <%= button_to event, method: :delete, data: { controller: "swal", action: "click->swal#fire", swal_options_value: default_swal_options,turbo_frame: "_top" }, class:"button is-clickable m-0"  do %>
+                          <%= link_to inline_svg_tag('cadmin/icons/ico-edit.svg', class: 'icon is-medium has-text-primary'), edit_event_path(event), data:{turbo_frame: "_top"}, class: 'button is-small is-clickable m-0' %>
+                          <%= button_to event, method: :delete, data: { controller: "swal", action: "click->swal#fire", swal_options_value: default_swal_options,turbo_frame: "_top" }, class:"button is-small is-clickable m-0"  do %>
                             <%=  inline_svg_tag('cadmin/icons/ico-trash.svg', class: 'icon is-medium has-text-primary') %>
                           <% end %>    
                         <% end %>
@@ -75,7 +76,7 @@
                   <td></td>
                   <th><%= t '.events_count' %> </th>
                   <td><%= @events_count %></td>
-                  <td colspan="6"></td>
+                  <td colspan="2"></td>
                   <th><%= t '.total_amount' %> </th>
                   <td><%= "#{number_with_precision(@total, precision: 2)}#{t 'currency'}" %></td>
                   <td colspan="2"></td>
