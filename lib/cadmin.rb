@@ -16,13 +16,8 @@ require "devise_invitable"
 require 'shrine'
 require "image_processing"
 require "pagy"
-
+require "rspec-rails"
 module Cadmin
   class Engine < ::Rails::Engine
-  #   config.to_prepare do
-  #     Devise::SessionsController.layout "application"
-  #   end
-    config.autoload_paths = %w(#{Cadmin::Engine.root}/app/models/concerns/cadmin)
-    isolate_namespace Cadmin
   end
 end

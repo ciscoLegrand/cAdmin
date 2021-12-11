@@ -56,7 +56,7 @@ module Cadmin
 
       # Only allow a list of trusted parameters through.
       def web_module_params
-        params.require(:web_module).permit(:blog, :gallery, :paypal, :stripe, :adyen, :opinions, :newsletter, :reservation,:mailbox, :invitable, :social_media)
+        params.require(:web_module).permit(:blog, :gallery, :paypal, :stripe, :multisafe, :opinions, :newsletter, :reservation,:mailbox, :invitable, :social_media)
       end
   end
 end
