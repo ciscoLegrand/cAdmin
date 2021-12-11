@@ -1,4 +1,4 @@
-Cadmin::User.create(name: 'cisco', username: 'admin', email: 'creadix@creadix.com',phone: '+34625650792', password: 'test123', role: 'superadmin')
+Cadmin::User.create(name: 'cisco', username: 'admin', email: 'creadix@creadix.es',phone: '+34625650792', password: 'test123', role: 'superadmin')
 Cadmin::User.create(name: 'yona', username: 'yonidrama', email: 'customer1@test.com',phone: '+34625650392', password: 'test123', role: 'customer')
 Cadmin::User.create(name: 'pepe', username: 'pepito', email: 'customer2@test.com',phone: '+34625650192', password: 'test123', role: 'customer')
 Cadmin::User.create(name: 'paco', username: 'paquito', email: 'customer3@test.com',phone: '+34625650292', password: 'test123', role: 'customer')
