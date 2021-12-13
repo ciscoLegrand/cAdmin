@@ -8,11 +8,13 @@ module Cadmin
     def index      
       # @users = current_cadmin_user.where(deleted_at: nil).pluck(:id) #devuelve array de users´ids importante si hacemos soft delete de users  
       #! get events
-      events = Event.where(customer_id: current_cadmin_user.id) if current_cadmin_user.customer? || current_cadmin_user.employee?      
+      events = Event.where(customer_id: current_cadmin_user.id) if current_cadmin_user.customer? 
+      events = Event.where(employee_id: current_cadmin_user.id) if current_cadmin_user.employee?      
       events = Event.all if current_cadmin_user.admin?
 
       #! search events
       events = events.filter_by_number(params[:number]) if params[:number].present?
+      events = events.filter_by_title(params[:title]) if params[:title].present?
       events = events.filter_by_user_id(params[:user_id]) if params[:user_id].present?
       events = events.filter_between_dates(params['start_date'], params['end_date']) if params['start_date'].present? && params['end_date'].present?
 
@@ -22,10 +24,11 @@ module Cadmin
       #! get total price events
       @total = employee_salary(events) if current_cadmin_user.employee?
       @total = total_events(events) if current_cadmin_user.admin? 
+      @pending_amount = pending_amount(events) if current_cadmin_user.admin?
       #! number of events to show
       @events_count = events.present? ? events.count : 0
       #! paginate events
-      @pagy, @events = pagy(events.order('date DESC'), items: 10) if @events.present? 
+      @pagy, @events = pagy(events, items: 10) if @events.present? 
     end
 
     # GET /events/1
@@ -38,19 +41,19 @@ module Cadmin
     def new
       add_breadcrumb 'Nuevo Evento'
       @event = Event.new
-      
+      @event_types = Cadmin::EventType.all
       # @event.event_services.build
     end
 
     # GET /events/1/edit
     def edit
       add_breadcrumb 'Editar Evento'
+      @event_types = Cadmin::EventType.all
       # @event.event_services.build
     end
 
     # POST /events
-    def create
-      
+    def create      
       @event = Event.new(event_params)  
       @event.create_number
       if @event.save        
@@ -102,19 +105,25 @@ module Cadmin
     # TODO: refactor this method for validate type event and $
     def employee_salary(events)
       total = 0
-      events.each do  |event| 
-        if event.type_name == 'boda'
-         total += 160 
-        else
-          total += 80 
-        end
+      events.each do |event| 
+        type = Cadmin::EventType.find_by(name: event.type_name)
+        services = Cadmin::EventService.where(event_id: event.id)
+        services.each { |s| total += s.overtime * type.overtime_price if Cadmin::Service.find(s.service_id).main_service_id == Cadmin::MainService.find_by(name: 'Cabinas').id }
+        total += type.salary
       end
       total
     end
 
+    #! total amount of all events
     def total_events(events)
       total = 0
-      events.all.each  { |event| total += event.total_services_amount unless event.status == 'cancelled' }
+      events.each { |event| event.status == 'cancelled' ? total += 0 : total += event.total_services_amount }
+      total
+    end
+
+    def pending_amount(events)
+      total = 0
+      events.where(charged: false).each { |event| total += event.total_services_amount - event.deposit unless event.status == 'cancelled' }
       total
     end
 
