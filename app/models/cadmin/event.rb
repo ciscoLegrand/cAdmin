@@ -1,5 +1,8 @@
 module Cadmin
   class Event < ApplicationRecord
+    include PgSearch::Model
+    include Cadmin::DateFormat
+
     belongs_to :customer, foreign_key: :customer_id, class_name: 'User'
     belongs_to :employee, optional: true, foreign_key: :employee_id, class_name: 'User'
     has_one :interview, dependent: :destroy
@@ -15,11 +18,6 @@ module Cadmin
              to: :customer, prefix: :customer
 
     delegate :name, :phone, :avatar, to: :employee, prefix: :employee
-
-    # TODO. CREATE EVENT TYPE MODEL¿?
-    PERMITED_EVENT = [
-      'Boda', 'Cena', 'Comunion', 'Despedida','Cumpleaños', 'Bodas de plata/oro'
-    ]
 
     def servicenames 
       self.event_services.map(&:service_name).join(', ')
@@ -68,10 +66,10 @@ module Cadmin
     scope :sort_by_date, -> { order('date ASC') }
     # ! SEARCH BETWEEN DATES
     scope :filter_between_dates, ->(start_date, end_date) { where(date: start_date..end_date) }
-    scope :filter_by_user_id, ->(user_id) { where(customer_id: user_id) }
+    scope :filter_by_user_id, ->(employee_id) { where('employee_id = ?', employee_id) }
 
     # ! pgsearch busqueda por campos de texto
-    scope :filter_by_number, ->(number) { where('number like ?', "%#{number}%") }
-    # pg_search_scope :filter_by_name, against: :name
+    # pg_search_scope :filter_by_number, against: :number
+    pg_search_scope :filter_by_title, against: :title
   end
 end
