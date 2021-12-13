@@ -50,7 +50,12 @@
               <%= link_to locations_path , class: 'item panel-block has-text-dark is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'places', action: 'click->menu#set_active_menu_item'}  do %>
                 <span data-decrease-target="hidetext">Restaurantes</span><%= inline_svg_tag('cadmin/icons/ico-location.svg', class:'icon ')%>
               <% end %>
-            </li>
+            </li>            
+            <li>
+              <%= link_to event_types_path , class: 'item panel-block has-text-dark is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'event_types', action: 'click->menu#set_active_menu_item'}  do %>
+                <span data-decrease-target="hidetext">Tipo eventos</span><%= inline_svg_tag('cadmin/icons/ico-information-circle.svg', class:'icon ')%>
+              <% end %>
+            </li>            
           <% end %>
         </ul>
       </li>

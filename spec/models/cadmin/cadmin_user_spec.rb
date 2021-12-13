@@ -3,7 +3,7 @@ require 'rails_helper'
 module Cadmin
   RSpec.describe ArticleCategory, type: :model do
     it "Is a valid ArticleCategory" do
-      ac = Cadmin::ArticleCategory.create(name: 'Test Category')
+      ac = ArticleCategory.create(name: 'Test Category')
       expect(ac.valid?).to eq(true)
       puts "its #{expect(true).to eq(true)} -> Category: #{ac.name}"
     end

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @event_type.name %>
+</p>
+
+<p>
+  <strong>Salary:</strong>
+  <%= @event_type.salary %>
+</p>
+
+<p>
+  <strong>Overtime pay:</strong>
+  <%= @event_type.overtime_price %>
+</p>
+
+<p>
+  <strong>Assemble:</strong>
+  <%= @event_type.assemble %>
+</p>
+
+<%= link_to 'Edit', edit_event_type_path(@event_type) %> |
+<%= link_to 'Back', event_types_path %>

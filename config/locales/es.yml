@@ -190,6 +190,11 @@ es:
         discount_id: 'Descuento'
         overtime: 'Horas extra'
         start_time: 'Horas de salida'
+      cadmin/event_type:
+        name: 'Nombre'
+        salary: 'Salario'
+        overtime_price: 'Precio hora extra'
+        assemble: 'Montaje'
       cadmin/interview:
         event: 'Evento' 
         employee_id: 'Empleado'
@@ -388,8 +393,8 @@ es:
         start_time: 'Horas de salida'
         deposit: 'Fianza'
         pending: 'Pendiente'
-        total_amount: 'Total'
-        events_count: 'Eventos totales:'
+        total_amount: 'Total:'
+        events_count: 'Nº Eventos:'
         charged: 'Cobrado'
         overtime: 'Horas extra'
         actions: 'Acciones'
@@ -438,6 +443,17 @@ es:
         success: 'Evento eliminado correctamente'
       cancel:
         cancelled: 'Cancelado'
+    event_types:
+      index: 
+        page_title: 'Tipos de evento'
+        new: 'Nuevo tipo de evento'
+        name: 'Nombre'
+        salary: 'Salario'
+        overtime_price: 'Hora extra'
+        assemble: 'Montaje'
+      form: 
+        create: 'Guardar'
+        cancel: 'Volver'
     interviews:
       index: 
         title: 'Entrevistas'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_01_100855) do
+ActiveRecord::Schema.define(version: 2021_12_11_160703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2021_11_01_100855) do
     t.string "title", null: false
     t.text "content", null: false
     t.integer "status", default: 0, null: false
-    t.date "published_at", default: "2021-12-11", null: false
+    t.date "published_at", default: "2021-12-12", null: false
     t.date "unpublished_at"
     t.string "metatitle"
     t.string "metadata"
@@ -84,11 +84,21 @@ ActiveRecord::Schema.define(version: 2021_11_01_100855) do
     t.index ["service_id"], name: "index_cadmin_event_services_on_service_id"
   end
 
+  create_table "cadmin_event_types", force: :cascade do |t|
+    t.string "name"
+    t.float "salary", default: 0.0, null: false
+    t.float "overtime_price", default: 0.0, null: false
+    t.float "assemble", default: 0.0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "cadmin_events", force: :cascade do |t|
     t.integer "customer_id", null: false
     t.integer "employee_id"
+    t.string "status", default: "pending", null: false
     t.string "title"
-    t.string "type_name", default: "wedding", null: false
+    t.string "type_name", default: "boda", null: false
     t.string "number", null: false
     t.date "date", null: false
     t.integer "guests"
@@ -96,6 +106,7 @@ ActiveRecord::Schema.define(version: 2021_11_01_100855) do
     t.float "deposit", default: 0.0, null: false
     t.float "total_amount", default: 0.0, null: false
     t.boolean "charged", default: false, null: false
+    t.boolean "employee_paid", default: false, null: false
     t.text "observations"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
