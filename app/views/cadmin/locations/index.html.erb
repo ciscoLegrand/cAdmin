@@ -6,7 +6,7 @@
 <div class="container mt-4">  
   <div class="columns is-multiline is-mobile is-justify-content-space-between">    
     <% @locations.each do |location| %>
-      <div class="card column is-4 my-3">
+      <div class="card column is-4-desktop is-6-tablet is-12-mobile my-3">
         <div class="card-image">
           <iframe src="<%= location.coords %>"
                   width="100%" height="300" 

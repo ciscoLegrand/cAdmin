@@ -17,7 +17,7 @@
       </div>
       <footer class="card-footer mt-3 pt-2">
         <div class="label mr-2">Última vez editado: </div>
-        <time datetime="<%= interview.updated_at %>" class="is-size-6"><%= interview.updated_format %></time>
+        <time datetime="<%= interview.updated_format %>" class="is-size-6"><%= interview.updated_format %></time>
         <% if current_cadmin_user.admin? %>
           <span class="tag is-rounded is-danger is-light ml-2"><%= interview.employee_name %></span>
         <% end %>

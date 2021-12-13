@@ -52,13 +52,13 @@
         <div class="card-content">
           <div class="media">
             <div class="media-left">
-              <div class="<%= web_module.adyen? ? 'has-background-primary' : 'has-background-tertiary'%> p-2   ccard__rounded">
+              <div class="<%= web_module.multisafe? ? 'has-background-primary' : 'has-background-tertiary'%> p-2   ccard__rounded">
                 <%= inline_svg_tag("cadmin/icons/ico-paypal.svg", size: '64', class: 'has-text-white  ') %>
               </div>
             </div>
             <div class="media-content is-flex is-flex-direction-column is-align-items-center">
-              <%= form.label :adyen, class: 'label' %> 
-              <%= form.check_box :adyen, class:"switch" %>
+              <%= form.label :multisafe, class: 'label' %> 
+              <%= form.check_box :multisafe, class:"switch" %>
             </div>
           </div>
         </div>

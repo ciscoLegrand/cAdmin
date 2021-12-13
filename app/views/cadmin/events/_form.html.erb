@@ -17,7 +17,7 @@
       <div class="field">
         <%= form.label :customer_id, class: 'label' %>        
         <div class="control is-expanded">
-          <%= form.collection_select :customer_id, Cadmin::User.where(role: 'customer').all, :id ,:name, {prompt: 'Selecciona cliente'}, {  prompt: 'Selecciona usuario',class: "select_inside_col",data: {controller: "slimselect"}} %>
+          <%= form.collection_select :customer_id, Cadmin::User.where(role: 'customer').all, :id ,:name, {prompt: 'Selecciona cliente'}, {  class: "select_inside_col",data: {controller: "slimselect"}} %>
         </div>
       </div>
       <div class="field">
@@ -38,7 +38,7 @@
       </div>
       <div class="field">
         <%= form.label :type_name, class: 'label' %>
-        <%= form.select :type_name, Cadmin::Event::PERMITED_EVENT, {prompt: 'Selecciona cliente'}, {  prompt: 'Selecciona tipo de evento',class: "select_inside_col",data: {controller: "slimselect"}} %>
+        <%= form.collection_select :type_name, @event_types, :name ,:name, {prompt: 'Selecciona tipo de evento'}, {  class: "select_inside_col",data: {controller: "slimselect"}} %>
       </div>
     </div>
   </div>
