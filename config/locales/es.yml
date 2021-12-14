@@ -171,6 +171,10 @@ es:
         observations: 'Comentarios'
         event_id: 'Evento' 
         service_id: 'Servicio'
+      cadmin/email_base_template:
+        title: 'Título'
+        kind: 'Tipo'
+        content: 'Cuerpo'
       cadmin/event:
         title: 'Nombre evento'
         customer_id: 'Cliente'
@@ -259,6 +263,10 @@ es:
       cadmin/comment:
       cadmin/conversation:
       cadmin/discount:
+      cadmin/email_base_template:
+        title: 'Título'
+        kind: 'Tipo'
+        content: 'Cuerpo'
       cadmin/event:
         title: 'Título'
         customer: 'Cliente'
@@ -376,6 +384,12 @@ es:
         success: 'Descuento actualizado correctamente'  
       destroy: 
         success: 'Descuento eliminado correctamente'
+    email_base_templates:
+      index:
+      show:
+      form:
+        create: 'Guardar'
+        cancel: 'Volver'
     events:
       index:
         page_title: 'Eventos'

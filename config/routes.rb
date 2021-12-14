@@ -1,4 +1,5 @@
 Cadmin::Engine.routes.draw do
+  resources :email_base_templates
   resources :event_types
   mount Shrine.upload_endpoint(:cache) => "/upload"
   root to: "dashboard#index"

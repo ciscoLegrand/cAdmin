@@ -140,10 +140,22 @@
             </li>
           </ul>
         </li>
+        <li>  
+          <span class="panel-block has-text-dark is-flex is-justify-content-flex-start is-align-items-start is-clickable is-hoverable has-no-bottom-line " data-action="click->menu#set_active_menu" data-menu="conf">
+            <%= inline_svg_tag('cadmin/icons/ico-mail.svg', class:'icon mx-4')%> <span data-decrease-target="hidetext">Configuración</span> 
+          </span>
+            <ul data-menu-target="dropdown">
+              <li>
+                <%= link_to email_base_templates_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'base_templates', action: 'click->menu#set_active_menu_item'} do %>
+                  Configuracion email<%= inline_svg_tag('cadmin/icons/ico-mail.svg', class:'icon ')%>
+                <% end %>
+              </li>      
+            </ul>
+        </li>
       <% end %>
       <% if current_cadmin_user.superadmin? %>
         <li>  
-          <span class="panel-block has-text-dark is-flex is-justify-content-flex-start is-align-items-start is-clickable is-hoverable has-no-bottom-line " data-action="click->menu#set_active_menu" data-menu="conf">
+          <span class="panel-block has-text-dark is-flex is-justify-content-flex-start is-align-items-start is-clickable is-hoverable has-no-bottom-line " data-action="click->menu#set_active_menu" data-menu="modules">
             <%= inline_svg_tag('cadmin/icons/ico-cog.svg', class:'icon mx-4')%>  <span data-decrease-target="hidetext">Configuración</span>
           </span>
           <ul data-menu-target="dropdown">
