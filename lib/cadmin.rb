@@ -17,6 +17,7 @@ require 'shrine'
 require "image_processing"
 require "pagy"
 require "rspec-rails"
+require "liquid"
 module Cadmin
   class Engine < ::Rails::Engine
   end
