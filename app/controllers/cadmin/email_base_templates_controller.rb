@@ -11,7 +11,8 @@ module Cadmin
 
     # GET /email_base_templates/1
     def show
-      @template = Liquid::Template.parse(@email_base_template.content) 
+      template = @email_base_template.has_custom_template? ? @email_base_template.custom_template : @email_base_template
+      @template = Liquid::Template.parse(template.content) 
     end
 
     # GET /email_base_templates/new

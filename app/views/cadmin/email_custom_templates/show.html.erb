@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @email_custom_template.content %>
+</p>
+
+<p>
+  <strong>Email base template:</strong>
+  <%= @email_custom_template.email_base_template_id %>
+</p>
+
+<%= link_to 'Edit', edit_email_custom_template_path(@email_custom_template) %> |
+<%= link_to 'Back', email_custom_templates_path %>

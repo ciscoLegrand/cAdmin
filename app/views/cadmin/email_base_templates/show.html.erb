@@ -5,9 +5,11 @@
         <p class="card-header-title">
          <%= @email_base_template.title %>
         </p>
-        <span class="has-tooltip-bottom card-header-icon" data-tooltip='<%= t '.edit'  %>'>
-            <%= link_to inline_svg_tag('cadmin/icons/ico-edit.svg', class: 'icon is-medium has-text-primary'), new_email_base_template_path(@email_base_template),  data:{turbo_frame: "_top"}, class: 'button is-clickable' %>
-        </span>
+         <%if @email_base_template.has_custom_template? %>
+            <%= link_to inline_svg_tag('cadmin/icons/ico-edit.svg', class: 'icon is-medium has-text-primary'), edit_email_base_template_email_custom_template_path(@email_base_template, @email_base_template.custom_template),  data:{turbo_frame: "_top"}, class: 'button is-clickable' %>
+          <% else %>
+            <%= link_to inline_svg_tag('cadmin/icons/ico-edit.svg', class: 'icon is-medium has-text-primary'), new_email_base_template_email_custom_template_path(@email_base_template),  data:{turbo_frame: "_top"}, class: 'button is-clickable' %>
+          <% end %>
       </header>
       <div class="card-content card-email__fullheight has-background-white-ter is-scrollable-y">
         <div class="content card-email__content my-6">

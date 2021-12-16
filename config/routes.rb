@@ -1,6 +1,4 @@
 Cadmin::Engine.routes.draw do
-  resources :email_base_templates
-  resources :event_types
   mount Shrine.upload_endpoint(:cache) => "/upload"
   root to: "dashboard#index"
   
@@ -15,7 +13,7 @@ Cadmin::Engine.routes.draw do
   match '/users', to: "users#index",  via: :get, as: :users
   # match '/charged', to: "events#charged", via: :get, as: :charged
   # match '/events/:id/charged', to: "events#charged", via: :put, as: :charged
-  
+  resources :event_types
   resources :locations
   resources :article_categories
   resources :tags
@@ -23,6 +21,10 @@ Cadmin::Engine.routes.draw do
   resources :web_modules
   resources  :users  
   
+  resources :email_base_templates do
+    resources :email_custom_templates, except: [:show]
+  end
+
   resources :events do
     resources :interviews  
   end

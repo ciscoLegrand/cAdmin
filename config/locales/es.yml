@@ -390,6 +390,12 @@ es:
       form:
         create: 'Guardar'
         cancel: 'Volver'
+    email_custom_templates:
+      index:
+      show:
+      form:
+        create: 'Guardar'
+        cancel: 'Volver'
     events:
       index:
         page_title: 'Eventos'
