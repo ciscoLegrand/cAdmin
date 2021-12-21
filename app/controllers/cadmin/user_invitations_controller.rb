@@ -19,21 +19,21 @@ module Cadmin
       end
       @user = Cadmin::User.new(invited_cadmin_user_params)
       if @user.valid?
-        # Cadmin::User.invite!(invited_cadmin_user_params)
-        redirect_to new_cadmin_user_invitation_path, notice: "Se acaba de enviar un email de activación a  #{invited_cadmin_user_params[:email]}."
+        Cadmin::User.invite!(invited_cadmin_user_params)
+        redirect_to events_path, notice: "Se acaba de enviar un email de activación a  #{invited_cadmin_user_params[:email]}."
       else        
         render 'cadmin/user_invitations/new', locals: { resource: @user, resource_name: resource_name }, notice: "No se ha podido enviar el email a  #{invited_cadmin_user_params[:email]}."
       end
     end
 
-    # def update
-    #   user = User.accept_invitation!(invited_user_params)
-    #   if user.valid?
-    #     redirect_to root_path, notice: ''
-    #   else
-    #     super
-    #   end
-    # end 
+    def update
+      user = Cadmin::User.accept_invitation!(invited_user_params)
+      if user.valid?
+        redirect_to root_path, notice: ''
+      else
+        super
+      end
+    end 
 
     private 
     

@@ -15,7 +15,7 @@ module Cadmin
       #! search events
       events = events.filter_by_number(params[:number]) if params[:number].present?
       events = events.filter_by_title(params[:title]) if params[:title].present?
-      events = events.filter_by_user_id(params[:user_id]) if params[:user_id].present?
+      events = events.filter_by_employee_id(params[:employee_id]) if params[:employee_id].present?
       events = events.filter_between_dates(params['start_date'], params['end_date']) if params['start_date'].present? && params['end_date'].present?
 
       #! sort events

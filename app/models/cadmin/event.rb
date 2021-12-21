@@ -66,7 +66,7 @@ module Cadmin
     scope :sort_by_date, -> { order('date ASC') }
     # ! SEARCH BETWEEN DATES
     scope :filter_between_dates, ->(start_date, end_date) { where(date: start_date..end_date) }
-    scope :filter_by_user_id, ->(employee_id) { where('employee_id = ?', employee_id) }
+    scope :filter_by_employee_id, ->(employee_id) { where('employee_id = ?', employee_id) }
 
     # ! pgsearch busqueda por campos de texto
     # pg_search_scope :filter_by_number, against: :number
