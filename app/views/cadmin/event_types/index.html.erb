@@ -1,0 +1,51 @@
+  <%= turbo_frame_tag :event_types do %>
+    <div class="card has-table">
+      <header class="card-header is-align-items-center pr-4">
+        <div class="card-header-title"> 
+          <%= link_to "#{t '.new'}", new_event_type_path, target: '_top',class: 'button is-primary is-outlined' if current_cadmin_user.admin? %>
+          <div class="has-text-centered is-fullwidth title is-size-4-desktop is-size-5-touch">
+            <%= t '.page_title' %> 
+          </div>
+        </div>
+        <span class="tag is-warning is-rounded" style="padding-top:5px;"><%= link_to inline_svg_tag('cadmin/icons/ico-refresh.svg', class: 'icon is-small'), event_types_path%></span>
+      </header>
+      <div class="card-content">
+        <div class="b-table has-pagination is-scrollable-touch">
+          <div class="table-wrapper has-mobile-cards">
+            <table class="table is-fullwidth is-striped is-hoverable is-fullwidth is-scrollable-touch">
+              <thead>
+                <tr>
+                  <th class="is-size-7-mobile"><%= t '.name' %></th>
+                  <th class="is-size-7-mobile"><%= t '.salary' %></th>
+                  <th class="is-size-7-mobile"><%= t '.overtime_price' %></th>
+                  <th class="is-size-7-mobile"><%= t '.assemble' %></th>
+                  <th colspan="3"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @event_types.each do |type| %>           
+                  <tr >
+                    <td class="is-size-7-mobile"><%= type.name%></td>
+                    <td class="is-size-7-mobile"><%= number_to_currency(type.salary, delimiter: '', unit:"#{t 'currency'}", separator: ',', precision: 2)%></td>
+                    <td class="is-size-7-mobile"><%= number_to_currency(type.overtime_price, delimiter: '', unit:"#{t 'currency'}", separator: ',', precision: 2) %></td>
+                    <td class="is-size-7-mobile"><%= number_to_currency(type.assemble, delimiter: '', unit: "#{t 'currency'}", separator: ',', precision: 2) %></td>
+                    <td class="is-actions-cell">
+                      <div class="buttons is-flex-wrap-nowrap">                         
+                        <%#= link_to inline_svg_tag('cadmin/icons/ico-eye.svg', class: 'icon is-medium has-text-primary'), type ,data:{turbo_frame: "_top"}, class: 'button is-small is-clickable m-0' %>
+                        <% if current_cadmin_user.admin? %>
+                          <%= link_to inline_svg_tag('cadmin/icons/ico-edit.svg', class: 'icon is-medium has-text-primary'), edit_event_type_path(type), data:{turbo_frame: "_top"}, class: 'button is-small is-clickable m-0' %>
+                          <%= button_to type, method: :delete, data: { controller: "swal", action: "click->swal#fire", swal_options_value: default_swal_options,turbo_frame: "_top" }, class:"button is-small is-clickable m-0 is-hidden-mobile"  do %>
+                            <%=  inline_svg_tag('cadmin/icons/ico-trash.svg', class: 'icon is-medium has-text-primary') %>
+                          <% end %>    
+                        <% end %>
+                      </div>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>

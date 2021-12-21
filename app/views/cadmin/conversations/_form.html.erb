@@ -19,7 +19,7 @@
         <%= form.label :recipient_id, class: 'label' %>
         </div>
         <div class="column is-12">
-        <%= form.collection_select :recipient_id, Cadmin::User.all, :id ,:name, {prompt: 'Selecciona usuario'}, {  prompt: 'Selecciona usuario',class: "select_inside_col",data: {controller: "slimselect"}} %>
+        <%= form.collection_select :recipient_id, @users, :id ,:name, {prompt: 'Selecciona usuario'}, {  prompt: 'Selecciona usuario',class: "select_inside_col",data: {controller: "slimselect"}} %>
         </div>
       </div>
     </div>

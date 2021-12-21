@@ -1,0 +1,64 @@
+
+
+  <div class="column is-one-third-desktop is-hidden-touch">
+    <h3 class="subtitle is-size-4-desktop is-size-5-touch">Etiquetas</h3>
+    <hr class="has-background-white-ter">
+    <ul>
+      <!--TODO: translate list--->
+      <li>  <span class="tag is-white-ter p-3 is-size-6 my-2 tag__fixsize"> {{nombre_usuario}}</span> Mostrará el nombre de usuario</li>      
+      <li>  <span class="tag is-white-ter p-3 is-size-6 my-2 tag__fixsize"> {{host}}</span> Mostrará el dominio desde donde se envia</li>
+      <% if @email_custom_template.base_kind == 'welcome' || @email_custom_template.base_kind == 'reset_password' %>
+        <li>  <span class="tag is-white-ter p-3 is-size-6 my-2 tag__fixsize"> {{boton_aceptar}}</span> Enlace que deberás añadir al link en el editor. </li>
+      <% end %>
+    </ul>
+  </div>
+
+
+  <div class="column is-two-third-desktop is-12-touch">
+    <div class="columns is-mobile is-justify-content-center">
+      <div class="column box is-10-desktop is-8-touch">
+        <%= form_with(model:[@email_base_template, @email_custom_template], local: true, data: {"controller": "quill", "action": "quill#save", turbo: false}, html: {id: 'base'}) do |form| %>        
+          <div class="field is-horizontal my-3">
+            <div class="field-body">
+              <div class="field">
+                <div class="control is-expanded">
+                  <%= form.label :title, class:'label' %>
+                  <%= form.text_field :title, class: 'input', value:@email_base_template.title, readonly: true  %>
+                </div>
+              </div>
+              <div class="field">
+                <div class="control is-expandend">
+                  <%= form.label :kind, class:'label' %>                  
+                  <%= form.text_field :kind, class: 'input', value:@email_base_template.kind, readonly: true  %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <%# TODO: revisar email_template_id (hara las veces de email padre del cual el custom email se modificará)%>
+          <%= form.hidden_field :email_base_template_id, value: @email_base_template.id %>     
+          <%= form.hidden_field :content, class: 'content', data: {"quill-target": "content"}%>
+          <div data-quill-target="editor" class="events__quill is-fullwidth editor-fullheight">
+            <%= @email_custom_template.content.present? ? raw(@email_custom_template.content) : raw(@email_base_template.content) %>         
+          </div> 
+          
+          <% if @email_custom_template.errors.any? %>
+            <div id="error_explanation">
+              <h2 class="subtitle is-size-5 has-background-warning has-text-centered has-text-dark"><%= pluralize(@email_custom_template.errors.count, "error") %> evitaron que se guardase:</h2>
+              <ul>
+                <% @email_custom_template.errors.each do |error| %>
+                  <li><%= error.full_message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <!-- TODO: translate -->
+          <div class="actions is-flex is-justify-content-center my-3">
+            <%= form.submit "#{t '.create'}", class: "button is-success mx-2" %>
+            <%= link_to "#{t '.cancel'}", email_base_templates_path, class: "button has-background-white-ter mx-2" %>
+          </div>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+

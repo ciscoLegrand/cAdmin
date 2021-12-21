@@ -9,6 +9,7 @@ PATH
       devise_invitable
       image_processing (~> 1.8)
       inline_svg
+      liquid
       pagy
       pg
       pg_search
@@ -153,6 +154,7 @@ GEM
       addressable (~> 2.7)
     letter_opener (1.7.0)
       launchy (~> 2.2)
+    liquid (5.1.0)
     loofah (2.12.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)

@@ -16,13 +16,11 @@ require "devise_invitable"
 require 'shrine'
 require "image_processing"
 require "pagy"
-  
-  require "rspotify"
-  require "active_model_serializers"
+require "rspotify"
+require "active_model_serializers"
+require "rspec-rails"
+require "liquid"
 module Cadmin
   class Engine < ::Rails::Engine
-
-    isolate_namespace Cadmin
-
   end
 end

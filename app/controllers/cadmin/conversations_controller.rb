@@ -7,7 +7,17 @@ module Cadmin
     add_breadcrumb 'Mensajes', :conversations_path
     # GET /conversations
     def index
-      @users = User.all
+      @users = User.all if current_cadmin_user.admin?
+      
+      #! get customers from events where employee is the current_user
+      customers = []
+      employees = []
+      Event.where(employee_id: current_cadmin_user.id).each { |event| customers << User.find(event.customer_id) } if current_cadmin_user.employee?
+      Event.where(customer_id: current_cadmin_user.id).each { |event| employees << User.find(event.employee_id) } if current_cadmin_user.customer?
+
+      @users = customers if current_cadmin_user.employee?
+      @users = employees if current_cadmin_user.customer?
+
       @conversations = Conversation.all
     end
 
@@ -19,6 +29,16 @@ module Cadmin
     # GET /conversations/new
     def new
       add_breadcrumb 'Nueva conversación'
+      @users = User.all if current_cadmin_user.admin?
+      
+      #! get customers from events where employee is the current_user
+      customers = []
+      employees = []
+      Event.where(employee_id: current_cadmin_user.id).each { |event| customers << User.find(event.customer_id) }
+      Event.where(customer_id: current_cadmin_user.id).each { |event| employees << User.find(event.employee_id) }
+
+      @users = customers if current_cadmin_user.employee?
+      @users = employees if current_cadmin_user.customer?
       @conversation = Conversation.new
     end
 

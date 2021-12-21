@@ -1,0 +1,31 @@
+
+<% if @email_base_templates.present? %>
+  <% if current_cadmin_user.admin? && !@email_base_templates.pending? %>
+    <%= link_to new_email_base_template_path, class:'button is-success px-4 mx-5 mb-5'  do %>
+      <span class="has-text-white is-clickable">Añadir Plantilla</span>  <%= inline_svg_tag('cadmin/icons/ico-mail.svg', class: 'icon is-16x16  has-text-white') %>
+    <% end %>
+  <% end %>
+  <div class="container">
+    <div class="columns is-multiline is-mobile">
+      <% @email_base_templates.each do |base_template|%>
+        <div class="column is-half mb-6">
+        <%= turbo_frame_tag dom_id(base_template), loading: :lazy, src: email_base_template_path(id: base_template.id) %>
+        </div>
+      <% end %>
+    </div>
+  </div>  
+<% else %>
+  <div class="box is-fullwidth">
+    <div class="is-flex is-justify-content-center">
+      <figure class='image'>
+        <%= inline_svg_tag('cadmin/content/no_data.svg', size: '250', class: 'has-text-centered')%> <br>
+      </figure>
+    </div>
+    <h3 class="subtitle is-size-5 has-text-centered"> Aún no hay plantillas generadas </h3>
+    <div class="is-flex is-justify-content-center">
+      <%= link_to  new_email_base_template_path, class: 'button is-primary mr-2', data: {turbo_frame: "_top"} do %>
+        Añadir Plantilla<%= inline_svg_tag('cadmin/icons/ico-plus-circle.svg', class:'icon is-medium ml-4') %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

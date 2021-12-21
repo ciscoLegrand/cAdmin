@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_01_120860) do
+ActiveRecord::Schema.define(version: 2021_12_16_213647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2021_11_01_120860) do
     t.string "title", null: false
     t.text "content", null: false
     t.integer "status", default: 0, null: false
-    t.date "published_at", default: "2021-11-01", null: false
+    t.date "published_at", default: "2021-12-16", null: false
     t.date "unpublished_at"
     t.string "metatitle"
     t.string "metadata"
@@ -70,6 +70,22 @@ ActiveRecord::Schema.define(version: 2021_11_01_120860) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "cadmin_email_base_templates", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "content", null: false
+    t.integer "kind", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "cadmin_email_custom_templates", force: :cascade do |t|
+    t.text "content"
+    t.bigint "email_base_template_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email_base_template_id"], name: "index_cadmin_email_custom_templates_on_email_base_template_id"
+  end
+
   create_table "cadmin_event_services", force: :cascade do |t|
     t.bigint "event_id", null: false
     t.bigint "service_id", null: false
@@ -77,7 +93,6 @@ ActiveRecord::Schema.define(version: 2021_11_01_120860) do
     t.integer "start_time"
     t.integer "overtime", default: 0, null: false
     t.float "total_amount", default: 0.0, null: false
-    t.boolean "remove", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["discount_id"], name: "index_cadmin_event_services_on_discount_id"
@@ -85,11 +100,21 @@ ActiveRecord::Schema.define(version: 2021_11_01_120860) do
     t.index ["service_id"], name: "index_cadmin_event_services_on_service_id"
   end
 
+  create_table "cadmin_event_types", force: :cascade do |t|
+    t.string "name"
+    t.float "salary", default: 0.0, null: false
+    t.float "overtime_price", default: 0.0, null: false
+    t.float "assemble", default: 0.0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "cadmin_events", force: :cascade do |t|
     t.integer "customer_id", null: false
     t.integer "employee_id"
+    t.string "status", default: "pending", null: false
     t.string "title"
-    t.string "type_name", default: "wedding", null: false
+    t.string "type_name", default: "boda", null: false
     t.string "number", null: false
     t.date "date", null: false
     t.integer "guests"
@@ -97,6 +122,7 @@ ActiveRecord::Schema.define(version: 2021_11_01_120860) do
     t.float "deposit", default: 0.0, null: false
     t.float "total_amount", default: 0.0, null: false
     t.boolean "charged", default: false, null: false
+    t.boolean "employee_paid", default: false, null: false
     t.text "observations"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -255,7 +281,7 @@ ActiveRecord::Schema.define(version: 2021_11_01_120860) do
     t.boolean "invitable"
     t.boolean "paypal"
     t.boolean "stripe"
-    t.boolean "adyen"
+    t.boolean "multisafe"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -264,6 +290,7 @@ ActiveRecord::Schema.define(version: 2021_11_01_120860) do
   add_foreign_key "cadmin_articles", "cadmin_users", column: "user_id"
   add_foreign_key "cadmin_comments", "cadmin_articles", column: "article_id"
   add_foreign_key "cadmin_comments", "cadmin_users", column: "user_id"
+  add_foreign_key "cadmin_email_custom_templates", "cadmin_email_base_templates", column: "email_base_template_id"
   add_foreign_key "cadmin_event_services", "cadmin_discounts", column: "discount_id"
   add_foreign_key "cadmin_event_services", "cadmin_events", column: "event_id"
   add_foreign_key "cadmin_event_services", "cadmin_services", column: "service_id"

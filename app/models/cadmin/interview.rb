@@ -1,5 +1,8 @@
 module Cadmin
   class Interview < ApplicationRecord
+    include PgSearch::Model
+    include Cadmin::DateFormat
+    
     belongs_to :event
     belongs_to :employee, foreign_key: :employee_id, class_name: 'User'
     

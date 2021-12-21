@@ -33,7 +33,7 @@
                 </tr>
                 <tr>
                   <th><%= t '.pending_amount' %></th>
-                  <td><%= number_with_precision(@event.total_services_amount - @event.deposit,precision:2)+ t( 'currency') %> </td>
+                  <td><%= number_with_precision(@event.total_services_amount - @event.deposit,precision:2) + t( 'currency') %> </td>
                 </tr>
                 <tr>
                   <th><%= t '.total_amount' %></th>
@@ -122,7 +122,7 @@
       </div>
       <footer class="card-footer">
         <div class="card-footer-item">
-          <div> <%= @event.charged ? 'Pagado' : 'Pendiente'  %> <span class="tag <%= @event.charged ? 'is-success' : 'is-warning'  %> is-size-5"><%= "#{number_with_precision(@event.total_amount, precision: 2)}#{t( 'currency')}"%></span></div>
+          <div> <%= @event.charged ? 'Pagado' : 'Pendiente'  %> <span class="tag <%= @event.charged ? 'is-success' : 'is-warning'  %> is-size-5"><%= "#{number_with_precision(@event.total_services_amount, precision: 2)}#{t( 'currency')}"%></span></div>
         </div>
       </footer>
     </div>  
@@ -162,7 +162,9 @@
                   <hr>
               
                   <div>Precio: <span class="tag is-success is-size-5"><%= "#{number_with_precision(service.total_amount, precision: 2)}#{t 'currency'}" %></span></div>
-                  
+                  <% if service.overtime > 0 %>
+                    <div>Horas extra: <span class="tag is-primary is-rounded is-size-6 mt-2"><%= "#{service.overtime}" %></span></div>
+                  <% end %>
                 </div>
               </div>  
             </div>         
