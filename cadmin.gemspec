@@ -44,7 +44,6 @@ Gem::Specification.new do |spec|
   # spotify   
   spec.add_dependency 'rspotify'
 
-  spec.add_dependency 'pagy'
   spec.add_dependency 'liquid'
   
   # dev dependencies
