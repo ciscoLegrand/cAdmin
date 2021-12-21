@@ -5,9 +5,8 @@
     <hr class="has-background-white-ter">
     <ul>
       <!--TODO: translate list--->
-      <li>  <span class="tag is-white-ter p-3 is-size-6 my-2 tag__fixsize"> {{nombre_usuario}}</span> Mostrará el nombre de usuario</li>
-      <li>  <span class="tag is-white-ter p-3 is-size-6 my-2 tag__fixsize"> {{nombre_cuenta}}</span> Mostrará el nombre comercial.</li>
-      <li>  <span class="tag is-white-ter p-3 is-size-6 my-2 tag__fixsize"> {{area_privada}}</span> Mostrará el dominio desde donde se envia</li>
+      <li>  <span class="tag is-white-ter p-3 is-size-6 my-2 tag__fixsize"> {{nombre_usuario}}</span> Mostrará el nombre de usuario</li>      
+      <li>  <span class="tag is-white-ter p-3 is-size-6 my-2 tag__fixsize"> {{host}}</span> Mostrará el dominio desde donde se envia</li>
       <% if @email_custom_template.base_kind == 'welcome' || @email_custom_template.base_kind == 'reset_password' %>
         <li>  <span class="tag is-white-ter p-3 is-size-6 my-2 tag__fixsize"> {{boton_aceptar}}</span> Enlace que deberás añadir al link en el editor. </li>
       <% end %>
@@ -38,7 +37,7 @@
           <%# TODO: revisar email_template_id (hara las veces de email padre del cual el custom email se modificará)%>
           <%= form.hidden_field :email_base_template_id, value: @email_base_template.id %>     
           <%= form.hidden_field :content, class: 'content', data: {"quill-target": "content"}%>
-          <div data-quill-target="editor" class="is-fullwidth editor-fullheight">
+          <div data-quill-target="editor" class="events__quill is-fullwidth editor-fullheight">
             <%= @email_custom_template.content.present? ? raw(@email_custom_template.content) : raw(@email_base_template.content) %>         
           </div> 
           

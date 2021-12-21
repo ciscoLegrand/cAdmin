@@ -21,7 +21,6 @@ module Cadmin
     def has_custom_template?
       template = self.email_custom_templates
       template.any? ? template.present? : false
-      # any? -> returns collections
     end
   
     def custom_template
