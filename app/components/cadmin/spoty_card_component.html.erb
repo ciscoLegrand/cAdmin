@@ -1,0 +1,24 @@
+
+<div class="card column is-2 mx-2">
+  <div class="card-image">
+    <figure class="image is-4by3">
+      <%= image_tag image, loading: :lazy%>
+    </figure>
+  </div>
+  <div class="card-content">
+    <div class="media">
+      <div class="media-content">
+        <p class="title is-4"><%= name.truncate(27)%></p>
+        <p class="subtitle is-6"><%= artist %></p>
+          <iframe src="https://open.spotify.com/follow/1/?uri=spotify:artist:6sFIWsNpZYqfjUpaCgueju&size=detail&theme=light" width="100%" height="56" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowtransparency="true"></iframe>
+      </div>
+    </div>
+
+    <div class="content">      
+      <audio controls style="width:100%;" preload="none">
+        <source src="<%= preview%>" type='audio/ogg; codecs=vorbis'>
+        <span class="tag is-danger has-text-white">Your user agent does not support the HTML5 Audio element.</span>
+      </audio>
+    </div>
+  </div>
+</div>

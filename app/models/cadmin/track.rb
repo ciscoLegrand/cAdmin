@@ -1,5 +1,7 @@
 module Cadmin
   class Track < ApplicationRecord
+    include PgSearch::Model
+    include Cadmin::DateFormat
     def self.new_from_spotify_track(spotify_track)
       unless Track.exists?(spotify_id: spotify_track.id)
         Track.create!(
@@ -17,5 +19,7 @@ module Cadmin
       track.save
       track
     end
+
+    pg_search_scope :filter_by_artist, against: :artist
   end
 end
