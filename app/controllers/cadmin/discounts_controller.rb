@@ -54,7 +54,7 @@ module Cadmin
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_discount
-        @discount = Discount.find(params[:id])
+        @discount = Discount.friendly.find(params[:id])
       end
 
       # Only allow a list of trusted parameters through.

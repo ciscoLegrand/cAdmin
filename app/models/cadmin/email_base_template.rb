@@ -1,5 +1,9 @@
 module Cadmin
   class EmailBaseTemplate < ApplicationRecord
+    extend FriendlyId
+
+    friendly_id :title, use: :slugged
+    
     has_many :email_custom_templates, dependent: :destroy
 
     validates :kind, presence: true, uniqueness: true

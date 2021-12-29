@@ -62,11 +62,11 @@ module Cadmin
 
     private
       def set_main_service 
-        @main = MainService.find_by_id(params[:main_service_id])
+        @main = MainService.friendly.find(params[:main_service_id])
       end
       # Use callbacks to share common setup or constraints between actions.
       def set_service
-        @service = Service.find(params[:id])
+        @service = Service.friendly.find(params[:id])
       end
 
       # Only allow a list of trusted parameters through.

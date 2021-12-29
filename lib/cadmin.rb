@@ -20,6 +20,7 @@ require "rspotify"
 require "active_model_serializers"
 require "rspec-rails"
 require "liquid"
+require "friendly_id"
 module Cadmin
   class Engine < ::Rails::Engine
   end

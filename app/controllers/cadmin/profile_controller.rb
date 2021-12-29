@@ -5,7 +5,7 @@ module Cadmin
     def index
       add_breadcrumb 'Perfil'
     end
-
+1
     def edit
     end
 

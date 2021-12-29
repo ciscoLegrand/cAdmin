@@ -15,7 +15,7 @@ class CreateCadminInterviews < ActiveRecord::Migration[6.1]
       t.string :figures_music
       t.text :gift_information
       t.text :observations
-
+      
       t.timestamps
     end
   end

@@ -1,5 +1,9 @@
 module Cadmin
   class User < ApplicationRecord
+    extend FriendlyId
+
+    friendly_id :username, use: :slugged
+
     include Cadmin::PermissionLevel
     include PgSearch::Model
 

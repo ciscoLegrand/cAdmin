@@ -20,7 +20,7 @@ class DeviseCreateCadminUsers < ActiveRecord::Migration[6.1]
       t.datetime :deleted_at
       t.string :role, null: false, default: 'user'
       t.string :encrypted_password, null: false, default: ""
-
+      t.string :slug
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
@@ -50,6 +50,7 @@ class DeviseCreateCadminUsers < ActiveRecord::Migration[6.1]
       t.timestamps null: false
     end
 
+    add_index :cadmin_users, :slug,                unique: true
     add_index :cadmin_users, :email,                unique: true
     add_index :cadmin_users, :username,             unique: true
     add_index :cadmin_users, :phone,                unique: true

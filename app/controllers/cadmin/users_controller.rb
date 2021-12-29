@@ -13,6 +13,9 @@ class Cadmin::UsersController < ApplicationController
     add_breadcrumb "Editar #{@user.username.capitalize}"
   end
 
+  def show
+  end
+
   # PATCH/PUT /invoices/1 or /invoices/1.json
   def update_user
     respond_to do |format|
@@ -41,7 +44,7 @@ class Cadmin::UsersController < ApplicationController
 
   private
   def set_user
-    @user = Cadmin::User.find(params[:id])
+    @user = Cadmin::User.friendly.find(params[:id])
   end
   def user_params
     #? NOTE: Using `strong_parameters` gem

@@ -14,8 +14,11 @@ class CreateCadminServices < ActiveRecord::Migration[6.1]
       t.text :metadescription
       t.text :image_data
       t.references :main_service, null: false, foreign_key: {to_table: :cadmin_main_services}
+      t.string :slug
 
       t.timestamps
     end
+    add_index :cadmin_services, :slug, unique: true
+    
   end
 end

@@ -1,5 +1,9 @@
 module Cadmin
   class Track < ApplicationRecord
+    extend FriendlyId
+
+    friendly_id :title, use: :slugged
+    
     include PgSearch::Model
     include Cadmin::DateFormat
     def self.new_from_spotify_track(spotify_track)

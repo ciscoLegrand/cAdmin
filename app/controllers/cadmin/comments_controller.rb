@@ -25,7 +25,7 @@ module Cadmin
 
     # POST /comments
     def create
-      @article = Article.find(params[:article_id])
+      @article = Article.friendly.find(params[:article_id])
       @comment = @article.comments.build(comment_params)
       
       if @comment.save
@@ -46,7 +46,7 @@ module Cadmin
 
     # DELETE /comments/1
     def destroy
-      @article = Article.find(params[:article_id])
+      @article = Article.friendly.find(params[:article_id])
       @comment = @article.comments.find(params[:id])
       @comment.destroy
       redirect_to root_path success: t('.success')

@@ -1,5 +1,9 @@
 module Cadmin
   class Event < ApplicationRecord
+    extend FriendlyId
+
+    friendly_id :title, use: :slugged
+
     include PgSearch::Model
     include Cadmin::DateFormat
 

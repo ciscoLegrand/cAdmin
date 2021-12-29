@@ -9,8 +9,9 @@ class CreateCadminDiscounts < ActiveRecord::Migration[6.1]
       t.date :start_date
       t.date :end_date
       t.text :observations
-            
+      t.string :slug 
       t.timestamps
     end
+    add_index :cadmin_discounts, :slug, unique: true
   end
 end

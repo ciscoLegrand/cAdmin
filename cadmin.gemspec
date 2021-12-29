@@ -45,6 +45,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rspotify'
 
   spec.add_dependency 'liquid'
+
+  spec.add_dependency 'friendly_id'
   
   # dev dependencies
   spec.add_development_dependency "rspec-rails"

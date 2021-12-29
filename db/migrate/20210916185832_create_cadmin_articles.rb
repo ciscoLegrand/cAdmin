@@ -12,8 +12,10 @@ class CreateCadminArticles < ActiveRecord::Migration[6.1]
       t.references :user, null: false, foreign_key: {to_table: :cadmin_users}
       t.references :article_category, null: false, foreign_key: {to_table: :cadmin_article_categories}
       t.text :tag_ids
+      t.string :slug
 
       t.timestamps
     end
+    add_index :cadmin_articles, :slug, unique: true
   end
 end

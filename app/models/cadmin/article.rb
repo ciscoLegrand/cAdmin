@@ -1,7 +1,12 @@
 module Cadmin
   class Article < ApplicationRecord
+    extend FriendlyId
+
+    friendly_id :title, use: :slugged
+    
     include PgSearch::Model  
     include ImageUploader::Attachment(:image)
+    
     belongs_to :user
     belongs_to :article_category
     

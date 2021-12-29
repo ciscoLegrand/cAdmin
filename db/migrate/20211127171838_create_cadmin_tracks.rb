@@ -6,8 +6,9 @@ class CreateCadminTracks < ActiveRecord::Migration[6.1]
       t.string :image
       t.string :preview
       t.string :spotify_id
-
+      t.string :slug
       t.timestamps
     end
+    add_index :cadmin_tracks, :slug, unique: true
   end
 end

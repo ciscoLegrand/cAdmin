@@ -15,8 +15,10 @@ class CreateCadminEvents < ActiveRecord::Migration[6.1]
       t.boolean :charged, null: false, default: false
       t.boolean :employee_paid, null: false, default: false
       t.text :observations
+      t.string :slug 
 
       t.timestamps
     end
+    add_index :cadmin_events, :slug, unique: true
   end
 end
