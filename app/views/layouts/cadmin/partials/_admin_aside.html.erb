@@ -66,17 +66,20 @@
           </span>
           <ul data-menu-target="dropdown">
             <li>
-              <%= link_to new_cadmin_user_invitation_path , class: 'item panel-block has-text-dark is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'invite', action: 'click->menu#set_active_menu_item'} do %>
+              <%= link_to new_cadmin_user_invitation_path , class: 'item panel-block has-text-dark is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'invite', 'menu-item': 'invite', action: 'click->menu#set_active_menu_item'} do %>
                 <span data-decrease-target="hidetext">Invitar</span><%= inline_svg_tag('cadmin/icons/ico-user-add.svg', class:'icon ')%>
               <% end %>
             </li>
-            <% if 1 == 0 %>
-              <li>
-                <%= link_to users_list_path , class: 'item panel-block has-text-dark is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'active', action: 'click->menu#set_active_menu_item'} do %>
-                  <span data-decrease-target="hidetext">Usuarios</span><%= inline_svg_tag('cadmin/icons/ico-user-group.svg', class:'icon ')%>
-                <% end %>
-              </li>
-            <% end %>
+            <li>
+              <%= link_to users_path , class: 'item panel-block has-text-dark is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'employees', 'menu-item': 'active', action: 'click->menu#set_active_menu_item'} do %>
+                <span data-decrease-target="hidetext">Empleados</span><%= inline_svg_tag('cadmin/icons/ico-user-group.svg', class:'icon ')%>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to root_path , class: 'item panel-block has-text-dark is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'customers', 'menu-item': 'active', action: 'click->menu#set_active_menu_item'} do %>
+                <span data-decrease-target="hidetext">Clientes</span><%= inline_svg_tag('cadmin/icons/ico-user-group.svg', class:'icon ')%>
+              <% end %>
+            </li>
           </ul>
         </li>
 

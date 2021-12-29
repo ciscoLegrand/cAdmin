@@ -1,12 +1,12 @@
-Cadmin::User.create(name: 'cisco', username: 'admin', email: 'creadix@creadix.es',phone: '+34625650792', password: 'test123', role: 'superadmin')
-Cadmin::User.create(name: 'yona', username: 'yonidrama', email: 'customer1@test.com',phone: '+34625650392', password: 'test123', role: 'customer')
-Cadmin::User.create(name: 'pepe', username: 'pepito', email: 'customer2@test.com',phone: '+34625650192', password: 'test123', role: 'customer')
-Cadmin::User.create(name: 'paco', username: 'paquito', email: 'customer3@test.com',phone: '+34625650293', password: 'test123', role: 'customer')
-Cadmin::User.create(name: 'tilin', username: 'vamostilino', email: 'customer4@test.com',phone: '+34625650294', password: 'test123', role: 'customer')
-Cadmin::User.create(name: 'thor', username: 'thor', email: 'customer5@test.com',phone: '+34625650295', password: 'test123', role: 'customer')
-Cadmin::User.create(name: 'tony', username: 'tonystark', email: 'customer6@test.com',phone: '+34625650296', password: 'test123', role: 'customer')
-Cadmin::User.create(name: 'cisco', username: 'cisco', email: 'cisco.glez@gmail.com',phone: '+34625350192', password: 'test123', role: 'employee')
-Cadmin::User.create(name: 'franchy', username: 'franchyto', email: 'employee2@test.com',phone: '+34625651292', password: 'test123', role: 'employee')
+Cadmin::User.create(name: 'cisco',    username: 'ciscolegrand',   email: 'creadix@creadix.es',  phone: '+34625650792', password: 'test123', role: 'superadmin')
+Cadmin::User.create(name: 'yona',     username: 'yonidrama',      email: 'customer1@test.com',  phone: '+34625650392', password: 'test123', role: 'customer')
+Cadmin::User.create(name: 'pepe',     username: 'pepito',         email: 'customer2@test.com',  phone: '+34625650192', password: 'test123', role: 'customer')
+Cadmin::User.create(name: 'paco',     username: 'paquito',        email: 'customer3@test.com',  phone: '+34625650293', password: 'test123', role: 'customer')
+Cadmin::User.create(name: 'tilin',    username: 'vamostilino',    email: 'customer4@test.com',  phone: '+34625650294', password: 'test123', role: 'customer')
+Cadmin::User.create(name: 'thor',     username: 'thor',           email: 'customer5@test.com',  phone: '+34625650295', password: 'test123', role: 'customer')
+Cadmin::User.create(name: 'tony',     username: 'tonystark',      email: 'customer6@test.com',  phone: '+34625650296', password: 'test123', role: 'customer')
+Cadmin::User.create(name: 'cisco',    username: 'cisco',          email: 'cisco.glez@gmail.com',phone: '+34625350192', password: 'test123', role: 'employee')
+Cadmin::User.create(name: 'franchy',  username: 'franchyto',      email: 'employee2@test.com',  phone: '+34625651292', password: 'test123', role: 'employee')
 count = 0
 names = [
   "Aaran", "Aaren", "Aarez", "Aarman", "Aaron", "Aaron-James", "Aarron", "Aaryan", "Aaryn", "Aayan", "Aazaan", "Abaan", "Abbas", "Abdallah", "Abdalroof", "Abdihakim", "Abdirahman", "Abdisalam", 
@@ -82,8 +82,8 @@ Cadmin::Location.create(name: 'Pazo Torrexunqueira', address:'', province: 'A Co
 Cadmin::Location.create(name: 'Pazo de Adran', address:'', province: 'A Coruña', coords: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1498939.4986847232!2d-9.138688094933547!3d42.7964627560893!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2f021b39d486d3%3A0xecb479c5f0974632!2sPazo%20de%20Adr%C3%A1n!5e0!3m2!1ses!2ses!4v1633541675159!5m2!1ses!2ses')
 
 Cadmin::MainService.create(name: 'Cabinas', description: 'Nuestras cabinas')
-Cadmin::MainService.create(name: 'Jbx', description: 'Nuestras luces')
 Cadmin::MainService.create(name: 'Picmaton', description: 'Nuestros fotomatones')
+Cadmin::MainService.create(name: 'Jbx', description: 'Nuestras luces')
 
 Cadmin::Service.create(name: 'Gramola', price: 550.00, hour_price: 90.00, main_service_id: 1)
 Cadmin::Service.create(name: 'Moon', price: 650.00,hour_price: 90.00, main_service_id: 1)

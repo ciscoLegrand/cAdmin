@@ -36,6 +36,7 @@
                             <div class="f-fallback">
                                   <%= raw @template.render(                                    
                                     'nombre_usuario' => current_cadmin_user.name, 
+                                    'host' => request.base_url,
                                     'cambiar_contrasena' => edit_password_url(current_cadmin_user, reset_password_token: @token)  ,
                                     )%>
                             </div>

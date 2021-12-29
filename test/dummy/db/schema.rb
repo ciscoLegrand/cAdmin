@@ -87,11 +87,9 @@ ActiveRecord::Schema.define(version: 2021_12_29_170012) do
   create_table "cadmin_email_custom_templates", force: :cascade do |t|
     t.text "content"
     t.bigint "email_base_template_id", null: false
-    t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email_base_template_id"], name: "index_cadmin_email_custom_templates_on_email_base_template_id"
-    t.index ["slug"], name: "index_cadmin_email_custom_templates_on_slug", unique: true
   end
 
   create_table "cadmin_event_services", force: :cascade do |t|
@@ -162,11 +160,9 @@ ActiveRecord::Schema.define(version: 2021_12_29_170012) do
     t.string "figures_music"
     t.text "gift_information"
     t.text "observations"
-    t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["event_id"], name: "index_cadmin_interviews_on_event_id"
-    t.index ["slug"], name: "index_cadmin_interviews_on_slug", unique: true
   end
 
   create_table "cadmin_locations", force: :cascade do |t|

@@ -20,7 +20,7 @@
               <thead>
                 <tr>
                   <% if 1 == 0 %>
-                   <%# TODO: pendiente de desarrollar checkbox select (all)%> 
+                   <%# FIXME: pendiente de desarrollar checkbox select (all)%> 
                   <th class="is-checkbox-cell">
                     <label class="b-checkbox checkbox">
                       <input type="checkbox" value="false">
@@ -46,7 +46,7 @@
                 <% @events.each do |event| %>           
                   <tr  data-controller='charged' class="<%= "has-background-danger-light" if event.status == 'cancelled' %>  <%="has-background-success-light" if event.status == 'completed' %>">
                     <% if 1 == 0 %>
-                      <%# TODO: pendiente desarrollar checkbox select (all)%>
+                      <%# FIXME: pendiente desarrollar checkbox select (all)%>
                       <td class="is-checkbox-cell">      
                         <%= check_box_tag :paid, event.id %>
                       </td>
