@@ -8,37 +8,21 @@ module Cadmin
     # GET /conversations
     def index
       @users = User.all if current_cadmin_user.admin?
-      
-      #! get customers from events where employee is the current_user
-      customers = []
-      employees = []
-      Event.where(employee_id: current_cadmin_user.id).each { |event| customers << User.find(event.customer_id) } if current_cadmin_user.employee?
-      Event.where(customer_id: current_cadmin_user.id).each { |event| employees << User.find(event.employee_id) } if current_cadmin_user.customer?
-
-      @users = customers if current_cadmin_user.employee?
-      @users = employees if current_cadmin_user.customer?
-
+      @users = get_customers if current_cadmin_user.employee?
+      @users = get_employees if current_cadmin_user.customer?
       @conversations = Conversation.all
     end
-
+    
     # GET /conversations/1
     def show
-
     end
 
     # GET /conversations/new
     def new
-      add_breadcrumb 'Nueva conversación'
       @users = User.all if current_cadmin_user.admin?
-      
-      #! get customers from events where employee is the current_user
-      customers = []
-      employees = []
-      Event.where(employee_id: current_cadmin_user.id).each { |event| customers << User.find(event.customer_id) }
-      Event.where(customer_id: current_cadmin_user.id).each { |event| employees << User.find(event.employee_id) }
+      @users = get_customers if current_cadmin_user.employee?
+      @users = get_employees if current_cadmin_user.customer?
 
-      @users = customers if current_cadmin_user.employee?
-      @users = employees if current_cadmin_user.customer?
       @conversation = Conversation.new
     end
 
@@ -71,6 +55,7 @@ module Cadmin
       @conversation.destroy
       redirect_to conversations_url, notice: 'Conversation was successfully destroyed.'
     end
+    
 
     private
       # Use callbacks to share common setup or constraints between actions.
@@ -81,6 +66,18 @@ module Cadmin
       # Only allow a list of trusted parameters through.
       def conversation_params
         params.require(:conversation).permit(:sender_id, :recipient_id, :title)
+      end
+
+      def get_customers 
+        customers = []
+        Event.where(employee_id: current_cadmin_user.id).each { |event| customers << User.find(event.customer_id) }
+        customers
+      end
+
+      def get_employees
+        employees = []      
+        Event.where(customer_id: current_cadmin_user.id).each { |event| employees << User.find(event.employee_id) }      
+        employees
       end
   end
 end

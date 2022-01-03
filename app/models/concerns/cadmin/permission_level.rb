@@ -3,15 +3,15 @@
     extend ActiveSupport::Concern
 
     def user?
-      %w(user admin superadmin).include?(self.role)
+      %w(user).include?(self.role)
     end
 
     def customer?
-      %w(customer admin superadmin).include?(self.role)
+      %w(customer).include?(self.role)
     end
 
     def employee?
-      %w(employee admin superadmin).include?(self.role)
+      %w(employee).include?(self.role)
     end
     def admin?
       %w(admin superadmin).include?(self.role)
