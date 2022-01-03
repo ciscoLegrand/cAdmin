@@ -21,6 +21,8 @@ require "active_model_serializers"
 require "rspec-rails"
 require "liquid"
 require "friendly_id"
+require "aasm"
+
 module Cadmin
   class Engine < ::Rails::Engine
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_29_170012) do
+ActiveRecord::Schema.define(version: 2022_01_03_182420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,22 @@ ActiveRecord::Schema.define(version: 2021_12_29_170012) do
     t.index ["article_category_id"], name: "index_cadmin_articles_on_article_category_id"
     t.index ["slug"], name: "index_cadmin_articles_on_slug", unique: true
     t.index ["user_id"], name: "index_cadmin_articles_on_user_id"
+  end
+
+  create_table "cadmin_cart_items", force: :cascade do |t|
+    t.bigint "service_id", null: false
+    t.bigint "cart_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cart_id"], name: "index_cadmin_cart_items_on_cart_id"
+    t.index ["service_id"], name: "index_cadmin_cart_items_on_service_id"
+  end
+
+  create_table "cadmin_carts", force: :cascade do |t|
+    t.string "ip"
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "cadmin_comments", force: :cascade do |t|
@@ -326,6 +342,8 @@ ActiveRecord::Schema.define(version: 2021_12_29_170012) do
 
   add_foreign_key "cadmin_articles", "cadmin_article_categories", column: "article_category_id"
   add_foreign_key "cadmin_articles", "cadmin_users", column: "user_id"
+  add_foreign_key "cadmin_cart_items", "cadmin_carts", column: "cart_id"
+  add_foreign_key "cadmin_cart_items", "cadmin_services", column: "service_id"
   add_foreign_key "cadmin_comments", "cadmin_articles", column: "article_id"
   add_foreign_key "cadmin_comments", "cadmin_users", column: "user_id"
   add_foreign_key "cadmin_email_custom_templates", "cadmin_email_base_templates", column: "email_base_template_id"

@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     cadmin (0.1.2)
+      aasm
       active_model_serializers
       breadcrumbs_on_rails
       bulma-rails
@@ -24,6 +25,8 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (5.2.0)
+      concurrent-ruby (~> 1.0)
     actioncable (6.1.4.1)
       actionpack (= 6.1.4.1)
       activesupport (= 6.1.4.1)
@@ -135,6 +138,7 @@ GEM
     faraday-net_http_persistent (1.2.0)
     faraday-patron (1.0.0)
     faraday-rack (1.0.0)
+    ffi (1.15.4)
     ffi (1.15.4-x64-mingw32)
     friendly_id (5.4.2)
       activerecord (>= 4.0.0)
@@ -178,6 +182,8 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.12.4-x64-mingw32)
       racc (~> 1.4)
+    nokogiri (1.12.4-x86_64-linux)
+      racc (~> 1.4)
     oauth2 (1.4.7)
       faraday (>= 0.8, < 2.0)
       jwt (>= 1.0, < 3.0)
@@ -193,6 +199,7 @@ GEM
       omniauth (>= 1.9, < 3)
     orm_adapter (0.5.0)
     pagy (5.6.6)
+    pg (1.2.3)
     pg (1.2.3-x64-mingw32)
     pg_search (2.3.5)
       activerecord (>= 5.2)
@@ -234,6 +241,10 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    rest-client (2.0.2)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
     rest-client (2.0.2-x64-mingw32)
       ffi (~> 1.9)
       http-cookie (>= 1.0.2, < 2.0)
@@ -263,6 +274,8 @@ GEM
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
+    sassc (2.4.0)
+      ffi (~> 1.9)
     sassc (2.4.0-x64-mingw32)
       ffi (~> 1.9)
     shrine (3.4.0)
@@ -287,6 +300,7 @@ GEM
       tzinfo (>= 1.0.0)
     unf (0.1.4)
       unf_ext
+    unf_ext (0.0.8)
     unf_ext (0.0.8-x64-mingw32)
     view_component (2.47.0)
       activesupport (>= 5.0.0, < 8.0)
@@ -300,6 +314,7 @@ GEM
 
 PLATFORMS
   x64-mingw32
+  x86_64-linux
 
 DEPENDENCIES
   cadmin!
