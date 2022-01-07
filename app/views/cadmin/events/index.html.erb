@@ -11,7 +11,10 @@
             <%= t '.page_title' %> 
           </div>
         </div>
-        <span class="tag is-warning is-rounded" style="padding-top:5px;"><%= link_to inline_svg_tag('cadmin/icons/ico-refresh.svg', class: 'icon is-small'), events_path%></span>
+        <span class="tag is-info is-rounded mr-2" style="padding-top:5px;"><%= link_to inline_svg_tag('cadmin/icons/ico-information-circle.svg', class: 'icon is-small'), events_path(status: 'pending')%></span>
+        <span class="tag is-success is-rounded mr-2" style="padding-top:5px;"><%= link_to inline_svg_tag('cadmin/icons/ico-euro.svg', class: 'icon is-small'), events_path(status: 'payed')%></span>
+        <span class="tag is-danger is-rounded mr-2" style="padding-top:5px;"><%= link_to inline_svg_tag('cadmin/icons/ico-ban.svg', class: 'icon is-small'), events_path(status: 'cancelled')%></span>
+        <span class="tag is-warning is-rounded mr-2" style="padding-top:5px;"><%= link_to inline_svg_tag('cadmin/icons/ico-refresh.svg', class: 'icon is-small'), events_path%></span>
       </header>
       <div class="card-content">
         <div class="b-table has-pagination is-scrollable-touch">

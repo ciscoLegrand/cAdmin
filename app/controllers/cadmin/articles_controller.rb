@@ -8,12 +8,12 @@ module Cadmin
 
     # GET /articles
     def index      
-      @articles = Article.all
       # articles = @articles.filter_by_search(params['title']) if params['title'].present?
-
+      
       # @pagy,@articles= pagy(articles, items: 5)
-
-      params[:tag] ? @article = Article.tagged_with(params[:tag]) : @articles = Article.all
+      articles = articles.filter_by_search(params['title']) if params['title'].present?
+      articles = params[:tag].present? ? Article.tagged_with(params[:tag]) : Article.all
+      @articles = articles
     end
     
     # GET /articles/1
@@ -23,7 +23,7 @@ module Cadmin
       @categories = ArticleCategory.all
       @tags = Article.tag_counts
 
-      # TODO: search results
+      # FIXME: search results
       articles = articles.filter_by_search(params['title']) if params['title'].present?
       # TODO: COMPLETAR COMENTARIOS ASOCIADOS A ARTICULOS
       comments = @article.comments.all     
