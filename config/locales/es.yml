@@ -268,7 +268,7 @@ es:
         kind: 'Tipo'
         content: 'Cuerpo'
       cadmin/event:
-        title: 'Título'
+        title: 'Maria y José'
         customer: 'Cliente'
         date: 'Fecha'
         type_name: 'Tipo de evento'
@@ -451,6 +451,7 @@ es:
         title_services: 'Servicios contratados'
         new_client: 'Crear cliente'
         add_item: 'Añadir servicio'
+        booking: 'Reservar'
         create: 'Guardar'
         cancel: 'Volver'
       event_service_fields:

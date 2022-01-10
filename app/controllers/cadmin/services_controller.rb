@@ -2,8 +2,8 @@ require_dependency "cadmin/application_controller"
 
 module Cadmin
   class ServicesController < ApplicationController
-    before_action :set_main_service, only: [:index,:show,:new,:create,:edit,:uptade,:destroy]
-    before_action :set_service, only: [:show, :edit, :update, :destroy]
+    before_action :set_main_service, only: %w[index show new create edit uptade destroy]
+    before_action :set_service, only: %w[show edit update destroy]
     # GET /services
     def index 
       add_breadcrumb @main.name
@@ -25,7 +25,7 @@ module Cadmin
 
     # GET /services/1/edit
     def edit
-      @service = @main.services.find(params[:id])
+      @service = @main.services.friendly.find(params[:id])
       add_breadcrumb @main.name
       add_breadcrumb "Editar #{@service.name}"
     end

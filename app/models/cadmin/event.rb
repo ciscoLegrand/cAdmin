@@ -7,6 +7,30 @@ module Cadmin
     include PgSearch::Model
     include Cadmin::DateFormat
 
+    include AASM
+
+    # state machine to change status of event
+    def update_status_by_date
+      self.completed if self&.event_date < Date.today
+    end
+    
+    aasm column: :status do
+      state :pending, initial: true
+      state :payed, :completed, :cancelled
+
+      event :pay do
+        transitions from: [:pending, :completed], to: :payed
+      end
+
+      event :complete do
+        transitions from: :pending, to: :completed
+      end
+
+      event :cancel do
+        transitions from: :pending, to: :cancelled
+      end
+    end
+
     belongs_to :customer, foreign_key: :customer_id, class_name: 'User'
     belongs_to :employee, optional: true, foreign_key: :employee_id, class_name: 'User'
     has_one :interview, dependent: :destroy
@@ -63,17 +87,15 @@ module Cadmin
       total
     end 
 
-    def update_status_by_date
-      self.update(status: 'completed') if self&.event_date < Date.today
-    end
-
     scope :sort_by_date, -> { order('date ASC') }
     # ! SEARCH BETWEEN DATES
     scope :filter_between_dates, ->(start_date, end_date) { where(date: start_date..end_date) }
     scope :filter_by_employee_id, ->(employee_id) { where('employee_id = ?', employee_id) }
-
+    
     # ! pgsearch busqueda por campos de texto
     # pg_search_scope :filter_by_number, against: :number
     pg_search_scope :filter_by_title, against: :title
+    pg_search_scope :filter_by_status, against: :status
+    
   end
 end

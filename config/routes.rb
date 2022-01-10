@@ -10,6 +10,7 @@ Cadmin::Engine.routes.draw do
   match '/', to: "dashboard#index",  via: :get, as: :dashboard
   match '/interviews', to: "interviews#index",  via: :get, as: :interviews
   match '/interviews/:id', to: "interviews#show",  via: :get, as: :interview
+  match 'cart', to: "carts#index",  via: :get, as: :cart
   # match '/users', to: "users#index",  via: :get, as: :users
   # match '/charged', to: "events#charged", via: :get, as: :charged
   # match '/events/:id/charged', to: "events#charged", via: :put, as: :charged
@@ -22,7 +23,7 @@ Cadmin::Engine.routes.draw do
   resources  :users  
   
   resources :cart_items, only: [:create, :destroy]
-  get "/add/product_id", as: :add_to_cart, to: "cart_items#create"
+  get "/add/:service_id", to: "cart_items#create", as: :add_to_cart
   
   resources :email_base_templates do
     resources :email_custom_templates, except: [:show]

@@ -1,5 +1,6 @@
 # Cadmin
-Short description and motivation.
+This engine is building to create an adminzone in where manage events and services from an event enterprise.
+To provide a webapp from an adminzone separate from it
 
 # Crate engine 
 ```ruby

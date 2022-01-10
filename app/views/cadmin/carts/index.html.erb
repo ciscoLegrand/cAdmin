@@ -1,0 +1,29 @@
+<div class="container">
+  <!--TODO: develop cat view to show all details from cart and cart_items -->
+  <% if @cart.cart_items.empty?  %>
+    Aun no has añadido items a tu cesta <br>
+    <%= link_to 'Segir comprando', main_service_services_path(@main_service), class: 'button is-success is-medium' %>
+  <% else %>
+    <% @cart.cart_items.each_with_index do |item, index|%>
+      <div class="is-flex">
+      <span class="mx-4">
+        <%= index += 1 %>: <%= item.service_name%> => <%= number_to_currency item.service_price%>                          
+      </span>
+      <%= button_to '',item, method: :delete, data: { controller: "swal", action: "click->swal#fire", swal_options_value: default_swal_options,turbo_frame: "_top" }, class:"delete is-small is-success" %>
+      </div>
+      <br>
+    <% end %>
+  <% end %>
+  <hr>
+  <div class="columns">
+    <div class="column is-6">
+      <div class="is-flex is-flex-direction-column">
+        Total: <%= number_to_currency  @total_cart_amount %>  <!--TODO: replace this by carts_controller method to calculate total amount -->
+        <hr>
+        Has agregado <%= pluralize @cart.cart_items.count, 'servicio', plural: 'servicios' %> en el carrito
+        <hr>  
+        <%= link_to 'Completar reserva', new_event_path, class: 'button is-primary is-medium mt-4' unless @cart.cart_items.empty? %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -8,15 +8,22 @@ module Cadmin
     aasm column: :status do
       state :pending, initial: true
       state :booking
-      state :canceled
 
-      event :pay do
+      event :booked do
         transitions from: :pending, to: :booking
       end
+    end
 
-      event :cancel do
-        transitions from: [:pending, :booking], to: :canceled
+    def total_cart_amount(items)
+      total_amount = 0
+      items&.each do |item|
+        total_amount += item&.service_price
       end
+      total_amount
+    end
+
+    def pay_deposit(items)
+      (self.total_cart_amount(items) * 20) / 100
     end
   end
 end

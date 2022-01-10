@@ -27,6 +27,7 @@ module Cadmin
       def set_main_services
         @main_services =  MainService.all 
       end  
+      
       def set_events
         @events = Event.all
       end 
