@@ -22,6 +22,7 @@ require "rspec-rails"
 require "liquid"
 require "friendly_id"
 require "aasm"
+require "stripe"
 
 module Cadmin
   class Engine < ::Rails::Engine

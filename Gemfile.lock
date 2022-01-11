@@ -19,6 +19,7 @@ PATH
       rspotify
       shrine
       stimulus-rails (~> 0.2.4)
+      stripe
       turbo-rails
       view_component
 
@@ -290,6 +291,7 @@ GEM
       sprockets (>= 3.0.0)
     stimulus-rails (0.2.4)
       rails (>= 6.0.0)
+    stripe (5.42.0)
     thor (1.1.0)
     turbo-rails (1.0.0)
       actionpack (>= 6.0.0)

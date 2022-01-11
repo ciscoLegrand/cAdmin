@@ -52,7 +52,9 @@ Gem::Specification.new do |spec|
   # email
   spec.add_dependency 'liquid'
 
-  
+  # payments
+  spec.add_dependency 'stripe'
+
   # dev dependencies
   spec.add_development_dependency "rspec-rails"
   spec.add_development_dependency "letter_opener"
