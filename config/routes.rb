@@ -20,7 +20,8 @@ Cadmin::Engine.routes.draw do
   resources :tags
   resources :discounts
   resources :web_modules
-  resources  :users  
+  resources :users  
+  post 'checkout/create', to: 'checkout#create'
   
   resources :cart_items, only: [:create, :destroy]
   get "/add/:service_id", to: "cart_items#create", as: :add_to_cart
