@@ -21,6 +21,9 @@ class DeviseCreateCadminUsers < ActiveRecord::Migration[6.1]
       t.string :role, null: false, default: 'user'
       t.string :encrypted_password, null: false, default: ""
       t.string :slug
+      t.integer :customer_id
+      t.integer :subscription_id
+      t.integer :price_id
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at

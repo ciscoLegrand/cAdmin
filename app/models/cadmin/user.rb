@@ -9,6 +9,8 @@ module Cadmin
 
     include ImageUploader::Attachment(:avatar)
     
+    before_create :create_stripe_customer
+
     validates :email, presence: true,
                       format: { with: /\A(.+)@(.+)\z/ },
                       uniqueness: { case_sensitive: false },
@@ -41,5 +43,13 @@ module Cadmin
       :last_name,
       :email
     ]
+
+    private 
+      def create_stripe_customer
+        customer = Stripe::Customer.create({
+          email: self.email,
+        })
+        self.customer_id = customer.id
+      end
   end
 end

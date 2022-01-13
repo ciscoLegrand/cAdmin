@@ -10,11 +10,16 @@
 #   gem install pg
 #       Choose the win32 build.
 #       Install PostgreSQL and put its /bin directory on your path.
-#
+#  
+#  username: dummy
+#  password: <%= ENV['DUMMY_DATABASE_PASSWORD'] %>
+
 # Configure Using Gemfile
 # gem 'pg'
 #
 default: &default
+  username: <%= ENV['DB_USER'] %>
+  password: <%= ENV['DB_PASS'] %>
   adapter: postgresql
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
@@ -82,5 +87,3 @@ test:
 production:
   <<: *default
   database: dummy_production
-  username: dummy
-  password: <%= ENV['DUMMY_DATABASE_PASSWORD'] %>
