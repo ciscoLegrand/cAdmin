@@ -8,7 +8,7 @@
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <script src="https://js.stripe.com/v3/"></script>
+    
     <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" %>
     <%= stylesheet_link_tag 'https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css', 'data-turbo-track': 'reload'%> 
     <%= stylesheet_link_tag "https://unpkg.com/slim-select@1.27.0/dist/slimselect.min.css", "data-turbo-track": "reload" %>
@@ -22,6 +22,8 @@
     
     <%#= javascript_include_tag 'cadmin/application' %>
     <%= javascript_include_tag "turbo", type: "module-shim" %>
+    <%= javascript_include_tag "https://js.stripe.com/v3/" %>
+    <%#= stripe_javascript_tag %>
     <%= cadmin_stimulus_include_tags %>
   </head>
   <body >
@@ -41,7 +43,7 @@
           <div class="is-flex is-flex-direction-row is-justify-content-flex-end">
             <span class="is-size-7"> <%= pluralize("Has accedido a tu cuenta #{current_cadmin_user.sign_in_count}", 'vez', plural: 'veces') if current_cadmin_user.admin? %></span>
             <div class="is-flex is-justify-content">
-              <%= link_to inline_svg('cadmin/icons/ico-shopping-cart.svg', size: '32'), cart_path, class:'is-clickable'%>
+              <%= link_to inline_svg_tag('cadmin/icons/ico-shopping-cart.svg', size: '32'), cart_path, class:'is-clickable'%>
               <div class="tag is-rounded is-primary"><%= Cadmin::Cart.find(session[:cart_id]).cart_items.count %></div>
             </div>
             <%= link_to profile_index_path, class: 'button is-fullwidth header__button_user p-5' do%>

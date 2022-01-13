@@ -1,21 +1,36 @@
 module Cadmin
   class CheckoutController < ApplicationController 
     def create
-      product = Service.find(params[:id])   
+      product = Service.friendly.find(params[:id])
+      category = product.main_service_id 
+
+      card = Stripe::PaymentMethod.create({
+        type: 'card',
+        card: {
+          number: '4242424242424242',
+          exp_month: 1,
+          exp_year: 2023,
+          cvc: '314',
+        },
+      })
+
+
       @session = Stripe::Checkout::Session.create({
-        payment_method_types: ['card'],
         line_items: [{
           name: product.name,
-          amount: (product.price * 100).to_i,
-          currency: 'eur',
-          quantity: 1,
+          amount: (product.price*100).to_i,
+          currency: "eur",
+          quantity: 1
         }],
+        payment_method_types: [
+          "card"
+        ],
         mode: 'payment',
-        success_url: root_url,
-        cancel_url: root_url,
+        success_url: main_app.root_url  ,
+        cancel_url: main_app.root_url ,
       })
       respond_to do |format|
-        format.js 
+        format.js
       end
     end
   end

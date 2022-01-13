@@ -1,7 +1,7 @@
 <!-- sidebaar-->
 <aside class="sidebar sidebar__w16 has-background-white-ter" data-controller="sidebar" data-action="openSidebar@window->sidebar#open" data-decrease-target="sidebar" >
   <div class="has-text-centered has-background-white sidebar__logo">
-    <%= link_to inline_svg_tag("cadmin/icons/ico-home.svg", class:"icon is-medium has-text-dark"), main_app.root_path, target: '_blank' %>              
+    <%= link_to inline_svg_tag("cadmin/icons/ico-home.svg", class:"icon is-medium has-text-dark"), root_path, target: '_blank' %>              
   </div>
   <button class="sidebar__close delete" aria-label="close" data-action="sidebar#close"></button>
   <div class="sidebar__showhide">  
