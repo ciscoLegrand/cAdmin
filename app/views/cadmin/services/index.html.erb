@@ -26,7 +26,7 @@
               <%= service.price if current_cadmin_user.admin?%>
             </div>
           </div>
-          <%= button_to 'Buy now!', checkout_create_path, params: { id: service.id }, remote: true, id:'checkout-button' %> <!--TODO: DELETE BUTTON WHEN COMPLETE FEAT -->  
+          
           <%= link_to "#{t '.edit'}", edit_main_service_service_path(id: service) , class:'button is-outlined is-success' if current_cadmin_user.admin? %>
           <%= link_to "#{t '.destroy'}", root_path,data: { controller: "swal", action: "click->swal#fire", swal_options_value: default_swal_options,turbo_frame: "_top" } , class:'button is-outlined is-warning' if current_cadmin_user.admin? %> <!-- todo: boton eliminar -->
         </div>
