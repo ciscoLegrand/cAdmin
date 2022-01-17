@@ -8,7 +8,7 @@ module Cadmin
     include Cadmin::DateFormat
 
     include AASM
-
+    aasm.attribute_name :status
     # state machine to change status of event
     def update_status_by_date
       self.completed if self&.event_date < Date.today

@@ -14,6 +14,7 @@ module Cadmin
     def show
       add_breadcrumb @main.name
       add_breadcrumb @service.name
+      @services = @main.services.all
     end
 
     # GET /services/new

@@ -44,8 +44,8 @@ module Cadmin
       add_breadcrumb 'Nuevo Evento'
       @event = Event.new
       @event_types = Cadmin::EventType.all # TODO: broke main_app when try to finish booking event!
-      @total_cart_amount = @cart.total_cart_amount(@cart.cart_items)
-      @deposit = @cart.pay_deposit(@cart.cart_items)
+      @total_cart_amount = @cart.total_cart_amount
+      @deposit = @cart.pay_deposit
     end
 
     # GET /events/1/edit
@@ -61,10 +61,8 @@ module Cadmin
       
       if @event.save        
         @event.update(total_amount: @event.total_services_amount)
-        @cart.booked
-        session[:cart_id] = nil
-        @cart = Cart.create!(ip: request.remote_ip)
-        session[:cart_id] = @cart.id
+        
+        create_new_session_cart
         redirect_to @event, success: t('.success')
       else
         render :new
@@ -72,8 +70,7 @@ module Cadmin
     end
 
     # PATCH/PUT /events/1
-    def update
-      
+    def update      
       if @event.update(event_params)  
         @event.update(total_amount: @event.total_services_amount)
         
@@ -158,6 +155,13 @@ module Cadmin
       def set_cart 
         @cart = Cart.find(session[:cart_id])
       end 
+
+      def create_new_session_cart 
+        @cart.booked
+        session[:cart_id] = nil
+        @cart = Cart.create!(ip: request.remote_ip)
+        session[:cart_id] = @cart.id
+      end
 
   end
 end

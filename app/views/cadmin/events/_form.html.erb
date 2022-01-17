@@ -138,8 +138,8 @@
       </div>
       <div class= "<%= current_cadmin_user.admin? ? 'is-hidden' : '' %>">
         <hr>
-        Total: <%= number_to_currency  @total_cart_amount %> <br>
-        <%= "Para completar la reserva tines que adelantar un deposito de #{ number_to_currency @cart.pay_deposit(@cart.cart_items)}" %>
+        Total: <%= number_to_currency  @cart.total_cart_amount %> <br>
+        <%= "Para completar la reserva tines que adelantar un deposito de #{ number_to_currency @cart.pay_deposit}" %>
       </div>
       
       <div class="actions my-6 <%= current_cadmin_user.admin? ? 'is-hidden' : '' %>">

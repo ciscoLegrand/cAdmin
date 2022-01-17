@@ -5,6 +5,8 @@ module Cadmin
     has_many :cart_items, dependent: :destroy
     has_many :services, through: :cart_items
 
+    aasm.attribute_name :status
+
     aasm column: :status do
       state :pending, initial: true
       state :booking
@@ -14,8 +16,12 @@ module Cadmin
       end
     end
 
-    def pay_deposit(items)
-      (self.total_cart_amount(items) * 20) / 100
+    def total_cart_amount
+      self.cart_items.sum(&:service_price)
+    end
+
+    def pay_deposit
+      (self.total_cart_amount * 20) / 100
     end
   end
 end

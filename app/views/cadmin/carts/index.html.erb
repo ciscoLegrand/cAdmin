@@ -12,20 +12,22 @@
           <div class="column is-12">
             <div class="card is-flex">
               <div class="card-image p-3">
-                <figure class="image is-96x96">
-                  <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                <figure class="image is-96x96">                  
+                  <% if item.service_image_url.present? %>
+                    <%= image_tag item.service_image_url %>
+                  <% else %>
+                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                  <% end %>                  
                 </figure>
               </div>
               <div class="media-content is-flex is-justify-content-space-evenly is-align-items-center mx-4">
-                <p class="title is-4 is-flex-grow-1"><%= item.service_name%></p>
-                <p class="subtitle is-6 is-flex-grow-1"><%= item.service_short_dscription %></p>
-                <span class="mx-4 is-flex-grow-1">
-                  <%= number_to_currency item.service_price %>                          
-                </span>
-                <%= button_to 'Eliminar',item, method: :delete, data: { controller: "swal", action: "click->swal#fire", swal_options_value: default_swal_options,turbo_frame: "_top" }, class:"tag is-medium is-danger is-flex-grow-1" %>
+                <div class="title is-4 is-flex-shrink-1 is-fullwidth py-3"><%= item.service_name%></div>
+                <div class="subtitle is-6 is-flex-shrink-1 is-fullwidth"><%= item.service_short_dscription %></div>
+                <div class="mx-4 is-flex-shrink-1 is-fullwidth"><%= number_to_currency item.service_price %></div>
+                <%= button_to 'Eliminar',item, method: :delete, data: { controller: "swal", action: "click->swal#fire", swal_options_value: default_swal_options,turbo_frame: "_top" }, class:"tag is-medium is-danger is-flex-shrink-1" %>
               </div>
             </div>
-          </div>        
+          </div>         
         <% end %>
       <% end %>
     </div>

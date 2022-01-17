@@ -4,7 +4,7 @@ module Cadmin
   class CartsController < ApplicationController 
     before_action :set_cart
     def index
-      @total_cart_amount = @cart.cart_items.sum(&:service_price)
+      @total_cart_amount = @cart.total_cart_amount
       @main_service = MainService.first
     end
   
