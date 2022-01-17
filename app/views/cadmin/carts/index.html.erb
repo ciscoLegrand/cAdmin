@@ -1,29 +1,42 @@
 <div class="container">
-  <!--TODO: develop cat view to show all details from cart and cart_items -->
-  <% if @cart.cart_items.empty?  %>
-    Aun no has añadido items a tu cesta <br>
-    <%= link_to 'Segir comprando', main_service_services_path(@main_service), class: 'button is-success is-medium' %>
-  <% else %>
-    <% @cart.cart_items.each_with_index do |item, index|%>
-      <div class="is-flex">
-      <span class="mx-4">
-        <%= index += 1 %>: <%= item.service_name%> => <%= number_to_currency item.service_price%>                          
-      </span>
-      <%= button_to '',item, method: :delete, data: { controller: "swal", action: "click->swal#fire", swal_options_value: default_swal_options,turbo_frame: "_top" }, class:"delete is-small is-success" %>
-      </div>
-      <br>
-    <% end %>
-  <% end %>
-  <hr>
-  <div class="columns">
-    <div class="column is-6">
+  <!--TODO: develop cart view to show all details from cart and cart_items -->
+  <div class="columns is-multiline is-mobile is-flex-direction-row">
+    <div class="column is-8">
+      <% if @cart.cart_items.empty?  %>
+        <div class="column is-12">
+          Aun no has añadido items a tu cesta <br>
+          <%= link_to 'Segir comprando', main_service_services_path(@main_service), class: 'button is-success is-medium' %>
+        </div>
+      <% else %>
+        <% @cart.cart_items.each do |item|%>
+          <div class="column is-12">
+            <div class="card is-flex">
+              <div class="card-image p-3">
+                <figure class="image is-96x96">
+                  <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                </figure>
+              </div>
+              <div class="media-content is-flex is-justify-content-space-evenly is-align-items-center mx-4">
+                <p class="title is-4 is-flex-grow-1"><%= item.service_name%></p>
+                <p class="subtitle is-6 is-flex-grow-1"><%= item.service_short_dscription %></p>
+                <span class="mx-4 is-flex-grow-1">
+                  <%= number_to_currency item.service_price %>                          
+                </span>
+                <%= button_to 'Eliminar',item, method: :delete, data: { controller: "swal", action: "click->swal#fire", swal_options_value: default_swal_options,turbo_frame: "_top" }, class:"tag is-medium is-danger is-flex-grow-1" %>
+              </div>
+            </div>
+          </div>        
+        <% end %>
+      <% end %>
+    </div>
+    <div class="column is-3 ml-4">
       <div class="is-flex is-flex-direction-column">
-        Total: <%= number_to_currency  @total_cart_amount %>  <!--TODO: replace this by carts_controller method to calculate total amount -->
+        Total: <%= number_to_currency  @total_cart_amount %>
         <hr>
-        Has agregado <%= pluralize @cart.cart_items.count, 'servicio', plural: 'servicios' %> en el carrito
+        Total: <%= pluralize @cart.cart_items.count, 'servicio', plural: 'servicios' %>
         <hr>  
         <%= link_to 'Completar reserva', new_event_path, class: 'button is-primary is-medium mt-4' unless @cart.cart_items.empty? %>
       </div>
-    </div>
+    </div>  
   </div>
 </div>
