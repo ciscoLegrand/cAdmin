@@ -14,7 +14,7 @@
     <%= stylesheet_link_tag "https://unpkg.com/slim-select@1.27.0/dist/slimselect.min.css", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "https://unpkg.com/uppy@1.25.2/dist/uppy.min.css", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/fullcalendar@5.9.0/main.min.css", "data-turbo-track": "reload" %>
+    <%#= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/fullcalendar@5.9.0/main.min.css", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma/bulma.css", "data-turbo-track": "reload" %>
     <%#= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/@sweetalert2/theme-borderless/borderless.css", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag 'cadmin/main',  'data-turbo-track': 'reload' %>    
@@ -22,11 +22,14 @@
     
     <%#= javascript_include_tag 'cadmin/application' %>
     <%= javascript_include_tag "turbo", type: "module-shim" %>
-    <script src="https://js.stripe.com/v3/"></script>
+    
+    <script src="https://js.stripe.com/v3/" async></script>
+
+    <%= tag :meta, name: 'stripe-key', content: ENV['STRIPE_PUBLIC_KEY'] %>
     <%= cadmin_stimulus_include_tags %>
   </head>
   <body >
-    <%= render Cadmin::NotificationComponent.with_collection(flash.to_a) %>
+    <%= render Cadmin::NotificationComponent.with_collection(flash.to_a) if cadmin_user_signed_in? %>
     <main class="column <%= cadmin_user_signed_in? ? 'main__is-10__is-offset-2 p-0' : 'is-12 has-background-grey-lighter' %> is-vcentered is-fullheight" 
           data-controller="decrease"  
           data-decrease-target="main"         
@@ -39,9 +42,9 @@
           <div class="is-flex is-align-items-center">
             <span class="panel-heading subtitle is-size-6 is-size-7-touch | has-text-left"><%= render_breadcrumbs separator: ' > ' %></span>           
           </div>
+            <span class="is-size-7"> <%= pluralize(current_cadmin_user.sign_in_count, 'visita', plural: 'visitas') if current_cadmin_user.admin? %></span>
           <div class="is-flex is-flex-direction-row is-justify-content-flex-end">
-            <span class="is-size-7"> <%= pluralize("Has accedido a tu cuenta #{current_cadmin_user.sign_in_count}", 'vez', plural: 'veces') if current_cadmin_user.admin? %></span>
-            <div class="is-flex is-justify-content">
+            <div class="is-flex is-justify-content px-3">
               <%= link_to inline_svg_tag('cadmin/icons/ico-shopping-cart.svg', size: '32'), cart_path, class:'is-clickable'%>
               <div class="tag is-rounded is-primary"><%= Cadmin::Cart.find(session[:cart_id]).cart_items.count %></div>
             </div>
