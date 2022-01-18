@@ -70,13 +70,13 @@ module Cadmin
 
       def get_customers 
         customers = []
-        Event.where(employee_id: current_cadmin_user.id).each { |event| customers << User.find(event.customer_id) }
+        Event.where(employee_id: current_cadmin_user.id).each { |event| customers << User.friendly.find(event.customer_id) }
         customers
       end
 
       def get_employees
         employees = []      
-        Event.where(customer_id: current_cadmin_user.id).each { |event| employees << User.find(event.employee_id) }      
+        Event.where(customer_id: current_cadmin_user.id).each { |event| employees << User.friendly.find(event.employee_id) }      
         employees
       end
   end
