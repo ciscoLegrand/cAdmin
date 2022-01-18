@@ -1,7 +1,7 @@
 <div class="container">
   <!--TODO: develop cart view to show all details from cart and cart_items -->
-  <div class="columns is-multiline is-mobile is-flex-direction-row">
-    <div class="column is-8">
+  <div class="columns is-multiline is-mobile is-flex-direction-row is-justify-content-space-between">
+    <div class="column is-8-desktop is-12-touch">
       <% if @cart.cart_items.empty?  %>
         <div class="column is-12">
           Aun no has añadido items a tu cesta <br>
@@ -31,7 +31,7 @@
         <% end %>
       <% end %>
     </div>
-    <div class="column is-3 ml-4">
+    <div class="column is-4-desktop is-12-touch">
       <div class="is-flex is-flex-direction-column">
         Total: <%= number_to_currency  @total_cart_amount %>
         <hr>
