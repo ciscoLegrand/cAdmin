@@ -13,6 +13,8 @@ module Cadmin
     before_action :set_unviewed_messages 
     before_action :set_events
     before_action :set_cart
+    # before_action :run_update_status_event_job
+    
 
     protected
 
@@ -34,11 +36,9 @@ module Cadmin
 
       def set_cart
         @cart = Cart.find(session[:cart_id])
-        puts "Cart: #{@cart.inspect}" # TODO: Remove this line after testing
         rescue ActiveRecord::RecordNotFound => e
           @cart = Cart.create!(ip: request.remote_ip)
           session[:cart_id] = @cart.id
-          puts "Cart: #{@cart.inspect}" # TODO: remove this line after testing
       end
 
       def set_unviewed_messages 
@@ -66,6 +66,10 @@ module Cadmin
 
       def set_web_module
         @web_module = WebModule.first
+      end
+
+      def run_update_status_event_job
+        UpdateStatusEventJob.set(wait: 1.day).perform_later(@events)
       end
   end
 end
