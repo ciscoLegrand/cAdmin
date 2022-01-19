@@ -7,16 +7,12 @@ module Cadmin
     include PgSearch::Model
     include Cadmin::DateFormat
 
+    # state machine to change status of event    
     include AASM
     aasm.attribute_name :status
-    # state machine to change status of event
-    def update_status_by_date
-      self.completed if self&.event_date < Date.today
-    end
-    
     aasm column: :status do
       state :pending, initial: true
-      state :payed, :completed, :cancelled
+      state :payed, :completed, :cancelled, :restarted
 
       event :pay do
         transitions from: [:pending, :completed], to: :payed
@@ -34,6 +30,7 @@ module Cadmin
     belongs_to :customer, foreign_key: :customer_id, class_name: 'User'
     belongs_to :employee, optional: true, foreign_key: :employee_id, class_name: 'User'
     has_one :interview, dependent: :destroy
+    has_one :cart, dependent: :destroy
     has_many :event_services, dependent: :destroy
     accepts_nested_attributes_for :event_services,
                                   allow_destroy: true,

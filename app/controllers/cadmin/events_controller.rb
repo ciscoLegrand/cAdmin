@@ -62,7 +62,7 @@ module Cadmin
       if @event.save        
         @event.update(total_amount: @event.total_services_amount)
         
-        create_new_session_cart
+        restart_new_session_cart
         redirect_to @event, success: t('.success')
       else
         render :new
@@ -96,18 +96,17 @@ module Cadmin
     end
 
     def charged 
-      @event.pay
-      @event.update(charged: !@event.charged)
+      @event.pay!
+      @event.update(charged: true)
       redirect_to events_path
     end
 
     def cancel 
-      @event.cancel
-      @event.update(status: 'cancelled', total_amount: 0)
+      @event.cancel!
+      @event.update(total_amount: 0)
       redirect_to events_path
     end
 
-    # TODO: refactor this method for validate type event and $
     def employee_salary(events)
       def is_collectible?(service)
         Cadmin::Service.find(service.service_id).main_service_id == Cadmin::MainService.find_by(name: 'Cabinas').id
@@ -125,20 +124,15 @@ module Cadmin
     #! total amount of all events
     def total_events(events)
       total = 0
-      events.each { |event| event.status == 'cancelled' ? total += 0 : total += event.total_services_amount }
+      events.each { |event| event.cancelled? ? total += 0 : total += event.total_services_amount }
       total
     end
 
     def pending_amount(events)
       total = 0
-      events.where(charged: false).each { |event| total += event.total_services_amount - event.deposit unless event.status == 'cancelled' }
+      events.where(charged: false).each { |event| total += event.total_services_amount - event.deposit unless event.cancelled? }
       total
     end
-
-    def pending 
-      events = events.status == 'pending'
-    end
-
 
     private
       # Use callbacks to share common setup or constraints between actions.
@@ -147,7 +141,7 @@ module Cadmin
       end
       # Only allow a list of trusted parameters through.
       def event_params
-        params.require(:event).permit(:customer_id, :title, :type_name, :number, :date, :guests, :employee_id, 
+        params.require(:event).permit(:customer_id, :cart_id, :title, :type_name, :number, :date, :guests, :employee_id, 
                                       :place_id, :deposit, :total_amount, :charged, :observations, :status,
                                       event_services_attributes: [:_destroy, :id, :event_id, :service_id, :discount_id, :start_time, :overtime, :total_amount])
       end
@@ -156,8 +150,8 @@ module Cadmin
         @cart = Cart.find(session[:cart_id])
       end 
 
-      def create_new_session_cart 
-        @cart.booked
+      def restart_new_session_cart 
+        @cart.booked!
         session[:cart_id] = nil
         @cart = Cart.create!(ip: request.remote_ip)
         session[:cart_id] = @cart.id

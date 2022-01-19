@@ -15,7 +15,7 @@
       <h3 class="title is-size-4"><%= t '.title_event' %></h3>
       <hr class="has-background-white-ter">
       
-
+      <%= form.hidden_field :cart_id, value: @cart.id %>
       <div class="field is-horizontal <%= current_cadmin_user.admin? ? '' : 'is-hidden' %>">
         <div class="field-body">
           <div class="field">

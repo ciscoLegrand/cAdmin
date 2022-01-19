@@ -3,6 +3,7 @@ class CreateCadminEvents < ActiveRecord::Migration[6.1]
     create_table :cadmin_events do |t|
       t.integer :customer_id, null: false, foreign_key: {to_table: :cadmin_users}
       t.integer :employee_id, null: true, foreign_key: {to_table: :cadmin_users}
+      t.integer :cart_id, null: true, foreign_key: {to_table: :cadmin_carts}
       t.string :status, null: false, default: 'pending'
       t.string :title
       t.string :type_name, null: false, default: 'boda'
