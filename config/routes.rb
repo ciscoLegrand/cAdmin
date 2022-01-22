@@ -21,6 +21,7 @@ Cadmin::Engine.routes.draw do
   resources :discounts
   resources :web_modules
   resources :users  
+  resources :tracks
   get 'checkout/create', to: 'checkout#create'
   post 'checkout/create', to: 'checkout#create'
   

@@ -115,6 +115,18 @@
           </li>
         </ul>
       </li>
+      <li>  
+        <span class="panel-block has-text-dark is-flex is-justify-content-flex-start is-align-items-start is-clickable is-hoverable has-no-bottom-line " data-action="click->menu#set_active_menu" data-menu="music">
+          <%= inline_svg_tag('cadmin/icons/ico-dj.svg', class:'icon mx-4')%> <span data-decrease-target="hidetext">Música</span>
+        </span>
+        <ul data-menu-target="dropdown">
+          <li>
+            <%= link_to tracks_path , class: 'item panel-block has-text-dark is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'all', action: 'click->menu#set_active_menu_item'} do %>
+              <span data-decrease-target="hidetext">Toda</span> <%= inline_svg_tag('cadmin/icons/ico-chat.svg', class:'icon ')%>
+            <% end %>
+          </li>
+        </ul>
+      </li>
       <% if  current_cadmin_user.admin? %>
         <li>  
           <span class="panel-block has-text-dark is-flex is-justify-content-flex-start is-align-items-start is-clickable is-hoverable has-no-bottom-line " data-action="click->menu#set_active_menu" data-menu="blog">

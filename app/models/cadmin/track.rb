@@ -1,11 +1,12 @@
 module Cadmin
   class Track < ApplicationRecord
-    extend FriendlyId
+    # extend FriendlyId
 
-    friendly_id :title, use: :slugged
+    # friendly_id :name, use: :slugged
     
     include PgSearch::Model
     include Cadmin::DateFormat
+
     def self.new_from_spotify_track(spotify_track)
       unless Track.exists?(spotify_id: spotify_track.id)
         Track.create!(
@@ -19,7 +20,7 @@ module Cadmin
     end
 
     def self.create_from_spotify(spotify_track)
-      track = self.new_froms_potify_track(spotify_track)
+      track = self.new_from_spotify_track(spotify_track)
       track.save
       track
     end

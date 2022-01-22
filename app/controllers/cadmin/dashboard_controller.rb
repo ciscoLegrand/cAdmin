@@ -8,12 +8,6 @@ module Cadmin
     def index
       add_breadcrumb 'Principal'
       @users = User.where(role: 'customer')
-      tracks = Track.all
-      tracks = tracks.filter_by_artist(params[:artist]) if params[:artist].present?
-      
-      
-
-      @pagy, @tracks = pagy(tracks, items: 10)
     end
 
     def agenda
