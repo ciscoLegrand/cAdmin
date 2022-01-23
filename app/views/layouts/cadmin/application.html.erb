@@ -42,19 +42,13 @@
           <div class="is-flex is-align-items-center">
             <span class="panel-heading subtitle is-size-6 is-size-7-touch | has-text-left"><%= render_breadcrumbs separator: ' > ' %></span>           
           </div>
-            <span class="is-size-7"> <%= pluralize(current_cadmin_user.sign_in_count, 'visita', plural: 'visitas') if current_cadmin_user.admin? %></span>
           <div class="is-flex is-flex-direction-row is-justify-content-flex-end">
-            <div class="is-flex is-justify-content px-3">
-              <%= link_to inline_svg_tag('cadmin/icons/ico-shopping-cart.svg', size: '32'), cart_path, class:'is-clickable'%>
-              <div class="tag is-rounded is-primary"><%= Cadmin::Cart.find(session[:cart_id]).cart_items.count %></div>
-            </div>
             <%= link_to profile_index_path, class: 'button is-fullwidth header__button_user p-5' do%>
               <% if current_cadmin_user.avatar_data.present? %>
                 <figure class=" image mr-3"><%= image_tag current_cadmin_user.avatar_url, class:'is-rounded sidebar__avatar'  %></figure>
               <% else %>
                 <span class="sidebar__letter_user"><%= current_cadmin_user.email[0] %></span> 
               <% end %>
-              <span><%= current_cadmin_user.username %></span>   
             <% end %>
           </div>
         </header>

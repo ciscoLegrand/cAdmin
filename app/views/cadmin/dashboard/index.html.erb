@@ -1,6 +1,6 @@
 
 
-
+<span class="is-size-7"> <%= pluralize(current_cadmin_user.sign_in_count, 'visita', plural: 'visitas') if current_cadmin_user.admin? %></span>
 <%= turbo_frame_tag :users, loading: :lazy, src: users_path  %>
 
 
