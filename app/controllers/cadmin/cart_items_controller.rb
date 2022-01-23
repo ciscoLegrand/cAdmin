@@ -15,7 +15,7 @@ module Cadmin
         #redirect_to main_app.servicio_path(main, service) , success: "#{service.name} was successfully added to cart." #TODO: thinking about redirect to cart_path or main_app.servicio_path¿? in production
         main  = @cart_item.service.main_service
         service = @cart_item.service
-        redirect_to main_service_service_path(main, service), success: "#{service.name} was successfully added to cart."
+        redirect_to main_app.servicio_path(main, service), success: "#{service.name} was successfully added to cart."
       else   
         render json: @cart_item.errors, status: 400
       end
@@ -26,7 +26,7 @@ module Cadmin
       service = @cart_item.service
       @cart_item.destroy
       count = Cart.find(session[:cart_id]).cart_items.count
-      redirect_to cart_path, alert: "#{service.name} was successfully removed from cart."
+      redirect_to main_app.cart_path, alert: "#{service.name} was successfully removed from cart."
       # render json: {cart: count, reponse: "ok"}
     end
 
