@@ -37,6 +37,7 @@ Cadmin::Engine.routes.draw do
   end
   
   resources :events do
+    get 'booked', on: :member
     get 'charged', on: :member 
     get 'cancel', on: :member
   end

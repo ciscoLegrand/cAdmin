@@ -12,18 +12,22 @@ module Cadmin
     aasm.attribute_name :status
     aasm column: :status do
       state :pending, initial: true
-      state :payed, :completed, :cancelled, :restarted
+      state :payed, :completed, :cancelled, :booked
+
+      event :book do 
+        transitions from: :pending, to: :booked
+      end
 
       event :pay do
-        transitions from: [:pending, :completed], to: :payed
+        transitions from: [:pending, :booked, :completed], to: :payed
       end
 
       event :complete do
-        transitions from: :pending, to: :completed
+        transitions from: [:pending, :booked], to: :completed
       end
 
       event :cancel do
-        transitions from: :pending, to: :cancelled
+        transitions from: [:pending, :booked], to: :cancelled
       end
     end
 

@@ -45,7 +45,6 @@ module Cadmin
       @event = Event.new
       @event_types = Cadmin::EventType.all # TODO: broke main_app when try to finish booking event!
       @total_cart_amount = @cart.total_cart_amount
-      @deposit = @cart.pay_deposit
     end
 
     # GET /events/1/edit
@@ -55,14 +54,14 @@ module Cadmin
     end
 
     # POST /events
-    def create      
+    def create
       @event = Event.new(event_params)  
       @event.create_number
       
-      if @event.save        
+      if @event.save
+        current_cadmin_user.update(role: 'customer') if current_cadmin_user.user?
         @event.update(total_amount: @event.total_services_amount)
         
-        restart_new_session_cart
         redirect_to @event, success: t('.success')
       else
         render :new
@@ -93,6 +92,11 @@ module Cadmin
     def destroy      
       @event.destroy
       redirect_to events_url, success: t('.success')
+    end
+    
+    def booked
+      @event.book!
+      redirect_to events_path
     end
 
     def charged 
@@ -149,13 +153,5 @@ module Cadmin
       def set_cart 
         @cart = Cart.find(session[:cart_id])
       end 
-
-      def restart_new_session_cart 
-        @cart.booked!
-        session[:cart_id] = nil
-        @cart = Cart.create!(ip: request.remote_ip)
-        session[:cart_id] = @cart.id
-      end
-
   end
 end

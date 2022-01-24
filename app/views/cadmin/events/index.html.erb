@@ -41,13 +41,13 @@
                   <th class="is-size-7-mobile is-hidden-mobile"><%= t '.deposit' %></th>
                   <th class="is-size-7-mobile is-hidden-mobile"><%= t '.pending' %></th>
                   <th class="is-size-7-mobile is-hidden-mobile"><%= t '.total_amount' %></th>
-                  <th class="is-size-7-mobile is-hidden-mobile"><%= t '.charged' %></th>
+                  <th class="is-size-7-mobile is-hidden-mobile"><%= t '.status' %></th>
                   <th class="is-size-7-mobile"><%= "#{t '.actions'}" %></th>
                 </tr>
               </thead>
               <tbody>
                 <% @events.each do |event| %>           
-                  <tr  data-controller='charged' class="<%= "has-background-danger-light" if event.status == 'cancelled' %>  <%="has-background-success-light" if event.status == 'completed' %>">
+                  <tr  data-controller='charged' class="<%= "has-background-danger-light" if event.cancelled? %>  <%="has-background-success-light" if event.payed? %>">
                     <% if 1 == 0 %>
                       <%# FIXME: pendiente desarrollar checkbox select (all)%>
                       <td class="is-checkbox-cell">      
@@ -64,14 +64,17 @@
                     <td class="is-size-7-mobile is-hidden-mobile"><%= number_with_precision(event.deposit, precision: 2) %></td>     
                     <td class="is-size-7-mobile is-hidden-mobile"><%= (event.charged || event.status == 'cancelled') ? 0 : number_with_precision(event.total_services_amount - event.deposit, precision: 2) %><%= t 'currency' %></td>               
                     <td class="is-size-7-mobile is-hidden-mobile"><%= event.status == 'cancelled' ? "0" : number_with_precision(event.total_services_amount , precision: 2) %><%= t('currency') %></td> 
-                    <td data-charged-target="tag" class="is-hidden-mobile <%= event.charged == true ? 'has-background-success' : 'default'%> is-size-7-mobile"><%= event.charged? ? 'Cobrado' : 'Pendiente' %> </td>
+                    <td data-charged-target="tag" class="is-hidden-mobile <%= event.charged == true ? 'has-background-success' : 'default'%> is-size-7-mobile"><%= t ".#{event.status}" %> </td>
                     <td class="is-actions-cell">
                       <div class="buttons is-flex-wrap-nowrap">                    
-                        <%= link_to inline_svg_tag('cadmin/icons/ico-euro.svg', class: 'icon is-medium   has-text-primary ') , charged_event_path(event), data: {action: 'charged#change',  turbo: false},  class: 'button is-small is-clickable m-0 is-hidden-mobile' %>
-                        <%= link_to inline_svg_tag('cadmin/icons/ico-ban.svg', class: 'icon is-medium   has-text-primary ') , cancel_event_path(event), data: {action: 'charged#cancel',  turbo: false},  class: 'button is-small is-clickable m-0 is-hidden-mobile' %>
                         <%= link_to inline_svg_tag('cadmin/icons/ico-eye.svg', class: 'icon is-medium has-text-primary'), event ,data:{turbo_frame: "_top"}, class: 'button is-small is-clickable m-0' %>
+                        <%= link_to inline_svg_tag('cadmin/icons/ico-edit.svg', class: 'icon is-medium has-text-primary'), edit_event_path(event), data:{turbo_frame: "_top"}, class: 'button is-small is-clickable m-0' %>
                         <% if current_cadmin_user.admin? %>
-                          <%= link_to inline_svg_tag('cadmin/icons/ico-edit.svg', class: 'icon is-medium has-text-primary'), edit_event_path(event), data:{turbo_frame: "_top"}, class: 'button is-small is-clickable m-0' %>
+                        <% state = event.pending? ? 'open' : 'closed'%>
+                        <% color = event.pending? ? 'danger' : 'primary'%>
+                        <%= link_to inline_svg_tag("cadmin/icons/ico-lock-#{state}.svg", class: "icon is-medium is-#{color} has-text-#{color}") , booked_event_path(event), data: {action: 'charged#booked',  turbo: false},  class: 'button is-small is-clickable m-0 is-hidden-mobile' %>
+                        <%= link_to inline_svg_tag('cadmin/icons/ico-ban.svg', class: 'icon is-medium   has-text-primary ') , cancel_event_path(event), data: {action: 'charged#cancel',  turbo: false},  class: 'button is-small is-clickable m-0 is-hidden-mobile' %>
+                          <%= link_to inline_svg_tag('cadmin/icons/ico-euro.svg', class: 'icon is-medium   has-text-primary ') , charged_event_path(event), data: {action: 'charged#change',  turbo: false},  class: 'button is-small is-clickable m-0 is-hidden-mobile' %>
                           <%= button_to event, method: :delete, data: { controller: "swal", action: "click->swal#fire", swal_options_value: default_swal_options,turbo_frame: "_top" }, class:"button is-small is-clickable m-0 is-hidden-mobile"  do %>
                             <%=  inline_svg_tag('cadmin/icons/ico-trash.svg', class: 'icon is-medium has-text-primary') %>
                           <% end %>    

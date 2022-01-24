@@ -151,6 +151,7 @@
           </div>
         </div>
       <% end %>
+      <%= link_to "Reserva Stripe! #{number_to_currency @event.deposit}", cadmin.checkout_create_path(id: @event.id), method: :post, remote: true, data: {controller: 'stripe' }, class:'button is-link is-flex is-flex-grow-1 ml-2 is-fullwidth'  %> 
     </div>
   </div>
 </div>

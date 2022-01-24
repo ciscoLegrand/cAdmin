@@ -19,9 +19,5 @@ module Cadmin
     def total_cart_amount
       self.cart_items.sum(&:service_price)
     end
-
-    def pay_deposit
-      (self.total_cart_amount * 20) / 100
-    end
   end
 end
