@@ -8,18 +8,20 @@ module Cadmin
           "card"
         ],
         line_items: [{
-          name:  product.number,
+          name: product.servicenames,
           amount: (product.deposit*100).to_i,
           currency: "eur",
           quantity: 1
         }],
         mode: 'payment',
         success_url: root_url  ,
-        cancel_url: root_url ,
+        cancel_url: main_app.root_url ,
       })
       # STRIPE documentation to checkout payment process -> https://github.com/stripe-samples/checkout-one-time-payments/blob/master/server/ruby/server.rb#L70-L82 
-      restart_new_session_cart
       redirect_to @session.url
+      restart_new_session_cart
+      product.update!(charged: true)
+      # product.book!
     end
 
     private

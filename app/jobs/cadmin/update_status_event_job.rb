@@ -4,7 +4,7 @@ module Cadmin
 
     def perform(events)      
       events.each do |event|
-        next unless event.status == 'pending'
+        next unless event.pending? || event.booking?
         event.complete! if event&.date < Date.today
       end
     end
