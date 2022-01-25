@@ -35,10 +35,7 @@ module Cadmin
       end 
 
       def set_cart
-        @cart = Cart.find(session[:cart_id])
-        rescue ActiveRecord::RecordNotFound => e
-          @cart = Cart.create!(ip: request.remote_ip)
-          session[:cart_id] = @cart.id
+        @cart = Cart.find(session[:cart_id]) if session[:cart_id].present?
       end
 
       def set_unviewed_messages 

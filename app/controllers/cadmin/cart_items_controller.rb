@@ -3,6 +3,7 @@ require_dependency "cadmin/application_controller"
 module Cadmin
   class CartItemsController < ApplicationController 
     before_action :set_service, only: [:create]
+    before_action :set_cart, only: [:create, :destroy]
     
     def create      
       @cart_item = CartItem.new(service_id: @service.id, cart: @cart)
@@ -12,7 +13,6 @@ module Cadmin
       if @cart_item.save
         @count = Cart.find(session[:cart_id]).cart_items.count
         # render json: {cart: count, reponse: "ok", notice: "Service #{Service.find(params[:service_id]).name} was successfully added to cart."}
-        #redirect_to main_app.servicio_path(main, service) , success: "#{service.name} was successfully added to cart." #TODO: thinking about redirect to cart_path or main_app.servicio_path¿? in production
         main  = @cart_item.service.main_service
         service = @cart_item.service
         redirect_to main_app.servicio_path(main, service), success: "#{service.name} was successfully added to cart."
@@ -34,6 +34,13 @@ module Cadmin
       
       def set_service 
         @service = Service.friendly.find(params[:service_id])
+      end
+
+      def set_cart
+        @cart = Cart.find(session[:cart_id]) 
+        rescue ActiveRecord::RecordNotFound => e
+          @cart = Cart.create!(ip: request.remote_ip)
+          session[:cart_id] = @cart.id
       end
   end
 end
