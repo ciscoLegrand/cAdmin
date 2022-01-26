@@ -1,36 +1,40 @@
 module Cadmin
   class CheckoutController < ApplicationController 
     def create
-      product = Event.find(params[:id])      
-
+      @product = Event.find(params[:id])
       @session = Stripe::Checkout::Session.create({
+        # customer: current_cadmin_user.customer_id,
         payment_method_types: [
           "card"
         ],
         line_items: [{
-          name: product.servicenames,
-          amount: (product.deposit*100).to_i,
+          name: @product.servicenames,
+          amount: (@product.deposit*100).to_i,
           currency: "eur",
           quantity: 1
         }],
         mode: 'payment',
-        success_url: root_url  ,
-        cancel_url: main_app.root_url ,
+        success_url: success_url + "?session_id={CHECKOUT_SESSION_ID}"  ,
+        cancel_url: cancel_url ,
       })
       # STRIPE documentation to checkout payment process -> https://github.com/stripe-samples/checkout-one-time-payments/blob/master/server/ruby/server.rb#L70-L82 
       redirect_to @session.url
-      restart_new_session_cart
-      product.update!(charged: true)
-      # product.book!
     end
 
-    private
-    
-      def restart_new_session_cart 
+    def success 
+      if params[:session_id].present?
         @cart.booked!
+        
+        @session_with_expand = Stripe::Checkout::Session.retrieve({ id: params[:session_id], expand: ["line_items"]})        
         session[:cart_id] = nil
         @cart = Cart.create!(ip: request.remote_ip)
         session[:cart_id] = @cart.id
+      else
+        redirect_to cancel_url, alert: "Payment was not successful"
       end
+    end
+
+    def cancel 
+    end
   end
 end
