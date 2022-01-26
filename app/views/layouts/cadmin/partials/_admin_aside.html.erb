@@ -1,12 +1,18 @@
 <!-- sidebaar-->
 <aside class="sidebar sidebar__w16 has-background-white-ter" data-controller="sidebar" data-action="openSidebar@window->sidebar#open" data-decrease-target="sidebar" >
-  <div class="has-text-centered has-background-white sidebar__logo">
-    <%= link_to inline_svg_tag("cadmin/icons/ico-home.svg", class:"icon is-medium has-text-dark"), root_path, target: '_blank' %>              
-  </div>
+  <%= link_to main_app.root_path, target: '_blank' do %>
+    <div class="has-text-centered has-background-white sidebar__logo is-clickable">
+      <%#= link_to inline_svg_tag("cadmin/icons/ico-home.svg", class:"icon is-medium has-text-dark"), root_path, target: '_blank' %>              
+      <div class="is-flex is-justify-content-center is-align-items-center mx-3">
+        <div class="is-size-4 has-text-weight-medium is-family-monospace" data-decrease-target='logoa'>cappweb</div><div class="has-text-weight-semibold is-size-3"  data-decrease-target='logob'>.dev</div>
+      </div>
+    </div>
+  <% end %>
+  
   <button class="sidebar__close delete" aria-label="close" data-action="sidebar#close"></button>
   <div class="sidebar__showhide">  
     
-    <%= link_to image_tag("cadmin/icons/ico-chevron-left.svg", class: 'sidebar__showhide__icon is-clickable', data: { "decrease-target": 'arrow'}),'', data: {action: "decrease#hide"} %>
+    <%= link_to image_tag("cadmin/icons/ico-chevron-left.svg", class: 'sidebar__showhide__icon is-clickable', data: { "decrease-target": 'arrow'}),'', data: { action: "decrease#hide" } %>
   </div>
   <nav class="vertical" data-controller="menu">
     <ul>
