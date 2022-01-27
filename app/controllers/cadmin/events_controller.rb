@@ -30,7 +30,7 @@ module Cadmin
       #! number of events to show
       @events_count = events.present? ? events.count : 0
       #! paginate events
-      @pagy, @events = pagy(events, items: 10) if @events.present? 
+      @pagy, @events = pagy(events, items: 10) if @events.present? && events.present?
     end
 
     # GET /events/1
@@ -43,7 +43,7 @@ module Cadmin
     def new
       add_breadcrumb 'Nuevo Evento'
       @event = Event.new
-      @event_types = Cadmin::EventType.all # TODO: broke main_app when try to finish booking event!
+      @event_types = Cadmin::EventType.all
       @total_cart_amount = @cart.total_cart_amount
     end
 

@@ -17,9 +17,7 @@
         <%= number_to_currency @service.price %>
       </div>
       <div class="is-flex is-justify-content-space-between my-4">
-      <%= link_to 'Add!', add_to_cart_path(@service), class: 'button is-info  is-flex-grow-1 mr-2 is-fullwidth' %>
-      <!--TODO: move button to event form finish payment -->  
-      <%= link_to 'Buy Stripe!', checkout_create_path(id: @service.id), method: :post, remote: true, data: {controller: 'stripe' }, class:'button is-link is-flex is-flex-grow-1 ml-2 is-fullwidth' %> 
+        <%= link_to 'Add!', add_to_cart_path(@service), class: 'button is-info  is-flex-grow-1 mr-2 is-fullwidth' %> 
       </div>
 
       <div class="service__content">
