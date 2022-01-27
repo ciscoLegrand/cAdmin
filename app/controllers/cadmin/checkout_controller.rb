@@ -3,7 +3,7 @@ module Cadmin
     def create
       @product = Event.find(params[:id])
       @session = Stripe::Checkout::Session.create({
-        # customer: current_cadmin_user.customer_id,
+        customer: current_cadmin_user.stripe_customer_id,
         payment_method_types: [
           "card"
         ],

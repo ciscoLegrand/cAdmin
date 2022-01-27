@@ -45,6 +45,7 @@ module Cadmin
     ]
 
     def create_stripe_customer
+      # to prevent create stripe customer every time that user buy a service
       customer = Stripe::Customer.create({
         email: self.email,
       })
