@@ -44,12 +44,11 @@ module Cadmin
       :email
     ]
 
-    private 
-      def create_stripe_customer
-        customer = Stripe::Customer.create({
-          email: self.email,
-        })
-        self.customer_id = customer.id
-      end
+    def create_stripe_customer
+      customer = Stripe::Customer.create({
+        email: self.email,
+      })
+      self.update!(role: 'customer', stripe_customer_id: customer.id)
+    end
   end
 end

@@ -59,7 +59,8 @@ module Cadmin
       @event.create_number
       
       if @event.save
-        current_cadmin_user.update(role: 'customer') if current_cadmin_user.user?
+        # update role and create customer on stripe
+        current_cadmin_user.create_stripe_customer if current_cadmin_user.user?
         @event.update(total_amount: @event.total_services_amount)
         
         redirect_to @event, success: t('.success')

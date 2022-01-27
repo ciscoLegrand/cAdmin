@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_03_182420) do
+ActiveRecord::Schema.define(version: 2022_01_27_203901) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -215,6 +215,22 @@ ActiveRecord::Schema.define(version: 2022_01_03_182420) do
     t.index ["user_id"], name: "index_cadmin_messages_on_user_id"
   end
 
+  create_table "cadmin_modules", force: :cascade do |t|
+    t.boolean "blog"
+    t.boolean "gallery"
+    t.boolean "mailbox"
+    t.boolean "opinions"
+    t.boolean "newsletter"
+    t.boolean "reservation"
+    t.boolean "social_media"
+    t.boolean "invitable"
+    t.boolean "paypal"
+    t.boolean "stripe"
+    t.boolean "multisafe"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "cadmin_services", force: :cascade do |t|
     t.string "name"
     t.float "price", default: 0.0, null: false
@@ -281,7 +297,7 @@ ActiveRecord::Schema.define(version: 2022_01_03_182420) do
     t.string "role", default: "user", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "slug"
-    t.integer "customer_id"
+    t.string "stripe_customer_id"
     t.integer "subscription_id"
     t.integer "price_id"
     t.string "reset_password_token"
@@ -315,22 +331,6 @@ ActiveRecord::Schema.define(version: 2022_01_03_182420) do
     t.index ["reset_password_token"], name: "index_cadmin_users_on_reset_password_token", unique: true
     t.index ["slug"], name: "index_cadmin_users_on_slug", unique: true
     t.index ["username"], name: "index_cadmin_users_on_username", unique: true
-  end
-
-  create_table "cadmin_web_modules", force: :cascade do |t|
-    t.boolean "blog"
-    t.boolean "gallery"
-    t.boolean "mailbox"
-    t.boolean "opinions"
-    t.boolean "newsletter"
-    t.boolean "reservation"
-    t.boolean "social_media"
-    t.boolean "invitable"
-    t.boolean "paypal"
-    t.boolean "stripe"
-    t.boolean "multisafe"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
