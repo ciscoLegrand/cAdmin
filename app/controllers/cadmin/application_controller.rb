@@ -58,7 +58,7 @@ module Cadmin
       end
       
       def after_sign_in_path_for(resource)
-        root_path
+        main_app.root_path
       end
 
       def set_web_module
