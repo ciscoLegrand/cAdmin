@@ -2,8 +2,8 @@ require_dependency "cadmin/application_controller"
 
 module Cadmin
   class EventsController < ApplicationController
-    before_action :set_event, only: [:show, :edit, :update, :destroy, :charged, :cancel]
-    before_action :set_cart 
+    before_action :set_event, only: %w[show edit update destroy charged cancel booked]
+    before_action :set_cart, only: %w[new create]
 
     add_breadcrumb 'Eventos', :events_path
     # GET /events
@@ -27,6 +27,7 @@ module Cadmin
       @total = employee_salary(events) if current_cadmin_user.employee?
       @total = total_events(events) if current_cadmin_user.admin? 
       @pending_amount = pending_amount(events) if current_cadmin_user.admin?
+      @deposits = @total - @pending_amount if current_cadmin_user.admin?
       #! number of events to show
       @events_count = events.present? ? events.count : 0
       #! paginate events
