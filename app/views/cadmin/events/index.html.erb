@@ -88,11 +88,14 @@
                   <td class="is-size-7-mobile "><%= t '.events_count' %> </th>
                   <td class="is-size-7-mobile "><%= @events_count %></td>
                   <td class="is-hidden-mobile" colspan="1"></td>
+                  <td class="is-size-7-mobile is-hidden-mobile"><%= t '.deposits' %>: </td>
+                  <td class="is-size-7-mobile "><%= number_to_currency @deposits %></td>
                   <td class="is-size-7-mobile is-hidden-mobile"><%= t '.pending' %>: </td>
-                  <td class="is-size-7-mobile is-hidden-mobile"><%= "#{number_with_precision(@pending_amount, precision: 2)}#{t 'currency'}" %></td>
+                  <td class="is-size-7-mobile is-hidden-mobile"><%= number_to_currency @pending_amount %></td>
+                  <td class="is-hidden-mobile" colspan="3"></td>
                   <td class="is-size-7-mobile "><%= t '.total_amount' %> </td>
-                  <td class="is-size-7-mobile "><%= "#{number_with_precision(@total, precision: 2)}#{t 'currency'}" %></td>
-                  <td class="is-hidden-mobile" colspan="5"></td>
+                  <td class="is-size-7-mobile "><%= number_to_currency @total %></td>
+                  
                 </tr>
               </tbody>
             </table>

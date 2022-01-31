@@ -412,6 +412,7 @@ es:
         guests: 'Invitados'
         start_time: 'Horas de salida'
         deposit: 'Fianza'
+        deposits: 'Cobrado'
         pending: 'Pendiente'
         booked: 'Reservado'
         cancelled: 'Cancelado'

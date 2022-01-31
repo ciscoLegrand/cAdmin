@@ -52,7 +52,7 @@ Cadmin::Engine.routes.draw do
 
   # cart actions
   match 'cart', to: "carts#index",  via: :get, as: :cart
-  resources :cart_items, only: %w[create, destroy]
+  resources :cart_items, only: %w[create destroy]
   get "/add/:service_id", to: "cart_items#create", as: :add_to_cart
   
   # payment routes
@@ -80,12 +80,12 @@ Cadmin::Engine.routes.draw do
 
   devise_scope :cadmin_user do
     get  'login',        to: 'user_sessions#new',              as: :login
-    get  'register',     to: 'user_registrations#new',         as: :register
-    get  'profile',      to: 'user_registrations#edit',        as: :edit_profile
-    get  'logout',       to: 'user_sessions#destroy',          as: :logout
-    put  'profile',      to: 'user_registrations#update',      as: :update_profile
     post 'login',        to: 'user_sessions#create',           as: :create_new_session
+    get  'register',     to: 'user_registrations#new',         as: :register
     post 'register',     to: 'user_registrations#create',      as: :registration
+    get  'profile',      to: 'user_registrations#edit',        as: :edit_profile
+    put  'profile',      to: 'user_registrations#update',      as: :update_profile
+    get  'logout',       to: 'user_sessions#destroy',          as: :logout
     # delete 'signout' => 'user_sessions#destroy', as: :logout
   end
 
