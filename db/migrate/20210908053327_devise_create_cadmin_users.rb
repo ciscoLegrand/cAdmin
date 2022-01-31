@@ -4,11 +4,13 @@ class DeviseCreateCadminUsers < ActiveRecord::Migration[6.1]
   def change
     create_table :cadmin_users do |t|
       ## Database authenticatable
-      t.string :username, null: false, default: ""
+      t.string :username, null: false, unique: true
       t.string :name , null: false, default: ""
       t.string :last_name, null: false, default: ""
-      t.string :email, null: false, default: ""
-      t.string :phone, null: false
+      t.string :email, null: false, unique: true
+      t.string :phone, null: false, unique: true, default: ""
+      t.string :stripe_customer_id
+      t.string :stripe_subscription_id
       t.integer :postal_code
       t.string :city
       t.string :province
@@ -21,9 +23,7 @@ class DeviseCreateCadminUsers < ActiveRecord::Migration[6.1]
       t.string :role, null: false, default: 'user'
       t.string :encrypted_password, null: false, default: ""
       t.string :slug
-      t.integer :customer_id
-      t.integer :subscription_id
-      t.integer :price_id
+      t.integer :stripe_price_id
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at

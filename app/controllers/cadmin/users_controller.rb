@@ -4,7 +4,7 @@ class Cadmin::UsersController < ApplicationController
 
 
   def index 
-    @users = Cadmin::User.where(role: 'customer') 
+    @users = Cadmin::User.all.order(created_at: :desc)#.where(role: 'customer') 
   end
   # todo: edit & update users && user account | soft delete user account | 
 

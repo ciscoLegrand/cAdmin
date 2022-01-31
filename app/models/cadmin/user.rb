@@ -8,17 +8,19 @@ module Cadmin
     include PgSearch::Model
 
     include ImageUploader::Attachment(:avatar)
-    
-    before_create :create_stripe_customer
 
     validates :email, presence: true,
+                      uniqueness: true,
                       format: { with: /\A(.+)@(.+)\z/ },
-                      uniqueness: { case_sensitive: false },
                       length: { minimum: 4, maximum: 254 }
 
     validates :username, presence: true, 
                          uniqueness: { case_sensitive: false }, 
                          on: :update
+
+    validates :phone, uniqueness: { case_sensitive: false },
+                      format: { with: /\A(?:\+?\d{1,3}\s*-?)?\(?(?:\d{3})?\)?[- ]?\d{3}[- ]?\d{4}\z/},
+                      length: {minimum: 9, maximum: 12}
 
     validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true # para no permitir caracteres especiales
     validates :role, presence: true

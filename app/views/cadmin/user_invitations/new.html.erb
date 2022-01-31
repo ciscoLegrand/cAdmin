@@ -5,8 +5,19 @@
   </div>
   <div class="login__invite column is-6-desktop is-12-touch is-flex is-flex-direction-column is-align-content-center">
     <h2 class="title is-size-3-desktop is-size-5-touch is-family-primary has-text-centered"><%= t "devise.invitations.new.header" %></h2>
-    <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post,class:'login__logform',turbo: false }) do |f| %>
-      
+    <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post,class:'login__logform' }) do |f| %>
+      <%= resource.errors %>
+      <% if resource.errors.any? %>
+        <div id="error_explanation">
+          <h2 class="subtitle is-size-5 has-background-warning has-text-centered has-text-dark"><%= pluralize(resource.errors.count, "error") %> evitaron que se guardase:</h2>
+
+          <ul>
+            <% resource.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
       <% resource.class.invite_key_fields.each do |field| -%>
         <div class="field login__logform__eigthywidth my-3">
           <%= f.label field, class: 'login__label' %><br />
