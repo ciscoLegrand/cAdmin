@@ -1,14 +1,32 @@
 module Cadmin
   class Event < ApplicationRecord
+    include PgSearch::Model
+    include Cadmin::DateFormat
+    include AASM
     extend FriendlyId
 
     friendly_id :title, use: :slugged
 
-    include PgSearch::Model
-    include Cadmin::DateFormat
+    belongs_to :customer, foreign_key: :customer_id, class_name: 'User'
+    belongs_to :employee, optional: true, foreign_key: :employee_id, class_name: 'User'
+    
+    has_one :interview, dependent: :destroy
+    has_one :cart, dependent: :destroy
+    has_many :event_services, dependent: :destroy
+    
+    accepts_nested_attributes_for :event_services,
+                                  allow_destroy: true,
+                                  reject_if: proc { |attr| attr['service_id'].blank? }
+
+    validates :number, presence: true, uniqueness: true  
+
+    delegate :name, :last_name, :avatar, :email, :phone, :address, :birthdate, :city, 
+             :province, :postal_code, :shipping_address, :billing_address, 
+             to: :customer, prefix: :customer
+
+    delegate :name, :phone, :avatar, to: :employee, prefix: :employee
 
     # state machine to change status of event    
-    include AASM
     aasm.attribute_name :status
     aasm column: :status do
       state :pending, initial: true
@@ -30,23 +48,6 @@ module Cadmin
         transitions from: [:pending, :booked], to: :cancelled
       end
     end
-
-    belongs_to :customer, foreign_key: :customer_id, class_name: 'User'
-    belongs_to :employee, optional: true, foreign_key: :employee_id, class_name: 'User'
-    has_one :interview, dependent: :destroy
-    has_one :cart, dependent: :destroy
-    has_many :event_services, dependent: :destroy
-    accepts_nested_attributes_for :event_services,
-                                  allow_destroy: true,
-                                  reject_if: proc { |attr| attr['service_id'].blank? }
-
-    validates :number, presence: true, uniqueness: true  
-
-    delegate :name, :last_name, :avatar, :email, :phone, :address, :birthdate, :city, 
-             :province, :postal_code, :shipping_address, :billing_address, 
-             to: :customer, prefix: :customer
-
-    delegate :name, :phone, :avatar, to: :employee, prefix: :employee
 
     def servicenames 
       self.event_services.map(&:service_name).join(', ')
