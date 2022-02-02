@@ -129,9 +129,7 @@ module Cadmin
 
     #! total amount of all events
     def total_events(events)
-      total = 0
-      events.each { |event| event.cancelled? ? total += 0 : total += event.total_services_amount }
-      total
+      events.sum(&:total_amount)
     end
 
     def pending_amount(events)

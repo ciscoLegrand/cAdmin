@@ -36,7 +36,7 @@ module Cadmin
       if @message.save
         respond_to do |format|
           format.turbo_stream
-          format.html { redirect_to conversations_path(id: @conversation.id) }
+          format.html {redirect_back(fallback_location: main_app.root_path) }
         end
         
       else

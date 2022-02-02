@@ -15,7 +15,7 @@
       <h3 class="title is-size-4"><%= t '.title_event' %></h3>
       <hr class="has-background-white-ter">
       
-      <%= form.hidden_field :cart_id, value: @cart.id %>
+      <%= form.hidden_field :cart_id, value: @cart.id if session[:cart_id].present? %>
       <div class="field is-horizontal <%= current_cadmin_user.admin? ? '' : 'is-hidden' %>">
         <div class="field-body">
           <div class="field">
@@ -104,49 +104,53 @@
     <div class="column is-one-third">    
       <h3 class="title is-size-4"><%= t '.title_services' %></h3>
       <hr class="has-background-white-ter">
-      <div data-controller="nested-form" class= "<%= current_cadmin_user.admin? ? '' : 'is-hidden' %>">
-        <template data-nested-form-target="template">
-          <%= form.fields_for :event_services, event.event_services.new, child_index: 'TEMPLATE_RECORD' do |event_service| %>
-            <%= render 'event_service_fields', form: event_service %>
-          <% end %>
-        </template>
-        
-        <%= form.fields_for :event_services do |event_service| %> 
-          <%= render 'event_service_fields', form: event_service if event_service.present? %> 
-        <% end %>      
-        
-        <div class="actions my-4"  data-nested-form-target="add_item">
-          <%= link_to "#{t '.add_item'}", "#",class: 'button is-outlined is-success', data: { action: "nested-form#add_association" } %>
-        </div>    
-      </div>
-      <div class= "<%= current_cadmin_user.admin? ? 'is-hidden' : '' %>">
-        <% @cart.cart_items.each_with_index do |item, index| %>
-          <div class="field">
-            <div class="control is-expanded is-flex">          
-              <div><%= index += 1%>: <%= item.service_name %></div>
-              <%= form.fields_for :event_services,  event.event_services.new do |event_service| %>
-                <%= event_service.hidden_field :service_id, value: item.service_id %>
-                <%= event_service.hidden_field :discount_id, value: Cadmin::Discount.find_by(name: 'default').id %>
-              <% end %>
-            </div>
-          </div>
-        <% end %>
-      </div>
-      <div class= "<%= current_cadmin_user.admin? ? 'is-hidden' : '' %>">
-        <hr>
-        Total: <%= number_to_currency  @cart.total_cart_amount %> <br>
-        <%= "Para completar la reserva tines que adelantar una fianza de " %>
-          <div class="control">
-          <%= form.radio_button :deposit, @cart.total_cart_amount * 20 / 100, class: 'radio', required: true %> <%= number_to_currency @cart.total_cart_amount * 20 / 100%>
-          <%= form.radio_button :deposit, @cart.total_cart_amount * 50 / 100, class: 'radio', required: true %> <%= number_to_currency @cart.total_cart_amount * 50 / 100%>
-          <%= form.radio_button :deposit, @cart.total_cart_amount, class: 'radio', required: true %> <%= number_to_currency @cart.total_cart_amount%>
-        </div>
-      </div>
       
-      <div class="actions my-6 <%= current_cadmin_user.admin? ? 'is-hidden' : '' %>">
-        <%= form.submit "#{t '.next'}", class: "button is-success mx-2" %>
-        <%= link_to "#{t '.cancel'}", events_path, class: "button has-background-white-ter mx-2" %>
-      </div>
+      <% if current_cadmin_user.admin? %>
+        <div data-controller="nested-form" class= "<%= current_cadmin_user.admin? ? '' : 'is-hidden' %>">
+          <template data-nested-form-target="template">
+            <%= form.fields_for :event_services, event.event_services.new, child_index: 'TEMPLATE_RECORD' do |event_service| %>
+              <%= render 'event_service_fields', form: event_service %>
+            <% end %>
+          </template>
+          
+          <%= form.fields_for :event_services do |event_service| %> 
+            <%= render 'event_service_fields', form: event_service if event_service.present? %> 
+          <% end %>      
+          
+          <div class="actions my-4"  data-nested-form-target="add_item">
+            <%= link_to "#{t '.add_item'}", "#",class: 'button is-outlined is-success', data: { action: "nested-form#add_association" } %>
+          </div>    
+        </div>
+      <% else %>
+        <div class= "<%= current_cadmin_user.admin? ? 'is-hidden' : '' %>">
+          <% @cart.cart_items.each_with_index do |item, index| %>
+            <div class="field">
+              <div class="control is-expanded is-flex">          
+                <div><%= index += 1%>: <%= item.service_name %></div>
+                <%= form.fields_for :event_services,  event.event_services.new do |event_service| %>
+                  <%= event_service.hidden_field :service_id, value: item.service_id %>
+                  <%= event_service.hidden_field :discount_id, value: Cadmin::Discount.find_by(name: 'default').id %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class= "<%= current_cadmin_user.admin? ? 'is-hidden' : '' %>">
+          <hr>
+          Total: <%= number_to_currency  @cart.total_cart_amount %> <br>
+          <%= "Para completar la reserva tines que adelantar una fianza de " %>
+            <div class="control">
+            <%= form.radio_button :deposit, @cart.total_cart_amount * 20 / 100, class: 'radio', required: true %> <%= number_to_currency @cart.total_cart_amount * 20 / 100%>
+            <%= form.radio_button :deposit, @cart.total_cart_amount * 50 / 100, class: 'radio', required: true %> <%= number_to_currency @cart.total_cart_amount * 50 / 100%>
+            <%= form.radio_button :deposit, @cart.total_cart_amount, class: 'radio', required: true %> <%= number_to_currency @cart.total_cart_amount%>
+          </div>
+        </div>
+        <div class="actions my-6 <%= current_cadmin_user.admin? ? 'is-hidden' : '' %>">
+          <%= form.submit "#{t '.next'}", class: "button is-success mx-2" %>
+          <%= link_to "#{t '.cancel'}", events_path, class: "button has-background-white-ter mx-2" %>
+        </div>
+      <% end %>
+      
     </div>   
   </div>
 
