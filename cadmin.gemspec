@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "rails", "~> 6.1.4", ">= 6.1.4.1"
   
   # db
-  spec.add_dependency 'pg'
+  spec.add_dependency 'pg'#, '~> 1.1'
   spec.add_dependency 'pg_search'
   spec.add_dependency 'active_model_serializers'
   

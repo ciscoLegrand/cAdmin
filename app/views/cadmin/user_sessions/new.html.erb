@@ -34,7 +34,7 @@
 
       <div class="actions is-relative login__logform__eigthywidth ">
         <%= f.submit "Inicio sesión", class: 'button login__logform__logbutton is-rounded is-clickable' %>
-        <%= link_to '/cadmin/register' , class: 'subtitle is-rounded login__buttons is-clickable' do %>
+        <%= link_to register_path , class: 'subtitle is-rounded login__buttons is-clickable' do %>
           Registro <%= inline_svg_tag('cadmin/icons/ico-arrow-right.svg', class: 'login__buttons__arrow')%>
         <% end %>        
       </div>

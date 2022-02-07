@@ -74,6 +74,7 @@ Cadmin::Engine.routes.draw do
                 registrations: 'cadmin/user_registrations',
                 invitations: 'cadmin/user_invitations'
               },
+              skip: [:sessions, :registrations],
               path_names: {sign_out: 'logout'},
               path_prefix: :user,
               module: :cadmin
@@ -83,10 +84,9 @@ Cadmin::Engine.routes.draw do
     post 'login',        to: 'user_sessions#create',           as: :create_new_session
     get  'register',     to: 'user_registrations#new',         as: :register
     post 'register',     to: 'user_registrations#create',      as: :registration
-    get  'profile',      to: 'user_registrations#edit',        as: :edit_profile
-    put  'profile',      to: 'user_registrations#update',      as: :update_profile
+    # get  'profile',      to: 'user_registrations#edit',        as: :edit_profile
+    # put  'profile',      to: 'user_registrations#update',      as: :update_profile
     get  'logout',       to: 'user_sessions#destroy',          as: :logout
-    # delete 'signout' => 'user_sessions#destroy', as: :logout
   end
 
   # TODO: generate routes for admin and employees

@@ -4,7 +4,7 @@
   </div>
   <div class="login__colform column is-4-desktop is-12-touch is-flex is-flex-direction-column is-align-content-center">
     <h2 class="title is-size-3-desktop is-size-5-touch is-family-primary has-text-centered">Registro Usuario</h2>
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name),html:{turbo: false, class:'login__logform'}) do |f| %>
+    <%= form_for(resource, as: resource_name, url: registration_path,html:{turbo: false, class:'login__logform'}) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="field login__logform__eigthywidth my-3">
