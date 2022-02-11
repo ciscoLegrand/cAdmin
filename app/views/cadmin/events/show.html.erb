@@ -40,7 +40,7 @@
                 </tr>
                 <tr>
                   <th><%= t '.place_id' %></th>
-                  <td> <%= link_to @event.placename, Cadmin::Location.find(@event.place_id) if @event.place_id.present?%> </td>
+                  <td> <%= link_to @event.place_name, Cadmin::Location.find(@event.place_id) if @event.place_id.present?%> </td>
                 </tr>
                 <tr>
                   <th><%= t '.date' %></th>

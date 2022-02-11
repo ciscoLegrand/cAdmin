@@ -58,7 +58,7 @@
                     <td class="is-size-7-mobile"><%= event.type_name %></td>
                     <td class="is-size-7-mobile is-hidden-mobile"><%= event.number %></td>
                     <td data-label="date"><small class="has-text-grey is-abbr-like" title="<%= event.date %>"><%= event.date.strftime('%d-%m-%y') %></small></td>
-                    <td class="is-size-7-mobile is-hidden-mobile"><%= link_to event.placename, Cadmin::Location.find_by_id(event.place_id)  %></td>
+                    <td class="is-size-7-mobile is-hidden-mobile"><%= link_to event.place_name, Cadmin::Location.find(event.place_id) %></td>
                     <td class="is-size-7-mobile is-hidden-mobile"><%= event.employee_name if event.employee_id.present? %></td>
                     <td class="is-size-7-mobile is-hidden-mobile"><%= event.servicenames  %></td>
                     <td class="is-size-7-mobile is-hidden-mobile"><%= number_with_precision(event.deposit, precision: 2) %></td>     

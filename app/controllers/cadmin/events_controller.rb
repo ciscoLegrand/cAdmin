@@ -12,7 +12,7 @@ module Cadmin
       #! get events
       events = Event.where(customer_id: current_cadmin_user.id) if current_cadmin_user.customer? 
       events = Event.where(employee_id: current_cadmin_user.id) if current_cadmin_user.employee?      
-      events = Event.all if current_cadmin_user.admin?
+      events = Event.includes([:event_services, :event_type, :place, :employee]).all if current_cadmin_user.admin?
 
       #! search events
       events = events.filter_by_number(params[:number]) if params[:number].present?
@@ -45,7 +45,7 @@ module Cadmin
       add_breadcrumb 'Nuevo Evento'
       @event = Event.new
       @event_types = Cadmin::EventType.all
-      @total_cart_amount = @cart.total_cart_amount
+      @total_cart_amount = @cart.total_cart_amount if @cart.present?
     end
 
     # GET /events/1/edit
@@ -145,13 +145,13 @@ module Cadmin
       end
       # Only allow a list of trusted parameters through.
       def event_params
-        params.require(:event).permit(:customer_id, :cart_id, :title, :type_name, :number, :date, :guests, :employee_id, 
+        params.require(:event).permit(:customer_id, :cart_id, :title, :event_type_id, :number, :date, :guests, :employee_id, 
                                       :place_id, :deposit, :total_amount, :charged, :observations, :status,
                                       event_services_attributes: [:_destroy, :id, :event_id, :service_id, :discount_id, :start_time, :overtime, :total_amount])
       end
 
       def set_cart 
-        @cart = Cart.find(session[:cart_id])
+        @cart = Cart.find(session[:cart_id]) unless session[:cart_id].nil?
       end 
   end
 end

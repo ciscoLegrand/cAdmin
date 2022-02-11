@@ -53,8 +53,8 @@
             </div>
           </div>
           <div class="field">
-            <%= form.label :type_name, class: 'label' %>
-            <%= form.collection_select :type_name, @event_types, :name ,:name, {prompt: 'Selecciona tipo de evento'}, {  class: "select_inside_col",data: {controller: "slimselect"}} %>
+            <%= form.label :event_type, class: 'label' %>
+            <%= form.collection_select :event_type_id, @event_types, :id ,:name, {prompt: 'Selecciona tipo de evento'}, {  class: "select_inside_col",data: {controller: "slimselect"}} %>
           </div>
         </div>
       </div>

@@ -7,9 +7,11 @@ module Cadmin
 
     friendly_id :title, use: :slugged
 
-    belongs_to :customer, foreign_key: :customer_id, class_name: 'User'
-    belongs_to :employee, optional: true, foreign_key: :employee_id, class_name: 'User'
-    
+    belongs_to :customer,                   foreign_key: :customer_id,    class_name: 'User'
+    belongs_to :employee,   optional: true, foreign_key: :employee_id,    class_name: 'User'
+    belongs_to :place,      optional: true, foreign_key: :place_id,       class_name: 'Location'
+    belongs_to :event_type, optional: true, foreign_key: :event_type_id,  class_name: 'EventType'
+
     has_one :interview, dependent: :destroy
     has_one :cart, dependent: :destroy
     has_many :event_services, dependent: :destroy
@@ -20,11 +22,15 @@ module Cadmin
 
     validates :number, presence: true, uniqueness: true  
 
+    # delegate data from users, places and event_types to the view
     delegate :name, :last_name, :avatar, :email, :phone, :address, :birthdate, :city, 
              :province, :postal_code, :shipping_address, :billing_address, 
              to: :customer, prefix: :customer
 
     delegate :name, :phone, :avatar, to: :employee, prefix: :employee
+
+    delegate :name, to: :event_type, prefix: :type
+    delegate :name, to: :place, prefix: :place
 
     # state machine to change status of event    
     aasm.attribute_name :status
@@ -55,10 +61,6 @@ module Cadmin
 
     def discountnames 
       self.event_services.map(&:disocunts_name).join(',')
-    end
-
-    def placename 
-      Location.find_by_id( self.place_id).name if self.place_id.present? 
     end
 
     #! create unique number of event
