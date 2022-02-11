@@ -27,7 +27,7 @@
     </div>
     <div class="column is-one-third">
       <div class="label is-size-6 is-pulled-left">Lugar: </div> 
-      <div class="is-size-5 has-tex-left"><%= @interview.event_placename %></div>
+      <div class="is-size-5 has-tex-left"><%= Cadmin::Location.find(@interview.event_place_id).name %></div>
     </div>
   </div>
   

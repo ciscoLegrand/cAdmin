@@ -10,7 +10,7 @@ module Cadmin
     accepts_nested_attributes_for :interview_options, allow_destroy: true, reject_if: proc { |attr| attr['gift'].blank? }
     
     delegate :name, :phone, :avatar, to: :employee, prefix: :employee
-    delegate :id, :title, :date, :customer_name, :customer_phone, :customer_email, :placename, to: :event, prefix: :event
+    delegate :id, :title, :date, :customer_name, :customer_phone, :customer_email, :place_id, to: :event, prefix: :event
 
     scope :filter_by_pending, -> {Time.now > Event.find(self.event_id).date}
     scope :filter_by_done, -> {Time.now <= Event.find(self.event_id).date}

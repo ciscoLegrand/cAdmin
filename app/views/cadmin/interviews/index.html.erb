@@ -11,7 +11,7 @@
           <%= link_to event_interview_path(interview.event_id, interview) do %>
             <h4 class="title is-size-4"><%= interview.event_title.present? ? interview.event_title : interview.event_customer_name  %></h4>          
           <% end %>
-          <h4 class="title is-size-5"><%= interview.event_placename %></h4>
+          <h4 class="title is-size-5"><%= Cadmin::Location.find(interview.event_place_id).name %></h4>
           <time datetime="<%= interview.event_date %>" class="is-size-5"><%= interview.event_date  %></time>
         </div>
       </div>

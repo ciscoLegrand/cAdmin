@@ -10,7 +10,7 @@ module Cadmin
       #! get interviews
       
       # @users = current_cadmin_user.where(deleted_at: nil).pluck(:id) #devuelve array de users´ids 
-      @interviews = current_cadmin_user.admin? ? Interview.all : Interview.where(employee_id: current_cadmin_user.id)
+      @interviews = current_cadmin_user.admin? ? Interview.includes([:event, :employee]).all : Interview.includes(:event).where(employee_id: current_cadmin_user.id)
     end
 
     # GET /interviews/1
