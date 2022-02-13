@@ -10,9 +10,10 @@ module Cadmin
     def index      
       # @users = current_cadmin_user.where(deleted_at: nil).pluck(:id) #devuelve array de users´ids importante si hacemos soft delete de users  
       #! get events
-      events = Event.where(customer_id: current_cadmin_user.id) if current_cadmin_user.customer? 
-      events = Event.where(employee_id: current_cadmin_user.id) if current_cadmin_user.employee?      
-      events = Event.includes([:event_services, :event_type, :place, :employee]).all if current_cadmin_user.admin?
+      event = Event.includes([:event_services, :event_type, :place, :employee])
+      events = event.where(customer_id: current_cadmin_user.id) if current_cadmin_user.customer? 
+      events = event.where(employee_id: current_cadmin_user.id) if current_cadmin_user.employee?      
+      events = event.all if current_cadmin_user.admin?
 
       #! search events
       events = events.filter_by_number(params[:number]) if params[:number].present?
