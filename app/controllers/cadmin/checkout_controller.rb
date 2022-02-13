@@ -24,7 +24,8 @@ module Cadmin
     def success 
       if params[:session_id].present?
         @cart.booked!
-        @product.book!
+        Event.find_by(cart_id:@cart.id).book!
+        
         @session_with_expand = Stripe::Checkout::Session.retrieve({ id: params[:session_id], expand: ["line_items"]})        
         session[:cart_id] = nil
         @cart = Cart.create!(ip: request.remote_ip)
