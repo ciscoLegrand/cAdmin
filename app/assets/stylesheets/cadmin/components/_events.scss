@@ -7,4 +7,38 @@
     height:15rem;
   }
 
+  &__radio {  
+    &__button {
+      &:after {
+        width: 20px;
+        height: 20px;
+        border-radius: 15px;
+        top: -2px;
+        left: -1px;
+        position: relative;
+        background-color: #d1d3d1;
+        content: '';
+        display: inline-block;
+        visibility: visible;
+        border: 2px solid white;
+        margin-right: 10px;
+      }
+      &:checked:after {
+        width: 20px;
+        height: 20px;
+        border-radius: 15px;
+        top: -2px;
+        left: -1px;
+        position: relative;
+        background-color: $success;
+        content: '';
+        display: inline-block;
+        visibility: visible;
+        border: 2px solid white;
+        margin-right: 10px;
+      }
+    }
+  }
 }
+
+
