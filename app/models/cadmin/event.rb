@@ -21,7 +21,7 @@ module Cadmin
                                   reject_if: proc { |attr| attr['service_id'].blank? }
 
     validates :number, presence: true, uniqueness: true  
-
+    validates_presence_of :title, :event_type, :date, :deposit
     # delegate data from users, places and event_types to the view
     delegate :name, :last_name, :avatar, :email, :phone, :address, :birthdate, :city, 
              :province, :postal_code, :shipping_address, :billing_address, 
