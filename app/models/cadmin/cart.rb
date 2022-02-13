@@ -19,5 +19,9 @@ module Cadmin
     def total_cart_amount
       self.cart_items.sum(&:service_price)
     end
+
+    def deposit_percentage(percentage)
+      self.total_cart_amount * percentage / 100
+    end
   end
 end
