@@ -2,6 +2,7 @@ require_dependency "cadmin/application_controller"
 
 module Cadmin
   class CartItemsController < ApplicationController 
+    skip_before_action :authenticate_cadmin_user!
     before_action :set_service, only: [:create]
     before_action :set_cart, only: [:create, :destroy]
     

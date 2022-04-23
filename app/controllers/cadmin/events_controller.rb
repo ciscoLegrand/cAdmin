@@ -2,6 +2,7 @@ require_dependency "cadmin/application_controller"
 
 module Cadmin
   class EventsController < ApplicationController
+    skip_before_action :authenticate_cadmin_user!, only: %w[new create]
     before_action :set_event, only: %w[show edit update destroy charged cancel booked]
     before_action :set_cart, only: %w[new create]
 
