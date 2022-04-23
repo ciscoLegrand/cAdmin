@@ -1,7 +1,13 @@
 module Cadmin
   module ApplicationHelper
     include Pagy::Frontend
-
+    #! percentage of events by type for display in the dashboard index
+    def event_percentage(id)
+      (Event.where(event_type_id: id).count * 100) / Event.all.count 
+    end
+    def total_event_amount(id)
+      Event.where(event_type_id: id).sum(&:total_amount)
+    end
     #! display select roles
     def permitted_roles
       current_cadmin_user.superadmin? ? [['Usuario', 'user'],['Empleado', 'employee'], ['Administrador', 'admin'],['Cliente','customer'], ['Superadministrador', 'superadmin']] : [['Usuario', 'user'],['Empleado', 'employee'], ['Cliente', 'customer'],['Administrador', 'admin']]

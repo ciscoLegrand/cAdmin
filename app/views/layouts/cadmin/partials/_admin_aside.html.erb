@@ -10,20 +10,20 @@
   <% end %>
   
   <button class="sidebar__close delete" aria-label="close" data-action="sidebar#close"></button>
-  <div class="sidebar__showhide">  
-    
+  <div class="sidebar__showhide"> 
     <%= link_to image_tag("cadmin/icons/ico-chevron-left.svg", class: 'sidebar__showhide__icon is-clickable', data: { "decrease-target": 'arrow'}),'', data: { action: "decrease#hide" } %>
   </div>
   <nav class="vertical" data-controller="menu">
     <ul>
-
-      <li>  
-        <span data-action="click->menu#set_active_menu" data-menu="home">
-          <%= link_to root_path , class: 'panel-block is-flex is-justify-content-flex-start is-align-items-start is-clickable is-hoverable has-no-bottom-line has-text-dark', data: {'menu-target': 'link', 'menu-item': 'home', action: 'click->menu#set_active_menu_item'} if current_cadmin_user.admin? do %>
-              <%= inline_svg_tag('cadmin/icons/ico-home.svg', class:'icon  mx-4')%> <span data-decrease-target="hidetext">Inicio</span>
-          <% end %>
-        </span>
-      </li>
+      <% if current_cadmin_user.admin? %>
+        <li>  
+          <span data-action="click->menu#set_active_menu" data-menu="home">
+            <%= link_to root_path , class: 'panel-block is-flex is-justify-content-flex-start is-align-items-start is-clickable is-hoverable has-no-bottom-line has-text-dark', data: {'menu-target': 'link', 'menu-item': 'home', action: 'click->menu#set_active_menu_item'} do %>
+                <%= inline_svg_tag('cadmin/icons/ico-home.svg', class:'icon  mx-4')%> <span data-decrease-target="hidetext">Inicio</span>
+            <% end %>
+          </span>
+        </li>
+      <% end %>
       <li>  
         <span class="panel-block has-text-dark is-flex is-justify-content-flex-start is-align-items-start is-clickable is-hoverable has-no-bottom-line " data-action="click->menu#set_active_menu" data-menu="events">
           <%= inline_svg_tag('cadmin/icons/ico-calendar.svg', class:'icon mx-4')%> <span data-decrease-target="hidetext">Eventos</span>

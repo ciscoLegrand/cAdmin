@@ -7,11 +7,13 @@ module Cadmin
 
     def index
       add_breadcrumb 'Principal'
-      @users = User.where(role: 'customer')
     end
 
     def agenda
       add_breadcrumb 'Agenda'
     end
+
+    private 
+
   end
 end
