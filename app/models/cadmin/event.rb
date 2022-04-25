@@ -13,9 +13,9 @@ module Cadmin
     belongs_to :event_type, optional: true, foreign_key: :event_type_id,  class_name: 'EventType'
 
     has_one :interview, dependent: :destroy
-    has_one :cart, dependent: :destroy
+    has_one :cart
     has_many :event_services, dependent: :destroy
-    
+
     accepts_nested_attributes_for :event_services,
                                   allow_destroy: true,
                                   reject_if: proc { |attr| attr['service_id'].blank? }
