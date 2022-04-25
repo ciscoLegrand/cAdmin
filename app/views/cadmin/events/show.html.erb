@@ -17,74 +17,73 @@
       </div>
     </div>
     <div class="card-content">
-      <div class="columns">
-        <div class="column is-6">
+      <div class="columns is-multiline">
+        <div class="column is-12">
           <h3 class="title is-size-5"><%= t '.event_title' %></h3>         
           <div class="content">
-              <table class="table is-fullwidth is-striped is-hoverable is-fullwidth is-scrollable-touch">
-                <tr>
-                  <th><%= t '.guests' %></th>
-                  <td><%= @event.guests%></td>
-                </tr>
-                <tr>
-                  <th><%= t '.deposit' %></th>
-                  <td><%= number_to_currency @event.deposit %></td>
-                </tr>
-                <tr>
-                  <th><%= t '.pending_amount' %></th>
-                  <td><%= number_to_currency(@event.total_services_amount - @event.deposit)%> </td>
-                </tr>
-                <tr>
-                  <th><%= t '.total_amount' %></th>
-                  <td><%= number_to_currency @event.total_services_amount %> </td>
-                </tr>
-                <tr>
-                  <th><%= t '.place_id' %></th>
-                  <td> <%= link_to @event.place_name, Cadmin::Location.find(@event.place_id) if @event.place_id.present?%> </td>
-                </tr>
-                <tr>
-                  <th><%= t '.date' %></th>
-                  <td><%= @event.date.strftime("%d-%m-%Y")  %> </td>
-                </tr>
-              </table>
+            <table class="table is-fullwidth is-striped is-hoverable is-fullwidth is-scrollable-touch">
+              <tr>
+                <th><%= t '.guests' %></th>
+                <td><%= @event.guests%></td>
+              </tr>
+              <tr>
+                <th><%= t '.deposit' %></th>
+                <td><%= number_to_currency @event.deposit %></td>
+              </tr>
+              <tr>
+                <th><%= t '.pending_amount' %></th>
+                <td><%= number_to_currency(@event.total_services_amount - @event.deposit)%> </td>
+              </tr>
+              <tr>
+                <th><%= t '.total_amount' %></th>
+                <td><%= number_to_currency @event.total_services_amount %> </td>
+              </tr>
+              <tr>
+                <th><%= t '.place_id' %></th>
+                <td> <%= link_to @event.place_name, Cadmin::Location.find(@event.place_id) if @event.place_id.present?%> </td>
+              </tr>
+              <tr>
+                <th><%= t '.date' %></th>
+                <td><%= @event.date.strftime("%d-%m-%Y")  %> </td>
+              </tr>
+            </table>
           </div>
         </div>
-        <div class="column is-6">
-          <% if current_cadmin_user.admin? %>
-            <h3 class="title is-size-5">Datos del cliente:</h3>
-            <div class="content">
-              <table class="table is-fullwidth is-striped is-hoverable is-fullwidth is-scrollable-touch">
-                <tr>
-                  <th><%= t '.name' %></th>
-                  <td><%= @event.customer_name%></td>
-                </tr>
-                <tr>
-                  <th><%= t '.last_name' %></th>
-                  <td><%= @event.customer_last_name%></td>
-                </tr>
-                <tr>
-                  <th><%= t '.email' %></th>
-                  <td><%= @event.customer_email%> </td>
-                </tr>
-                <tr>
-                  <th><%= t '.birthdate' %></th>
-                  <td><%= @event.customer_birthdate %></td>
-                </tr>
-                <tr>
-                  <th><%= t '.phone' %></th>
-                  <td><%= @event.customer_phone%></td>
-                </tr>
-                <tr>
-                  <th><%= t '.city' %></th>
-                  <td><%= @event.customer_city %></td>
-                </tr>
-                <tr>
-                  <th><%= t '.billing_address' %></th>
-                  <td> <%= @event.customer_billing_address%></td>
-                </tr>
-              </table>
-            </div>
-          <% end %>
+        <hr>
+        <div class="column is-12">
+          <h3 class="title is-size-5">Datos del cliente:</h3>
+          <div class="content">
+            <table class="table is-fullwidth is-striped is-hoverable is-fullwidth is-scrollable-touch">
+              <tr>
+                <th><%= t '.name' %></th>
+                <td><%= @event.customer_name%></td>
+              </tr>
+              <tr>
+                <th><%= t '.last_name' %></th>
+                <td><%= @event.customer_last_name%></td>
+              </tr>
+              <tr>
+                <th><%= t '.email' %></th>
+                <td><%= @event.customer_email%> </td>
+              </tr>
+              <tr>
+                <th><%= t '.birthdate' %></th>
+                <td><%= @event.customer_birthdate %></td>
+              </tr>
+              <tr>
+                <th><%= t '.phone' %></th>
+                <td><%= @event.customer_phone%></td>
+              </tr>
+              <tr>
+                <th><%= t '.city' %></th>
+                <td><%= @event.customer_city %></td>
+              </tr>
+              <tr>
+                <th><%= t '.billing_address' %></th>
+                <td> <%= @event.customer_billing_address%></td>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -151,7 +150,8 @@
           </div>
         </div>
       <% end %>
-      <%= link_to "Reserva Stripe! #{number_to_currency @event.deposit}", cadmin.checkout_create_path(id: @event.id), method: :post, remote: true, data: {controller: 'stripe' }, class:'button is-link is-flex is-flex-grow-1 ml-2 is-fullwidth' if @event.deposit > 0.0 %> 
+
+      <%= link_to "Confirmar reserva #{number_to_currency @event.deposit}", cadmin.checkout_create_path(id: @event.id), method: :post, remote: true, data: {controller: 'stripe' }, class:'button is-link is-flex is-flex-grow-1 ml-2 is-fullwidth' if @event.deposit > 0.0  if @event.status == 'pending' %> 
     </div>
   </div>
 </div>
