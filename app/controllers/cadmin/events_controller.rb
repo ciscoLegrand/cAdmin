@@ -33,7 +33,7 @@ module Cadmin
       #! number of events to show
       @events_count = events.present? ? events.count : 0
       #! paginate events
-      @pagy, @events = pagy(events, items: 10) if @events.present? && events.present?
+      @pagy, @events = pagy(events.order(created_at: :desc), items: 10) if @events.present? && events.present?
     end
 
     # GET /events/1
@@ -65,7 +65,9 @@ module Cadmin
         # update role and create customer on stripe
         current_cadmin_user.create_stripe_customer if current_cadmin_user.user?
         @event.update(total_amount: @event.total_services_amount)
-        
+        @event.event_services.each do |es|
+          es.update_stock_by_day(@event.date)
+        end
         redirect_to @event, success: t('.success')
       else
         render :new
