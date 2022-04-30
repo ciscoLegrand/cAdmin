@@ -13,7 +13,6 @@ module Cadmin
     before_action :set_unviewed_messages 
     before_action :set_events
     before_action :set_cart
-    # before_action :run_update_status_event_job
     
 
     protected
@@ -59,10 +58,6 @@ module Cadmin
 
       def set_web_module
         @web_module = WebModule.first
-      end
-
-      def run_update_status_event_job
-        UpdateStatusEventJob.set(wait: 1.day).perform_later(@events)
       end
   end
 end
