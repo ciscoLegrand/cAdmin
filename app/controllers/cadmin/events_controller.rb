@@ -58,10 +58,16 @@ module Cadmin
 
     # POST /events
     def create
-      @event = Event.new(event_params)  
+      @event = Event.new(event_params)        
       @event.create_number
+      available = 0
+      @cart.cart_items.each do |ci|
+        stock = StockByDate.find_by(service_id: ci.service_id, date: @event.date)
+        available += stock&.stock_available? ? 0 : 1
+      end
       
-      if @event.save
+      if available == 0 
+        @event.save
         # update role and create customer on stripe
         current_cadmin_user.create_stripe_customer if current_cadmin_user.user?
         @event.update(total_amount: @event.total_services_amount)
@@ -75,9 +81,10 @@ module Cadmin
             service.stock_by_dates.create!(stock: service.stock - 1 , date: @event.date)
           end
         end
+ 
         redirect_to @event, success: t('.success')
       else
-        render :new
+        redirect_to main_app.cart_path, alert: "La reserva contiene algun servicio del que no disponemos stock"
       end
     end
 
