@@ -17,15 +17,21 @@
         <%= form.label :name, class:'label' %>
         <%= form.text_field :name, class: 'input' %>
       </div>
-
       <div class="field">
-        <%= form.label :price, class:'label' %>
-        <%= form.text_field :price, class:'input' %>
+        <%= form.label :stock, class:'label' %>
+        <%= form.number_field :stock, class:'input' %>
       </div>
-      
+    </div>
+  </div>
+  <div class="field is-horizontal">
+    <div class="field-body">
       <div class="field">
         <%= form.label :hour_price, class:'label' %>
-        <%= form.text_field :hour_price, class:'input' %>
+        <%= form.number_field :hour_price, class:'input' %>
+      </div>
+      <div class="field">
+        <%= form.label :price, class:'label' %>
+        <%= form.number_field :price, class:'input' %>
       </div>
     </div>
   </div>
@@ -69,13 +75,11 @@
 
     <%# if 1 == 0 %>        
       <div class="field">
-        <div class="file has-name">
-          <%= form.label :image , class: 'label' %>
-          <div class="control">
-            <%= image_tag form.object.image_url if form.object.cached_image_data %>
-            <%= form.hidden_field :image, value: form.object.cached_image_data %>
-            <%= form.file_field :image, class: 'custom-file-upload' %>    
-          </div>
+        <%= form.label :image , class: 'label' %>
+        <div class="control">
+          <%= image_tag form.object.image_url if form.object.cached_image_data %>
+          <%= form.hidden_field :image, value: form.object.cached_image_data %>
+          <%= form.file_field :image, class: 'custom-file-upload' %>
         </div>
       </div>
     <%# end %>
