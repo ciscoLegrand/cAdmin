@@ -66,7 +66,14 @@ module Cadmin
         current_cadmin_user.create_stripe_customer if current_cadmin_user.user?
         @event.update(total_amount: @event.total_services_amount)
         @event.event_services.each do |es|
-          es.update_stock_by_day(@event.date)
+          #! stock's control by dates
+          if StockByDate.find_by(service_id: es.service_id, date: @event.date).present?
+            stocks = Service.find(es.service_id).stock_by_dates.find_by(service_id: es.service_id, date: @event.date)
+            stocks.update(stock: stocks.stock - 1 )
+          else 
+            service = Service.find(es.service_id)
+            service.stock_by_dates.create!(stock: service.stock - 1 , date: @event.date)
+          end
         end
         redirect_to @event, success: t('.success')
       else
@@ -112,8 +119,13 @@ module Cadmin
     end
 
     def cancel 
-      @event.cancel!
       @event.update(total_amount: 0)
+      #! restore service's stock
+      @event.event_services.each do |es|
+        service = Service.find(es.service_id).stock_by_dates.find_by(service_id: es.service_id, date: @event.date)
+        service.update(stock: service.stock + 1 )
+      end
+      @event.cancel!
       redirect_to events_path
     end
 
