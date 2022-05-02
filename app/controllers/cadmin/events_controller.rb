@@ -55,36 +55,28 @@ module Cadmin
       add_breadcrumb 'Editar Evento'
       @event_types = Cadmin::EventType.all
     end
-
+    
     # POST /events
     def create
       @event = Event.new(event_params)        
       @event.create_number
-      available = 0
-      @cart.cart_items.each do |ci|
-        stock = StockByDate.find_by(service_id: ci.service_id, date: @event.date)
-        available += stock&.stock_available? ? 0 : 1
-      end
-      
-      if available == 0 
-        @event.save
-        # update role and create customer on stripe
+      @event.save
+
+      if @event.unallowed_booking?
+        @event.destroy
+        if current_cadmin_user.admin?
+          redirect_to events_path, alert: "La reserva contiene algun servicio del que no disponemos stock"
+        else
+          redirect_to main_app.cart_path, alert: "La reserva contiene algun servicio del que no disponemos stock"
+        end
+      else
+        #! update role and create customer on stripe
         current_cadmin_user.create_stripe_customer if current_cadmin_user.user?
         @event.update(total_amount: @event.total_services_amount)
-        @event.event_services.each do |es|
-          #! stock's control by dates
-          if StockByDate.find_by(service_id: es.service_id, date: @event.date).present?
-            stocks = Service.find(es.service_id).stock_by_dates.find_by(service_id: es.service_id, date: @event.date)
-            stocks.update(stock: stocks.stock - 1 )
-          else 
-            service = Service.find(es.service_id)
-            service.stock_by_dates.create!(stock: service.stock - 1 , date: @event.date)
-          end
-        end
+        #! stock's control by dates
+        @event.event_services.each { |es| es.stock_decrement! }
  
         redirect_to @event, success: t('.success')
-      else
-        redirect_to main_app.cart_path, alert: "La reserva contiene algun servicio del que no disponemos stock"
       end
     end
 
@@ -128,10 +120,7 @@ module Cadmin
     def cancel 
       @event.update(total_amount: 0)
       #! restore service's stock
-      @event.event_services.each do |es|
-        service = Service.find(es.service_id).stock_by_dates.find_by(service_id: es.service_id, date: @event.date)
-        service.update(stock: service.stock + 1 )
-      end
+      @event.event_services.each { |es| es.stock_increment! }
       @event.cancel!
       redirect_to events_path
     end
