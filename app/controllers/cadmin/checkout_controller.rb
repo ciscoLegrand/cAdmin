@@ -25,7 +25,7 @@ module Cadmin
       if params[:session_id].present?
         @cart.booked!
         Event.find_by(cart_id:@cart.id).book!
-        
+        EventMailer.admin_event(Event.find_by(cart_id:@cart.id)).deliver
         @session_with_expand = Stripe::Checkout::Session.retrieve({ id: params[:session_id], expand: ["line_items"]})        
         session[:cart_id] = nil
         @cart = Cart.create!(ip: request.remote_ip)

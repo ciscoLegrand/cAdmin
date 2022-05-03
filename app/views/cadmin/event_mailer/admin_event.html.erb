@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1><%= @user.name %> ha hecho una reserva </h1>
+    <p>
+      Se ha hecho la reserva <%= @event.number %> es necesaria la revisión de la misma para confirmación.
+    </p>
+
+    <p> Ponte en contacto con <%= @user.name %> en el telefono: <%= @user.phone %>  o en el email: <%= @user.email %> para darle mas información</p>
+  </body>
+</html>
