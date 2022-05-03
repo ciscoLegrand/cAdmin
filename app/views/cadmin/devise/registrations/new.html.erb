@@ -35,12 +35,13 @@
 
       <div class="field login__logform__eigthywidth my-2">
         <%= f.label :password_confirmation, class: 'login__label is-size-5-desktop' %>
+        <hr>
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'login__input' %>
       </div>
 
-      <div class="actions is-relative login__logform__eigthywidth mt-6">
-        <%= f.submit "Registrarse", class: 'button login__logform__logbutton is-rounded is-clickable' %>
-        <%= link_to '/cadmin/login' , class: 'subtitle is-rounded login__buttons is-clickable' do %>
+      <div class="actions login__logform  login__logform__eigthywidth mt-6">
+        <%= f.submit "Registrarse", class: 'button login__logform__logbutton is-rounded is-clickable mb-4' %>
+        <%= link_to '/cadmin/login' , class: 'subtitle is-rounded is-clickable mt-4' do %>
           Login <%= inline_svg_tag('cadmin/icons/ico-arrow-right.svg', class: 'login__buttons__arrow')%>
         <% end %>        
       </div>

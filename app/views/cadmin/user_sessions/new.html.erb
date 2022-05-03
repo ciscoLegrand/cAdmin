@@ -32,9 +32,9 @@
         </div>
       <% end %>
 
-      <div class="actions is-relative login__logform__eigthywidth ">
-        <%= f.submit "Inicio sesión", class: 'button login__logform__logbutton is-rounded is-clickable' %>
-        <%= link_to register_path , class: 'subtitle is-rounded login__buttons is-clickable' do %>
+      <div class="actions login__logform__eigthywidth is-flex is-flex-direction-column is-align-items-center">
+        <%= f.submit "Inicio sesión", class: 'button login__logform__logbutton is-rounded is-clickable mb-4' %>
+        <%= link_to register_path , class: 'subtitle is-rounded is-clickable mt-4' do %>
           Registro <%= inline_svg_tag('cadmin/icons/ico-arrow-right.svg', class: 'login__buttons__arrow')%>
         <% end %>        
       </div>

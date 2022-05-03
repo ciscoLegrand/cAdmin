@@ -37,19 +37,21 @@
         <%= f.label :password_confirmation, class: 'login__label is-size-5-desktop' %>
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'login__input' %>
       </div>
-      <div class="field">
-        <div class="file has-name">
-          <%= f.label :avatar , class: 'label required-form__mark' %>
-          <div class="control">
-            <%= image_tag form.object.image_url if f.object.cached_avatar_data %>
-            <%= f.hidden_field :avatar, value: f.object.cached_avatar_data %>
-            <%= f.file_field :avatar, class: 'input' %>    
+      <% if 1 == 0 %>
+        <div class="field">
+          <div class="file has-name">
+            <%= f.label :avatar , class: 'label required-form__mark' %>
+            <div class="control">
+              <%= image_tag form.object.image_url if f.object.cached_avatar_data %>
+              <%= f.hidden_field :avatar, value: f.object.cached_avatar_data %>
+              <%= f.file_field :avatar, class: 'input' %>    
+            </div>
           </div>
         </div>
-      </div>
-      <div class="actions is-relative login__logform__eigthywidth mt-6">
-        <%= f.submit "Registrarse", class: 'button login__logform__logbutton is-rounded is-clickable' %>
-        <%= link_to '/cadmin/login' , class: 'subtitle is-rounded login__buttons is-clickable' do %>
+      <% end %>
+      <div class="actions login__logform__eigthywidth is-flex is-flex-direction-column is-align-items-center">
+        <%= f.submit "Registrarse", class: 'button login__logform__logbutton is-rounded is-clickable mb-4' %>
+        <%= link_to '/cadmin/login' , class: 'subtitle is-rounded is-clickable mt-4' do %>
           Login <%= inline_svg_tag('cadmin/icons/ico-arrow-right.svg', class: 'login__buttons__arrow')%>
         <% end %>        
       </div>
