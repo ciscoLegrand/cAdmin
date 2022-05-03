@@ -10,6 +10,13 @@
       </ul>
     </div>
   <% end %>
+
+ <% if action_name == 'edit' %>
+   <% @cart = Cadmin::Cart.create %>
+   <% session[:cart_id] = @cart.id %>
+ <% end %>
+
+
   <div class="columns">
     <div class="column is-two-thirds">
       <h3 class="title is-size-4"><%= t '.title_event' %></h3>
