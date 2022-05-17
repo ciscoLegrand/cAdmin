@@ -1,7 +1,7 @@
 <% 
-    email_base_template = Cadmin::EmailBaseTemplate.where(kind: 2).first
+    email_base_template = Cadmin::EmailBaseTemplate.find_by(kind: 2)
     data = email_base_template.has_custom_template? ? email_base_template.custom_template : email_base_template
-    template = Liquid::Template.parse(data.content)     
+    @template = Liquid::Template.parse(data.content)     
 %>
 
 
