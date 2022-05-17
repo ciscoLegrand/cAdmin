@@ -30,17 +30,22 @@
   </head>
   <body >
     <%= render Cadmin::NotificationComponent.with_collection(flash.to_a) if cadmin_user_signed_in? %>
-    <main class="column <%= cadmin_user_signed_in? ? 'main__is-10__is-offset-2 p-0' : 'is-12 has-background-grey-lighter' %> is-vcentered is-fullheight" 
+    <% admin_or_events = cadmin_user_signed_in? ? (current_cadmin_user.admin? || Cadmin::Event.where(customer_id: current_cadmin_user.id).size > 0) : false %>
+    <main class="column <%= admin_or_events ? 'main__is-10__is-offset-2 p-0' : 'is-12 ' %> is-vcentered is-fullheight" 
           data-controller="decrease"  
           data-decrease-target="main"         
           data-decrease-right-value="<%= asset_path("cadmin/icons/ico-chevron-right.svg") %>"
           data-decrease-left-value="<%= asset_path("cadmin/icons/ico-chevron-left.svg") %>">
-      <%= render 'layouts/cadmin/partials/admin_aside' if cadmin_user_signed_in? %>
-      <%= render 'layouts/cadmin/partials/mobile_navbar' if cadmin_user_signed_in? %>
+      
+      <%if admin_or_events %>
+        <%= render 'layouts/cadmin/partials/admin_aside' if cadmin_user_signed_in? %>
+        <%= render 'layouts/cadmin/partials/mobile_navbar' if cadmin_user_signed_in? %>
+      <% end %>
+      
       <% if cadmin_user_signed_in? %>
         <header class="header panel-heading">
           <div class="is-flex is-align-items-center">
-            <span class="panel-heading subtitle is-size-6 is-size-7-touch | has-text-left"><%= render_breadcrumbs separator: ' > ' %></span>           
+            <span class="panel-heading subtitle is-size-6 is-size-7-touch | has-text-left"><%= render_breadcrumbs separator: ' > ' if admin_or_events %></span>           
           </div>
           <div class="is-flex is-flex-direction-row is-justify-content-flex-end">
             <%= link_to profile_index_path, class: 'button is-fullwidth header__button_user p-5' do%>

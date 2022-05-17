@@ -23,28 +23,38 @@
                   <tr>
                     <td class="email-masthead" style="word-break: break-word; font-family: &quot;Nunito Sans&quot;, Helvetica, Arial, sans-serif; font-size: 16px; text-align: center; padding: 25px 0;" align="center">
                       <!--  TODO: insert Logo -->
-                      <img src="https://bulma.io/images/placeholders/128x128.png">
+                      
                     </td>
                   </tr>
                   <!-- Email Body -->
                   <tr>
                     <td class="email-body" width="570" cellpadding="0" cellspacing="0" style="word-break: break-word; margin: 0; padding: 0; font-family: &quot;Nunito Sans&quot;, Helvetica, Arial, sans-serif; font-size: 16px; width: 100%; -premailer-width: 100%; -premailer-cellpadding: 0; -premailer-cellspacing: 0;">
                       <table class="email-body_inner" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation" style="width: 570px; -premailer-width: 570px; -premailer-cellpadding: 0; -premailer-cellspacing: 0; background-color: #FFFFFF; margin: 0 auto; padding: 0;" bgcolor="#FFFFFF">
+                        <tr>
+                          <td lass="content-cell" align="center">
+                            <%= image_tag 'cadmin/content/signature.jpg' %>
+                          </td>
+                        </tr>
                         <!-- Body content -->
                         <tr>
                           <td class="content-cell" style="word-break: break-word; font-family: &quot;Nunito Sans&quot;, Helvetica, Arial, sans-serif; font-size: 16px; padding: 45px;">
                             <div class="f-fallback">
-                                  <%= raw @template.render(                                    
-                                    'nombre_usuario' => current_cadmin_user.name, 
-                                    'host' => request.base_url,
-                                    'cambiar_contrasena' => edit_password_url(current_cadmin_user, reset_password_token: @token)  ,
-                                    )%>
+                              <% @event = Cadmin::Event.first %>
+                              <%= raw @template.render(                                    
+                              'nombre_usuario' => Cadmin::User.find_by(id: @event.customer_id).name, 
+                              'host' => request.host,
+                              'numero_evento' => @event.number,
+                              'fecha_evento' => @event.date,                              
+                              'email_contacto' =>  ENV['GMAIL_ACCOUNT'],                              
+                              'nombre_cuenta' => 'lagramoladisco',
+                              # 'password' => Cadmin::User.find_by(id: @event.customer_id).password if  @email_base_template.kind == 'welcome' || @email_base_template.kind == 'reset_password'
+                              )%>
                             </div>
                           </td>
                         </tr>
                         <tr>
                           <td lass="content-cell" align="center">
-
+                            <%= render 'layouts/cadmin/partials/email_signature' %>
                           </td>
                         </tr>
                       </table>

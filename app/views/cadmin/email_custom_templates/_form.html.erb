@@ -1,13 +1,17 @@
 
+<div class="columns is-multiline is-mobile">
 
   <div class="column is-one-third-desktop is-hidden-touch">
     <h3 class="subtitle is-size-4-desktop is-size-5-touch">Etiquetas</h3>
     <hr class="has-background-white-ter">
     <ul>
       <!--FIXME: translate list and do more tags--->
-      <li>  <span class="tag is-white-ter p-3 is-size-6 my-2 tag__fixsize"> {{nombre_usuario}}</span> Mostrará el nombre de usuario</li>      
-      <li>  <span class="tag is-white-ter p-3 is-size-6 my-2 tag__fixsize"> {{host}}</span> Mostrará el dominio desde donde se envia</li>
-      <% if @email_custom_template.base_kind == 'welcome' || @email_custom_template.base_kind == 'reset_password' %>
+      <li>  <span class="tag is-white-ter p-3 is-size-6 my-2 tag__fixsize"> {{nombre_usuario}}</span> Mostrará el nombre de usuario</li>
+      <li>  <span class="tag is-white-ter p-3 is-size-6 my-2 tag__fixsize"> {{nombre_cuenta}}</span> Mostrará el nombre comercial.</li>
+      <li>  <span class="tag is-white-ter p-3 is-size-6 my-2 tag__fixsize"> {{host}}</span> Mostrará <%= request.host %></li>
+      <li><span class="tag is-white-ter p-3 is-size-6 my-2 tag__fixsize"> {{numero_evento}}</span> Mostrará el número de evento</li>
+      <li><span class="tag is-white-ter p-3 is-size-6 my-2 tag__fixsize"> {{fecha_evento}}</span> Mostrará la fecha del evento</li>
+      <% if @email_base_template.kind == 'welcome' || @email_base_template.kind == 'reset_password' %>
         <li>  <span class="tag is-white-ter p-3 is-size-6 my-2 tag__fixsize"> {{boton_aceptar}}</span> Enlace que deberás añadir al link en el editor. </li>
       <% end %>
     </ul>
@@ -62,3 +66,4 @@
     </div>
   </div>
 
+</div>

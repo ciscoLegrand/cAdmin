@@ -13,9 +13,10 @@ module Cadmin
       welcome: 0,
       reset_password: 1,
       new_event: 2,
-      update_event: 3,
-      event_has_employee: 4,
-      billing_is_ready: 5
+      new_event_admin: 3,
+      customer_update_event: 4,
+      employee_update_event: 5,
+      billing_is_ready: 6
      }
 
     def self.pending?

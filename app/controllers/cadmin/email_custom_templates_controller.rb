@@ -56,7 +56,7 @@ module Cadmin
       end
 
       def set_email_base_template
-        @email_base_template = EmailBaseTemplate.find(params[:email_base_template_id])
+        @email_base_template = EmailBaseTemplate.friendly.find(params[:email_base_template_id])
       end
 
       # Only allow a list of trusted parameters through.

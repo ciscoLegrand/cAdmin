@@ -12,7 +12,7 @@
   <% end %>
 
  <% if action_name == 'edit' %>
-   <% @cart = Cadmin::Cart.create %>
+   <% @cart = Cadmin::Cart.find_or_initialize_by(id: event.cart_id) %>
    <% session[:cart_id] = @cart.id %>
  <% end %>
 
