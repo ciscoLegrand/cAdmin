@@ -105,9 +105,9 @@ Cadmin::Engine.routes.draw do
   #   end
   # end
 
-  # SPOTIFY API
   namespace :api do 
     namespace :v1 do 
+      # SPOTIFY API
       resources :tracks do 
         collection do 
           get :top_100

@@ -1,5 +1,5 @@
 <h1 class="title is-size-4-desktop is-size-5-touch has-text-centered"><%= t '.title' %></h1>
-<%= render Cadmin::SearchFormComponent.new(path: events_path,params: 'title',  button:'')%>
+  <%= render Cadmin::SearchFormComponent.new(path: events_path,params: 'title',  button:'') if current_cadmin_user.admin? %>
 <div class="is-clearfix"></div>
 
   <%= turbo_frame_tag :events do %>
@@ -11,10 +11,18 @@
             <%= t '.page_title' %> 
           </div>
         </div>
-        <span class="tag is-info is-rounded mr-2" style="padding-top:5px;"><%= link_to inline_svg_tag('cadmin/icons/ico-information-circle.svg', class: 'icon is-small'), events_path(status: 'pending')%></span>
-        <span class="tag is-success is-rounded mr-2" style="padding-top:5px;"><%= link_to inline_svg_tag('cadmin/icons/ico-euro.svg', class: 'icon is-small'), events_path(status: 'payed')%></span>
-        <span class="tag is-danger is-rounded mr-2" style="padding-top:5px;"><%= link_to inline_svg_tag('cadmin/icons/ico-ban.svg', class: 'icon is-small'), events_path(status: 'cancelled')%></span>
-        <span class="tag is-warning is-rounded mr-2" style="padding-top:5px;"><%= link_to inline_svg_tag('cadmin/icons/ico-refresh.svg', class: 'icon is-small'), events_path%></span>
+        <span class="tag is-info is-rounded has-tooltip-bottom mx-1" style="padding-top:5px;" data-tooltip="Eventos pendientes">
+          <%= link_to inline_svg_tag('cadmin/icons/ico-information-circle.svg', class: 'icon is-small'), events_path(status: 'pending')%>
+        </span>
+        <span class="tag is-success is-rounded has-tooltip-bottom mx-1" style="padding-top:5px;" data-tooltip="Eventos cobrados">
+         <%= link_to inline_svg_tag('cadmin/icons/ico-euro.svg', class: 'icon is-small'), events_path(status: 'payed')%>
+        </span>
+        <span class="tag is-danger is-rounded has-tooltip-bottom mx-1" style="padding-top:5px;" data-tooltip="Eventos Cancelados">
+          <%= link_to inline_svg_tag('cadmin/icons/ico-ban.svg', class: 'icon is-small'), events_path(status: 'cancelled')%>
+        </span>
+        <span class="tag is-warning is-rounded has-tooltip-bottom mx-1" style="padding-top:5px;" data-tooltip="Limpipar filtros">
+          <%= link_to inline_svg_tag('cadmin/icons/ico-refresh.svg', class: 'icon is-small'), events_path%>
+        </span>
       </header>
       <div class="card-content">
         <div class="b-table has-pagination is-scrollable-touch">
@@ -66,18 +74,31 @@
                     <td class="is-size-7-mobile is-hidden-mobile"><%= event.status == 'cancelled' ? "0" : number_with_precision(event.total_services_amount , precision: 2) %><%= t('currency') %></td> 
                     <td data-charged-target="tag" class="is-hidden-mobile <%= event.charged == true ? 'has-background-success' : 'default'%> is-size-7-mobile"><%= t ".#{event.status}" %> </td>
                     <td class="is-actions-cell">
-                      <div class="buttons is-flex-wrap-nowrap">                    
+                      <div class="buttons is-flex-wrap-nowrap">   
+                       <span class="has-tooltip-bottom mx-1"   data-tooltip="Consultar evento">                 
                         <%= link_to inline_svg_tag('cadmin/icons/ico-eye.svg', class: 'icon is-medium has-text-primary'), event ,data:{turbo_frame: "_top"}, class: 'button is-small is-clickable m-0' %>
+                       </span>
+                       <span class="has-tooltip-bottom mx-1"   data-tooltip="Editar evento"> 
                         <%= link_to inline_svg_tag('cadmin/icons/ico-edit.svg', class: 'icon is-medium has-text-primary'), edit_event_path(event), data:{turbo_frame: "_top"}, class: 'button is-small is-clickable m-0' %>
+                       </span> 
                         <% if current_cadmin_user.admin? %>
                         <% state = event.pending? ? 'open' : 'closed'%>
                         <% color = event.pending? ? 'danger' : 'primary'%>
-                        <%= link_to inline_svg_tag("cadmin/icons/ico-lock-#{state}.svg", class: "icon is-medium is-#{color} has-text-#{color}") , booked_event_path(event), data: {action: 'charged#booked',  turbo: false},  class: 'button is-small is-clickable m-0 is-hidden-mobile' %>
+                        <% msg = event.pending? ? 'Confirmar evento' : 'Evento confirmado'%>
+                        <span class="has-tooltip-bottom mx-1"   data-tooltip="<%= msg %>">
+                         <%= link_to inline_svg_tag("cadmin/icons/ico-lock-#{state}.svg", class: "icon is-medium is-#{color} has-text-#{color}") , booked_event_path(event), data: {action: 'charged#booked',  turbo: false},  class: 'button is-small is-clickable m-0 is-hidden-mobile' %>
+                        </span>
+                        <span class="has-tooltip-bottom mx-1"   data-tooltip="Cancelar evento">
                         <%= link_to inline_svg_tag('cadmin/icons/ico-ban.svg', class: 'icon is-medium   has-text-primary ') , cancel_event_path(event), data: {action: 'charged#cancel',  turbo: false},  class: 'button is-small is-clickable m-0 is-hidden-mobile' %>
+                        </span>
+                        <span class="has-tooltip-bottom mx-1"   data-tooltip="Cobrar evento">
                           <%= link_to inline_svg_tag('cadmin/icons/ico-euro.svg', class: 'icon is-medium   has-text-primary ') , charged_event_path(event), data: {action: 'charged#change',  turbo: false},  class: 'button is-small is-clickable m-0 is-hidden-mobile' %>
+                        </span>
+                        <span class="has-tooltip-bottom mx-1"   data-tooltip="Eliminar evento">
                           <%= button_to event, method: :delete, data: { controller: "swal", action: "click->swal#fire", swal_options_value: default_swal_options,turbo_frame: "_top" }, class:"button is-small is-clickable m-0 is-hidden-mobile"  do %>
                             <%=  inline_svg_tag('cadmin/icons/ico-trash.svg', class: 'icon is-medium has-text-primary') %>
-                          <% end %>    
+                          <% end %>   
+                        </span>
                         <% end %>
                       </div>
                     </td>

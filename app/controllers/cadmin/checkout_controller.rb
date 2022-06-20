@@ -24,12 +24,25 @@ module Cadmin
     def success 
       if params[:session_id].present?
         @cart.booked!
-        Event.find_by(cart_id:@cart.id).book!
-        EventMailer.admin_event(Event.find_by(cart_id:@cart.id)).deliver
-        @session_with_expand = Stripe::Checkout::Session.retrieve({ id: params[:session_id], expand: ["line_items"]})        
-        session[:cart_id] = nil
-        @cart = Cart.create!(ip: request.remote_ip)
-        session[:cart_id] = @cart.id
+        @event = Event.find_by(cart_id:@cart.id)
+        @event.book!
+
+        begin
+          @session_with_expand = Stripe::Checkout::Session.retrieve({ id: params[:session_id], expand: ["line_items"]})        
+          EventMailer.admin_event(@event).deliver
+          EventMailer.confirmation_event(@event).deliver
+          session[:cart_id] = nil
+          @cart = Cart.create!(ip: request.remote_ip)
+          session[:cart_id] = @cart.id
+        rescue => exception
+          @event.event_services.each { |es| es.stock_increment! }
+          @event.destroy      
+          session[:cart_id] = nil
+          @cart = Cart.create!(ip: request.remote_ip)
+          session[:cart_id] = @cart.id  
+          puts exception.message
+          redirect_to cancel_url, error: "Payment was not successful -> #{exception.message}"
+        end
       else
         redirect_to cancel_url, alert: "Payment was not successful"
       end

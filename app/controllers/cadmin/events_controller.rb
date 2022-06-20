@@ -11,17 +11,17 @@ module Cadmin
     def index      
       # @users = current_cadmin_user.where(deleted_at: nil).pluck(:id) #devuelve array de users´ids importante si hacemos soft delete de users  
       #! get events
-      event = Event.includes([:event_services, :event_type, :place, :employee])
-      events = event.where(customer_id: current_cadmin_user.id) if current_cadmin_user.customer? 
-      events = event.where(employee_id: current_cadmin_user.id) if current_cadmin_user.employee?      
-      events = event.all if current_cadmin_user.admin?
+      
+      events = Event.includes([:event_services, :event_type, :place, :employee]).where(customer_id: current_cadmin_user.id) if current_cadmin_user.customer? 
+      events = Event.includes([:event_services, :event_type, :place, :employee]).where(employee_id: current_cadmin_user.id) if current_cadmin_user.employee?      
+      events = Event.includes([:event_services, :event_type, :place, :employee]).all if current_cadmin_user.admin?
 
       #! search events
-      events = events.filter_by_number(params[:number]) if params[:number].present?
-      events = events.filter_by_title(params[:title]) if params[:title].present?
-      events = events.filter_by_employee_id(params[:employee_id]) if params[:employee_id].present?
-      events = events.filter_between_dates(params['start_date'], params['end_date']) if params['start_date'].present? && params['end_date'].present?
-      events = events.filter_by_status(params[:status]) if params[:status].present?
+      events = Event.includes([:event_services, :event_type, :place, :employee]).filter_by_number(params[:number]) if params[:number].present?
+      events = Event.includes([:event_services, :event_type, :place, :employee]).filter_by_title(params[:title]) if params[:title].present?
+      events = Event.includes([:event_services, :event_type, :place, :employee]).filter_by_employee_id(params[:employee_id]) if params[:employee_id].present?
+      events = Event.includes([:event_services, :event_type, :place, :employee]).filter_between_dates(params['start_date'], params['end_date']) if params['start_date'].present? && params['end_date'].present?
+      events = Event.includes([:event_services, :event_type, :place, :employee]).filter_by_status(params[:status]) if params[:status].present?
       #! sort events
       # events= events.order(params[:sort])
 

@@ -12,11 +12,12 @@ module Cadmin
     enum kind: { 
       welcome: 0,
       reset_password: 1,
-      new_event: 2,
-      new_event_admin: 3,
-      customer_update_event: 4,
-      employee_update_event: 5,
-      billing_is_ready: 6
+      new_event_admin: 2,
+      new_event_customer: 3,
+      confirmation_event: 4,
+      customer_update_event: 5,
+      employee_update_event: 6,
+      billing_is_ready: 7,
      }
 
     def self.pending?

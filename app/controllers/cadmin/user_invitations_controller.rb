@@ -6,7 +6,7 @@ module Cadmin
       add_breadcrumb 'Invitar usuario'
       render 'cadmin/user_invitations/new', locals: { resource: @user, resource_name: resource_name }
     end
-    # todo: how manage mailers after send invitation???
+    # TODO: how manage mailers after send invitation???
 
     # def edit
     #   render 'users/invitations/edit', locals: { resource: @user, resource_name: resource_name }
@@ -14,7 +14,7 @@ module Cadmin
 
     def create
       @user = Cadmin::User.invite!(invited_cadmin_user_params) do |user|
-        # todo: review this section 'cause dont sending emails and uses skip_invitations only for not broke this part!
+        # TODO: review this section 'cause dont sending emails and uses skip_invitations only for not broke this part!
         user.skip_invitation = true
       end
       
