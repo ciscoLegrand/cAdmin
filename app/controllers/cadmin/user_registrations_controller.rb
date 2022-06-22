@@ -26,6 +26,7 @@ module Cadmin
         params.require(:cadmin_user).permit(:name, :username, :email,:phone, :password, :password_confirmation, :avatar)
       end
       def after_sign_up_path_for(resource)
+        UserMailer.welcome(resource).deliver_now
         main_app.root_path
       end
   end
