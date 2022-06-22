@@ -150,8 +150,8 @@
           </div>
         </div>
       <% end %>
-
-      <%= link_to "Confirmar reserva #{number_to_currency @event.deposit}", cadmin.checkout_create_path(id: @event.id), method: :post, remote: true, data: {controller: 'stripe' }, class:'button is-link is-flex is-flex-grow-1 ml-2 is-fullwidth' if @event.deposit > 0.0  if @event.status == 'pending' %> 
+      
+      <%= link_to "Confirmar reserva #{number_to_currency @event.deposit}", cadmin.checkout_create_path(id: @event.id), method: :post, remote: true, data: {controller: 'stripe' }, class:'button is-link is-flex is-flex-grow-1 ml-2 is-fullwidth' if @event.status == 'pending' %> 
     </div>
   </div>
 </div>
