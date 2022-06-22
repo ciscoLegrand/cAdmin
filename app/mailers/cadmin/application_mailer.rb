@@ -1,6 +1,6 @@
 module Cadmin
   class ApplicationMailer < ActionMailer::Base
-    default from: 'creadix@creadix.es'
+    default from: ENV['GOOGLE_EMAIL']
     layout 'mailer'
   end
 end
