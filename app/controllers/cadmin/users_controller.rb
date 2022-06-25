@@ -40,7 +40,16 @@ class Cadmin::UsersController < ApplicationController
     end
   end
   
-
+  def reset_password 
+    @user = Cadmin::User.find_by_email(params[:email])
+    if @user.present?
+      @token = SecureRandom.hex(8)
+      Cadmin::UserMailer.reset_password(@user, @token).deliver_now
+      redirect_to main_app.root_path, notice: "Se ha enviado un correo con la nueva contraseña temporal"
+    else
+      redirect_to main_app.root_path, notice: "El email introducido no coincide con ningún usuario"
+    end
+  end
 
   private
   def set_user

@@ -6,15 +6,17 @@ module Cadmin
       # raise @correo.to_json
       @greeting = "Bienvenido #{@user.name}, te has registrado correctamente en #{ENV['DOMAINWWW']}"
       # =>  destinatario del correo  , quien envia el correo
-      mail( to:  @user.email , from: ENV['GMAIL_ACCOUNT'] , subject: @greeting)
+      mail( to:  @user.email , from: "La gramola disco <#{ENV['GMAIL_ACCOUNT']}>" , subject: @greeting)
     end
 
     def reset_password(resource, token)
       template_email(1)
       @user = resource 
-      @token = token
-      @greeting = "#{@user.name} has solicitado una nueva contraseña"
-      mail( to:  @user.email , from: ENV['GMAIL_ACCOUNT'] , subject: @greeting)
+      @password = token 
+      @user.update!(password: token)
+      
+      @greeting = "#{@user.name} se ha cambiado la contraseña, por #{@password}"
+      mail( to:  @user.email , from: "La gramola disco <#{ENV['GMAIL_ACCOUNT']}>" , subject: @greeting)
     end
 
     protected 

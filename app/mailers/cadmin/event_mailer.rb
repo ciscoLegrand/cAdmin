@@ -28,7 +28,7 @@ module Cadmin
       # raise @correo.to_json
       @greeting = "Hola #{@user.name}, gracias por confiar en La Gramola disco, hemos confirmado tu reserva."
       # =>  destinatario del correo  , quien envia el correo
-      mail( to: @user.email ,from: ENV['GMAIL_ACCOUNT'] , subject: @greeting)
+      mail( to: @user.email ,from: "La gramola disco <#{ENV['GMAIL_ACCOUNT']}>"  , subject: @greeting)
     end
 
     protected 

@@ -11,6 +11,7 @@ Cadmin::Engine.routes.draw do
   match '/agenda',            to: "dashboard#agenda",         via: :get,      as: :agenda
   match '/interviews',        to: "interviews#index",         via: :get,      as: :interviews
   match '/interviews/:id',    to: "interviews#show",          via: :get,      as: :interview
+  match '/reset-password',    to: "users#reset_password",     via: [:get,:post],      as: :reset_password
   # match '/users', to: "users#index",  via: :get, as: :users
   # match '/charged', to: "events#charged", via: :get, as: :charged
   # match '/events/:id/charged', to: "events#charged", via: :put, as: :charged
@@ -22,7 +23,7 @@ Cadmin::Engine.routes.draw do
   resources :locations
   resources :tags
   resources :tracks
-  resources :users  
+  resources :users
   resources :web_modules
     
   resources :articles do

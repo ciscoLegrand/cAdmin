@@ -14,7 +14,7 @@
         <%= f.text_field :email, autofocus: true, class:'login__input', data: {'controller': 'capslock'} %>
       </div>
 
-      <div class="field login__logform__eigthywidth  has-text-left"data-controller="password-visibility" 
+      <div class="field login__logform__eigthywidth  has-text-left" data-controller="password-visibility" 
                                       data-password-visibility-show-value="<%= asset_path("cadmin/icons/ico-eye.svg") %>"
                                       data-password-visibility-hide-value="<%= asset_path("cadmin/icons/ico-eye-off.svg") %>">
         <%= f.label :password, value: "Contraseña:" , class:'login__label label is-pulled-left mr-3'%> 
@@ -39,7 +39,27 @@
         <% end %>        
       </div>
     <% end %>
-
-    <%#= render "devise/shared/links" %>
+    <!--TODO: extract modal to a view component-->
+    <div data-controller="modal" class="has-text-centered mt-4">
+      <%= link_to '¿Has olvidado tu contraseña? ','',data: {target: 'button', action: "click->modal#open"}  , class: 'subtitle is-size-7 is-rounded is-clickable' %>
+      <div class="modal" data-modal-target="modal">
+        <%= form_tag reset_password_path, method: :get do%>
+          <div class="modal-background"></div>
+          <div class="modal-card">
+            <header class="modal-card-head">
+              <p class="modal-card-title">Recuperar Contraseña</p>
+              <button class="delete" aria-label="close" data-action="modal#close"></button>
+            </header>
+            <section class="modal-card-body">
+              <%= text_field_tag :email,params[:email], class: 'input'%>
+            </section>
+            <footer class="modal-card-foot is-justify-content-center">
+              <%= button_tag 'Restablecer contraseña', type: "submit", class:"button is-success"%>
+              <button class="button" data-action="modal#close">Cancelar</button>
+            </footer>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
