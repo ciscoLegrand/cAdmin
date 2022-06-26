@@ -6,8 +6,8 @@
   <div class="login__invite column is-6-desktop is-12-touch is-flex is-flex-direction-column is-align-content-center">
     <h2 class="title is-size-3-desktop is-size-5-touch is-family-primary has-text-centered"><%= t "devise.invitations.new.header" %></h2>
     <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post,class:'login__logform' }) do |f| %>
-      <%= resource.errors %>
-      <% if resource.errors.any? %>
+      <%#= resource.errors.inspect %>
+      <% if resource.errors.present? %>
         <div id="error_explanation">
           <h2 class="subtitle is-size-5 has-background-warning has-text-centered has-text-dark"><%= pluralize(resource.errors.count, "error") %> evitaron que se guardase:</h2>
 
@@ -21,19 +21,19 @@
       <% resource.class.invite_key_fields.each do |field| -%>
         <div class="field login__logform__eigthywidth my-3">
           <%= f.label field, class: 'login__label' %><br />
-          <%= f.text_field field, class: 'login__input' %>
+          <%= f.text_field field, class: 'login__input', required: true %>
         </div>
       <% end -%>      
       <div class="field is-success  login__logform__eigthywidth my-3">
         <%= f.label :username, class: 'login__label is-size-5-desktop' %>
-        <%= f.text_field :username, autofocus: true, autocomplete: "username", class: 'login__input' %>
+        <%= f.text_field :username, autofocus: true, autocomplete: "username", class: 'login__input', required: true %>
       </div>
 
       <div class="field is-horizontal login__logform__eigthywidth">
         <div class="field-body">
           <div class="field login__logform__eigthywidth my-3">
             <%= f.label :name, class: 'login__label is-size-5-desktop' %>
-            <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'login__input' %>
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'login__input', required: true %>
           </div>
           <div class="field login__logform_eigthywidth my-3">
             <%= f.label :last_name, class: 'login__label is-size-5-desktop' %>
@@ -43,30 +43,35 @@
       </div>
       <div class="field login__logform__eigthywidth my-3">
         <%= f.label :phone, class: 'login__label is-size-5-desktop' %>
-        <%= f.number_field :phone, autofocus: true, autocomplete: "phone", class: 'login__input' %>
+        <%= f.number_field :phone, autofocus: true, autocomplete: "phone", class: 'login__input', required: true %>
       </div>
-
+      
+      <% if 1 == 0 %>
+        TODO: revisar  cuan importante es tener la dirección      
         <div class="field login__logform__eigthywidth my-3">
           <%= f.label :address, class: 'login__label is-size-5-desktop' %>
           <%= f.text_field :address, autofocus: true, autocomplete: "phone", class: 'login__input' %>
         </div>
-      <div class="field is-horizontal login__logform__eigthywidth">
-        <div class="field-body">
-          <div class="field login__logform__eigthywidth my-3">
-            <%= f.label :city, class: 'login__label is-size-5-desktop' %>
-            <%= f.text_field :city, autofocus: true, autocomplete: "phone", class: 'login__input' %>
-          </div>
-          <div class="field login__logform__eigthywidth my-3">
-            <%= f.label :province, class: 'login__label is-size-5-desktop' %>
-            <%= f.text_field :province, autofocus: true, autocomplete: "phone", class: 'login__input' %>
-          </div>
-          <div class="field login__logform__eigthywidth my-3">
-            <%= f.label :postal_code, class: 'login__label is-size-5-desktop' %>
-            <%= f.number_field :postal_code, autofocus: true, autocomplete: "phone", class: 'login__input' %>
+        <div class="field is-horizontal login__logform__eigthywidth">
+          <div class="field-body">
+            <div class="field login__logform__eigthywidth my-3">
+              <%= f.label :city, class: 'login__label is-size-5-desktop' %>
+              <%= f.text_field :city, autofocus: true, autocomplete: "phone", class: 'login__input' %>
+            </div>
+            <div class="field login__logform__eigthywidth my-3">
+              <%= f.label :province, class: 'login__label is-size-5-desktop' %>
+              <%= f.text_field :province, autofocus: true, autocomplete: "phone", class: 'login__input' %>
+            </div>
+            <div class="field login__logform__eigthywidth my-3">
+              <%= f.label :postal_code, class: 'login__label is-size-5-desktop' %>
+              <%= f.number_field :postal_code, autofocus: true, autocomplete: "phone", class: 'login__input' %>
+            </div>
           </div>
         </div>
-      </div>
-      <%#= f.hidden_field :phone, value: rand(9**9).to_i %>        
+      <% end %>
+      <% password = SecureRandom.hex(8)%>
+      <%= f.hidden_field :password, value: password %>
+      <%= f.hidden_field :password_confirmation, value: password %>
       <div class="field login__logform__eigthywidth my-3">
         <div class="control">
           <%= f.label :role, class: 'login__label' %>

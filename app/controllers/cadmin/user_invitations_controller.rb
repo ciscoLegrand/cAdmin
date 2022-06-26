@@ -13,23 +13,30 @@ module Cadmin
     # end
 
     def create
-      @user = Cadmin::User.invite!(invited_cadmin_user_params) do |user|
-        # TODO: review this section 'cause dont sending emails and uses skip_invitations only for not broke this part!
-        user.skip_invitation = true
-      end
+      # TODO: 
+      # @user = Cadmin::User.invite!(invited_cadmin_user_params) do |user|
+      #   # TODO: review this section 'cause dont sending emails and uses skip_invitations only for not broke this part!
+      #   user.skip_invitation = true
+      #   UserMailer.invitation_instructions(user, user.invitation_token).deliver_now
+      # end
       
-      @user = Cadmin::User.new(invited_cadmin_user_params)
-      
+      @user = Cadmin::User.create!(invited_cadmin_user_params)
       if @user.valid?
-        # Cadmin::User.invite!(invited_cadmin_user_params)
-        redirect_to events_path, notice: "Se acaba de enviar un email de activación a  #{invited_cadmin_user_params[:email]}."
-      else        
-        render 'cadmin/user_invitations/new', locals: { resource: @user, resource_name: resource_name }, notice: "No se ha podido enviar el email a  #{invited_cadmin_user_params[:email]}."
+        @user.update!(
+          invitation_created_at: Time.now,
+          invitation_sent_at: Time.now,
+          invited_by_id: current_cadmin_user.id
+        )
+        UserMailer.invitation_instructions(@user, params[:password]).deliver_now
+        redirect_to new_cadmin_user_invitation_path, success: "Se acaba de enviar un email de activación a  #{invited_cadmin_user_params[:email]}."
+      else 
+        redirect_to new_cadmin_user_invitation_path, error: "Algo ha salido mal y no se pudo enviar la invitación."
       end
+
     end
 
     def update
-      user = Cadmin::User.accept_invitation!(invited_user_params)
+      user = Cadmin::User.accept_invitation!(invited_cadmin_user_params)
       if user.valid?
         redirect_to root_path, notice: ''
       else

@@ -85,6 +85,8 @@ Cadmin::Engine.routes.draw do
     post 'login',        to: 'user_sessions#create',           as: :create_new_session
     get  'register',     to: 'user_registrations#new',         as: :register
     post 'register',     to: 'user_registrations#create',      as: :registration
+    get  'invite',       to: 'user_invitations#new',           as: :invite
+    post 'invite',       to: 'user_invitations#create',        as: :invitation
     # get  'profile',      to: 'user_registrations#edit',        as: :edit_profile
     # put  'profile',      to: 'user_registrations#update',      as: :update_profile
     get  'logout',       to: 'user_sessions#destroy',          as: :logout

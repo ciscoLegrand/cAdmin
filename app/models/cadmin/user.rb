@@ -32,8 +32,9 @@ module Cadmin
 
     # Include default devise modules. Others available are:
     # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-    devise :invitable, :database_authenticatable, :registerable,
-           :recoverable, :rememberable, :validatable, :trackable
+    devise :database_authenticatable, :registerable,
+           :recoverable, :rememberable, :validatable, 
+           :trackable, :invitable
 
     # todo: create page's results
     scope :filter_between_dates, -> (start_date, end_date) { where(created_at: start_date..end_date) }

@@ -19,6 +19,16 @@ module Cadmin
       mail( to:  @user.email , from: "La gramola disco <#{ENV['GMAIL_ACCOUNT']}>" , subject: @greeting)
     end
 
+    def invitation_instructions(resource, token)
+      template_email(8)
+      @user = resource 
+      @token = token
+      # @password = SecureRandom.hex(8)
+      # @user.update!(password: SecureRandom.hex(8))      
+      @greeting = "Bienvenido #{@user.name}, activa tu cuenta"
+      mail( to:  @user.email , from: "La gramola disco <#{ENV['GMAIL_ACCOUNT']}>" , subject: @greeting)
+    end
+
     protected 
       def template_email(kind_id)
         email_base_template = Cadmin::EmailBaseTemplate.find_by(kind: kind_id)

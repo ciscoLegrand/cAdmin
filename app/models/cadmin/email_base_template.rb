@@ -18,6 +18,7 @@ module Cadmin
       customer_update_event: 5,
       employee_update_event: 6,
       billing_is_ready: 7,
+      invitation: 8
      }
 
     def self.pending?
