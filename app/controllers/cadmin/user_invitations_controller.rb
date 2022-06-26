@@ -28,9 +28,9 @@ module Cadmin
           invited_by_id: current_cadmin_user.id
         )
         UserMailer.invitation_instructions(@user, params[:password]).deliver_now
-        redirect_to new_cadmin_user_invitation_path, success: "Se acaba de enviar un email de activación a  #{invited_cadmin_user_params[:email]}."
+        redirect_to root_path, success: "Se acaba de enviar un email de activación a  #{invited_cadmin_user_params[:email]}."
       else 
-        redirect_to new_cadmin_user_invitation_path, error: "Algo ha salido mal y no se pudo enviar la invitación."
+        redirect_to root_path, error: "Algo ha salido mal y no se pudo enviar la invitación."
       end
 
     end
