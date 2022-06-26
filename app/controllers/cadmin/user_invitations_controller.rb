@@ -19,7 +19,7 @@ module Cadmin
       #   user.skip_invitation = true
       #   UserMailer.invitation_instructions(user, user.invitation_token).deliver_now
       # end
-      
+      @password = invited_cadmin_user_params[:password]
       @user = Cadmin::User.create!(invited_cadmin_user_params)
       if @user.valid?
         @user.update!(
@@ -27,7 +27,7 @@ module Cadmin
           invitation_sent_at: Time.now,
           invited_by_id: current_cadmin_user.id
         )
-        UserMailer.invitation_instructions(@user, params[:password]).deliver_now
+        UserMailer.invitation_instructions(@user,@password).deliver_now
         redirect_to root_path, success: "Se acaba de enviar un email de activación a  #{invited_cadmin_user_params[:email]}."
       else 
         redirect_to root_path, error: "Algo ha salido mal y no se pudo enviar la invitación."
