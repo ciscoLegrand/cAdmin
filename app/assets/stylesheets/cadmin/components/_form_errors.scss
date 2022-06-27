@@ -4,3 +4,8 @@
   line-height: 2rem;
   color: white;
 }
+
+.required::after{
+  content: ' *';
+  color: $danger;
+}
