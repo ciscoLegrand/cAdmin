@@ -5,7 +5,7 @@
   </div>
   <div class="login__invite column is-6-desktop is-12-touch is-flex is-flex-direction-column is-align-content-center">
     <h2 class="title is-size-3-desktop is-size-5-touch is-family-primary has-text-centered"><%= t "devise.invitations.new.header" %></h2>
-    <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post,class:'login__logform' }) do |f| %>
+    <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: {turbo: false, method: :post,class:'login__logform' }) do |f| %>
       <%#= resource.errors.inspect %>
       <% if resource.errors.present? %>
         <div id="error_explanation">
@@ -69,9 +69,6 @@
           </div>
         </div>
       <% end %>
-      <% password = SecureRandom.hex(8)%>
-      <%= f.hidden_field :password, value: password %>
-      <%= f.hidden_field :password_confirmation, value: password %>
       <div class="field login__logform__eigthywidth my-3">
         <div class="control">
           <%= f.label :role, class: 'login__label' %>
