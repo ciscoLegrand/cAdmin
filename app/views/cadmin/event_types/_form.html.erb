@@ -13,22 +13,22 @@
 
   <div class="field">
     <%= form.label :name, class:'label' %>
-    <%= form.text_field :name, class:'input' %>
+    <%= form.text_field :name, class:'input', required: true %>
   </div>
 
   <div class="field">
     <%= form.label :salary, class:'label' %>
-    <%= form.number_field :salary,value: number_to_currency(form.object.salary.to_f, delimiter: '', unit: ''), step: :any, class:'input' %>
+    <%= form.number_field :salary,value: number_to_currency(form.object.salary.to_f, delimiter: '', unit: ''), step: :any, class:'input', required: true %>
   </div>
 
   <div class="field">
     <%= form.label :overtime_price, class:'label' %>
-    <%= form.number_field :overtime_price,value: number_to_currency(form.object.overtime_price.to_f, delimiter: '', unit: ''), step: :any, class:'input' %>
+    <%= form.number_field :overtime_price,value: number_to_currency(form.object.overtime_price.to_f, delimiter: '', unit: ''), step: :any, class:'input', required: true %>
   </div>
 
   <div class="field">
     <%= form.label :assemble, class:'label' %>
-    <%= form.number_field :assemble,value: number_to_currency(form.object.assemble.to_f, delimiter: '', unit: ''), step: :any , class:'input' %>
+    <%= form.number_field :assemble,value: number_to_currency(form.object.assemble.to_f, delimiter: '', unit: ''), step: :any , class:'input'%>
   </div>
 
   <div class="actions my-6">
