@@ -179,7 +179,7 @@ es:
         title: 'Nombre evento'
         customer_id: 'Cliente'
         date: 'Fecha'
-        type_name: 'Tipo de evento'
+        event_type: 'Tipo de evento'
         number: 'Número'        
         place: 'Lugar del evento'
         employee_id: 'Empleado'        
@@ -464,12 +464,17 @@ es:
         remove_item: 'Eliminar'
       create: 
         success: 'Evento creado correctamente'
+        error: 'Error al crear el evento, algún dato estaba vacío o no se ha podido guardar'
       update: 
         success: 'Evento actualizado correctamente'
       destroy: 
         success: 'Evento eliminado correctamente'
       cancel:
         cancelled: 'Cancelado'
+      booking_errors:
+        out_of_stock: 'La reserva contiene algun servicio del que no disponemos stock'
+      booking_success:
+        success: 'Reserva realizada correctamente'
     event_types:
       index: 
         page_title: 'Tipos de evento'
