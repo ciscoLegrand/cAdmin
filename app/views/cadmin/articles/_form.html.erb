@@ -1,6 +1,6 @@
   <%= form_with(model: article, data: {"controller": "quill", "action": "quill#save", turbo: false}, html: {id: 'base', class: 'article__form'}) do |form| %>
     <% if article.errors.any? %>
-      <div id="error_explanation">
+      <div id="error_explanation" class="bg-errors">
         <h2><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
 
         <ul>
@@ -33,7 +33,7 @@
     <div class="field">
       <%= form.label :title, class: 'label' %>
       <div class="control">
-      <%= form.text_field :title, class: 'input' %>
+      <%= form.text_field :title, class: 'input', required: true %>
       </div>
     </div>
 
@@ -102,7 +102,7 @@
         <div class="field">
           <%= form.label :article_category_id, class: 'label'%>
           <div class="select">
-            <%= form.collection_select(:article_category_id, Cadmin::ArticleCategory.all,:id,:name, {prompt: 'Selecciona una categoria',class: 'select is-fullwidth is-focused'})%>
+            <%= form.collection_select(:article_category_id, Cadmin::ArticleCategory.all,:id,:name, {prompt: 'Selecciona una categoria',class: 'select is-fullwidth is-focused'}, required: true)%>
           </div>
         </div>
         

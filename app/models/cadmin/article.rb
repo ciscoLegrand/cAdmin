@@ -19,7 +19,7 @@ module Cadmin
     delegate :username, :name, to: :user
     delegate :name, to: :article_category, prefix: :category
     
-    enum status: [:pendig, :published, :unpublished, :drafts ]
+    enum status: [:pending, :published, :unpublished, :drafts ]
 
     validates :title, :content, presence: true
 
