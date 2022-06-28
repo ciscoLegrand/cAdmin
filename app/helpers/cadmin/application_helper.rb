@@ -3,7 +3,11 @@ module Cadmin
     include Pagy::Frontend
     #! percentage of events by type for display in the dashboard index
     def event_percentage(id)
-      (Event.where(event_type_id: id).count * 100) / Event.all.count 
+      begin
+        (Event.where(event_type_id: id).count * 100) / Event.all.count 
+      rescue 
+        0
+      end
     end
     def total_event_amount(id)
       Event.where(event_type_id: id).sum(&:total_amount)
