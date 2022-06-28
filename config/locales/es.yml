@@ -503,6 +503,7 @@ es:
       edit:
         title: 'Editar entrevista'
       form:
+        error_message: ' han evitado que se crease el evento'
         more_details: 'Más detalles'
         add: 'Añadir'
         create: 'Guardar'

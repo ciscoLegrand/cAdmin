@@ -3,7 +3,7 @@
 <%= form_with(model:[ @event, @interview], data: {"controller": "quill", "action": "quill#save", turbo: false},html: {class: 'events events__form'}) do |form| %>
   <% if @interview.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@interview.errors.count, "error") %> prohibited this interview from being saved:</h2>
+      <h2><%= pluralize(@interview.errors.count, "error") %> <%= t('.error_message')%>  <!--prohibited this interview from being saved:--></h2>
 
       <ul>
         <% @interview.errors.each do |error| %>
