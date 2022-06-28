@@ -532,6 +532,7 @@ es:
         edit: 'Editar'
         cancel: 'Volver'
       form:
+        error_message: ' han evitado que se crease el evento'
         create: 'Guardar'
         cancel: 'Volver'
       create:
