@@ -532,7 +532,7 @@ es:
         edit: 'Editar'
         cancel: 'Volver'
       form:
-        error_message: ' han evitado que se crease el evento'
+        error_message: ' han evitado que se crease la localización'
         create: 'Guardar'
         cancel: 'Volver'
       create:
@@ -547,6 +547,7 @@ es:
       edit:
         title: 'Editar categoría'
       form:
+        error_message: ' han evitado que se crease la categoría'
         create: 'Guardar'
         cancel: 'Volver'
       create: 
