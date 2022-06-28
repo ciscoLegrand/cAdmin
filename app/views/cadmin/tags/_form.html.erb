@@ -1,7 +1,7 @@
 <%= form_with(model: tag,  class: 'article__form') do |form| %>
   <% if tag.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(tag.errors.count, "error") %> prohibited this article_category from being saved:</h2>
+      <h2><%= pluralize(tag.errors.count, "error") %> <%= t('.error_message')%></h2>
 
       <ul>
         <% tag.errors.each do |error| %>
@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label :name, class: 'label' %>
-    <%= form.text_field :name, class: 'input is-medium' %>
+    <%= form.text_field :name, class: 'input is-medium', required: true %>
   </div>
   <div class="actions my-6">
     <%= form.submit "#{t '.create'}", class: "button is-success mx-2" %>

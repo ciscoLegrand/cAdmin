@@ -623,6 +623,7 @@ es:
         name: 'Nombre'
         add: 'Añadir'
       form:
+        error_message: ' han evitado que se crease el tag'
         create: 'Guardar'
         cancel: 'Volver'
       new:
