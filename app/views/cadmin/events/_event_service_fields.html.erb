@@ -1,10 +1,11 @@
-
+ 
 <div class="nested-fields">             
   <div class="field is-horizontal">
     <div class="field-body">
+    
       <div class="field" style="width:25%;">
         <%= form.hidden_field :_destroy %>
-        <%= form.label :service_id, class:'label' %>
+        <%= form.label :service_id, class:'label required' %>
         <div class="control is-expanded" data-controller="tomselect">          
           <%= form.collection_select :service_id, Cadmin::Service.all, :id ,:name, {include_blank: true}, {class: 'form-select', data: { tomselect_target: 'tagsField' }} %>
         </div>

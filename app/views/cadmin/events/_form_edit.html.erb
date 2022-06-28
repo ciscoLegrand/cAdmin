@@ -1,6 +1,7 @@
-
-<!--TODO: CREATE FORM-->
+<% if action_name == 'edit' %>
   <%= form_with(model: event,  data: {"controller": "quill", "action": "quill#save", turbo: false},html: {class: 'events events__form'}) do |form| %>
+    <% @cart = Cadmin::Cart.find_or_initialize_by(id: event.cart_id) %>
+    <% session[:cart_id] = @cart.id %>
     <% if event.errors.any? %>
       <div id="error_explanation" class="bg-errors mb-4">
         <h2><%= pluralize(event.errors.count, "error") %> <%= t('.error_message')%><!--prohibited this event from being saved:--></h2>
@@ -12,6 +13,7 @@
         </ul>
       </div>
     <% end %>
+
     <div class="columns">
       <div class="column is-two-thirds">
         <h3 class="title is-size-4"><%= t '.title_event' %></h3>
@@ -23,13 +25,13 @@
             <div class="field">
               <%= form.label :customer_id, class: 'label required' %>        
               <div class="control is-expanded">
-                <%= form.collection_select :customer_id, Cadmin::User.where(role: 'customer').all, :id ,:email, {prompt: t('.select_client')}, {  class: "select_inside_col",data: {controller: "slimselect"}} %>
+                <%= form.collection_select :customer_id, Cadmin::User.where(role: 'customer').all, :id ,:name, {include_blank:  t('.select_customer')}, {prompt:  t('.select_customer'),  class: "select_inside_col",data: {controller: "slimselect"}}  %>
               </div>
             </div>
             <div class="field">
               <%= form.label "#{t '.new_client'}", class: 'label' %>
               <%= link_to new_cadmin_user_invitation_path , class: 'item panel-block is-flex is-justify-content-space-between is-align-items-start',data: {'menu-target': 'link', 'menu-item': 'invite', action: 'click->menu#set_active_menu_item'} do %>
-                 <%= t('.create_client')%><%= inline_svg_tag('cadmin/icons/ico-user-add.svg', class:'icon ')%>
+                <%= t('.create_client')%><%= inline_svg_tag('cadmin/icons/ico-user-add.svg', class:'icon ')%>
               <% end %>
             </div>
           </div>
@@ -51,12 +53,12 @@
             <div class="field">
               <div class="control">
               <%= form.label :title, class: 'label required' %>
-              <%= form.text_field :title,placeholder: true, class: 'input' %>
+              <%= form.text_field :title,placeholder: true, class: 'input', required: true %>
               </div>
             </div>
             <div class="field">
               <%= form.label :event_type, class: 'label required' %>
-              <%= form.collection_select :event_type_id, Cadmin::EventType.all, :id ,:name, {prompt: t('.select_event_type')}, {  class: "select_inside_col",data: {controller: "slimselect"}} %>
+              <%= form.collection_select :event_type_id, Cadmin::EventType.all, :id ,:name, {include_blank: t('.select_event_type')},{prompt: t('.select_event_type'), class: "select_inside_col",data: {controller: "slimselect"}} %>
             </div>
           </div>
         </div>
@@ -65,23 +67,25 @@
             <div class="field">
               <%= form.label :date, class: 'label  required' %>
               <div class="control is-expanded  has-icons-right">
-                <%= form.text_field :date,  autocomplete: "off", class: 'input',placeholder: t('.select_date'),  data: { controller: "flatpickr",flatpickr_min_date: Time.zone.now, flatpickr_date_format: "Y-m-d", flatpickr_locale: locale } %>
+                <%= form.text_field :date,  autocomplete: "off", class: 'input',placeholder: t('.select_date'),  data: { controller: "flatpickr",flatpickr_min_date: Time.zone.now, flatpickr_date_format: "Y-m-d", flatpickr_locale: locale }, required: true %>
                 <%= inline_svg_tag('cadmin/icons/ico-calendar.svg', class: 'icon is-small is-right ')%>
               </div>
             </div>
             <div class="field">
+              <!--TODO: permitir introducir una nueva localización si no se encuentra en la lista-->
               <%= form.label :place, class: 'label required' %>
-              <%= form.collection_select :place_id, Cadmin::Location.all, :id ,:name, {include_blank: t('.select_location')}, {  prompt: t('.select_location'),class: "select_inside_col",data: {controller: "slimselect"}} %>
+              <%= form.collection_select :place_id, Cadmin::Location.all, :id ,:name, {include_blank: t('.select_location')}, {  prompt: t('.select_location'),class: "select_inside_col",data: {controller: "slimselect"} } %>
             </div>
           </div>
         </div>
+
 
         <div class="field is-horizontal <%= current_cadmin_user.admin? ? '' : 'is-hidden' %>">
           <div class="field-body">
             <div class="field">
               <%= form.label :employee_id, class: 'label' %>        
               <div class="control is-expanded">
-                <%= form.collection_select :employee_id, Cadmin::User.where(role: 'employee').all, :id ,:name, {include_blank: t('.select_employee')}, {  prompt:  t('.select_employee'),class: "select_inside_col",data: {controller: "slimselect"}} %>
+                <%= form.collection_select :employee_id, Cadmin::User.where(role: 'employee').all, :id ,:name, {prompt: t('.select_employee')}, {  prompt: t('.select_employee'),class: "select_inside_col",data: {controller: "slimselect"} } %>
               </div>
             </div>
             <div class="field">
@@ -154,10 +158,12 @@
                   <span class="ml-2"><%= number_to_currency 0 %></span>
                 <% end %>
               <% end %>
+
               <%= form.label :deposit, class:'events__radio button is-outlined is-success  is-clickable is-hoverable p-2' do%>
                 <%= form.radio_button :deposit, payment0, class: 'events__radio__button is-clickable is-hoverable', required: true %> 
                 <span class="ml-2"><%= number_to_currency payment0 %></span>
-              <% end %>                  
+              <% end %>  
+
               <%= form.label :deposit, class:'events__radio button is-outlined is-success  is-clickable is-hoverable p-2' do%>
                 <%= form.radio_button :deposit, payment1, class: 'events__radio__button is-clickable is-hoverable', required: true %> 
                 <span class="ml-2"><%= number_to_currency payment1 %></span>
@@ -186,4 +192,4 @@
       <%= link_to "#{t '.cancel'}", events_path, class: "button has-background-white-ter mx-2" %>
     </div>
   <% end %>
-<!--TODO: CREATE FORM-->
+<% end %>

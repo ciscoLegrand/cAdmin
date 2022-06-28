@@ -9,7 +9,7 @@
       <%#= resource.errors.inspect %>
       <% if resource.errors.present? %>
         <div id="error_explanation">
-          <h2 class="subtitle is-size-5 has-background-warning has-text-centered has-text-dark"><%= pluralize(resource.errors.count, "error") %> evitaron que se guardase:</h2>
+          <h2 class="subtitle is-size-5 has-background-warning has-text-centered has-text-dark"><%= pluralize(resource.errors.count, "error") %> <%= t('.error_message')%></h2>
 
           <ul>
             <% resource.errors.each do |error| %>
