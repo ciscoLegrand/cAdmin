@@ -10,7 +10,7 @@
     <div class="media-content">
       <%= form_with(model: [@article, @article.comments.build], local: true,data: {"controller": "quill", "action": "quill#save", turbo: false}, html: {id: 'base'}) do |form| %>
         <% if comment.errors.any? %>
-          <div id="error_explanation">
+          <div id="error_explanation" class="bg-errors">
             <h2><%= pluralize(comment.errors.count, "error") %> <%= t '.error' %></h2>
 
             <ul>
@@ -24,7 +24,7 @@
           <p class="control">
             <%#= form.hidden_field :article_id%>
             <%= form.hidden_field :user_id %>
-            <%= form.text_area :content, class: 'textarea', placeholder: 'Escribe un comentario...' %>
+            <%= form.text_area :content, class: 'textarea', placeholder: 'Escribe un comentario...', required: true %>
           </p>
         </div>
         <div class="field">

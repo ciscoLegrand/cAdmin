@@ -62,22 +62,27 @@ module Cadmin
       @event.create_number
       @event.save
 
-      if @event.unallowed_booking?
-        @event.destroy
-        if current_cadmin_user.admin?
-          redirect_to events_path, alert: "La reserva contiene algun servicio del que no disponemos stock"
-        else
-          redirect_to main_app.cart_path, alert: "La reserva contiene algun servicio del que no disponemos stock"
-        end
-      else
-        #! update role and create customer on stripe
-        current_cadmin_user.create_stripe_customer if current_cadmin_user.user?
-        @event.update(total_amount: @event.total_services_amount)
-        #! stock's control by dates
-        @event.event_services.each { |es| es.stock_decrement! }
- 
-        redirect_to @event, success: t('.success')
+      if @event.persisted?
+        booking_error if @event.unallowed_booking?
+        booking_success unless @event.unallowed_booking?
+      else  
+        render :new, locales: @event , error: t('.error')
       end
+    end
+
+    def booking_error 
+      @event.destroy
+      if current_cadmin_user.admin?
+        redirect_to events_path, alert: t('.out_of_stock')
+      else
+        redirect_to main_app.cart_path, alert: t('.out_of_stock')
+      end
+    end
+
+    def booking_success
+      @event.update(total_amount: @event.total_services_amount)      
+      @event.event_services.each { |es| es.stock_decrement! }#! stock's control by dates
+      redirect_to @event, success: t('.success')
     end
 
     # PATCH/PUT /events/1

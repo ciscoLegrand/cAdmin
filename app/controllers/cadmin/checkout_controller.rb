@@ -23,6 +23,8 @@ module Cadmin
 
     def success 
       if params[:session_id].present?
+        #! update role and create customer on stripe
+        current_cadmin_user.create_stripe_customer if current_cadmin_user.user?
         @cart.booked!
         @event = Event.find_by(cart_id:@cart.id)
         @event.book!

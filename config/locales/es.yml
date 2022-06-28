@@ -179,7 +179,7 @@ es:
         title: 'Nombre evento'
         customer_id: 'Cliente'
         date: 'Fecha'
-        type_name: 'Tipo de evento'
+        event_type: 'Tipo de evento'
         number: 'Número'        
         place: 'Lugar del evento'
         employee_id: 'Empleado'        
@@ -452,10 +452,19 @@ es:
       edit:
         title: 'Editar evento'
       form:
+        error_message: ' han evitado que se crease el evento'
+        select_client: 'Selecciona cliente'
+        select_event_type: 'Selecciona tipo de evento'
+        select_location: 'Selecciona localización'
+        select_employee: 'Selecciona empleado'
+        select_customer: 'Selecciona cliente'
+        select_date: 'Selecciona la fecha del evento'
         title_event: 'Datos del evento'
         title_services: 'Servicios contratados'
         new_client: 'Crear cliente'
         add_item: 'Añadir servicio'
+        need_deposit: 'Para completar la reserva tines que adelantar una fianza de: '
+        create_client: 'Crear cliente'
         booking: 'Reservar'
         next: 'Siguiente'
         create: 'Guardar'
@@ -464,12 +473,17 @@ es:
         remove_item: 'Eliminar'
       create: 
         success: 'Evento creado correctamente'
+        error: 'Error al crear el evento, algún dato estaba vacío o no se ha podido guardar'
       update: 
         success: 'Evento actualizado correctamente'
       destroy: 
         success: 'Evento eliminado correctamente'
       cancel:
         cancelled: 'Cancelado'
+      booking_errors:
+        out_of_stock: 'La reserva contiene algun servicio del que no disponemos stock'
+      booking_success:
+        success: 'Reserva realizada correctamente'
     event_types:
       index: 
         page_title: 'Tipos de evento'
@@ -489,6 +503,7 @@ es:
       edit:
         title: 'Editar entrevista'
       form:
+        error_message: ' han evitado que se crease el evento'
         more_details: 'Más detalles'
         add: 'Añadir'
         create: 'Guardar'
@@ -517,6 +532,7 @@ es:
         edit: 'Editar'
         cancel: 'Volver'
       form:
+        error_message: ' han evitado que se crease la localización'
         create: 'Guardar'
         cancel: 'Volver'
       create:
@@ -531,6 +547,7 @@ es:
       edit:
         title: 'Editar categoría'
       form:
+        error_message: ' han evitado que se crease la categoría'
         create: 'Guardar'
         cancel: 'Volver'
       create: 
@@ -591,6 +608,7 @@ es:
       edit:
         title: 'Editar servicio'
       form:
+        error_message: ' han evitado que se crease el servicio'
         create: 'Guardar'
         cancel: 'Volver'
       create: 
@@ -605,13 +623,15 @@ es:
         name: 'Nombre'
         add: 'Añadir'
       form:
+        error_message: ' han evitado que se crease el tag'
         create: 'Guardar'
         cancel: 'Volver'
       new:
         title: 'Nuevo Tag'
     user_invitations:
-      new: 
-        username: 'Nickname'
+      new:
+        error_message: ' han evitado que se crease la invitación'
+        username: 'Nickname'        
       create:
         success: 'Usuario creado correctamente e invitación enviada a su email'
     user_registrations:
@@ -623,8 +643,11 @@ es:
         phone: 'Teléfono'
         email: 'email'
         role: 'Rol'
+      form:
+        error_message: ' han evitado que se actualizasen los datos'
     web_modules:
       form:
+        error_message: ' hand evitado que se actualizasen los modulos'
         create: 'Guardar'
         cancel: 'Volver'
       update:

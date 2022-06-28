@@ -1,6 +1,6 @@
 <%= form_with(model: discount, data: {"controller": "quill", "action": "quill#save", turbo: false},html: {class: 'events events__form'}) do |form| %>
   <% if discount.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="bg-errors">
       <h2><%= pluralize(discount.errors.count, "error") %> prohibited this discount from being saved:</h2>
 
       <ul>
@@ -13,12 +13,12 @@
 
   <div class="field">
     <%= form.label :name, class:'label' %>
-    <%= form.text_field :name, class: 'input' %>
+    <%= form.text_field :name, class: 'input', required: true %>
   </div>
 
   <div class="field">
     <%= form.label :type_discount, class:'label' %>
-    <%= form.text_field :type_discount,class: 'input' %>
+    <%= form.text_field :type_discount,class: 'input', required: true %>
   </div>
 
   <div class="field">
@@ -34,12 +34,12 @@
     <div class="field-body">
       <div class="field">
         <%= form.label :percentage, class:'label' %>
-        <%= form.number_field :percentage,step: :any,class: 'input' %>
+        <%= form.number_field :percentage,step: :any,class: 'input', required: true %>
       </div>
 
       <div class="field">
         <%= form.label :amount, class:'label' %>
-        <%= form.number_field :amount,step: :any,class: 'input' %>
+        <%= form.number_field :amount,step: :any,class: 'input', required: true %>
       </div>    
     </div>
   </div>

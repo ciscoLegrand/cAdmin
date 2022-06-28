@@ -7,7 +7,7 @@
     <%= form_for(@user,url:  edit_profile_path(id: current_cadmin_user.id) , html: { method: :put ,class:'box required-form'}, data: {turbo: false}) do |f| %>
       <% if @user.errors.any? %>
         <div id="error_explanation">
-          <h2 class="subtitle is-size-5 has-background-warning has-text-centered has-text-dark"><%= pluralize(@user.errors.count, "error") %> evitaron que se guardase:</h2>
+          <h2 class="subtitle is-size-5 has-background-warning has-text-centered has-text-dark"><%= pluralize(@user.errors.count, "error") %> <%= t('.error_message')%></h2>
 
           <ul>
             <% @user.errors.each do |error| %>

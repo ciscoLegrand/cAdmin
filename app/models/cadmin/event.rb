@@ -8,9 +8,12 @@ module Cadmin
     friendly_id :title, use: :slugged
 
     belongs_to :customer,                   foreign_key: :customer_id,    class_name: 'User'
+    
     belongs_to :employee,   optional: true, foreign_key: :employee_id,    class_name: 'User'
     belongs_to :place,      optional: true, foreign_key: :place_id,       class_name: 'Location'
+    
     belongs_to :event_type, optional: true, foreign_key: :event_type_id,  class_name: 'EventType'
+    
 
     has_one :interview, dependent: :destroy
     has_one :cart
@@ -21,7 +24,8 @@ module Cadmin
                                   reject_if: proc { |attr| attr['service_id'].blank? }
 
     validates :number, presence: true, uniqueness: true  
-    validates_presence_of :title, :event_type, :date, :deposit
+    validates :title,:event_type, :customer, :place, :event_services, :date, presence: true
+    
     # delegate data from users, places and event_types to the view
     delegate :name, :last_name, :avatar, :email, :phone, :address, :birthdate, :city, 
              :province, :postal_code, :shipping_address, :billing_address, 

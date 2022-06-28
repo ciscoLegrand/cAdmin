@@ -1,7 +1,7 @@
 <%= form_with(model: main_service, html: {class: 'events__form'}) do |form| %>
   <% if main_service.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(main_service.errors.count, "error") %> prohibited this main_service from being saved:</h2>
+      <h2><%= pluralize(main_service.errors.count, "error") %> <%= t('.error_message')%></h2>
 
       <ul>
         <% main_service.errors.each do |error| %>
@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label :name, class: 'label' %>
-    <%= form.text_field :name, class: 'input' %>
+    <%= form.text_field :name, class: 'input', required: true %>
   </div>
 
   <div class="field">
