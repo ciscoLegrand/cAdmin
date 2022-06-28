@@ -629,8 +629,9 @@ es:
       new:
         title: 'Nuevo Tag'
     user_invitations:
-      new: 
-        username: 'Nickname'
+      new:
+        error_message: ' han evitado que se crease la invitación'
+        username: 'Nickname'        
       create:
         success: 'Usuario creado correctamente e invitación enviada a su email'
     user_registrations:
@@ -642,8 +643,11 @@ es:
         phone: 'Teléfono'
         email: 'email'
         role: 'Rol'
+      form:
+        error_message: ' han evitado que se actualizasen los datos'
     web_modules:
       form:
+        error_message: ' hand evitado que se actualizasen los modulos'
         create: 'Guardar'
         cancel: 'Volver'
       update:
