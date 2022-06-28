@@ -10,66 +10,85 @@
       </ul>
     </div>
   <% end %>
-
-  <h1 class="title is-size-4-desktop is-size-5-touch">Pagos</h1>
-  <div class="columns is-multiline">
-    <div class="column is-2">
-      <div class="card ccard">
-        <div class="card-content">
-          <div class="media">
-            <div class="media-left">
-              <div class="<%= web_module.paypal? ? 'has-background-primary' : 'has-background-tertiary'%> p-2   ccard__rounded">
-                <%= inline_svg_tag("cadmin/icons/ico-paypal.svg", size: '64', class: 'has-text-white  ') %>
+  
+  <% if web_module.reservation? %>
+    <h1 class="title is-size-4-desktop is-size-5-touch">Pagos</h1>
+    <div class="columns is-multiline">
+      <div class="column is-2">
+        <div class="card ccard">
+          <div class="card-content">
+            <div class="media">
+              <div class="media-left">
+                <div class="<%= web_module.wire_transfer? ? 'has-background-primary' : 'has-background-tertiary'%> p-2   ccard__rounded">
+                  <%= inline_svg_tag("cadmin/icons/ico-paypal.svg", size: '64', class: 'has-text-white  ') %>
+                </div>
+              </div>
+              <div class="media-content is-flex is-flex-direction-column is-align-items-center">
+                <%= form.label :wire_transfer, class: 'label' %> 
+                <%= form.check_box :wire_transfer, class:"switch" %>
               </div>
             </div>
-            <div class="media-content is-flex is-flex-direction-column is-align-items-center">
-              <%= form.label :paypal, class: 'label' %> 
-              <%= form.check_box :paypal, class:"switch" %>
+          </div>
+        </div>
+      </div>
+      <div class="column is-2">
+        <div class="card ccard">
+          <div class="card-content">
+            <div class="media">
+              <div class="media-left">
+                <div class="<%= web_module.paypal? ? 'has-background-primary' : 'has-background-tertiary'%> p-2   ccard__rounded">
+                  <%= inline_svg_tag("cadmin/icons/ico-paypal.svg", size: '64', class: 'has-text-white  ') %>
+                </div>
+              </div>
+              <div class="media-content is-flex is-flex-direction-column is-align-items-center">
+                <%= form.label :paypal, class: 'label' %> 
+                <%= form.check_box :paypal, class:"switch" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column is-2">
+        <div class="card ccard">
+          <div class="card-content">
+            <div class="media">
+              <div class="media-left">
+                <div class="<%= web_module.stripe? ? 'has-background-primary' : 'has-background-tertiary'%> p-2   ccard__rounded">
+                  <%= inline_svg_tag("cadmin/icons/ico-stripe.svg", size: '64', class: 'has-text-white  ') %>
+                </div>
+              </div>
+              <div class="media-content is-flex is-flex-direction-column is-align-items-center">
+                <%= form.label :stripe, class: 'label' %> 
+                <%= form.check_box :stripe, class:"switch" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column is-2">
+        <div class="card ccard">
+          <div class="card-content">
+            <div class="media">
+              <div class="media-left">
+                <div class="<%= web_module.multisafe? ? 'has-background-primary' : 'has-background-tertiary'%> p-2   ccard__rounded">
+                  <%= inline_svg_tag("cadmin/icons/ico-paypal.svg", size: '64', class: 'has-text-white  ') %>
+                </div>
+              </div>
+              <div class="media-content is-flex is-flex-direction-column is-align-items-center">
+                <%= form.label :multisafe, class: 'label' %> 
+                <%= form.check_box :multisafe, class:"switch" %>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="column is-2">
-      <div class="card ccard">
-        <div class="card-content">
-          <div class="media">
-            <div class="media-left">
-              <div class="<%= web_module.stripe? ? 'has-background-primary' : 'has-background-tertiary'%> p-2   ccard__rounded">
-                <%= inline_svg_tag("cadmin/icons/ico-stripe.svg", size: '64', class: 'has-text-white  ') %>
-              </div>
-            </div>
-            <div class="media-content is-flex is-flex-direction-column is-align-items-center">
-              <%= form.label :stripe, class: 'label' %> 
-              <%= form.check_box :stripe, class:"switch" %>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="actions">
+      <%= form.submit 'Guardar', class: 'button is-success is-small' %>
     </div>
-    <div class="column is-2">
-      <div class="card ccard">
-        <div class="card-content">
-          <div class="media">
-            <div class="media-left">
-              <div class="<%= web_module.multisafe? ? 'has-background-primary' : 'has-background-tertiary'%> p-2   ccard__rounded">
-                <%= inline_svg_tag("cadmin/icons/ico-paypal.svg", size: '64', class: 'has-text-white  ') %>
-              </div>
-            </div>
-            <div class="media-content is-flex is-flex-direction-column is-align-items-center">
-              <%= form.label :multisafe, class: 'label' %> 
-              <%= form.check_box :multisafe, class:"switch" %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="actions">
-    <%= form.submit 'Guardar', class: 'button is-success is-small' %>
-  </div>
-  <hr class="has-background-primary">
-    <h1 class="title is-size-4-desktop is-size-5-touch">Modulos</h1>
+    <hr class="has-background-primary">
+  <% end %>
+  <h1 class="title is-size-4-desktop is-size-5-touch">Modulos</h1>
   <div class="columns is-multiline">
 
     <div class="column is-2">
