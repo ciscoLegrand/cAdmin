@@ -608,6 +608,7 @@ es:
       edit:
         title: 'Editar servicio'
       form:
+        error_message: ' han evitado que se crease el servicio'
         create: 'Guardar'
         cancel: 'Volver'
       create: 

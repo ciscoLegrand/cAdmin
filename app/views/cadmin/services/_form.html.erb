@@ -1,7 +1,7 @@
 <%= form_with(model: [@main, @service],data: {"controller": "quill", "action": "quill#save", turbo: false}, html: {class: 'events__form'}) do |form| %>
   <% if @service.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@service.errors.count, "error") %> prohibited this service from being saved:</h2>
+      <h2><%= pluralize(@service.errors.count, "error") %> <%= t('.error_message')%></h2>
 
       <ul>
         <% @service.errors.each do |error| %>
@@ -15,11 +15,11 @@
     <div class="field-body">
       <div class="field">
         <%= form.label :name, class:'label' %>
-        <%= form.text_field :name, class: 'input' %>
+        <%= form.text_field :name, class: 'input', required: true %>
       </div>
       <div class="field">
         <%= form.label :stock, class:'label' %>
-        <%= form.number_field :stock, class:'input' %>
+        <%= form.number_field :stock, class:'input', required: true %>
       </div>
     </div>
   </div>
@@ -31,7 +31,7 @@
       </div>
       <div class="field">
         <%= form.label :price, class:'label' %>
-        <%= form.number_field :price, class:'input' %>
+        <%= form.number_field :price, class:'input', required: true %>
       </div>
     </div>
   </div>
