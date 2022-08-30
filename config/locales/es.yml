@@ -593,7 +593,7 @@ es:
         create: 'Nuevo servicio'
         edit: 'Editar'
         destroy: 'Eliminar'
-        create: 'Añadir'
+        # create: 'Añadir'
       show:
         name: 'Nombre'
         short_description: 'Descripción corta'
